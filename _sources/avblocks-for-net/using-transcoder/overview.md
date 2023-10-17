@@ -6,7 +6,8 @@ taxonomy:
     category: docs
 summary:
   enabled: true
-  format: short      
+  format: short
+orphan:
 ---
 
 # Overview

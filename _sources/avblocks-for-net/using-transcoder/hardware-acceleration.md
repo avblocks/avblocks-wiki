@@ -4,6 +4,7 @@ metadata:
     description: This topic explains how to enable Intel Graphics, AMD, or NVIDIA hardware acceleration.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Hardware Acceleration

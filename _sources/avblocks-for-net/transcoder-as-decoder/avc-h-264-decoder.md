@@ -4,6 +4,7 @@ metadata:
     description: This article explains how you can use Transcoder to decode an AVC / H.264 elementary stream.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # AVC / H.264 Decoder

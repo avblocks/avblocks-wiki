@@ -4,6 +4,7 @@ metadata:
     description: This topic describes how to handle AVBlocks errors.
 taxonomy:
     category: docs
+orphan:    
 ---
 
 # Handling Errors

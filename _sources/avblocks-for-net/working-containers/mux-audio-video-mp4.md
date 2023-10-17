@@ -4,6 +4,7 @@ metadata:
     description: This topic describes how to use the Transcoder class to mux AAC audio and H.264 video into an MP4 file.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Mux Audio and Video Into MP4

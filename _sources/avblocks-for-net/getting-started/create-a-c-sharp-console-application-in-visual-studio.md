@@ -4,6 +4,7 @@ metadata:
     description: This article describes the steps needed to configure a C# console application in Visual Studio.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Create a C# console application in Visual Studio

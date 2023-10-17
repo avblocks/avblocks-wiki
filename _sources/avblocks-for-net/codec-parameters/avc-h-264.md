@@ -4,6 +4,7 @@ metadata:
     description: This topic describes the AVC / H.264 codec parameters.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # AVC / H.264

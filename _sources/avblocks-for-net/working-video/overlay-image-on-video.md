@@ -4,6 +4,7 @@ metadata:
     description: This article explains how you can overlay PNG image on top of MP4 video.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Overlay Image On Video

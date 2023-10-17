@@ -4,6 +4,7 @@ metadata:
     description: This topic describes how to initialize and terminate the AVBlocks API.
 taxonomy:
     category: docs
+orphan:    
 ---
 
 # Initialization and Termination

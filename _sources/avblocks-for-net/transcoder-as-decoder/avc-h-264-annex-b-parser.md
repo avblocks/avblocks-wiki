@@ -4,6 +4,7 @@ metadata:
     description: This topic explains how you can use Transcoder to parse an AVC / H.264 Annex B elementary stream.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # AVC / H.264 Annex B Parser

@@ -4,6 +4,7 @@ metadata:
     description: This topic describes how to use an AVBlocks license file.
 taxonomy:
     category: docs
+orphan:    
 ---
 
 # Setting License Info

@@ -4,6 +4,7 @@ metadata:
     description: This section describes how to use MediaInfo to read audio and video stream information from a file.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Reading stream information

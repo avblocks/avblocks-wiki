@@ -4,6 +4,7 @@ metadata:
     description: This article shows how to change the frame rate of a video from 24 fps to 30 fps.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Change Video Frame Rate

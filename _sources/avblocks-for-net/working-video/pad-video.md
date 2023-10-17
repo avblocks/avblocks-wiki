@@ -4,6 +4,7 @@ metadata:
     description: This article explains how you can fit a 16:9 video into a 4:3 frame by sizing and padding the original picture.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Pad Video

@@ -4,6 +4,7 @@ metadata:
     description: This article explains how you can use Transcoder.Push to encode an AVC / H.264 elementary stream from raw video frames.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # AVC / H.264 Encoder

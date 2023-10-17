@@ -13,7 +13,7 @@ This topic discusses the platforms and the codecs for which hardware acceleratio
 
 ## How To Enable Hardware Acceleration
 
-See [Hardware Acceleration](../avblocks-for-net/using-transcoder/hardware-acceleration/) for an example on how to enable the hardware accelerated codecs in your code.
+See [Hardware Acceleration](../avblocks-for-cpp/using-transcoder/hardware-acceleration/) for an example on how to enable the hardware accelerated codecs in your code.
 
 ## Supported Codecs
 

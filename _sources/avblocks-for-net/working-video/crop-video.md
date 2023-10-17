@@ -4,6 +4,7 @@ metadata:
     description: This article explains how you can crop video with AVBlocks.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Crop Video

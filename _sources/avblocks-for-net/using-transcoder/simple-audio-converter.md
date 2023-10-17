@@ -4,6 +4,7 @@ metadata:
     description: This topic is about building an audio converter in C#.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Simple Audio Converter

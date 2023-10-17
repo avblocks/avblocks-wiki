@@ -4,6 +4,7 @@ metadata:
     description: This topic is about building a video converter in C#, C++, and Visual Studio.
 taxonomy:
     category: docs
+orphan:
 ---
 
 # Simple Video Converter
