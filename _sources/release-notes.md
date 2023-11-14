@@ -11,6 +11,36 @@ toc:
 
 # Release Notes
 
+## Version 3.0
+
+### Bug
+
+* [AVB-1229] AAC: Push encoding with a raw input track causes the Transcoder::flush to hang
+* [AVB-1267] MP4: Converting mp4 files to DVD MP2 preset results in distorted audio when the source audio is AAC LC Mono 
+ 
+ ### Story
+ 
+* [AVB-1264] API: Refactor headers to lowercase and subdirs for namespaces
+* [AVB-1148] Installer: Distribute AVBlocks SDK and demo libs through GitHub
+* [AVB-1161] Installer: GitHub repository for macOS samples
+* [AVB-1162] Installer: GitHub repository for Linux samples
+* [AVB-1240] Installer: GitHub repository for Windows samples
+* [AVB-1174] macOS: Remove 32-bit application support
+* [AVB-1281] macOS: Sign dylib on macOS before publishing 
+* [AVB-1179] macOS: .NET SDK for macOS
+* [AVB-1187] Linux: Remove 32-bit application support
+* [AVB-1280] Linux: .NET SDK for Linux
+* [AVB-1185] Linux: Switch to Ubuntu 22.04
+* [AVB-1241] Samples: macOS: Use cmake and Visual Studio Code
+* [AVB-1157] Samples: Linux: Use cmake and Visual Studio Code
+* [AVB-1242] Samples: Windows: Use cmake and Visual Studio Code
+* [AVB-1258] Samples: C\+\+: slideshow: Add command line options for input and output dirs 
+* [AVB-1271] Samples: C\+\+: Rename the \`remux\` sample to \`re-encode\`
+* [AVB-1273] Samples: C\+\+: Add enc\_preset\_file sample \(macOS, Linux, Windows\)
+* [AVB-1276] Samples: Publish .NET CLI samples to GitHub
+* [AVB-1275] wiki: Split Wiki to separate C\+\+ and .NET sites
+
+---
 ## Version 2.3.2
 
 ### Bug

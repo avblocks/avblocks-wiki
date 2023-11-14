@@ -32,16 +32,17 @@ outVideoPin->params()->addInt(Param::HardwareEncoder, HardwareEncoder::Auto);
 ## Complete C++ Code
 
 ``` cpp
-// HardwareEncoding.cpp : Defines the entry point for the console application.
-//
+#include <primo/avblocks/avb.h>
+#include <primo/platform/reference++.h>
 
-#include "stdafx.h"
+// link with AVBlocks64.lib
+#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
 
+using namespace primo;
 using namespace primo::codecs;
 using namespace primo::avblocks;
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+int main(int argc, const char * argv[]) {
     // needed for Windows Media Codecs
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
@@ -61,7 +62,7 @@ int _tmain(int argc, _TCHAR* argv[])
             
         // create output socket
         auto outputSocket = primo::make_ref(
-            Library::createMediaSocket(Preset::Video::iPad::H264_720p)
+            Library::createMediaSocket(Preset::Video::Generic::MP4::Base_H264_AAC)
         );
 
         // enable hardware acceleration

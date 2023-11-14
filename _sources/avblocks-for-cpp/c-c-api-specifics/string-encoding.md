@@ -20,7 +20,7 @@ Note: A Unicode character can be expressed by 1 or 2 UTF-16 code units, i.e. by 
 
 ### Windows
 
-On Windows the `char_t` type is the same as the `wchar_t` type. Your Windows application must be compiled for Unicode.
+On Windows the `char_t` type is the same as the `wchar_t` type. Your Windows application must be compiled for Unicode OR alternatively you should convert strings to `wchar_t` before passing calling the AVBlocks API.
 
 ### Mac
 

@@ -10,7 +10,7 @@ taxonomy:
 
 This topic describes how to use the Transcoder class to re-encode audio and video streams.
 
-The code snippets in this article are from the [ReEncode](https://github.com/avblocks/avblocks-samples/tree/main/windows/cpp/samples/ReEncode) sample.
+The code snippets in this article are from the [re-encode](https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/re-encode) sample.
 
 ## Why Re-encode?
 
@@ -32,6 +32,11 @@ pin->params()->addInt(Param::ReEncode, Use::On);
 ``` cpp
 bool reEncode(Options opt)
 {
+    wcout << L"Input file: " << opt.inputFile << endl;
+    wcout << L"Output file: " << opt.outputFile << endl;
+    wcout << L"Re-encode audio forced: " << opt.reEncodeAudio << endl;
+    wcout << L"Re-encode video forced: " << opt.reEncodeVideo << endl;
+
     DeleteFile(opt.outputFile.c_str());
 
     auto transcoder = primo::make_ref(Library::createTranscoder());
@@ -40,49 +45,55 @@ bool reEncode(Options opt)
     // the demo mode must be enabled.
     transcoder->setAllowDemoMode(1);
 
-    auto mediaInfo = primo::make_ref(Library::createMediaInfo());
-
-    mediaInfo->setInputFile(opt.inputFile.c_str());
-    
-    if (!mediaInfo->load())
+    // configure input
     {
-        printError(L"Load Info", mediaInfo->error());
-        return false;
-    }
+        auto mediaInfo = primo::make_ref(Library::createMediaInfo());
 
-    // Add Inputs
-    {
-        auto socket = primo::make_ref(Library::createMediaSocket(mediaInfo.get()));
-        transcoder->inputs()->add(socket.get());
+        mediaInfo->inputs()->at(0)->setFile(opt.inputFile.c_str());
+
+        if (!mediaInfo->open())
+        {
+            printError(L"Open Info", mediaInfo->error());
+            return false;
+        }
+
+        // Add Inputs
+        {
+            auto socket = primo::make_ref(Library::createMediaSocket(mediaInfo.get()));
+            transcoder->inputs()->add(socket.get());
+        }
     }
 
     // Add Outputs
     {
         // Add output socket
         auto socket = primo::make_ref(Library::createMediaSocket());
-        socket->setStreamType(mediaInfo->streamType());
+        socket->setStreamType(transcoder->inputs()->at(0)->streamType());
         socket->setFile(opt.outputFile.c_str());
 
         // Add output pins and set the ReEncode parameter to Use::On
-        StreamInfoEnum* pStreams = mediaInfo->streams();
-        for (int i = 0; i < pStreams->count(); ++i)
+        for (int i = 0; i < transcoder->inputs()->count(); i++)
         {
-            StreamInfo* psi = pStreams->at(i);
-
-            auto pin = primo::make_ref(Library::createMediaPin());
-            pin->setStreamInfo(psi);
-
-            if ((MediaType::Video == psi->mediaType()) && opt.reEncodeVideo)
+            auto inSocket = transcoder->inputs()->at(i);
+            for (int j = 0; j < inSocket->pins()->count(); j++)
             {
-                pin->params()->addInt(Param::ReEncode, Use::On);
-            }
+                auto psi = primo::make_ref(inSocket->pins()->at(j)->streamInfo()->clone());
 
-            if ((MediaType::Audio == psi->mediaType()) && opt.reEncodeAudio)
-            {
-                pin->params()->addInt(Param::ReEncode, Use::On);
-            }
+                auto pin = primo::make_ref(Library::createMediaPin());
+                pin->setStreamInfo(psi.get());
 
-            socket->pins()->add(pin.get());
+                if ((MediaType::Video == psi->mediaType()) && opt.reEncodeVideo)
+                {
+                    pin->params()->addInt(Param::ReEncode, Use::On);
+                }
+
+                if ((MediaType::Audio == psi->mediaType()) && opt.reEncodeAudio)
+                {
+                    pin->params()->addInt(Param::ReEncode, Use::On);
+                }
+
+                socket->pins()->add(pin.get());
+            }
         }
 
         transcoder->outputs()->add(socket.get());
@@ -104,4 +115,3 @@ bool reEncode(Options opt)
     return true;
 }
 ```
-

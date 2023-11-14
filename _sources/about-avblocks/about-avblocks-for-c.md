@@ -12,37 +12,35 @@ This section describes the minimum requirements for C++ development on Windows, 
 
 ## Operating Systems
 
-* Mac OS X 10.7
-* Ubuntu 14.04 LTS 
-* Debian 7.5   
-* Windows 7 SP1
+* macOS 11 (Big Sur / Darwin 20)
+* Ubuntu 22.04 LTS (Jammy Jellyfish) 
+* Windows 10 21H2 ~ Windows 11 21H2 
+* Windows Server 2019 ~ Windows Server 2022
 
 ## Threading 
 
 Parts of AVBlocks use advanced algorithms for parallel processing, implemented using:
 
 * [Windows Concurrency Runtime](http://msdn.microsoft.com/en-us/library/ee207192.aspx) on Windows
-* [Grand Central Dispatch](https://developer.apple.com/library/mac/documentation/Performance/Reference/GCD_libdispatch_Ref) on Mac OS X
-* [Intel Threading Building Blocks](https://www.threadingbuildingblocks.org/) on Linux.
+* [Grand Central Dispatch](https://developer.apple.com/library/mac/documentation/Performance/Reference/GCD_libdispatch_Ref) on macOS
+* [Intel Threading Building Blocks](https://www.threadingbuildingblocks.org/) on Linux
 
 ## Dependencies
 
-### Linux (Ubuntu, Debian)
+### Linux
+
+#### Ubuntu
 
 These libraries are loaded dynamically by AVBlocks to handle the corresponding image format (jpeg / tiff / png):
 
 * libjpeg.so.8  - JPEG Library	
 * libtiff.so.5  - TIFF Library and Utilities
-* libpng12.so.0 - PNG Reference Library   
-
-These libraries are needed by AVBlocks, i.e. `libAVBlocks.so` will not load without these libraries:
-
-* libtbb.so.2   - Intel Threading Building Blocks.
+* libpng16.so.16 - PNG Reference Library   
 
 To install all dependencies you can run this command in Terminal:
 
 ```bash
-sudo apt-get install libjpeg8 libtiff5 libpng12-0 libtbb2
+sudo apt-get install libjpeg8 libtiff5 libpng16-16
 ```
 
 ### Windows
@@ -56,34 +54,3 @@ These libraries are loaded dynamically by AVBlocks to do Windows Media (ASF) mux
 These libraries are loaded dynamically by AVBlocks when Windows Media (WMA / WMV) codecs are used:
 
 * msdmo.dll
-
-## Samples
-
-The samples provided with AVBlocks may need additional tools / libraries to be built:
-
-### Mac OS X
-
-The AudioConverter and VideoConverter GUI samples use the Cocoa AppKit Framework.
-
-### Linux
-
-The AudioConverter and VideoConverter GUI samples are NetBeans "C/C++ Qt Application" projects.
-To use these projects you need NetBeans IDE with C/C++ add-on. The Netbeans IDE is available through Synaptic Package Manager or directly from [netbeans.org](http://netbeans.org/downloads).
-
-The `libqt4-dev` package is required. It is available in the Synaptic Package Manager and can be installed from terminal by running: 
-
-```bash
-sudo apt-get install libqt4-dev
-```
-
-The latest Qt framework can be downloaded from [qt-project.org](http://qt-project.org/downloads).
-
-To run the 32 bit samples on 64 bit distribution, you need the `ia32-lib` package. The `ia32-lib` package is available in the Synaptic Package Manager and can be installed from terminal by running: 
-
-```bash
-sudo apt-get install ia32-libs
-```
-
-### Windows
-
-The AVBlocks samples can be compiled in Visual Studio 2010 and above. The AudioConverter and VideoConverter GUI samples use MFC (Microsoft Foundation Classes).

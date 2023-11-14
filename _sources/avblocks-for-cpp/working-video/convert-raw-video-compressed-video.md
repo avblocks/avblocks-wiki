@@ -10,7 +10,7 @@ taxonomy:
 
 This topic describes how to use the Transcoder class to convert a raw YUV video file into a compressed video file. The format of the output is configured with an AVBlocks preset.
 
-The code snippets in this article are from the [enc_yuv_preset_file](https://github.com/avblocks/avblocks-samples/tree/main/windows/cpp/samples/enc_yuv_preset_file) sample. 
+The code snippets in this article are from the [enc_preset_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/enc_preset_file) sample. 
 
 ## Create a Transcoder object
 
@@ -104,8 +104,39 @@ transcoder->close();
 ## Complete C++ code
 
 ``` cpp
+#include "stdafx.h"
+#include "options.h"
+#include "util.h"
+
+using namespace std;
+using namespace primo::avblocks;
+using namespace primo::codecs;
+
+void printError(const wchar_t* action, const primo::error::ErrorInfo* e)
+{
+    if (action)
+    {
+        wcout << action << L": ";
+    }
+
+    if (primo::error::ErrorFacility::Success == e->facility())
+    {
+        wcout << L"Success" << endl;
+        return;
+    }
+
+    if (e->message())
+    {
+        wcout << e->message() << L", ";
+    }
+
+    wcout << L"facility:" << e->facility() << L", error:" << e->code() << endl;
+}
+
 bool encode(const Options& opt)
 {
+    deleteFile(opt.output_file.c_str());
+
     auto transcoder = primo::make_ref(Library::createTranscoder());
     
     // Transcoder demo mode must be enabled, 
@@ -118,8 +149,8 @@ bool encode(const Options& opt)
         auto instream = primo::make_ref(Library::createVideoStreamInfo());
         instream->setStreamType(StreamType::UncompressedVideo);
         instream->setFrameRate(opt.yuv_fps);
-        instream->setFrameWidth(opt.yuv_width);
-        instream->setFrameHeight(opt.yuv_height);
+        instream->setFrameWidth(opt.yuv_frame.width);
+        instream->setFrameHeight(opt.yuv_frame.height);
         instream->setColorFormat(opt.yuv_color.Id);
         instream->setScanType(ScanType::Progressive);
 
@@ -156,8 +187,29 @@ bool encode(const Options& opt)
     }
 
     transcoder->close();
+
+    wcout << L"created video: " << opt.output_file << endl;
     
     return true;
+}
+
+int _tmain(int argc, wchar_t* argv[])
+{
+    Options opt;
+
+    switch(prepareOptions( opt, argc, argv))
+    {
+        case Command: return 0;
+        case Error: return 1;
+    }
+
+    primo::avblocks::Library::initialize();
+    
+    bool encodeResult = encode(opt);
+
+    primo::avblocks::Library::shutdown();
+
+    return encodeResult ? 0 : 1;
 }
 ```
 

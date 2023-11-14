@@ -10,118 +10,79 @@ taxonomy:
 
 This topic describes how to use the Transcoder class to mux AAC audio and H.264 video into an MP4 file.
 
-The code snippets in this article are from the [mux_mp4_avc_aac_file](https://github.com/avblocks/avblocks-samples/tree/main/windows/cpp/samples/mux_mp4_avc_aac_file) sample.
+The code snippets in this article are from the [mux_mp4_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/mux_mp4_file) sample.
 
 ## Complete C++ code
 
 ``` cpp
 bool MP4Mux(const Options& opt)
 {
-    auto transcoder = primo::make_ref(Library::createTranscoder());
+    deleteFile(opt.output_file.c_str());
+
+    primo::ref<Transcoder> transcoder (Library::createTranscoder());
 
     // Transcoder demo mode must be enabled, 
     // in order to use the production release for testing (without a valid license)
     transcoder->setAllowDemoMode(TRUE);
 
-    bool audioStreamDetected = false;
-    bool videoStreamDetected = false;
+    primo::ref<MediaSocket> outputSocket(Library::createMediaSocket());
+    outputSocket->setFile(opt.output_file.c_str());
+    outputSocket->setStreamType(StreamType::MP4);
 
-    for(int i = 0; i < (int)opt.input_files.size(); i++)
+    // audio
+    for(int i = 0; i < (int)opt.input_audio.size(); i++)
     {
-        auto mediaInfo = primo::make_ref(Library::createMediaInfo());
-        mediaInfo->setInputFile(opt.input_files[i].c_str());
+        primo::ref<MediaPin> outputPin(Library::createMediaPin());
+        primo::ref<AudioStreamInfo> asi(Library::createAudioStreamInfo());
+        asi->setStreamType(StreamType::AAC);
+        outputPin->setStreamInfo(asi.get());
 
-        if (!mediaInfo->load())
-        {
-            printError(L"mediaInfo.Load", mediaInfo->error());
-            return false;
-        }
+        outputSocket->pins()->add(outputPin.get());
 
-        auto inputSocket = primo::make_ref(Library::createMediaSocket(mediaInfo.get()));
-
-        for(int j = 0; j < inputSocket->pins()->count(); j++)
-        {
-            MediaPin *pin = inputSocket->pins()->at(j);
-
-            if(pin->streamInfo()->streamType() == StreamType::H264)
-            {
-                if(videoStreamDetected)
-                {
-                    pin->setConnection(PinConnection::Disabled);
-                }
-                else
-                {
-                    videoStreamDetected = true;
-                    wcout << "Muxing video input: " << opt.input_files[i] << std::endl;
-                }
-            }
-            else if(pin->streamInfo()->streamType() == StreamType::AAC)
-            {
-                if(audioStreamDetected)
-                {
-                    pin->setConnection(PinConnection::Disabled);
-                }
-                else
-                {
-                    audioStreamDetected = true;
-                    wcout << "Muxing audio input: " << opt.input_files[i] << std::endl;
-                }
-            }
-            else
-            {
-                pin->setConnection(PinConnection::Disabled);
-            }
-        }
-
+        primo::ref<MediaSocket> inputSocket(Library::createMediaSocket());
+        inputSocket->setFile(opt.input_audio[i].c_str());
+        inputSocket->setStreamType(StreamType::MP4);
         transcoder->inputs()->add(inputSocket.get());
+
+        wcout << "Muxing audio input: " << opt.input_audio[i] << endl;
     }
 
-    // Configure output
+    // video
+    for (int i = 0; i < (int)opt.input_video.size(); i++)
     {
-        auto socket = primo::make_ref(Library::createMediaSocket());
-        socket->setFile(opt.output_file.c_str());
-        socket->setStreamType(StreamType::MP4);
+        primo::ref<MediaPin> outputPin(Library::createMediaPin());
+        primo::ref<VideoStreamInfo> vsi(Library::createVideoStreamInfo());
+        vsi->setStreamType(StreamType::H264);
+        outputPin->setStreamInfo(vsi.get());
 
-        if(videoStreamDetected)
-        {
-            auto streamInfo = primo::make_ref(Library::createVideoStreamInfo());
-            streamInfo->setStreamType(StreamType::H264);
-            streamInfo->setStreamSubType(StreamSubType::AVC1);
+        outputSocket->pins()->add(outputPin.get());
 
-            auto pin = primo::make_ref(Library::createMediaPin());
-            pin->setStreamInfo(streamInfo.get());
-            socket->pins()->add(pin.get());
-        }
+        primo::ref<MediaSocket> inputSocket(Library::createMediaSocket());
+        inputSocket->setFile(opt.input_video[i].c_str());
+        inputSocket->setStreamType(StreamType::MP4);
+        transcoder->inputs()->add(inputSocket.get());
 
-        if(audioStreamDetected)
-        {
-            auto streamInfo = primo::make_ref(Library::createAudioStreamInfo());
-            streamInfo->setStreamType(StreamType::AAC);
-            streamInfo->setStreamSubType(StreamSubType::AAC_MP4);
-
-            auto pin = primo::make_ref(Library::createMediaPin());
-            pin->setStreamInfo(streamInfo.get());
-            socket->pins()->add(pin.get());
-        }
-
-        if(opt.fast_start)
-        {
-            socket->params()->addInt(Param::Muxer::MP4::FastStart, 1);
-        }
-
-        transcoder->outputs()->add(socket.get());
+        wcout << "Muxing video input: " << opt.input_video[i] << endl;
     }
 
-    bool_t res = transcoder->open();
-    printError(L"Open Transcoder", transcoder->error());
-    if (!res)
-        return false;
+    transcoder->outputs()->add(outputSocket.get());
 
-    res = transcoder->run();
-    printError(L"Run Transcoder", transcoder->error());
+    if (!transcoder->open())
+    {
+        printError(L"Open Transcoder", transcoder->error());
+        return false;
+    }
+    
+    if (!transcoder->run())
+    {
+        printError(L"Run Transcoder", transcoder->error());
+        return false;
+    }
 
     transcoder->close();
 
-    return res ? true : false;
+    wcout << "Output file: " << opt.output_file << endl;
+        
+    return true;
 }
 ```

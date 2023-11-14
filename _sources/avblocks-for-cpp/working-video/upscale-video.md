@@ -21,17 +21,16 @@ This code takes an MP4 file with H.264 video and AAC audio, and scales the video
 ### Windows
    
 ``` cpp
-// UpscaleVideo.cpp : Defines the entry point for the console application.
-//
+#include <primo/avblocks/avb.h>
+#include <primo/platform/reference++.h>
 
-#include "stdafx.h"
+// link with AVBlocks64.lib
+#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
 
-using namespace primo;
 using namespace primo::codecs;
 using namespace primo::avblocks;
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+int main(int argc, const char * argv[]) {
     Library::initialize();
 
     // start with two identical input and output configurations
@@ -93,7 +92,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 #### How to run
 
-Follow the [steps](../getting-started/create-a-c-plus-console-application-in-visual-studio) to create a C++ console application in Visual Studio, but use the code from this article. 
+Follow the [steps](../getting-started-windows/create-a-c-plus-console-app-in-visual-studio) to create a C++ console application in Visual Studio, but use the code from this article. 
 
 Download the `AndrewConnolly_2014.mp4` MPEG4 file from the [Internet Archive](https://archive.org/details/AndrewConnolly_2014) and save it in the project directory.
 

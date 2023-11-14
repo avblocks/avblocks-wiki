@@ -89,10 +89,11 @@ void decode_h264_stream(Transcoder* transcoder)
 #### Complete C++ Code
 
 ``` cpp
-// H264Decoder.cpp : Defines the entry point for the console application.
-//
+#include <primo/avblocks/avb.h>
+#include <primo/platform/reference++.h>
 
-#include "stdafx.h"
+// link with AVBlocks64.lib
+#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
 
 namespace p = primo;
 
@@ -163,8 +164,7 @@ void decode_h264_stream()
     Library::shutdown();
 }
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+int main(int argc, const char * argv[]) {
     decode_h264_stream();
     return 0;
 }
@@ -172,8 +172,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 #### How to run
 
-Follow the [steps](../getting-started/create-a-c-plus-console-application-in-visual-studio) to create a C++ console application in Visual Studio, but use the code from this article. 
+Follow the [steps](../getting-started-windows/create-a-c-plus-console-app-in-visual-studio) to create a C++ console application in Visual Studio, but use the code from this article. 
 
-Copy the `foreman_qcif.h264` file from the assets archive to `bin\x64\Debug` under the project's directory.
+Copy the `foreman_qcif.h264` file from the assets archive to `x64/Debug` under the project's directory.
 
 Run the application in Visual Studio. 

@@ -10,7 +10,7 @@ taxonomy:
 
 This topic describes how to use the {transcoder-cpp}` ` class to make a video from a sequence of images.
 
-The code snippets in this article are from the [Slideshow](https://github.com/avblocks/avblocks-samples/tree/main/windows/cpp/samples/Slideshow) sample.
+The code snippets in this article are from the [slideshow](https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/slideshow) sample.
 
 ## Create a Transcoder object
 
@@ -190,36 +190,65 @@ printError(L"Flush Transcoder", transcoder->error());
 
 Here is the complete sample:
 
-``` cpp
-int _tmain(int argc, wchar_t* argv[])
+```cpp
+#include "stdafx.h"
+#include "options.h"
+#include "util.h"
+
+using namespace std;
+using namespace primo::avblocks;
+using namespace primo::codecs;
+
+void printError(const wchar_t* action, const primo::error::ErrorInfo* e)
 {
-    Options opt =  parseCommandLineOptions(argc, argv);
-    
-    if (opt.error || opt.help)
+    if (action)
     {
-        help();
-        return 1;
-    }
-    
-    if (opt.preset.empty())
-    {
-        wcout << "No preset!" << endl;
-        help();
-        return 1;
+        wcout << action << L": ";
     }
 
-    primo::avblocks::Library::initialize();
+    if (primo::error::ErrorFacility::Success == e->facility())
+    {
+        wcout << L"Success" << endl;
+        return;
+    }
 
+    if (e->message())
+    {
+        wcout << e->message() << L", ";
+    }
+
+    wcout << L"facility:" << e->facility() << L", error:" << e->code() << endl;
+}
+
+MediaBuffer* createMediaBufferForFile(const wchar_t* filename)
+{
+    HANDLE h = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    if (INVALID_HANDLE_VALUE == h)
+        return NULL;
+
+    int32_t imgsize = GetFileSize(h, NULL);
+
+    MediaBuffer* mediaBuffer = Library::createMediaBuffer(imgsize);
+    
+    DWORD bytesRead;
+    ReadFile(h, mediaBuffer->start(), imgsize, &bytesRead, NULL);
+    
+    mediaBuffer->setData(0, imgsize);
+    
+    CloseHandle(h);
+    
+    return mediaBuffer;
+}
+
+bool slideshow(Options& opt)
+{
     const double inputFramerate = 25.0;
     const int imageCount = 250;
     bool_t res;
     
-    wstring imgdir( getExeDir() );
-    imgdir.append(L"\\..\\sample-resources\\img");
+    wstring imgdir( opt.input_dir);
 
-    wstring outFilename (getExeDir());
-    outFilename.append(L"\\cube.");
-    outFilename.append(opt.fileExtension);
+    wstring outFilename (opt.output_file);
     DeleteFile(outFilename.c_str());
 
     auto transcoder = primo::make_ref(Library::createTranscoder());
@@ -234,21 +263,21 @@ int _tmain(int argc, wchar_t* argv[])
         wstring firstImage(imgdir);
         firstImage.append(L"\\cube0000.jpeg");
 
-        info->setInputFile(firstImage.c_str());
+        info->inputs()->at(0)->setFile(firstImage.c_str());
 
-        res = info->load();
+        res = info->open();
         printError(L"Load Info", info->error());
         if (!res)
-            return 1;
+            return false;
     }
 
     // Configure input
     {
-        VideoStreamInfo *vinfo = (VideoStreamInfo*) info->streams()->at(0);
+        auto vinfo = primo::make_ref((VideoStreamInfo*) info->outputs()->at(0)->pins()->at(0)->streamInfo()->clone());
         vinfo->setFrameRate(inputFramerate);
 
         auto pin = primo::make_ref(Library::createMediaPin());
-        pin->setStreamInfo(vinfo);
+        pin->setStreamInfo(vinfo.get());
 
         auto socket = primo::make_ref(Library::createMediaSocket());
         socket->pins()->add(pin.get());
@@ -259,7 +288,7 @@ int _tmain(int argc, wchar_t* argv[])
 
     // Configure output
     {
-        auto socket = primo::make_ref(Library::createMediaSocket(opt.preset.c_str()));
+        auto socket = primo::make_ref(Library::createMediaSocket(opt.preset.name));
         socket->setFile(outFilename.c_str());
 
         transcoder->outputs()->add(socket.get());
@@ -268,7 +297,7 @@ int _tmain(int argc, wchar_t* argv[])
     res = transcoder->open();
     printError(L"Open Transcoder", transcoder->error());
     if (!res)
-        return 1;
+        return false;
 
     // Encode images
     auto mediaSample = primo::make_ref(Library::createMediaSample());
@@ -289,41 +318,38 @@ int _tmain(int argc, wchar_t* argv[])
         if (!res)
         {
             printError(L"Push Transcoder", transcoder->error());
-            return 1;
+            return false;
         }
     }
 
-    res = transcoder->flush();
-    printError(L"Flush Transcoder", transcoder->error());
+    if(!transcoder->flush())
+    {
+        printError(L"Flush Transcoder", transcoder->error());
+        return false;
+    }
 
     transcoder->close();
     wcout << L"Output video: \"" << outFilename << L"\"" << endl;
 
+    return true;
+}
+
+int _tmain(int argc, wchar_t* argv[])
+{
+    Options opt;
+
+    switch(prepareOptions( opt, argc, argv))
+    {
+        case Command: return 0;
+        case Error: return 1;
+    }
+
+    primo::avblocks::Library::initialize();
+
+    bool slideshowResult = slideshow(opt);
+
     primo::avblocks::Library::shutdown();
 
-    return 0;
+    return slideshowResult ? 0 : 1;
 }
 ```
-
-``` cpp
-MediaBuffer* createMediaBufferForFile(const wchar_t* filename)
-{
-    HANDLE h = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
-    if (INVALID_HANDLE_VALUE == h)
-        return NULL;
-
-    int32_t imgsize = GetFileSize(h, NULL);
-
-    MediaBuffer* mediaBuffer = Library::createMediaBuffer(imgsize);
-    
-    DWORD bytesRead;
-    ReadFile(h, mediaBuffer->start(), imgsize, &bytesRead, NULL);
-    
-    mediaBuffer->setData(0, imgsize);
-    
-    CloseHandle(h);
-    
-    return mediaBuffer;
-}
-```
-

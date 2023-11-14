@@ -205,10 +205,11 @@ void encode_h264_stream(Transcoder* yuvReader, Transcoder* h264Encoder)
 #### Complete C++ Code
 
 ``` cpp
-// H264Encoder.cpp : Defines the entry point for the console application.
-//
+#include <primo/avblocks/avb.h>
+#include <primo/platform/reference++.h>
 
-#include "stdafx.h"
+// link with AVBlocks64.lib
+#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
 
 namespace p = primo;
 
@@ -376,8 +377,7 @@ void encode_h264_stream()
     Library::shutdown();
 }
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+int main(int argc, const char * argv[]) {
     encode_h264_stream();
     return 0;
 }
@@ -385,8 +385,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 #### How to run
 
-[Create a C++ console application ](../getting-started/create-a-c-plus-console-application-in-visual-studio) in Visual Studio and use the code from this article. 
+[Create a C++ console application ](../getting-started-windows/create-a-c-plus-console-app-in-visual-studio) in Visual Studio and use the code from this article. 
 
-Copy the `foreman_qcif.yuv` file from the assets archive to `bin\x64\Debug` under the project's directory.
+Copy the `foreman_qcif.yuv` file from the assets archive to `x64/Debug` under the project's directory.
 
 Run the application in Visual Studio. 

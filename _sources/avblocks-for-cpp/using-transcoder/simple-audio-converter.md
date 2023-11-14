@@ -19,16 +19,17 @@ For an audio source we use the `kahvi011_kennybeltrey-hydrate.mp3` file from the
 ### Windows
 
 ``` cpp
-// SimpleConverter.cpp : Defines the entry point for the console application.
-//
+#include <primo/avblocks/avb.h>
+#include <primo/platform/reference++.h>
 
-#include "stdafx.h"
+// link with AVBlocks64.lib
+#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo;
 using namespace primo::codecs;
 using namespace primo::avblocks;
 
-int _tmain(int argc, _TCHAR* argv[]) {
+int main(int argc, const char * argv[]) {
     // needed for Windows Media Codecs
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
@@ -64,7 +65,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 #### How to run   
 
-Follow the [steps](../getting-started/create-a-c-plus-console-application-in-visual-studio) to create a C++ console application in Visual Studio but use the code from this article. 
+Follow the [steps](../getting-started-windows/create-a-c-plus-console-app-in-visual-studio) to create a C++ console application in Visual Studio but use the code from this article. 
 
 Download the `kahvi011_kennybeltrey-hydrate.mp3` song from the [Internet Archive](https://archive.org/details/kahvi011) and save it in the project directory.
 

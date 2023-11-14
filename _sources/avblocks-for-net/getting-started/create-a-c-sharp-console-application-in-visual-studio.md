@@ -63,11 +63,11 @@ namespace SimpleConverter
 
 ## Run the application
 
-1. Download the `Wildlife.wmv` HD movie from the [Internet Archive](https://archive.org/download/WildlifeHd/Wildlife.wmv) and save it in `bin\x64\Debug` under the project's directory.
-2. Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file `Wildlife.mp4` will be in the `bin\x64\Debug` directory.   
+1. Download the `Wildlife.wmv` HD movie from the [Internet Archive](https://archive.org/download/WildlifeHd/Wildlife.wmv) and save it in `x64/Debug` under the project's directory.
+2. Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file `Wildlife.mp4` will be in the `x64/Debug` directory.   
 	
 ## Troubleshooting
 
-* You may get a "'DllNotFoundException' exception: Unable to load DLL 'AVBlocks64.dll': The specified module could not be found." To fix that, copy the file 'AVBlocks64.dll' to `bin\x64\Debug` under the project's directory.
+* You may get a "'DllNotFoundException' exception: Unable to load DLL 'AVBlocks64.dll': The specified module could not be found." To fix that, copy the file 'AVBlocks64.dll' to `x64/Debug` under the project's directory.
 
-* Transcoder.Open may fail if there is already a file `Wildlife.mp4` in the `bin\x64\Debug` directory. Delete `Wildlife.mp4` to solve that.         
+* Transcoder.Open may fail if there is already a file `Wildlife.mp4` in the `x64/Debug` directory. Delete `Wildlife.mp4` to solve that.         

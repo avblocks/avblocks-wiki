@@ -10,7 +10,7 @@ taxonomy:
 
 This topic describes how to use MediaInfo to read audio and video stream information from a file.
 
-The code snippets in this article are from the [read_av_info_any_file](https://github.com/avblocks/avblocks-samples/tree/main/windows/cpp/samples/read_av_info_any_file) AVBlocks sample.
+The code snippets in this article are from the [info_stream_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/info_stream_file) AVBlocks sample.
 
 
 ## Create a MediaInfo object

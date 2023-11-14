@@ -21,16 +21,17 @@ Just under 50 lines of code, this snippet is a fully functional video converter.
 ### Windows
 
 ``` cpp
-// SimpleConverter.cpp : Defines the entry point for the console application.
-//
+#include <primo/avblocks/avb.h>
+#include <primo/platform/reference++.h>
 
-#include "stdafx.h"
+// link with AVBlocks64.lib
+#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo;
 using namespace primo::codecs;
 using namespace primo::avblocks;
 
-int _tmain(int argc, _TCHAR* argv[]) {
+int main(int argc, const char * argv[]) {
     // needed for Windows Media Codecs
     CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
@@ -41,7 +42,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
     if (inputInfo->open()) {
         ref<MediaSocket> inputSocket(Library::createMediaSocket(inputInfo.get()));
-        ref<MediaSocket> outputSocket(Library::createMediaSocket(Preset::Video::iPad::H264_720p));
+        ref<MediaSocket> outputSocket(Library::createMediaSocket(Preset::Video::Generic::MP4::Base_H264_AAC));
         outputSocket->setFile(L"Wildlife.mp4");
 
         ref<Transcoder> transcoder(Library::createTranscoder());
@@ -66,7 +67,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 #### How to run   
 
-Follow the [steps](../getting-started/create-a-c-plus-console-application-in-visual-studio) to create a C++ console application in Visual Studio, but use the code from this article. 
+Follow the [steps](../getting-started-windows/create-a-c-plus-console-app-in-visual-studio) to create a C++ console application in Visual Studio, but use the code from this article. 
 
 Download the `Wildlife.wmv` HD movie from the [Internet Archive](https://archive.org/download/WildlifeHd/Wildlife.wmv) and save it in the project directory.
 

@@ -83,7 +83,7 @@ namespace UpscaleVideo
 
 Follow the [steps](../getting-started/create-a-c-sharp-console-application-in-visual-studio) to create a C# console application in Visual Studio but in `Program.cs` use the code from this article. 
 
-Download the `AndrewConnolly_2014.mp4` MPEG4 file from the [Internet Archive](https://archive.org/details/AndrewConnolly_2014) and save it in `bin\x64\Debug` under the project's directory.
+Download the `AndrewConnolly_2014.mp4` MPEG4 file from the [Internet Archive](https://archive.org/details/AndrewConnolly_2014) and save it in `x64/Debug` under the project's directory.
 
-Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file `AndrewConnolly_2014_1080p.mp4` will be in the `bin\x64\Debug` directory.
+Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file `AndrewConnolly_2014_1080p.mp4` will be in the `x64/Debug` directory.
 
