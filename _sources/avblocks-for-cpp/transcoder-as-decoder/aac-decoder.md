@@ -109,6 +109,8 @@ namespace p = primo;
 using namespace primo::codecs;
 using namespace primo::avblocks;
 
+#include <iostream>
+
 static int frame_index = 0;
 void process_audio_frame(MediaSample* sample)
 {
@@ -117,11 +119,11 @@ void process_audio_frame(MediaSample* sample)
     // The samples of multi-channel audio (such as stereo and surround) are stored by 
     // cycling through the samples for each channel before advancing to the next sample time
 
-    std::wcout << L"Sample Index : " << frame_index
-               << L" timestamp : " << sample->startTime() 
-               << L" data : " << sample->buffer()->data()
-               << L" dataSize : " << sample->buffer()->dataSize()
-               << std::endl;
+    std::cout << "Sample Index : " << frame_index
+        << " timestamp : " << sample->startTime()
+        << " data : " << sample->buffer()->data()
+        << " dataSize : " << sample->buffer()->dataSize()
+        << std::endl;
 
     // Do something with the audio buffer, 
     // for example you can save it to a WAV file or send it to a speaker
@@ -186,11 +188,10 @@ void decode_aac_stream()
     Library::shutdown();
 }
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     decode_aac_stream();
     return 0;
 }
-
 ```
 
 #### How to run
