@@ -26,8 +26,8 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
     │   ├───include
     │   └───lib
     ├───simple-converter.cpp
-    ├───simple-converter.vcxproj
-    └───simple-converter.sln
+    ├───simple-converter.sln
+    └───simple-converter.vcxproj
     ```
 
 4. Replace the contents of `simple-converter.cpp` with this code:
