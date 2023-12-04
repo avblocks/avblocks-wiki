@@ -12,7 +12,7 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
 
 ## Create the Visual Studio project
 
-1. Create a C++, Console App in Visual Studio. Name the project `simple-converter`.
+1. Create a C++, Console App in Visual Studio. Name the project `simple-converter`. Check `Place solution and project in the same directory`. 
 
 2. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to `avblocks_v3.0.0-demo.1-windows.zip` - the version number may differ. 
 
@@ -25,8 +25,8 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
     ├───avblocks
     │   ├───include
     │   └───lib
-    ├───simple-converter
-    │   └───simple-converter.cpp
+    ├───simple-converter.cpp
+    ├───simple-converter.vcxproj
     └───simple-converter.sln
     ```
 
@@ -40,7 +40,7 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
     #include <primo/platform/reference++.h>
 
     // link with AVBlocks64.lib
-    #pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+    #pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
     using namespace primo::codecs;
     using namespace primo::avblocks;
@@ -52,12 +52,12 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
         Library::initialize();
 
         auto inputInfo = primo::make_ref(Library::createMediaInfo());
-        inputInfo->inputs()->at(0)->setFile(L"../Wildlife.wmv");
+        inputInfo->inputs()->at(0)->setFile(L"Wildlife.wmv");
 
         if (inputInfo->open()) {
             auto inputSocket = primo::make_ref(Library::createMediaSocket(inputInfo.get()));
             auto outputSocket = primo::make_ref(Library::createMediaSocket(Preset::Video::Generic::MP4::Base_H264_AAC));
-            outputSocket->setFile(L"../Wildlife.mp4");
+            outputSocket->setFile(L"Wildlife.mp4");
 
             auto transcoder = primo::make_ref(Library::createTranscoder());
             transcoder->inputs()->add(inputSocket.get());
@@ -79,7 +79,7 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
 
 5. In Visual Studio, select `Build | Configuration Manager` from the menu, then select the `x64` platform to the solution platforms.
 
-6. In Visual Studio, select `Project | simple-converter Properties` from the menu, then `C++ | General`, then add `../avblocks/include` to `Additional Include Directories`.
+6. In Visual Studio, select `Project | simple-converter Properties` from the menu, then `C++ | General`, then add `./avblocks/include` to `Additional Include Directories`.
 
 7. Build the project (Ctrl + Shift + B).
 
@@ -87,7 +87,7 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
 
 ## Run the application
 
-1. Download the `Wildlife.wmv` HD movie from the [Internet Archive](https://archive.org/download/WildlifeHd/Wildlife.wmv) and save it in the Visual Studio solution directory.
+1. Download the `Wildlife.wmv` HD movie from the [Internet Archive](https://archive.org/download/WildlifeHd/Wildlife.wmv) and save it in the Visual Studio solution directory (next to the  `simple-converter.sln` solution file).
 
 2. Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file `Wildlife.mp4` will be in the solution directory.   
 

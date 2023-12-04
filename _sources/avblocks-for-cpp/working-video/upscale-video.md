@@ -25,7 +25,7 @@ This code takes an MP4 file with H.264 video and AAC audio, and scales the video
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo::codecs;
 using namespace primo::avblocks;

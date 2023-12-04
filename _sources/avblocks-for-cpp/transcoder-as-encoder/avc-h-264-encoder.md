@@ -1,14 +1,14 @@
 ---
 title: AVC / H.264 Encoder
 metadata:
-    description: This article explains how you can use Transcoder.Push to encode an AVC / H.264 elementary stream from raw video frames.
+    description: This article explains how you can use Transcoder to encode an AVC / H.264 elementary stream from raw video frames.
 taxonomy:
     category: docs
 ---
 
 # AVC / H.264 Encoder
 
-This article explains how you can use Transcoder.Push to encode an AVC / H.264 elementary stream from raw YUV frames.
+This article explains how you can use [Transcoder::push](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0) to encode an AVC / H.264 elementary stream from raw YUV frames.
 
 ## Source Video
 
@@ -17,7 +17,7 @@ As video input we use the `foreman_qcif.yuv` file from the [AVBlocks Assets](htt
 
 ## Code
 
-This code shows how you can encode raw uncompressed YUV frames into an H.264 stream. Two Transcoder objects are used, one to read the raw YUV frames from a file, and another to encode the raw frames to AVC / H.264 Annex B stream. The encoding is done via the Transcoder.Push (Transcoder::push) method.   
+This code shows how you can encode raw uncompressed YUV frames into an H.264 stream. Two Transcoder objects are used, one to read the raw YUV frames from a file, and another to encode the raw frames to AVC / H.264 Annex B stream. The encoding is done via the `Transcoder::push` method.   
 
 ### Windows
 
@@ -209,7 +209,7 @@ void encode_h264_stream(Transcoder* yuvReader, Transcoder* h264Encoder)
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 namespace p = primo;
 

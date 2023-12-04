@@ -672,7 +672,7 @@ title="Print to PDF"
 <section id="create-the-visual-studio-project">
 <h2>Create the Visual Studio project<a class="headerlink" href="#create-the-visual-studio-project" title="Permalink to this headline">#</a></h2>
 <ol>
-<li><p>Create a C++, Console App in Visual Studio. Name the project <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>.</p></li>
+<li><p>Create a C++, Console App in Visual Studio. Name the project <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>. Check <code class="docutils literal notranslate"><span class="pre">Place</span> <span class="pre">solution</span> <span class="pre">and</span> <span class="pre">project</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">directory</span></code>.</p></li>
 <li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks_v3.0.0-demo.1-windows.zip</span></code> - the version number may differ.</p></li>
 <li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the Visual Studio solution directory. The Visual Studio solution is the directory that contains the <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file.</p>
 <p>You should end up with a directory structure similar to the following:</p>
@@ -680,8 +680,8 @@ title="Print to PDF"
 ├───avblocks
 │   ├───include
 │   └───lib
-├───simple-converter
-│   └───simple-converter.cpp
+├───simple-converter.cpp
+├───simple-converter.vcxproj
 └───simple-converter.sln
 </pre></div>
 </div>
@@ -694,7 +694,7 @@ title="Print to PDF"
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
 
 <span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;../avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
@@ -706,12 +706,12 @@ title="Print to PDF"
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;../Wildlife.wmv&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.wmv&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">));</span>
-<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;../Wildlife.mp4&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.mp4&quot;</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
@@ -733,7 +733,7 @@ title="Print to PDF"
 </div>
 </li>
 <li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">|</span> <span class="pre">Configuration</span> <span class="pre">Manager</span></code> from the menu, then select the <code class="docutils literal notranslate"><span class="pre">x64</span></code> platform to the solution platforms.</p></li>
-<li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">|</span> <span class="pre">simple-converter</span> <span class="pre">Properties</span></code> from the menu, then <code class="docutils literal notranslate"><span class="pre">C++</span> <span class="pre">|</span> <span class="pre">General</span></code>, then add <code class="docutils literal notranslate"><span class="pre">../avblocks/include</span></code> to <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Include</span> <span class="pre">Directories</span></code>.</p></li>
+<li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">|</span> <span class="pre">simple-converter</span> <span class="pre">Properties</span></code> from the menu, then <code class="docutils literal notranslate"><span class="pre">C++</span> <span class="pre">|</span> <span class="pre">General</span></code>, then add <code class="docutils literal notranslate"><span class="pre">./avblocks/include</span></code> to <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Include</span> <span class="pre">Directories</span></code>.</p></li>
 <li><p>Build the project (Ctrl + Shift + B).</p></li>
 <li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
 </ol>
@@ -741,7 +741,7 @@ title="Print to PDF"
 <section id="run-the-application">
 <h2>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> HD movie from the <a class="reference external" href="https://archive.org/download/WildlifeHd/Wildlife.wmv">Internet Archive</a> and save it in the Visual Studio solution directory.</p></li>
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> HD movie from the <a class="reference external" href="https://archive.org/download/WildlifeHd/Wildlife.wmv">Internet Archive</a> and save it in the Visual Studio solution directory (next to the  <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file).</p></li>
 <li><p>Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> will be in the solution directory.</p></li>
 </ol>
 </section>

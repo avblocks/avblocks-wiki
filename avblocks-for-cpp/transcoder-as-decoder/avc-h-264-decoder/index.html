@@ -726,7 +726,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="avc-h-264-decoder">
 <h1>AVC / H.264 Decoder<a class="headerlink" href="#avc-h-264-decoder" title="Permalink to this headline">#</a></h1>
-<p>This article explains how you can use Transcoder to decode an AVC / H.264 elementary stream.</p>
+<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a8b54e4ba7db4474b0288ff57c12d538e">Transcoder::pull</a> to decode an AVC / H.264 elementary stream.</p>
 <section id="source-video">
 <h2>Source Video<a class="headerlink" href="#source-video" title="Permalink to this headline">#</a></h2>
 <p>As video input we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
@@ -808,7 +808,7 @@ title="Print to PDF"
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
 
 <span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;../avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
 

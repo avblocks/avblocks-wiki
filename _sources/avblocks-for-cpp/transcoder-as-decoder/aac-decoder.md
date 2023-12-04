@@ -8,7 +8,7 @@ taxonomy:
 
 # AAC Decoder
 
-This article explains how you can use Transcoder to decode an AAC ADTS elementary stream.
+This article explains how you can use [Transcoder::pull](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a8b54e4ba7db4474b0288ff57c12d538e) to decode an AAC ADTS elementary stream.
 
 ## Source Audio
 
@@ -102,7 +102,7 @@ void decode_aac_stream(Transcoder* transcoder)
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 namespace p = primo;
 

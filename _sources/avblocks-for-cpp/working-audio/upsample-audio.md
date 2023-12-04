@@ -25,7 +25,7 @@ This code takes an MP3 file with 44.1 KHz audio, and converts it to an MP3 file 
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo;
 using namespace primo::codecs;

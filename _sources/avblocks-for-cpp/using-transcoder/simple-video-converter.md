@@ -25,7 +25,7 @@ Just under 50 lines of code, this snippet is a fully functional video converter.
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo;
 using namespace primo::codecs;

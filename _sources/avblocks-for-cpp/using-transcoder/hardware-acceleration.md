@@ -36,7 +36,7 @@ outVideoPin->params()->addInt(Param::HardwareEncoder, HardwareEncoder::Auto);
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo;
 using namespace primo::codecs;

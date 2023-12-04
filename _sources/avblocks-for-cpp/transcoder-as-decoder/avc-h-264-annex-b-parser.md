@@ -84,7 +84,7 @@ void parse_h264_stream(Transcoder* transcoder) {
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 namespace p = primo;
 

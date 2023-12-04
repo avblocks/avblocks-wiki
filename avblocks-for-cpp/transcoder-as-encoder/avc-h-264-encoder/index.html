@@ -746,14 +746,14 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="avc-h-264-encoder">
 <h1>AVC / H.264 Encoder<a class="headerlink" href="#avc-h-264-encoder" title="Permalink to this headline">#</a></h1>
-<p>This article explains how you can use Transcoder.Push to encode an AVC / H.264 elementary stream from raw YUV frames.</p>
+<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0">Transcoder::push</a> to encode an AVC / H.264 elementary stream from raw YUV frames.</p>
 <section id="source-video">
 <h2>Source Video<a class="headerlink" href="#source-video" title="Permalink to this headline">#</a></h2>
 <p>As video input we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
-<p>This code shows how you can encode raw uncompressed YUV frames into an H.264 stream. Two Transcoder objects are used, one to read the raw YUV frames from a file, and another to encode the raw frames to AVC / H.264 Annex B stream. The encoding is done via the Transcoder.Push (Transcoder::push) method.</p>
+<p>This code shows how you can encode raw uncompressed YUV frames into an H.264 stream. Two Transcoder objects are used, one to read the raw YUV frames from a file, and another to encode the raw frames to AVC / H.264 Annex B stream. The encoding is done via the <code class="docutils literal notranslate"><span class="pre">Transcoder::push</span></code> method.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
 <section id="initialize-avblocks">
@@ -943,7 +943,7 @@ title="Print to PDF"
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
 
 <span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;../avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
 

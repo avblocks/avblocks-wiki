@@ -25,7 +25,7 @@ This code takes an MP4 file with 16:9 480p (854x480) video and AAC audio, and cr
 #include <primo/platform/reference++.h>
 
 // link with AVBlocks64.lib
-#pragma comment(lib, "../avblocks/lib/x64/AVBlocks64.lib")
+#pragma comment(lib, "./avblocks/lib/x64/AVBlocks64.lib")
 
 using namespace primo::codecs;
 using namespace primo::avblocks;
