@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About AVBlocks for C++ &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -137,6 +136,11 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../avblocks-for-cpp/getting-started-macos/create-cpp-command-line-tool-cmake/">
+     Create a C++ Command Line Tool using CMake
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../avblocks-for-cpp/getting-started-macos/create-objc-command-line-tool-xcode/">
      Create a Command Line Tool in Xcode
@@ -704,10 +708,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="about-avblocks-for-c">
+  <div class="tex2jax_ignore mathjax_ignore section" id="about-avblocks-for-c">
 <h1>About AVBlocks for C++<a class="headerlink" href="#about-avblocks-for-c" title="Permalink to this headline">#</a></h1>
 <p>This section describes the minimum requirements for C++ development on Windows, Mac and Linux.</p>
-<section id="operating-systems">
+<div class="section" id="operating-systems">
 <h2>Operating Systems<a class="headerlink" href="#operating-systems" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>macOS 11 (Big Sur / Darwin 20)</p></li>
@@ -715,8 +719,8 @@ title="Print to PDF"
 <li><p>Windows 10 21H2 ~ Windows 11 21H2</p></li>
 <li><p>Windows Server 2019 ~ Windows Server 2022</p></li>
 </ul>
-</section>
-<section id="threading">
+</div>
+<div class="section" id="threading">
 <h2>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">#</a></h2>
 <p>Parts of AVBlocks use advanced algorithms for parallel processing, implemented using:</p>
 <ul class="simple">
@@ -724,12 +728,12 @@ title="Print to PDF"
 <li><p><a class="reference external" href="https://developer.apple.com/library/mac/documentation/Performance/Reference/GCD_libdispatch_Ref">Grand Central Dispatch</a> on macOS</p></li>
 <li><p><a class="reference external" href="https://www.threadingbuildingblocks.org/">Intel Threading Building Blocks</a> on Linux</p></li>
 </ul>
-</section>
-<section id="dependencies">
+</div>
+<div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h2>
-<section id="linux">
+<div class="section" id="linux">
 <h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">#</a></h3>
-<section id="ubuntu">
+<div class="section" id="ubuntu">
 <h4>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">#</a></h4>
 <p>These libraries are loaded dynamically by AVBlocks to handle the corresponding image format (jpeg / tiff / png):</p>
 <ul class="simple">
@@ -738,12 +742,12 @@ title="Print to PDF"
 <li><p>libpng16.so.16 - PNG Reference Library</p></li>
 </ul>
 <p>To install all dependencies you can run this command in Terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libjpeg8<span class="w"> </span>libtiff5<span class="w"> </span>libpng16-16
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libjpeg8 libtiff5 libpng16-16
 </pre></div>
 </div>
-</section>
-</section>
-<section id="windows">
+</div>
+</div>
+<div class="section" id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
 <p>These libraries are loaded dynamically by AVBlocks to do Windows Media (ASF) muxing and demuxing.</p>
 <ul>
@@ -757,9 +761,9 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>msdmo.dll</p></li>
 </ul>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
