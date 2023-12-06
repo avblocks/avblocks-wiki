@@ -112,7 +112,7 @@ chmod +x build.sh
 
 1. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to `avblocks_v3.0.0-demo.1-darwin.zip` except for the version number which may be different. 
 
-2. Extract the ZIP archive in a location of your choice, then copy the `include` and `lib` directories to the `avblocks` subdirectory of the Xcode project directory. The Xcode project directory is the directory that contains the `simple-converter.xcodeproj` project file.
+2. Extract the ZIP archive in a location of your choice, then copy the `include` and `lib` directories to the `avblocks` subdirectory of the CMake project directory. The CMake project directory is the directory that contains the `CMakeLists.txt` file.
 
     You should end up with a directory structure similar to the following:
 
