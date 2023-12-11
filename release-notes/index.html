@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Release Notes &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -137,8 +136,18 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../avblocks-for-cpp/getting-started-macos/create-cpp-command-line-tool-cmake/">
+     Create a Command Line Tool using CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../avblocks-for-cpp/getting-started-macos/create-objc-command-line-tool-xcode/">
      Create a Command Line Tool in Xcode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../avblocks-for-cpp/getting-started-macos/developing-with-vscode/">
+     Developing with Visual Studio Code
     </a>
    </li>
   </ul>
@@ -2048,18 +2057,18 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="release-notes">
+  <div class="tex2jax_ignore mathjax_ignore section" id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
-<section id="version-3-0">
+<div class="section" id="version-3-0">
 <h2>Version 3.0<a class="headerlink" href="#version-3-0" title="Permalink to this headline">#</a></h2>
-<section id="bug">
+<div class="section" id="bug">
 <h3>Bug<a class="headerlink" href="#bug" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1229] AAC: Push encoding with a raw input track causes the Transcoder::flush to hang</p></li>
 <li><p>[AVB-1267] MP4: Converting mp4 files to DVD MP2 preset results in distorted audio when the source audio is AAC LC Mono</p></li>
 </ul>
-</section>
-<section id="story">
+</div>
+<div class="section" id="story">
 <h3>Story<a class="headerlink" href="#story" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1264] API: Refactor headers to lowercase and subdirs for namespaces</p></li>
@@ -2082,38 +2091,38 @@ title="Print to PDF"
 <li><p>[AVB-1276] Samples: Publish .NET CLI samples to GitHub</p></li>
 <li><p>[AVB-1275] wiki: Split Wiki to separate C++ and .NET sites</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-2-3-2">
+<div class="section" id="version-2-3-2">
 <h2>Version 2.3.2<a class="headerlink" href="#version-2-3-2" title="Permalink to this headline">#</a></h2>
-<section id="id1">
+<div class="section" id="id1">
 <h3>Bug<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1190] - Clicks in the resulting mp3 file when doing 256kbps / CBR encoding</p></li>
 <li><p>[AVB-1183] - Windows: AVBlocks has hard dependency on Media Foundation (mfplat.dll)</p></li>
 <li><p>[AVB-1133] - Transcoder returns “No codec” on AMD GPU R9 200 series GCN 1.0 with VCE 1.0</p></li>
 </ul>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h3>Story<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1119] - Wiki: New post about audio resampling in C++</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-2-3-1">
+<div class="section" id="version-2-3-1">
 <h2>Version 2.3.1<a class="headerlink" href="#version-2-3-1" title="Permalink to this headline">#</a></h2>
-<section id="id3">
+<div class="section" id="id3">
 <h3>Bug<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1170] - Clicks in the resulting mp3 file when doing 320kbps / CBR encoding</p></li>
 <li><p>[AVB-1167] - MP4: Invalid stream error when demuxing MP4 file with <code class="docutils literal notranslate"><span class="pre">pvat</span></code> atom in it</p></li>
 <li><p>[AVB-1125] - Cannot open certain MP3 file and convert them to PCM</p></li>
 </ul>
-</section>
-<section id="id4">
+</div>
+<div class="section" id="id4">
 <h3>Story<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1159] - Wiki: C++: Update error handling pages for latest AVBlocks version</p></li>
@@ -2125,30 +2134,30 @@ title="Print to PDF"
 <li><p>[AVB-959] - Samples: New <code class="docutils literal notranslate"><span class="pre">hw_enc_avc_amd_file</span></code> sample</p></li>
 <li><p>[AVB-682] - Installer: Mac: Distribute AVBlocks as a simple zip file</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-2-3">
+<div class="section" id="version-2-3">
 <h2>Version 2.3<a class="headerlink" href="#version-2-3" title="Permalink to this headline">#</a></h2>
-<section id="id5">
+<div class="section" id="id5">
 <h3>Story<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1117] - Retire AVBlocks for DirectShow</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-2-2">
+<div class="section" id="version-2-2">
 <h2>Version 2.2<a class="headerlink" href="#version-2-2" title="Permalink to this headline">#</a></h2>
-<section id="id6">
+<div class="section" id="id6">
 <h3>Bug<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1082] - Transcoder: Transcoder returns a BufferFull error even when it consumes the whole input sample</p></li>
 <li><p>[PC-254] - Encoder: AAC: the encoded audio is slightly shorter than the input PCM</p></li>
 <li><p>[PC-255] - Encoder: MP3: the encoded audio is slightly shorter than the input PCM</p></li>
 </ul>
-</section>
-<section id="id7">
+</div>
+<div class="section" id="id7">
 <h3>Story<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-796] - Samples: C#: New <code class="docutils literal notranslate"><span class="pre">hw_caps</span></code> sample</p></li>
@@ -2165,12 +2174,12 @@ title="Print to PDF"
 <li><p>[AVB-1088] - Encoders: MP3: Configure stereo mode via parameter.</p></li>
 <li><p>[PC-251] - Document stereo modes (<code class="docutils literal notranslate"><span class="pre">PrimoSoftware.AVBlocks.StereoMode</span></code>)</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-2-1">
+<div class="section" id="version-2-1">
 <h2>Version 2.1<a class="headerlink" href="#version-2-1" title="Permalink to this headline">#</a></h2>
-<section id="id8">
+<div class="section" id="id8">
 <h3>Bug<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-1030] - Mac: Filters: Overlay: Contour between transparent and opaque area</p></li>
@@ -2183,8 +2192,8 @@ title="Print to PDF"
 <li><p>[AVB-1073] - Encoders: AAC: Cannot encode AAC with Push or Pull in .NET</p></li>
 <li><p>[AVB-1081] - Transcoder freezes when an empty sample is pushed</p></li>
 </ul>
-</section>
-<section id="id9">
+</div>
+<div class="section" id="id9">
 <h3>Story<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-217] - Samples: C++: <code class="docutils literal notranslate"><span class="pre">dec_avc_au</span></code> should work with pre-processed files that contain one AVC / H.264 AU (Access Unit) per file.</p></li>
@@ -2203,12 +2212,12 @@ title="Print to PDF"
 <li><p>[AVB-1056] - Remove API deprecated before 2.0</p></li>
 <li><p>[AVB-1061] - Samples: New <code class="docutils literal notranslate"><span class="pre">capture_ds_video_audio</span></code> sample</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-2-0">
+<div class="section" id="version-2-0">
 <h2>Version 2.0<a class="headerlink" href="#version-2-0" title="Permalink to this headline">#</a></h2>
-<section id="id10">
+<div class="section" id="id10">
 <h3>Bug<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[PC-248] - Codecs: MP3: Incorrect duration when ID3 data is garbage</p></li>
@@ -2217,8 +2226,8 @@ title="Print to PDF"
 <li><p>[AVB-1024] - Transcoder: Demuxer error when splitting M4V to 1MB clips</p></li>
 <li><p>[AVB-1026] - Transcoder: Muxer error when splitting M4V by time</p></li>
 </ul>
-</section>
-<section id="id11">
+</div>
+<div class="section" id="id11">
 <h3>Story<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-220] - Samples: C++: New <code class="docutils literal notranslate"><span class="pre">dump_avc_au</span></code> sample</p></li>
@@ -2232,12 +2241,12 @@ title="Print to PDF"
 <li><p>[AVB-931] - Blocks: .NET: Immutable block inputs and outputs (breaking change)</p></li>
 <li><p>[AVB-941] - Samples: C#: New <code class="docutils literal notranslate"><span class="pre">overlay_yuv_jpegs_push_pull</span></code> sample</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-26">
+<div class="section" id="version-1-26">
 <h2>Version 1.26<a class="headerlink" href="#version-1-26" title="Permalink to this headline">#</a></h2>
-<section id="id12">
+<div class="section" id="id12">
 <h3>Bug<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-925] - Transcoder: AccessViolationException in <code class="docutils literal notranslate"><span class="pre">Transcoder.Close</span></code> after <code class="docutils literal notranslate"><span class="pre">Transcoder.Run</span></code> when <code class="docutils literal notranslate"><span class="pre">Run</span></code> returns false.</p></li>
@@ -2249,8 +2258,8 @@ title="Print to PDF"
 <li><p>[PC-234] - Codecs: H.264: AMD MFT encoder crashes if closed without flush</p></li>
 <li><p>[PC-238] - Codecs: H.264: Intel QuickSync Media encoder sporadic failure</p></li>
 </ul>
-</section>
-<section id="id13">
+</div>
+<div class="section" id="id13">
 <h3>Story<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-220] - Samples: C++: New <code class="docutils literal notranslate"><span class="pre">dump_avc_au</span></code> sample</p></li>
@@ -2279,19 +2288,19 @@ title="Print to PDF"
 <li><p>[AVB-955] - API: Return frame size from frame dimensions and color format</p></li>
 <li><p>[AVB-1013] - Windows: Upgrade C++ sample projects to Visual Studio 2015</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-25">
+<div class="section" id="version-1-25">
 <h2>Version 1.25<a class="headerlink" href="#version-1-25" title="Permalink to this headline">#</a></h2>
-<section id="improvement">
+<div class="section" id="improvement">
 <h3>Improvement<a class="headerlink" href="#improvement" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-879] - Docs: StreamSubType: Update the docs for Mpeg1System and Mpeg2System</p></li>
 <li><p>[AVB-895] - Improve interlaced encoding in hardware and software encoders</p></li>
 </ul>
-</section>
-<section id="id14">
+</div>
+<div class="section" id="id14">
 <h3>Bug<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-335] - Some WMA presets produce output files with varying duration / size.</p></li>
@@ -2300,61 +2309,61 @@ title="Print to PDF"
 <li><p>[AVB-894] - Intel QSV: The H.264 encoding may fail if a monitor is not connected to the Intel GPU device.</p></li>
 <li><p>[AVB-896] - Cannot decode MP4 (H.264) video files created by some DVR systems.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-24">
+<div class="section" id="version-1-24">
 <h2>Version 1.24<a class="headerlink" href="#version-1-24" title="Permalink to this headline">#</a></h2>
-<section id="id15">
+<div class="section" id="id15">
 <h3>Improvement<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-736] - Samples: Rename <code class="docutils literal notranslate"><span class="pre">AVMixer</span></code> to <code class="docutils literal notranslate"><span class="pre">mp4_mix_yuv_pcm</span></code></p></li>
 <li><p>[AVB-815] - Samples: C++: Set working directory to be  ….\lib\ for easier debugging</p></li>
 <li><p>[AVB-882] - Transcoder: Tests: Add more unit tests for AVI to MP4 transcoding</p></li>
 </ul>
-</section>
-<section id="id16">
+</div>
+<div class="section" id="id16">
 <h3>Bug<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-337] - The test rgb24_to_mpeg2ps_write produces an output file with varying duration/size.</p></li>
 <li><p>[AVB-340] - MediaInfo: ScanType is not detected correctly for interlaced video in Debug/x64</p></li>
 <li><p>[PC-136] - Decoders: AVC / H.264 SW: Frames are reordered when decoding 4K video input</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-23">
+<div class="section" id="version-1-23">
 <h2>Version 1.23<a class="headerlink" href="#version-1-23" title="Permalink to this headline">#</a></h2>
-<section id="new-feature">
+<div class="section" id="new-feature">
 <h3>New Feature<a class="headerlink" href="#new-feature" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-828] - Enable / disable hardware platforms at a Library level</p></li>
 <li><p>[PC-183] - Codecs: H.264: AMD/WMF: Real-time 4K encoding on AMD Radeon R9 285 / R9 380 (Tonga Pro, GCN 1.2, VCE 3.0)</p></li>
 </ul>
-</section>
-<section id="id17">
+</div>
+<div class="section" id="id17">
 <h3>Improvement<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[PC-102] - Use vector extensions on AMD CPUs</p></li>
 </ul>
-</section>
-<section id="id18">
+</div>
+<div class="section" id="id18">
 <h3>Bug<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-841] - Encoders: H.264: AMD/WMF: NumRefFrames parameter is ignored</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-22">
+<div class="section" id="version-1-22">
 <h2>Version 1.22<a class="headerlink" href="#version-1-22" title="Permalink to this headline">#</a></h2>
-<section id="id19">
+<div class="section" id="id19">
 <h3>New Feature<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-787] - API: Allow to set image overlay through VideoStreamInfo parameter</p></li>
 </ul>
-</section>
-<section id="id20">
+</div>
+<div class="section" id="id20">
 <h3>Improvement<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-738] - Transcoder: AMD VCE hardware acceleration for H.264 encoding (via MFT)</p></li>
@@ -2362,8 +2371,8 @@ title="Print to PDF"
 <li><p>[AVB-768] - Samples: .NET:  Deprecate the .NET CLR 2 projects</p></li>
 <li><p>[AVB-802] - Transcoder: Return <code class="docutils literal notranslate"><span class="pre">Library</span> <span class="pre">not</span> <span class="pre">initialized</span></code> if Library.Initialize has not been called.</p></li>
 </ul>
-</section>
-<section id="id21">
+</div>
+<div class="section" id="id21">
 <h3>Bug<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-717] - Audio and video out of sync when H.264 uses B-frames in MP4 container</p></li>
@@ -2373,12 +2382,12 @@ title="Print to PDF"
 <li><p>[PC-161] - Encoders: AVC / H.264 SW: Multiple encodings with B-frames do not produce exactly the same output.</p></li>
 <li><p>[PC-171] - Encoders: H.264: AMD/WMF: Hang on Window Server 2012 R2+ with XFX AMD R7 260X GPU (Double Dissipation Edition), Driver 14.12</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-21">
+<div class="section" id="version-1-21">
 <h2>Version 1.21<a class="headerlink" href="#version-1-21" title="Permalink to this headline">#</a></h2>
-<section id="id22">
+<div class="section" id="id22">
 <h3>New Feature<a class="headerlink" href="#id22" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-234] - Presets: MP3 presets</p></li>
@@ -2394,8 +2403,8 @@ title="Print to PDF"
 <li><p>[PC-157] - MediaPin: Add Clone method</p></li>
 <li><p>[PC-158] - MediaSocket: Add Clone method</p></li>
 </ul>
-</section>
-<section id="id23">
+</div>
+<div class="section" id="id23">
 <h3>Improvement<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-161] - Presets: H.264 and AAC encoder default parameters should match the Web preset</p></li>
@@ -2416,8 +2425,8 @@ title="Print to PDF"
 <li><p>[PC-153] - Muxers: MP4: Update AVCDecoderConfigurationRecord from the H.264 bitstream data</p></li>
 <li><p>[PC-160] - Docs: Document that Media Foundation feature must be installed on Windows Server to be able to use Windows Media codecs</p></li>
 </ul>
-</section>
-<section id="id24">
+</div>
+<div class="section" id="id24">
 <h3>Bug<a class="headerlink" href="#id24" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-65] - Regression: Transcoding a wmv input (with non-explicit/missing fps) to mp4 output fails with a muxer error</p></li>
@@ -2426,21 +2435,21 @@ title="Print to PDF"
 <li><p>[AVB-770] - Codecs: NVIDIA NVENC H.264: The NVENC H.264 encoder does not use ProfileIdc param,  output bitstream profile is always set to High.</p></li>
 <li><p>[AVB-783] - Process stops abruptly when Hardware::refresh() is called on a system with new AMD drivers (15.7.1)</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-20">
+<div class="section" id="version-1-20">
 <h2>Version 1.20<a class="headerlink" href="#version-1-20" title="Permalink to this headline">#</a></h2>
 <p>This release has been tested on <strong>Windows 10 Insider Preview</strong>.</p>
-<section id="id25">
+<div class="section" id="id25">
 <h3>New Feature<a class="headerlink" href="#id25" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-233] - Presets: Additional Apple HTTP Live Streaming presets</p></li>
 <li><p>[AVB-698] - Transcoder: Intel QuickSync hardware acceleration for H.264 encoding</p></li>
 <li><p>[AVB-707] - Transcoder: AMD Video Coding Engine hardware acceleration for H.264 encoding</p></li>
 </ul>
-</section>
-<section id="id26">
+</div>
+<div class="section" id="id26">
 <h3>Improvement<a class="headerlink" href="#id26" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-510] - Docs: Presets: Document stream and parameter settings used in presets.</p></li>
@@ -2450,27 +2459,27 @@ title="Print to PDF"
 <li><p>[PC-36] - Muxers: MP4: Support writing MP4 files bigger than 4GB</p></li>
 <li><p>[PC-101] - Demuxers: MP4: Support reading MP4 files bigger than 4GB</p></li>
 </ul>
-</section>
-<section id="id27">
+</div>
+<div class="section" id="id27">
 <h3>Bug<a class="headerlink" href="#id27" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-688] - Transcoder: Video is truncated when MPEG-2 TS is transcoded to DVD_NTSC_PCM preset</p></li>
 <li><p>[AVB-689] - Transcoder: Some MPEG-2 TS streams cannot be transcoded in push mode</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-19">
+<div class="section" id="version-1-19">
 <h2>Version 1.19<a class="headerlink" href="#version-1-19" title="Permalink to this headline">#</a></h2>
-<section id="id28">
+<div class="section" id="id28">
 <h3>New Feature<a class="headerlink" href="#id28" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-147] - Presets: HDV 720P / HDV 1080i encoding presets</p></li>
 <li><p>[AVB-232] - Presets: Additional MP4 presets</p></li>
 <li><p>[AVB-570] - Transcoder: Deliver MPEG-2 TS packets and decoded elementary streams to different outputs of the same transcoder</p></li>
 </ul>
-</section>
-<section id="id29">
+</div>
+<div class="section" id="id29">
 <h3>Bug<a class="headerlink" href="#id29" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-65] - Transcoding a wmv input (with non-explicit/missing fps) to mp4 output fails with a muxer error</p></li>
@@ -2480,20 +2489,20 @@ title="Print to PDF"
 <li><p>[AVB-686] - Docs: C++: Nested namespaces under primo::avblocks::Preset are not visible</p></li>
 <li><p>[AVB-687] - The test “mpegts_h264_aac_to_mp4_remux” produces an output with damaged audio.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-18">
+<div class="section" id="version-1-18">
 <h2>Version 1.18<a class="headerlink" href="#version-1-18" title="Permalink to this headline">#</a></h2>
-<section id="id30">
+<div class="section" id="id30">
 <h3>New Feature<a class="headerlink" href="#id30" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-569] - Transcoder: Support MPEG-2 TS packets as output.</p></li>
 <li><p>[AVB-572] - Transcoder: Filter MPEG-2 TS packet by program number or packet ID</p></li>
 <li><p>[AVB-653] - Transcoder: Mux up to 96Khz, 1-7 channel, 16 bit LPCM in MPEG-2 transport stream</p></li>
 </ul>
-</section>
-<section id="id31">
+</div>
+<div class="section" id="id31">
 <h3>Improvement<a class="headerlink" href="#id31" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-201] - Samples: Windows: C++: Add precompiled header for MetaInfo sample</p></li>
@@ -2509,27 +2518,27 @@ title="Print to PDF"
 <li><p>[AVB-528] - Params: C++: Add the missing ParamList::addByteArray method</p></li>
 <li><p>[AVB-673] - StreamInfo: Rename <code class="docutils literal notranslate"><span class="pre">StreamInfo.ProgramID</span></code> to <code class="docutils literal notranslate"><span class="pre">StreamInfo.ProgramNumber</span></code></p></li>
 </ul>
-</section>
-<section id="id32">
+</div>
+<div class="section" id="id32">
 <h3>Bug<a class="headerlink" href="#id32" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-610] - Muxer: Setting Param.Muxer.MP4.FastStartUseTempFile to true produces black video with no audio</p></li>
 <li><p>[AVB-651] - Visual artifacts when encoding from YUV to H.264</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-17">
+<div class="section" id="version-1-17">
 <h2>Version 1.17<a class="headerlink" href="#version-1-17" title="Permalink to this headline">#</a></h2>
-<section id="id33">
+<div class="section" id="id33">
 <h3>New Feature<a class="headerlink" href="#id33" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-183] - Samples: New MP4Muxer sample</p></li>
 <li><p>[AVB-527] - Transcoder: Support MPEG-2 TS in Transcoder.Push</p></li>
 <li><p>[AVB-559] - Samples: .NET: New ImageGrabber WPF sample</p></li>
 </ul>
-</section>
-<section id="id34">
+</div>
+<div class="section" id="id34">
 <h3>Improvement<a class="headerlink" href="#id34" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-320] - Codecs: AAC: Convert bitstream from ADIF to ADTS to avoid re-encoding.</p></li>
@@ -2538,8 +2547,8 @@ title="Print to PDF"
 <li><p>[AVB-536] - Demuxers: MPEG2-TS: Generate a separate data stream for Program Specific Information (PSI) tables</p></li>
 <li><p>[AVB-554] - MediaInfo: Extend to report system subtype</p></li>
 </ul>
-</section>
-<section id="id35">
+</div>
+<div class="section" id="id35">
 <h3>Bug<a class="headerlink" href="#id35" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-560] - Cannot parse a wav file containing a muLaw audio stream</p></li>
@@ -2548,29 +2557,29 @@ title="Print to PDF"
 <li><p>[AVB-601] - Crash in Transcoder.Open when the input is a raw G.711 or G.726 file (no container)</p></li>
 <li><p>[AVB-609] - Muxer: Output artefacts when using Param.Muxer.MP4.FastStart with some clips</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-16">
+<div class="section" id="version-1-16">
 <h2>Version 1.16<a class="headerlink" href="#version-1-16" title="Permalink to this headline">#</a></h2>
-<section id="id36">
+<div class="section" id="id36">
 <h3>New Feature<a class="headerlink" href="#id36" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-557] - Samples: New VideoSplitter sample that shows how to split a file to short clips</p></li>
 </ul>
-</section>
-<section id="id37">
+</div>
+<div class="section" id="id37">
 <h3>Bug<a class="headerlink" href="#id37" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-565] - Cannot transcode mulaw (wav) to mp3</p></li>
 <li><p>[AVB-577] - Race condition when using Transcoder.Open from multiple threads.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-15">
+<div class="section" id="version-1-15">
 <h2>Version 1.15<a class="headerlink" href="#version-1-15" title="Permalink to this headline">#</a></h2>
-<section id="id38">
+<div class="section" id="id38">
 <h3>New Feature<a class="headerlink" href="#id38" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[PC-72]   - Detect Teletext stream in TS</p></li>
@@ -2578,8 +2587,8 @@ title="Print to PDF"
 <li><p>[AVB-525] - StreamInfo: ProgramID and StreamID properties for multi-program transport streams (mpeg2-ts)</p></li>
 <li><p>[AVB-538] - MediaInfo: Allow data stream processing via a Push method</p></li>
 </ul>
-</section>
-<section id="id39">
+</div>
+<div class="section" id="id39">
 <h3>Improvement<a class="headerlink" href="#id39" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-173] - MediaBuffer: Improve MediaBuffer interface and Buffer helper class</p></li>
@@ -2588,8 +2597,8 @@ title="Print to PDF"
 <li><p>[AVB-552] - Fix VCD related presets to produce MPEG1-PS</p></li>
 <li><p>[AVB-553] - .NET: Add MediaSocket.StreamSubType to the .NET API</p></li>
 </ul>
-</section>
-<section id="id40">
+</div>
+<div class="section" id="id40">
 <h3>Bug<a class="headerlink" href="#id40" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-425] - Samples: CaptureDS: Recording stops with an error after only a few seconds</p></li>
@@ -2597,12 +2606,12 @@ title="Print to PDF"
 <li><p>[AVB-543] - AAC stream not recognized in a MOV container</p></li>
 <li><p>[AVB-551] - Crash when using MPEG_PES stream type for output.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-14">
+<div class="section" id="version-1-14">
 <h2>Version 1.14<a class="headerlink" href="#version-1-14" title="Permalink to this headline">#</a></h2>
-<section id="id41">
+<div class="section" id="id41">
 <h3>New Feature<a class="headerlink" href="#id41" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-500] - Transcoder: Support H.264 interlaced video output</p></li>
@@ -2610,8 +2619,8 @@ title="Print to PDF"
 <li><p>[AVB-504] - Add picture type to MediaSample</p></li>
 <li><p>[AVB-517] - Support *.M2T file format</p></li>
 </ul>
-</section>
-<section id="id42">
+</div>
+<div class="section" id="id42">
 <h3>Improvement<a class="headerlink" href="#id42" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-475] - MPEG-2 Encoder: Improve performance and quality in restricted VBR mode</p></li>
@@ -2620,27 +2629,27 @@ title="Print to PDF"
 <li><p>[AVB-512] - Params: C++: Add convenience “add” methods to ParamList, e.g. ParamList::addInt(const char_t* name, int64_t value)</p></li>
 <li><p>[AVB-520] - Docs: Add class diagrams</p></li>
 </ul>
-</section>
-<section id="id43">
+</div>
+<div class="section" id="id43">
 <h3>Bug<a class="headerlink" href="#id43" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-507] - MediaSocket: Calling FromMediaInfo multiple times creates media sockets linked to the same StreamInfo instance</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-13-1">
+<div class="section" id="version-1-13-1">
 <h2>Version 1.13.1<a class="headerlink" href="#version-1-13-1" title="Permalink to this headline">#</a></h2>
-<section id="id44">
+<div class="section" id="id44">
 <h3>Bug<a class="headerlink" href="#id44" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-513] - Cannot play H.264 MP4 video on Windows 7 SP1</p></li>
 </ul>
-</section>
-</section>
-<section id="version-1-13">
+</div>
+</div>
+<div class="section" id="version-1-13">
 <h2>Version 1.13<a class="headerlink" href="#version-1-13" title="Permalink to this headline">#</a></h2>
-<section id="id45">
+<div class="section" id="id45">
 <h3>New Feature<a class="headerlink" href="#id45" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-319] - Add a parameter to force/request re-encoding in case the input and output formats are equivalent</p></li>
@@ -2648,8 +2657,8 @@ title="Print to PDF"
 <li><p>[AVB-487] - Samples: C++: New ReEncode sample</p></li>
 <li><p>[AVB-488] - Samples: .NET: New ReEncode sample</p></li>
 </ul>
-</section>
-<section id="id46">
+</div>
+<div class="section" id="id46">
 <h3>Improvement<a class="headerlink" href="#id46" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-63] - H.264 Encoder: Improve performance by using all CPU cores.</p></li>
@@ -2660,20 +2669,20 @@ title="Print to PDF"
 <li><p>[AVB-490] - Docs: Mac: Include  a docset for XCode</p></li>
 <li><p>[AVB-499] - Presets: BDAV: Encode H.264 video with 4 slices per picture if level is 4.1</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-12">
+<div class="section" id="version-1-12">
 <h2>Version 1.12<a class="headerlink" href="#version-1-12" title="Permalink to this headline">#</a></h2>
-<section id="id47">
+<div class="section" id="id47">
 <h3>New Feature<a class="headerlink" href="#id47" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-406] - Transcoder: H.264 Decoder: Optimize for 4K / 2160p / 30fps playback</p></li>
 <li><p>[AVB-462] - Add more MPEG-1/2 encoding parameters (I/P/B pics, VBV buffer size)</p></li>
 <li><p>[AVB-470] - Samples: CaptureDS sample in <a class="reference external" href="http://VB.NET">VB.NET</a></p></li>
 </ul>
-</section>
-<section id="id48">
+</div>
+<div class="section" id="id48">
 <h3>Improvement<a class="headerlink" href="#id48" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-419] - BDAV: Pad last LPCM frame to 5ms at end of stream</p></li>
@@ -2683,8 +2692,8 @@ title="Print to PDF"
 <li><p>[AVB-433] - Samples: New AVMixer sample shows how to compress and multiplex YUV video and LPCM audio into H.264, AAC, MP4</p></li>
 <li><p>[AVB-458] - CaptureDS sample: add custom output sockets and recording without audio input</p></li>
 </ul>
-</section>
-<section id="id49">
+</div>
+<div class="section" id="id49">
 <h3>Bug<a class="headerlink" href="#id49" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-424] - Samples: CaptureDS crashes when recording to webm.vp8.vorbis preset</p></li>
@@ -2695,12 +2704,12 @@ title="Print to PDF"
 <li><p>[AVB-472] - TIFF images cannot be opened/parsed on a clean Ubuntu 14.04</p></li>
 <li><p>[AVB-473] - Crash when encoding mpeg-1 video on 8 core system</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-11">
+<div class="section" id="version-1-11">
 <h2>Version 1.11<a class="headerlink" href="#version-1-11" title="Permalink to this headline">#</a></h2>
-<section id="id50">
+<div class="section" id="id50">
 <h3>New Feature<a class="headerlink" href="#id50" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-154] - Blu-ray Encoding Presets (.m2ts)</p></li>
@@ -2709,8 +2718,8 @@ title="Print to PDF"
 <li><p>[AVB-377] - Support LPCM in a BDAV format (M2TS)</p></li>
 <li><p>[AVB-379] - Support AVC/H.264 in a BDAV format (M2TS)</p></li>
 </ul>
-</section>
-<section id="id51">
+</div>
+<div class="section" id="id51">
 <h3>Improvement<a class="headerlink" href="#id51" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-210] - Samples: Rename PullPushDecoder sample to H264NaluDecoder</p></li>
@@ -2721,34 +2730,34 @@ title="Print to PDF"
 <li><p>[AVB-400] - AVBlocks-Samples: Wiki: Simplify end-user instructions</p></li>
 <li><p>[AVB-402] - Samples: Rename DirectShowInput sample to InputDS</p></li>
 </ul>
-</section>
-<section id="id52">
+</div>
+<div class="section" id="id52">
 <h3>Bug<a class="headerlink" href="#id52" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-218] - Samples: H264NaluDecoder ignores the –frame and —rate command line options.</p></li>
 <li><p>[AVB-392] - H.264 decoder high CPU usage</p></li>
 <li><p>[AVB-393] - Demo logo is upside down when transcoder output is set to BGR24 BottomUp</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-10">
+<div class="section" id="version-1-10">
 <h2>Version 1.10<a class="headerlink" href="#version-1-10" title="Permalink to this headline">#</a></h2>
-<section id="id53">
+<div class="section" id="id53">
 <h3>Story<a class="headerlink" href="#id53" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-365] - Samples: C++: CaptureDS sample for Windows</p></li>
 <li><p>[AVB-366] - Samples: .NET: CaptureDS sample</p></li>
 </ul>
-</section>
-<section id="id54">
+</div>
+<div class="section" id="id54">
 <h3>New Feature<a class="headerlink" href="#id54" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-328] - API: Add functions to get library version and description</p></li>
 <li><p>[AVB-359] - New AccessUnitDelimiters H.264 encoder parameter</p></li>
 </ul>
-</section>
-<section id="id55">
+</div>
+<div class="section" id="id55">
 <h3>Improvement<a class="headerlink" href="#id55" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-237] - Redefine presets as nested namespaces / classes.</p></li>
@@ -2758,8 +2767,8 @@ title="Print to PDF"
 <li><p>[AVB-374] - Write aspect ratio in the MP4 container when an  H.264/AVC stream has non-square pixels</p></li>
 <li><p>[AVB-376] - C++ API: Replace MediaSocket static creating functions with Library equivalents</p></li>
 </ul>
-</section>
-<section id="id56">
+</div>
+<div class="section" id="id56">
 <h3>Bug<a class="headerlink" href="#id56" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-259] - The video frame rate filter is not used when it is set explicitly</p></li>
@@ -2768,40 +2777,40 @@ title="Print to PDF"
 <li><p>[AVB-373] - Aspect ratio not detected for an H.264/AVC stream in MP4 container</p></li>
 <li><p>[AVB-375] - Cannot transcode from WMA Lossless to WMA Pro</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-9">
+<div class="section" id="version-1-9">
 <h2>Version 1.9<a class="headerlink" href="#version-1-9" title="Permalink to this headline">#</a></h2>
-<section id="id57">
+<div class="section" id="id57">
 <h3>Story<a class="headerlink" href="#id57" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[PC-54] - Enable placing of MPEG-2 video in a MPEG-4 container (mp4)</p></li>
 </ul>
-</section>
-<section id="id58">
+</div>
+<div class="section" id="id58">
 <h3>New Feature<a class="headerlink" href="#id58" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-322] - Pass AAC streams from the MP4 demuxer to the MP4 muxer without re-encoding</p></li>
 </ul>
-</section>
-<section id="id59">
+</div>
+<div class="section" id="id59">
 <h3>Improvement<a class="headerlink" href="#id59" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-302] - Reduce the jitter in the video frame rate converter to less than +125 ms / -45 ms.</p></li>
 <li><p>[AVB-338] - Change ErrorInfo::message() to return an empty string instead of NULL.</p></li>
 <li><p>[AVB-346] - Linux: Include the missing library name as a hint in case of MissingDependency error</p></li>
 </ul>
-</section>
-<section id="task">
+</div>
+<div class="section" id="task">
 <h3>Task<a class="headerlink" href="#task" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-329] - API Docs: Clarify MediaBuffer usage in Transcoder::push()</p></li>
 <li><p>[AVB-349] - API Docs: Update the description of StreamType::H264 and StreamSubType::AVC1</p></li>
 <li><p>[AVB-351] - API Docs: Document the <code class="docutils literal notranslate"><span class="pre">ConcealDefects</span></code> parameter</p></li>
 </ul>
-</section>
-<section id="id60">
+</div>
+<div class="section" id="id60">
 <h3>Bug<a class="headerlink" href="#id60" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-136] - Demo version fails when video output is set to NV12 YUV</p></li>
@@ -2819,24 +2828,24 @@ title="Print to PDF"
 <li><p>[AVB-352] - Some streams may cause access violation in the MPEG-4 Visual decoder</p></li>
 <li><p>[PC-43] - Heap corruption in MP4 muxer when a stream is configured with framerate=0</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-8-1">
+<div class="section" id="version-1-8-1">
 <h2>Version 1.8.1<a class="headerlink" href="#version-1-8-1" title="Permalink to this headline">#</a></h2>
-<section id="id61">
+<div class="section" id="id61">
 <h3>Bug<a class="headerlink" href="#id61" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-309] - License not accepted on Linux distributions other than Debian and Ubuntu</p></li>
 <li><p>[AVB-313] - Mac: ImageSequence C++ sample does not compile.</p></li>
 <li><p>[AVB-318] - Crash while decoding MP4 with AAC audio at 44.1 KHz</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-8">
+<div class="section" id="version-1-8">
 <h2>Version 1.8<a class="headerlink" href="#version-1-8" title="Permalink to this headline">#</a></h2>
-<section id="epic">
+<div class="section" id="epic">
 <h3>Epic<a class="headerlink" href="#epic" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-298] - H.264 Decoder: Provide a way to override Video Usability Information / VUI (spans multiple releases)</p>
@@ -2849,18 +2858,18 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-</section>
-<section id="id62">
+</div>
+<div class="section" id="id62">
 <h3>Bug<a class="headerlink" href="#id62" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-297] - Transcoding WMV to MPEG2 produces output shorter than the input</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-7">
+<div class="section" id="version-1-7">
 <h2>Version 1.7<a class="headerlink" href="#version-1-7" title="Permalink to this headline">#</a></h2>
-<section id="id63">
+<div class="section" id="id63">
 <h3>Story<a class="headerlink" href="#id63" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-155] - Transcoder: Push / pull support for MPEG-4 Visual elementary stream</p></li>
@@ -2871,8 +2880,8 @@ title="Print to PDF"
 <li><p>[AVB-261] - Add IntParameter to supported parameter types in AVBlocks</p></li>
 <li><p>[AVB-283] - AVBlocks on Debian</p></li>
 </ul>
-</section>
-<section id="id64">
+</div>
+<div class="section" id="id64">
 <h3>Improvement<a class="headerlink" href="#id64" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-225] - Use explicit values for public enumerations and document the actual values</p></li>
@@ -2884,8 +2893,8 @@ title="Print to PDF"
 <li><p>[AVB-293] - Rename primo::codecs::InterlaceType to primo::codecs::ScanType (Breaking change)</p></li>
 <li><p>[AVB-295] - Change VideoStreamInfo::ScanType default value from ScanType::Progressive to ScanType::Unknown (Breaking change)</p></li>
 </ul>
-</section>
-<section id="id65">
+</div>
+<div class="section" id="id65">
 <h3>Bug<a class="headerlink" href="#id65" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-224] - Fix the ErrorFacility constants in .NET to be the same as the C++ constants</p></li>
@@ -2894,12 +2903,12 @@ title="Print to PDF"
 <li><p>[AVB-275] - Samples: Fix wrong calls to WriteFile (Windows)</p></li>
 <li><p>[AVB-290] - Push decoding broken for H.264 interlaced streams in some specific cases</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-6-1">
+<div class="section" id="version-1-6-1">
 <h2>Version 1.6.1<a class="headerlink" href="#version-1-6-1" title="Permalink to this headline">#</a></h2>
-<section id="id66">
+<div class="section" id="id66">
 <h3>Bug<a class="headerlink" href="#id66" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-189] - iPad / H.264 / AAC and iPad / H.264 HD / AAC presets produce choppy audio.</p></li>
@@ -2911,19 +2920,19 @@ title="Print to PDF"
 <li><p>[AVB-229] - Build scripts may include sample code from the wrong branch</p></li>
 <li><p>[AVB-245] - Windows: .NET: StreamEncoder and YuvEncoder samples: Duplicate extension of output filename, e.g. <code class="docutils literal notranslate"><span class="pre">.mp4.mp4</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">.mp4</span></code>.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-6">
+<div class="section" id="version-1-6">
 <h2>Version 1.6<a class="headerlink" href="#version-1-6" title="Permalink to this headline">#</a></h2>
-<section id="id67">
+<div class="section" id="id67">
 <h3>Story<a class="headerlink" href="#id67" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-141] - Push / Pull for MPEG4 video elementary streams</p></li>
 <li><p>[AVB-166] - G.711 and G.726 codecs</p></li>
 </ul>
-</section>
-<section id="id68">
+</div>
+<div class="section" id="id68">
 <h3>Improvement<a class="headerlink" href="#id68" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-96] - Clean .Net API documentation</p></li>
@@ -2936,9 +2945,9 @@ title="Print to PDF"
 <li><p>[AVB-180] - Docs: C++: Update Transcoder::run API documentation</p></li>
 <li><p>[AVB-187] - Load msdmo.dll dynamically when needed for WM codecs</p></li>
 </ul>
-</section>
+</div>
 <hr class="docutils" />
-<section id="id69">
+<div class="section" id="id69">
 <h3>Bug<a class="headerlink" href="#id69" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-115] - Ogg demuxer returns -1 for seek position</p></li>
@@ -2946,28 +2955,28 @@ title="Print to PDF"
 <li><p>[AVB-163] - MPEG-4 Visual: MP4 demuxer will not group the headers and data for “I” frames (in some border cases).</p></li>
 <li><p>[AVB-170] - Transcoder fails to decode a video frame in pull mode</p></li>
 </ul>
-</section>
-</section>
-<section id="version-1-5">
+</div>
+</div>
+<div class="section" id="version-1-5">
 <h2>Version 1.5<a class="headerlink" href="#version-1-5" title="Permalink to this headline">#</a></h2>
-<section id="id70">
+<div class="section" id="id70">
 <h3>Epic<a class="headerlink" href="#id70" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-124] - MP4 muxing for video streaming / progressive download / fast start.</p></li>
 </ul>
-</section>
-<section id="id71">
+</div>
+<div class="section" id="id71">
 <h3>Bug<a class="headerlink" href="#id71" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-128] - VideoStreamInfo.FrameBottomUp set to true is not processed correctly in Transcoder</p></li>
 <li><p>[AVB-162] - Stuffing bytes not discarded when decoding MPEG-4 Visual elementary stream</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-4">
+<div class="section" id="version-1-4">
 <h2>Version 1.4<a class="headerlink" href="#version-1-4" title="Permalink to this headline">#</a></h2>
-<section id="id72">
+<div class="section" id="id72">
 <h3>New Feature<a class="headerlink" href="#id72" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-117] - StreamEncoder sample</p></li>
@@ -2977,75 +2986,75 @@ title="Print to PDF"
 <li><p>[AVB-121] - PullPushDecoder sample</p></li>
 <li><p>[AVB-131] - DirectShowInput C++ sample</p></li>
 </ul>
-</section>
-<section id="id73">
+</div>
+<div class="section" id="id73">
 <h3>Bug<a class="headerlink" href="#id73" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-107] - Linux: Video encoding produces wrong results</p></li>
 <li><p>[AVB-126] - .NET: LicenseStatusFlags.DemoBuild is not defined.</p></li>
 <li><p>[AVB-137] - Docs: C++: No documentation for primo::license::LicenseInfo</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-3">
+<div class="section" id="version-1-3">
 <h2>Version 1.3<a class="headerlink" href="#version-1-3" title="Permalink to this headline">#</a></h2>
-<section id="id74">
+<div class="section" id="id74">
 <h3>New Feature<a class="headerlink" href="#id74" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-98] - New ImageSequence sample</p></li>
 <li><p>[AVB-100] - New YuvEncoder sample</p></li>
 </ul>
-</section>
-<section id="id75">
+</div>
+<div class="section" id="id75">
 <h3>Improvement<a class="headerlink" href="#id75" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-99] - Windows: Package AVBlocks SDK as a self extracting archive.</p></li>
 <li><p>[AVB-106] - Split MediaInfo sample to AVInfo and MetaInfo samples.</p></li>
 </ul>
-</section>
-<section id="id76">
+</div>
+<div class="section" id="id76">
 <h3>Bug<a class="headerlink" href="#id76" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-108] - JPEG image decoder on Linux generates corrupted output</p></li>
 <li><p>[AVB-109] - avb_create_license_info not exported on Mac and Linux</p></li>
 <li><p>[AVB-122] - Assert in Transcoder::open with video input that has no stream or file set.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-2-1">
+<div class="section" id="version-1-2-1">
 <h2>Version 1.2.1<a class="headerlink" href="#version-1-2-1" title="Permalink to this headline">#</a></h2>
-<section id="id77">
+<div class="section" id="id77">
 <h3>Bug<a class="headerlink" href="#id77" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-92] - Last 2 frames in MPEG2 Video encoded stream are not the same as in the input.</p></li>
 <li><p>[AVB-101] - MPEG2 video encoder does not generate sequence_end code</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-2">
+<div class="section" id="version-1-2">
 <h2>Version 1.2<a class="headerlink" href="#version-1-2" title="Permalink to this headline">#</a></h2>
-<section id="id78">
+<div class="section" id="id78">
 <h3>Improvement<a class="headerlink" href="#id78" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-83] - Update avblocks::ParamType documentation.</p></li>
 <li><p>[AVB-88] - Rename Transcoder::write and Transcoder::read to Transcoder::push and Transcoder::pull</p></li>
 <li><p>[AVB-93] - Strong-named .NET assemblies</p></li>
 </ul>
-</section>
-<section id="id79">
+</div>
+<div class="section" id="id79">
 <h3>Bug<a class="headerlink" href="#id79" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-89] - Transcoder ignores frame rate for YUV input</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-1">
+<div class="section" id="version-1-1">
 <h2>Version 1.1<a class="headerlink" href="#version-1-1" title="Permalink to this headline">#</a></h2>
-<section id="id80">
+<div class="section" id="id80">
 <h3>New Feature<a class="headerlink" href="#id80" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-31] - New API to read and write metadata - ID3 / ASF / OGG.</p></li>
@@ -3054,8 +3063,8 @@ title="Print to PDF"
 <li><p>[AVB-68] - Transcoder seek support for WebM ( socket-&gt;setTimePosition() ).</p></li>
 <li><p>[AVB-20] - Ability to split a long video to 2 or more pieces (DVDBuilder needs this to create multi-disc DVD output)</p></li>
 </ul>
-</section>
-<section id="id81">
+</div>
+<div class="section" id="id81">
 <h3>Improvement<a class="headerlink" href="#id81" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-5] - API: Inconsistent collections</p></li>
@@ -3069,8 +3078,8 @@ title="Print to PDF"
 <li><p>[AVB-82] - Restructure License info API</p></li>
 <li><p>[AVB-13] - Allow AVB to be loaded and used more than once in a single process</p></li>
 </ul>
-</section>
-<section id="id82">
+</div>
+<div class="section" id="id82">
 <h3>Bug<a class="headerlink" href="#id82" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[AVB-4] - Mp3 length is reported as zero</p></li>
@@ -3088,14 +3097,14 @@ title="Print to PDF"
 <li><p>[AVB-66] - The WMA decoder does not keep the sample time</p></li>
 <li><p>[AVB-70] - WebM muxer output does not strictly follow the “WebM Container Guidelines”</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="version-1-0">
+<div class="section" id="version-1-0">
 <h2>Version 1.0<a class="headerlink" href="#version-1-0" title="Permalink to this headline">#</a></h2>
 <p>First version. Everything works.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
