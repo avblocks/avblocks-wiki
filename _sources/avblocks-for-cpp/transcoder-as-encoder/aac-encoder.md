@@ -92,7 +92,7 @@ p::ref<Transcoder> create_aac_encoder(const char_t* outputFile)
     // AudioStreamInfo
     p::ref<AudioStreamInfo> pcmAudio(Library::createAudioStreamInfo());
     pcmAudio->setStreamType(StreamType::LPCM);
-    pcmAudio->setSampleRate(44100);
+    pcmAudio->setSampleRate(48000);
     pcmAudio->setChannels(2);
     pcmAudio->setBitsPerSample(16);
     pcmAudio->setBytesPerFrame((pcmAudio->bitsPerSample() / 8) * pcmAudio->channels());
@@ -253,7 +253,7 @@ p::ref<Transcoder> create_aac_encoder(const char_t* outputFile)
     // AudioStreamInfo
     p::ref<AudioStreamInfo> pcmAudio(Library::createAudioStreamInfo());
     pcmAudio->setStreamType(StreamType::LPCM);
-    pcmAudio->setSampleRate(44100);
+    pcmAudio->setSampleRate(48000);
     pcmAudio->setChannels(2);
     pcmAudio->setBitsPerSample(16);
     pcmAudio->setBytesPerFrame((pcmAudio->bitsPerSample() / 8) * pcmAudio->channels());
