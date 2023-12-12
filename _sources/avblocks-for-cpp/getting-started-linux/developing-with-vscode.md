@@ -1,20 +1,20 @@
 ---
 title: Developing with Visual Studio Code
 metadata:
-    description: This page describes the steps needed to setup Visual Studio Code for AVBlocks development on macOS
+    description: This page describes the steps needed to setup Visual Studio Code for AVBlocks development on Ubuntu
 taxonomy:
     category: docs
 ---
 
 # Developing with Visual Studio Code
 
-This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on macOS. These steps have been verified to work with Xcode 15.0.1, on macOS Ventura 13.5.2.
+This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on Ubuntu. These steps have been verified to work on Ubuntu 22.04.3 LTS.
 
 ## Visual Studio Code
 
 Download and install from [Visual Studio Code](https://code.visualstudio.com/download) site.
 
-Open Visual Studio Code and press `Cmd + Shift + p`. Select `Shell Command: Install 'code' command in PATH`. 
+Open Visual Studio Code and press `Ctrl + Shift + P`. Select `Shell Command: Install 'code' command in PATH`. 
 
 Also install the [C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack).
 
@@ -35,7 +35,7 @@ Add the following Visual Studio Code specific files to the `.vscode` subdir:
         {
             "label": "Build",
             "type": "shell",
-            "osx": {
+            "linux": {
                 "command": "${workspaceFolder}/build.sh",
             },
             "group": {
@@ -54,13 +54,13 @@ Add the following Visual Studio Code specific files to the `.vscode` subdir:
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch (lldb)",
+            "name": "Launch (gdb)",
             "type": "cppdbg",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "osx": {
+            "linux": {
                 "program": "${workspaceFolder}/build/debug/simple-converter",
-                "MIMode": "lldb",
+                "MIMode": "gdb",
             },
         }    
     ]
@@ -69,7 +69,7 @@ Add the following Visual Studio Code specific files to the `.vscode` subdir:
 
 ## Test the build
 
-Test the build by pressing `Cmd + Shift + B`. Visual Studio Code should execute the `build.sh` script automatically.
+Test the build by pressing `Ctrl + Shift + B`. Visual Studio Code should execute the `build.sh` script automatically.
 
 ## Test the debugging
 
