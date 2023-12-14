@@ -189,25 +189,23 @@ simple-converter
     ```cpp
     #include <primo/avblocks/avb.h>
     #include <primo/platform/reference++.h>
-    #include <primo/platform/ustring.h>
 
-    using namespace primo;
     using namespace primo::codecs;
     using namespace primo::avblocks;
 
-    int main(int argc, const char *argv[]) {
+    int main(int argc, const char * argv[]) {
+        // needed for WMV
+        CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
+
         Library::initialize();
 
-        auto inputFile = primo::ustring("AAP.m4v");
-        auto outputFile = primo::ustring("AAP.mp4");
-
         auto inputInfo = primo::make_ref(Library::createMediaInfo());
-        inputInfo->inputs()->at(0)->setFile(inputFile.u16());
+        inputInfo->inputs()->at(0)->setFile(L"Wildlife.wmv");
 
         if (inputInfo->open()) {
             auto inputSocket = primo::make_ref(Library::createMediaSocket(inputInfo.get()));
             auto outputSocket = primo::make_ref(Library::createMediaSocket(Preset::Video::Generic::MP4::Base_H264_AAC));
-            outputSocket->setFile(outputFile.u16());
+            outputSocket->setFile(L"Wildlife.mp4");
 
             auto transcoder = primo::make_ref(Library::createTranscoder());
             transcoder->inputs()->add(inputSocket.get());
@@ -220,6 +218,9 @@ simple-converter
         }
 
         Library::shutdown();
+
+        CoUninitialize();
+
         return 0;
     }
     ```
