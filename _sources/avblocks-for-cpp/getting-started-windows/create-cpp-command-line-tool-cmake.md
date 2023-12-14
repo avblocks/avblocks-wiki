@@ -184,7 +184,7 @@ simple-converter
     target_sources(${target} PRIVATE ${source})
     ```
 
-4. Replace the contents of `main.cpp` with this code:
+4. Replace the contents of `src/main.cpp` with this code:
 
     ```cpp
     #include <primo/avblocks/avb.h>
