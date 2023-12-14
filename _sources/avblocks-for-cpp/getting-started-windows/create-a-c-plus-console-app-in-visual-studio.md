@@ -33,9 +33,6 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
 4. Replace the contents of `simple-converter.cpp` with this code:
 
     ```cpp
-    // simple-converter.cpp : This file contains the 'main' function. Program execution begins and ends there.
-    //
-
     #include <primo/avblocks/avb.h>
     #include <primo/platform/reference++.h>
 

@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="Developing with Visual Studio Code" href="../developing-with-vscode/" />
-    <link rel="prev" title="Create a Command Line Tool in Xcode" href="../create-objc-command-line-tool-xcode/" />
+    <link rel="next" title="Initialization and Termination" href="../../initialization-and-termination/" />
+    <link rel="prev" title="Create a Console App in Visual Studio" href="../create-a-c-plus-console-app-in-visual-studio/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -149,50 +149,50 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting-started-macos/">
    Getting Started - macOS
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="../create-objc-command-line-tool-xcode/">
-     Create a Command Line Tool in Xcode
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Create a Command Line Tool using CMake
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../developing-with-vscode/">
-     Developing with Visual Studio Code
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-windows/">
-   Getting Started - Windows
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">
-     Create a Console App in Visual Studio
+    <a class="reference internal" href="../../getting-started-macos/create-objc-command-line-tool-xcode/">
+     Create a Command Line Tool in Xcode
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-cpp-command-line-tool-cmake/">
+    <a class="reference internal" href="../../getting-started-macos/create-cpp-command-line-tool-cmake/">
+     Create a Command Line Tool using CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../getting-started-macos/developing-with-vscode/">
+     Developing with Visual Studio Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../">
+   Getting Started - Windows
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../create-a-c-plus-console-app-in-visual-studio/">
+     Create a Console App in Visual Studio
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Create a Command Line Tool using CMake
     </a>
    </li>
@@ -625,7 +625,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/getting-started-macos/create-cpp-command-line-tool-cmake.md"
+        <a href="../../../_sources/avblocks-for-cpp/getting-started-windows/create-cpp-command-line-tool-cmake.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -785,33 +785,29 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="create-a-command-line-tool-using-cmake">
 <h1>Create a Command Line Tool using CMake<a class="headerlink" href="#create-a-command-line-tool-using-cmake" title="Permalink to this headline">#</a></h1>
-<p>This topic describes the steps needed to configure a CMake project for C++ Command Line Tool. These steps have been verified to work with Xcode 15.0.1, on macOS Ventura 13.5.2.</p>
+<p>This topic describes the steps needed to configure a CMake project for C++ Command Line Tool. These steps were tested on Windows 11, 23H2. Scripts are <code class="docutils literal notranslate"><span class="pre">PowerShell</span></code>.</p>
 <section id="test-that-you-have-all-tools-installed">
 <h2>Test that you have all tools installed<a class="headerlink" href="#test-that-you-have-all-tools-installed" title="Permalink to this headline">#</a></h2>
-<p>C++ Compiler (clang):</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>clang<span class="w"> </span>--version
-</pre></div>
-</div>
 <p>CMake:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>--version
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="p">-</span><span class="n">-version</span>
 </pre></div>
 </div>
 <p>ninja:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ninja<span class="w"> </span>--version
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">ninja</span> <span class="p">-</span><span class="n">-version</span>
 </pre></div>
 </div>
-<p>If you don’t have those tools follow the steps in the <a class="reference external" href="https://blog.primosoftware.com/setup-cpp-development-environment-macos/">Setup C++ development environment on macOS</a> post to configure a C++ development environment.</p>
+<p>If you don’t have those tools follow the steps in the <a class="reference external" href="https://blog.primosoftware.com/setup-cpp-development-environment-windows/">Setup C++ development environment on Windows</a> post to configure a C++ development environment.</p>
 </section>
 <section id="create-the-project-directory">
 <h2>Create the project directory<a class="headerlink" href="#create-the-project-directory" title="Permalink to this headline">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/avblocks/cmake/simple-converter
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="p">~/</span><span class="n">avblocks</span><span class="p">/</span><span class="n">cmake</span><span class="p">/</span><span class="n">simple-converter</span>
 </pre></div>
 </div>
 </section>
 <section id="create-the-cmake-project">
 <h2>Create the CMake project<a class="headerlink" href="#create-the-cmake-project" title="Permalink to this headline">#</a></h2>
 <p>Switch to the project directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/avblocks/cmake/simple-converter
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd </span><span class="p">~/</span><span class="n">avblocks</span><span class="p">/</span><span class="n">cmake</span><span class="p">/</span><span class="n">simple-converter</span>
 </pre></div>
 </div>
 <p>Add <code class="docutils literal notranslate"><span class="pre">src/main.cpp</span></code>:</p>
@@ -823,37 +819,52 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>Add <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.20</span><span class="p">)</span>
 
 <span class="nb">project</span><span class="p">(</span><span class="s">simple-converter</span><span class="p">)</span>
 
 <span class="nb">add_executable</span><span class="p">(</span><span class="s">simple-converter</span><span class="w"> </span><span class="s">src/main.cpp</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Add <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
-
-mkdir<span class="w"> </span>-p<span class="w"> </span>./build/debug
-<span class="nb">pushd</span><span class="w"> </span>./build/debug
-<span class="w">    </span>cmake<span class="w"> </span>-G<span class="w"> </span><span class="s1">&#39;Ninja&#39;</span><span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w">  </span>../..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ninja
-<span class="w">    </span><span class="nv">ret</span><span class="o">=</span><span class="nv">$?</span>
-<span class="nb">popd</span><span class="w">  </span>
+<p>Add <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">cache</span><span class="p">/</span>
+<span class="n">build</span><span class="p">/</span>
 </pre></div>
 </div>
-<p>Add <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.DS_Store
-.cache/
-build/
+<p>Add <code class="docutils literal notranslate"><span class="pre">build.ps1</span></code>:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">New-Item</span> <span class="n">-Force</span> <span class="n">-Path</span> <span class="p">./</span><span class="n">build</span><span class="p">/</span><span class="n">debug</span> <span class="n">-ItemType</span> <span class="n">Directory</span> 
+<span class="nb">Push-Location</span> <span class="p">./</span><span class="n">build</span><span class="p">/</span><span class="n">debug</span>
+    <span class="n">cmake</span> <span class="n">-G</span> <span class="s1">&#39;Ninja&#39;</span> <span class="n">-DCMAKE_BUILD_TYPE</span><span class="p">=</span><span class="n">debug</span> <span class="p">../..</span>
+    <span class="n">ninja</span>
+<span class="nb">Pop-Location</span>
+</pre></div>
+</div>
+<p>Add <code class="docutils literal notranslate"><span class="pre">configure.ps1</span></code>:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$tempFile</span> <span class="p">=</span> <span class="no">[IO.Path]</span><span class="p">::</span><span class="n">GetTempFileName</span><span class="p">()</span>
+
+<span class="c"># get the path to Visual Studio 2022</span>
+<span class="nv">$vs_install_dir</span> <span class="p">=</span> <span class="p">$(</span><span class="nb">Get-VSSetupInstance</span> <span class="p">|</span> <span class="nb">Select-VSSetupInstance</span> <span class="n">-Version</span> <span class="s1">&#39;[17.0,18.0]&#39;</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">InstallationPath</span><span class="p">)</span>
+<span class="nv">$vs_common_tools</span> <span class="p">=</span> <span class="s2">&quot;${vs_install_dir}/Common7/Tools/&quot;</span>
+
+<span class="c"># run VsDevCmd.bat for x64 C++ compiler and save the environment to a file</span>
+<span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot; </span><span class="se">`&quot;</span><span class="s2">$vs_common_tools/VsDevCmd.bat</span><span class="se">`&quot;</span><span class="s2"> -arch=amd64 -host_arch=amd64 &amp;&amp; set &gt; </span><span class="se">`&quot;</span><span class="s2">$tempFile</span><span class="se">`&quot;</span><span class="s2">&quot;</span>
+
+<span class="c"># set the environment into PowerShell</span>
+<span class="nb">Get-Content</span> <span class="nv">$tempFile</span> <span class="p">|</span> <span class="k">Foreach</span><span class="n">-Object</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$_</span> <span class="o">-match</span> <span class="s2">&quot;^(.*?)=(.*)$&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">Set-Content</span> <span class="s2">&quot;env:\</span><span class="p">$(</span><span class="nv">$matches</span><span class="p">[</span><span class="n">1</span><span class="p">])</span><span class="s2">&quot;</span> <span class="nv">$matches</span><span class="p">[</span><span class="n">2</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">Remove-Item</span> <span class="nv">$tempFile</span>
 </pre></div>
 </div>
 <p>You should end up with the following directory structure:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>tree<span class="w"> </span>-a<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span>simple-converter
-
-simple-converter
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
 ├──<span class="w"> </span>.gitignore
 ├──<span class="w"> </span>CMakeLists.txt
-├──<span class="w"> </span>build.sh
+├──<span class="w"> </span>build.ps1
+├──<span class="w"> </span>configure.ps1
 └──<span class="w"> </span>src
 <span class="w">    </span>└──<span class="w"> </span>main.cpp
 </pre></div>
@@ -861,17 +872,19 @@ simple-converter
 </section>
 <section id="test-the-build">
 <h2>Test the build<a class="headerlink" href="#test-the-build" title="Permalink to this headline">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>build.sh
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># source configure.ps1</span>
+<span class="p">.</span> <span class="p">.\</span><span class="n">configure</span><span class="p">.</span><span class="n">ps1</span>
 
-./build.sh
+<span class="c"># build</span>
+<span class="p">./</span><span class="n">build</span><span class="p">.</span><span class="n">ps1</span>
 </pre></div>
 </div>
 </section>
 <section id="update-for-avblocks">
 <h2>Update for AVBlocks<a class="headerlink" href="#update-for-avblocks" title="Permalink to this headline">#</a></h2>
 <ol>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks_v3.0.0-demo.1-darwin.zip</span></code> except for the version number which may be different.</p></li>
-<li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks_v3.0.0-demo.1-windows.zip</span></code> except for the version number which may be different.</p></li>
+<li><p>Extract the archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <p>You should end up with a directory structure similar to the following:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
 ├──<span class="w"> </span>.gitignore
@@ -879,15 +892,15 @@ simple-converter
 ├──<span class="w"> </span>avblocks
 │<span class="w">   </span>├──<span class="w"> </span>include
 │<span class="w">   </span>└──<span class="w"> </span>lib
-├──<span class="w"> </span>build.sh
+├──<span class="w"> </span>build.ps1
+├──<span class="w"> </span>configure.ps1
 └──<span class="w"> </span>src
 <span class="w">    </span>└──<span class="w"> </span>main.cpp
 </pre></div>
 </div>
 </li>
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> with this code:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">DS_Store</span>
-<span class="o">.</span><span class="n">cache</span><span class="o">/</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">cache</span><span class="o">/</span>
 <span class="n">build</span><span class="o">/</span>
 <span class="n">avblocks</span><span class="o">/</span>
 </pre></div>
@@ -901,34 +914,33 @@ simple-converter
 
 <span class="n">add_executable</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">})</span>
 
-<span class="cp"># definitions for Debug x64</span>
-<span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PUBLIC</span><span class="w">  </span><span class="n">_DEBUG</span><span class="p">)</span>
+<span class="cp"># debug definitions</span>
+<span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w">  </span><span class="n">_DEBUG</span><span class="p">)</span>
 
-<span class="cp"># compile options for Debug x64</span>
-<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">17</span><span class="w"> </span><span class="o">-</span><span class="n">stdlib</span><span class="o">=</span><span class="n">libc</span><span class="o">++</span><span class="p">)</span>
-<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">m64</span><span class="w"> </span><span class="o">-</span><span class="n">fPIC</span><span class="p">)</span>
-<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+<span class="cp"># debug compile options</span>
+<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">/</span><span class="n">Zi</span><span class="w"> </span><span class="o">/</span><span class="n">Od</span><span class="p">)</span>
 
-<span class="cp"># includes</span>
-<span class="n">target_include_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PUBLIC</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">include</span><span class="p">)</span>
+<span class="cp"># enable C++ 17 standard features</span>
+<span class="n">target_compile_features</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">cxx_std_17</span><span class="p">)</span>
+
+<span class="cp"># include dirs</span>
+<span class="n">target_include_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">include</span><span class="p">)</span>
 
 <span class="cp"># libs</span>
-<span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x64</span><span class="p">)</span>
-<span class="n">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">libAVBlocks</span><span class="p">.</span><span class="n">dylib</span><span class="w"> </span><span class="s">&quot;-framework CoreFoundation&quot;</span><span class="w"> </span><span class="s">&quot;-framework AppKit&quot;</span><span class="p">)</span>
+<span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x64</span><span class="p">)</span>
+<span class="n">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">AVBlocks64</span><span class="p">.</span><span class="n">dll</span><span class="p">)</span>
+
+<span class="cp"># add /MTd or /MT compiler option </span>
+<span class="n">set_property</span><span class="p">(</span><span class="n">TARGET</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PROPERTY</span><span class="w"> </span><span class="n">MSVC_RUNTIME_LIBRARY</span><span class="w"> </span><span class="s">&quot;MultiThreaded$&lt;$&lt;CONFIG:Debug&gt;:Debug&gt;&quot;</span><span class="p">)</span>
 
 <span class="cp"># sources</span>
-<span class="n">file</span><span class="p">(</span><span class="n">GLOB</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="s">&quot;src/*.cpp&quot;</span><span class="w"> </span><span class="s">&quot;src/*.mm&quot;</span><span class="p">)</span>
+<span class="n">file</span><span class="p">(</span><span class="n">GLOB</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="s">&quot;src/*.cpp&quot;</span><span class="p">)</span>
 <span class="n">target_sources</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">source</span><span class="p">})</span>
 </pre></div>
 </div>
 </li>
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> with this code:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
-<span class="c1">//  main.cpp</span>
-<span class="c1">//  simple-converter</span>
-<span class="c1">//</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
 
@@ -939,8 +951,8 @@ simple-converter
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AAP.m4v&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AAP.mp4&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="s">&quot;AAP.m4v&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="s">&quot;AAP.mp4&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
 <span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">.</span><span class="n">u16</span><span class="p">());</span>
@@ -967,7 +979,8 @@ simple-converter
 </div>
 </li>
 <li><p>Build the project</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build.sh
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.</span> <span class="p">./</span><span class="n">configure</span><span class="p">.</span><span class="n">ps1</span>
+<span class="p">./</span><span class="n">build</span><span class="p">.</span><span class="n">ps1</span>
 </pre></div>
 </div>
 </li>
@@ -976,19 +989,21 @@ simple-converter
 <section id="run-the-application">
 <h2>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this headline">#</a></h2>
 <ol>
-<li><p>Download the <code class="docutils literal notranslate"><span class="pre">AAP.m4v</span></code> HD movie from the <a class="reference external" href="https://archive.org/details/Wildlife-filming">Internet Archive</a> and save it in the project directory.</p></li>
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> HD movie from the <a class="reference external" href="https://archive.org/download/WildlifeHd/Wildlife.wmv">Internet Archive</a> and save it in the project directory.</p></li>
+<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
 <li><p>Run the application:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build/debug/simple-converter
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">./</span><span class="n">build</span><span class="p">/</span><span class="n">debug</span><span class="p">/</span><span class="n">simple-converter</span>
 </pre></div>
 </div>
-<p>Wait for the Transcoder to finish - it will take a few minutes. The converted file <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> will be in the project directory.</p>
+<p>Wait for the Transcoder to finish - it will take a few seconds. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> will be in the project directory.</p>
 </li>
 </ol>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> to solve that.</p></li>
+<li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> to solve that.</p></li>
 </ul>
 </section>
 </section>
@@ -1006,7 +1021,7 @@ simple-converter
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp\getting-started-macos"
+            path: "./avblocks-for-cpp\getting-started-windows"
         },
         predefinedOutput: true
     }
@@ -1020,17 +1035,17 @@ simple-converter
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../create-objc-command-line-tool-xcode/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../create-a-c-plus-console-app-in-visual-studio/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Create a Command Line Tool in Xcode</p>
+            <p class="prev-next-title">Create a Console App in Visual Studio</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../developing-with-vscode/" title="next page">
+    <a class='right-next' id="next-link" href="../../initialization-and-termination/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Developing with Visual Studio Code</p>
+        <p class="prev-next-title">Initialization and Termination</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
