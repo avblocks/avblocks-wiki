@@ -1,14 +1,14 @@
 ---
-title: Developing with Visual Studio Code on Ubuntu
+title: Developing with Visual Studio Code on Windows
 metadata:
-    description: This page describes the steps needed to setup Visual Studio Code for AVBlocks development on Ubuntu
+    description: This page describes the steps needed to setup Visual Studio Code for AVBlocks development on Windows
 taxonomy:
     category: docs
 ---
 
-# Developing with Visual Studio Code on Ubuntu
+# Developing with Visual Studio Code on Windows
 
-This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on Ubuntu. These steps have been verified to work on Ubuntu 22.04.3 LTS.
+This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on Windows. These steps have been verified to work on on Windows 11 (22H2).
 
 ## Visual Studio Code
 
@@ -35,13 +35,10 @@ Add the following Visual Studio Code specific files to the `.vscode` subdir:
         {
             "label": "Build",
             "type": "shell",
-            "linux": {
-                "command": "${workspaceFolder}/build.sh",
+            "windows": {
+                "command": "${workspaceFolder}/build.ps1"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         }
     ]
 }
@@ -54,22 +51,23 @@ Add the following Visual Studio Code specific files to the `.vscode` subdir:
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch (gdb)",
+            "name": "Debug (cppvsdbg)",
             "type": "cppdbg",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "linux": {
-                "program": "${workspaceFolder}/build/debug/simple-converter",
-                "MIMode": "gdb",
+            "windows": {
+                "type": "cppvsdbg",
+                "program": "${workspaceFolder}/build/debug/simple-converter.exe"
             },
-        }    
-    ]
+            "preLaunchTask": "Build"
+        }        
+   ]
 }
 ```
 
 ## Test the build
 
-Test the build by pressing `Ctrl + Shift + B`. Visual Studio Code should execute the `build.sh` script automatically.
+Test the build by pressing `Ctrl + Shift + B`. Visual Studio Code should execute the `build.ps1` script automatically.
 
 ## Test the debugging
 

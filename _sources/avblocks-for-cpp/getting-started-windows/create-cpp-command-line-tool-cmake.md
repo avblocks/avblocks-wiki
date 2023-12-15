@@ -1,12 +1,12 @@
 ---
-title: Create a Command Line Tool using CMake
+title: Create a Command Line Tool using CMake on Windows
 metadata:
     description: This page describes the steps needed to configure CMake project for AVBlocks Command Line Tool on Windows
 taxonomy:
     category: docs
 ---
 
-# Create a Command Line Tool using CMake
+# Create a Command Line Tool using CMake on Windows
 
 This topic describes the steps needed to configure a CMake project for C++ Command Line Tool. These steps were tested on Windows 11, 23H2. Scripts are `PowerShell`.
 

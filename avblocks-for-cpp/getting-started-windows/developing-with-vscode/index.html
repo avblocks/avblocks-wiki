@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Create a Command Line Tool in Xcode on macOS &#8212; AVBlocks for C++</title>
+    <title>Developing with Visual Studio Code on Windows &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="Create a Command Line Tool using CMake on macOS" href="../create-cpp-command-line-tool-cmake/" />
-    <link rel="prev" title="Getting Started - macOS" href="../" />
+    <link rel="next" title="Initialization and Termination" href="../../initialization-and-termination/" />
+    <link rel="prev" title="Create a Command Line Tool using CMake on Windows" href="../create-cpp-command-line-tool-cmake/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -149,55 +149,55 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting-started-macos/">
    Getting Started - macOS
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Create a Command Line Tool in Xcode on macOS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../create-cpp-command-line-tool-cmake/">
-     Create a Command Line Tool using CMake on macOS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../developing-with-vscode/">
-     Developing with Visual Studio Code on macOS
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-windows/">
-   Getting Started - Windows
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">
+    <a class="reference internal" href="../../getting-started-macos/create-objc-command-line-tool-xcode/">
+     Create a Command Line Tool in Xcode on macOS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../getting-started-macos/create-cpp-command-line-tool-cmake/">
+     Create a Command Line Tool using CMake on macOS
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../getting-started-macos/developing-with-vscode/">
+     Developing with Visual Studio Code on macOS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../">
+   Getting Started - Windows
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../create-a-c-plus-console-app-in-visual-studio/">
      Create a Console App in Visual Studio on Windows
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-cpp-command-line-tool-cmake/">
+    <a class="reference internal" href="../create-cpp-command-line-tool-cmake/">
      Create a Command Line Tool using CMake on Windows
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/developing-with-vscode/">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Developing with Visual Studio Code on Windows
     </a>
    </li>
@@ -630,7 +630,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/getting-started-macos/create-objc-command-line-tool-xcode.md"
+        <a href="../../../_sources/avblocks-for-cpp/getting-started-windows/developing-with-vscode.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -690,18 +690,48 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-the-xcode-project">
-   Create the Xcode project
+  <a class="reference internal nav-link" href="#visual-studio-code">
+   Visual Studio Code
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-the-application">
-   Run the application
+  <a class="reference internal nav-link" href="#create-cmake-project">
+   Create CMake project
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#troubleshooting">
-   Troubleshooting
+  <a class="reference internal nav-link" href="#automate-the-build">
+   Automate the build
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vscode-tasks-json">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .vscode/tasks.json
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vscode-launch-json">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .vscode/launch.json
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-the-build">
+   Test the build
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-the-debugging">
+   Test the debugging
   </a>
  </li>
 </ul>
@@ -713,7 +743,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Create a Command Line Tool in Xcode on macOS</h1>
+                <h1>Developing with Visual Studio Code on Windows</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -724,18 +754,48 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-the-xcode-project">
-   Create the Xcode project
+  <a class="reference internal nav-link" href="#visual-studio-code">
+   Visual Studio Code
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-the-application">
-   Run the application
+  <a class="reference internal nav-link" href="#create-cmake-project">
+   Create CMake project
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#troubleshooting">
-   Troubleshooting
+  <a class="reference internal nav-link" href="#automate-the-build">
+   Automate the build
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vscode-tasks-json">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .vscode/tasks.json
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vscode-launch-json">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .vscode/launch.json
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-the-build">
+   Test the build
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-the-debugging">
+   Test the debugging
   </a>
  </li>
 </ul>
@@ -748,114 +808,69 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="create-a-command-line-tool-in-xcode-on-macos">
-<h1>Create a Command Line Tool in Xcode on macOS<a class="headerlink" href="#create-a-command-line-tool-in-xcode-on-macos" title="Permalink to this headline">#</a></h1>
-<p>This topic describes the steps needed to configure an Objective-C Command Line Tool in Xcode. These steps have been verified to work with Xcode 15.0.1, on macOS Ventura 13.5.2.</p>
-<section id="create-the-xcode-project">
-<h2>Create the Xcode project<a class="headerlink" href="#create-the-xcode-project" title="Permalink to this headline">#</a></h2>
-<ol>
-<li><p>Open Xcode, select <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">New</span> <span class="pre">Project</span></code>, pick <code class="docutils literal notranslate"><span class="pre">macOS</span></code> as a platform, pick <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Tool</span></code> for Application</p></li>
-<li><p>Set Product Name to <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>, select <code class="docutils literal notranslate"><span class="pre">Objective-C</span></code> for language.</p></li>
-<li><p>Rename <code class="docutils literal notranslate"><span class="pre">main.m</span></code> to <code class="docutils literal notranslate"><span class="pre">main.mm</span></code>.</p></li>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks_v3.0.0-demo.1-darwin.zip</span></code> except for the version number which may be different.</p></li>
-<li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the Xcode project directory. The Xcode project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">simple-converter.xcodeproj</span></code> project file.</p>
-<p>You should end up with a directory structure similar to the following:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
-├──<span class="w"> </span>avblocks
-│<span class="w">   </span>├──<span class="w"> </span>include
-│<span class="w">   </span>└──<span class="w"> </span>lib
-├──<span class="w"> </span>simple-converter
-│<span class="w">   </span>└──<span class="w"> </span>main.mm
-└──<span class="w"> </span>simple-converter.xcodeproj
-</pre></div>
-</div>
-</li>
-<li><p>In Xcode, select the <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code> project in Xcode, and then the ‘Build Settings’ tab:</p>
-<ul class="simple">
-<li><p>Under Apple Clang - Language - C++, set the C++ Language Dialect to <code class="docutils literal notranslate"><span class="pre">C++17[-std=c++17]</span></code></p></li>
-<li><p>Under Search Paths | Header Search Paths, add the <code class="docutils literal notranslate"><span class="pre">$(PROJECT_DIR)/avblocks/include</span></code> directory to the list</p></li>
-<li><p>Under linking - General | Runpath Search Paths, add <code class="docutils literal notranslate"><span class="pre">&#64;executable_path</span></code> to the list</p></li>
-<li><p>Set the Build Products Path to <code class="docutils literal notranslate"><span class="pre">$(PROJECT_DIR)/build</span></code></p></li>
-</ul>
-</li>
-<li><p>In Xcode, select the ‘simple-converter’ target, and then the ‘Build Phases’ tab:</p>
-<ul class="simple">
-<li><p>Expand the ‘Link Binary with Libraries’ section</p></li>
-<li><p>Add the <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from the <code class="docutils literal notranslate"><span class="pre">$(PROJECT_DIR)/avblocks/lib/x64</span></code> directory.</p></li>
-</ul>
-</li>
-<li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">main.mm</span></code> with this code:</p>
-<div class="highlight-objectivec notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
-<span class="c1">//  main.mm</span>
-<span class="c1">//  simple-converter</span>
-<span class="c1">//</span>
-
-<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
-
-<span class="cp">#pragma clang diagnostic push</span>
-<span class="cp">#pragma clang diagnostic ignored &quot;-Weverything&quot;</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
-
-<span class="cp">#pragma clang diagnostic pop</span>
-
-<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">primo</span><span class="p">;</span>
-<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="p">;</span>
-<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="p">;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">@autoreleasepool</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
-
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AAP.m4v&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AAP.mp4&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">        </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">.</span><span class="n">u16</span><span class="p">());</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">));</span>
-<span class="w">            </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">.</span><span class="n">u16</span><span class="p">());</span>
-<span class="w">            </span>
-<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">            </span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
-<span class="w">                </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="w">            </span><span class="p">}</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="developing-with-visual-studio-code-on-windows">
+<h1>Developing with Visual Studio Code on Windows<a class="headerlink" href="#developing-with-visual-studio-code-on-windows" title="Permalink to this headline">#</a></h1>
+<p>This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on Windows. These steps have been verified to work on on Windows 11 (22H2).</p>
+<section id="visual-studio-code">
+<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">#</a></h2>
+<p>Download and install from <a class="reference external" href="https://code.visualstudio.com/download">Visual Studio Code</a> site.</p>
+<p>Open Visual Studio Code and press <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code>. Select <code class="docutils literal notranslate"><span class="pre">Shell</span> <span class="pre">Command:</span> <span class="pre">Install</span> <span class="pre">'code'</span> <span class="pre">command</span> <span class="pre">in</span> <span class="pre">PATH</span></code>.</p>
+<p>Also install the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack">C/C++ Extension Pack</a>.</p>
+</section>
+<section id="create-cmake-project">
+<h2>Create CMake project<a class="headerlink" href="#create-cmake-project" title="Permalink to this headline">#</a></h2>
+<p>Follow the steps in <a class="reference internal" href="../create-cpp-command-line-tool-cmake/"><span class="doc std std-doc">Create a Command Line Tool using CMake</span></a> to create a CMake project.</p>
+</section>
+<section id="automate-the-build">
+<h2>Automate the build<a class="headerlink" href="#automate-the-build" title="Permalink to this headline">#</a></h2>
+<p>Add the following Visual Studio Code specific files to the <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> subdir:</p>
+<section id="vscode-tasks-json">
+<h3><code class="docutils literal notranslate"><span class="pre">.vscode/tasks.json</span></code><a class="headerlink" href="#vscode-tasks-json" title="Permalink to this headline">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Build&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;windows&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/build.ps1&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span>
-<span class="w">        </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</li>
-<li><p>Restart Xcode!!! Otherwise it will not pick the new Build Products Path</p></li>
-<li><p>Build the project ( ⌘B )</p></li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code>.</p></li>
-</ol>
 </section>
-<section id="run-the-application">
-<h2>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p>Download the <code class="docutils literal notranslate"><span class="pre">AAP.m4v</span></code> HD movie from the <a class="reference external" href="https://archive.org/details/Wildlife-filming">Internet Archive</a> and save it in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory.</p></li>
-<li><p>Run the application in Xcode. Wait for the Transcoder to finish - it will take a few minutes. The converted file <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> will be in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory.</p></li>
-</ol>
+<section id="vscode-launch-json">
+<h3><code class="docutils literal notranslate"><span class="pre">.vscode/launch.json</span></code><a class="headerlink" href="#vscode-launch-json" title="Permalink to this headline">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Debug (cppvsdbg)&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cppdbg&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;windows&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cppvsdbg&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/build/debug/simple-converter.exe&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;preLaunchTask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Build&quot;</span>
+<span class="w">        </span><span class="p">}</span><span class="w">        </span>
+<span class="w">   </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>You may get <code class="docutils literal notranslate"><span class="pre">dyld:</span> <span class="pre">Library</span> <span class="pre">not</span> <span class="pre">loaded:</span> <span class="pre">&#64;executable_path/libAVBlocks.dylib</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib</span></code> to <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory. Delete <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> to solve that.</p></li>
-</ul>
+</section>
+<section id="test-the-build">
+<h2>Test the build<a class="headerlink" href="#test-the-build" title="Permalink to this headline">#</a></h2>
+<p>Test the build by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">B</span></code>. Visual Studio Code should execute the <code class="docutils literal notranslate"><span class="pre">build.ps1</span></code> script automatically.</p>
+</section>
+<section id="test-the-debugging">
+<h2>Test the debugging<a class="headerlink" href="#test-the-debugging" title="Permalink to this headline">#</a></h2>
+<p>Set a breakpoint on the first line of <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">main(int</span> <span class="pre">argc,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*argv[])</span></code> inside <code class="docutils literal notranslate"><span class="pre">src/main.cpp</span></code>. Press <code class="docutils literal notranslate"><span class="pre">F5</span></code> to launch the debugger. It should stop at the breakpoint.</p>
 </section>
 </section>
 
@@ -872,7 +887,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp\getting-started-macos"
+            path: "./avblocks-for-cpp\getting-started-windows"
         },
         predefinedOutput: true
     }
@@ -886,17 +901,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../" title="previous page">
+    <a class='left-prev' id="prev-link" href="../create-cpp-command-line-tool-cmake/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Getting Started - macOS</p>
+            <p class="prev-next-title">Create a Command Line Tool using CMake on Windows</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../create-cpp-command-line-tool-cmake/" title="next page">
+    <a class='right-next' id="next-link" href="../../initialization-and-termination/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Create a Command Line Tool using CMake on macOS</p>
+        <p class="prev-next-title">Initialization and Termination</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

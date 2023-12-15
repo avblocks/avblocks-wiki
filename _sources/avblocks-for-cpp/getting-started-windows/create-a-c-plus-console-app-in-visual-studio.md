@@ -1,14 +1,14 @@
 ---
-title: Create a C++ Console App in Visual Studio
+title: Create a C++ Console App in Visual Studio on Windows
 metadata:
     description: This topic describes the steps needed to configure a C++ console application in Visual Studio.
 taxonomy:
     category: docs
 ---
 
-# Create a Console App in Visual Studio
+# Create a Console App in Visual Studio on Windows
 
-This topic describes the steps needed to configure a C++ Console App in Visual Studio. These steps have been verified to work with Visual Studio 2022 Community Edition, on Windows 11 Pro (22H2).
+This topic describes the steps needed to configure a C++ Console App in Visual Studio. These steps have been verified to work with Visual Studio 2022 Community Edition, on Windows 11 (22H2).
 
 ## Create the Visual Studio project
 
