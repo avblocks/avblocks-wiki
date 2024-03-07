@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Overview &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -748,20 +747,20 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+  <div class="tex2jax_ignore mathjax_ignore section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h1>
 <p>A quick look at the elements of a transcoding workflow.</p>
-<section id="inputs-and-outputs">
+<div class="section" id="inputs-and-outputs">
 <h2>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">#</a></h2>
 <p>Before using a Transcoder object you have to configure its inputs and outputs. The Transcoder inputs and outputs are collections of media sockets, and each media socket may have one or more media pins.</p>
 <p>Media sockets are roughly equivalent to containers like MP4 and OGG (i.e. file formats), and media pins represent individual data streams within the containers like video, audio and subtitle streams.</p>
-</section>
-<section id="presets">
+</div>
+<div class="section" id="presets">
 <h2>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">#</a></h2>
 <p>You can configure a MediaSocket manually with StreamInfo and MediaPin objects. You can also configure a MediaSocket automatically from a predefined preset. AVBlocks offers presets for most modern audio and video formats.</p>
 <p><span class="label label-success"> Tip: </span> MediaSocket configuration from presets is especially useful when configuring outputs. A common way of configuring outputs is to start with a MediaSocket generated from the preset that is closest to your custom output format and then tweak and fine-tune the MediaSocket according to your needs.</p>
-</section>
-<section id="transcoding">
+</div>
+<div class="section" id="transcoding">
 <h2>Transcoding<a class="headerlink" href="#transcoding" title="Permalink to this headline">#</a></h2>
 <p>Once you have inputs and output configured, the actual transcoding is a simple three-step process:</p>
 <ul class="simple">
@@ -769,8 +768,8 @@ title="Print to PDF"
 <li><p>Run the Transcoder to encode the inputs into the outputs.</p></li>
 <li><p>Close the Transcoder to flush its buffers and to free the allocated resources.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -785,7 +784,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp\using-transcoder"
+            path: "./avblocks-for-cpp/using-transcoder"
         },
         predefinedOutput: true
     }

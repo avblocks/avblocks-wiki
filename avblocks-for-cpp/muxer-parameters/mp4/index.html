@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MP4 &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -772,74 +771,74 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="mp4">
+  <div class="tex2jax_ignore mathjax_ignore section" id="mp4">
 <h1>MP4<a class="headerlink" href="#mp4" title="Permalink to this headline">#</a></h1>
 <p>This topic describes the MP4 muxer parameters.</p>
-<section id="optimizing-for-progressive-download-or-streaming">
+<div class="section" id="optimizing-for-progressive-download-or-streaming">
 <h2>Optimizing for progressive download or streaming<a class="headerlink" href="#optimizing-for-progressive-download-or-streaming" title="Permalink to this headline">#</a></h2>
 <p>Every MP4 file contains a <strong>moov</strong> atom that acts as an index of the video data. The index enables a player to play and scrub the file. Unfortunately, in an MPEG-4–compliant container, the <strong>moov</strong> atom is normally stored at the end of the file. To enable progressive download or streaming the <strong>moov</strong> atom has to be moved to the beginning of the file.</p>
 <p>There are three AVBlocks parameters that control the MP4 FastStart muxing. These parameters must be set on the output socket:</p>
-<section id="faststart">
+<div class="section" id="faststart">
 <h3>FastStart<a class="headerlink" href="#faststart" title="Permalink to this headline">#</a></h3>
 <p>If this parameter is set to <strong>1</strong>, the MP4 muxer will run a second pass to move the <strong>moov</strong> atom to the beginning of the file.</p>
-</section>
-<section id="faststartusetempfile">
+</div>
+<div class="section" id="faststartusetempfile">
 <h3>FastStartUseTempFile<a class="headerlink" href="#faststartusetempfile" title="Permalink to this headline">#</a></h3>
 <p>If this parameter is set to <strong>1</strong>, the MP4 muxer will use a temp file for the second pass.</p>
-</section>
-<section id="faststarttempfiledirectory">
+</div>
+<div class="section" id="faststarttempfiledirectory">
 <h3>FastStartTempFileDirectory<a class="headerlink" href="#faststarttempfiledirectory" title="Permalink to this headline">#</a></h3>
 <p>Specifies a directory for the temp file. If not set, the system temp path is used.</p>
-</section>
-<section id="sample-code">
+</div>
+<div class="section" id="sample-code">
 <h3>Sample Code<a class="headerlink" href="#sample-code" title="Permalink to this headline">#</a></h3>
 <p>Here is how you can set the MP4 FastStart parameters in C++:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span><span class="w"></span>
 
 <span class="c1">// Transcoder demo mode must be enabled, </span>
 <span class="c1">// in order to use the production release for testing (without a valid license)</span>
-<span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// Configure output socket</span>
-<span class="p">{</span>
+<span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// MP4 container socket </span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">MP4</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">MP4</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// The MP4 FastStart parameters must be set on the socket</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addInt</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Muxer</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">FastStart</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addInt</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Muxer</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">FastStartUseTempFile</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addString</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Muxer</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">FastStartTempFileDirectory</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">Temp&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addInt</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Muxer</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">FastStart</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addInt</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Muxer</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">FastStartUseTempFile</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addString</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Muxer</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">FastStartTempFileDirectory</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">Temp&quot;</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// H.264 video pin	</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">streamInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
-<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AVC1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">streamInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AVC1</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">        </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">streamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">streamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// AAC audio pin	</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">streamInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
-<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_MP4</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">streamInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">streamInfo</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_MP4</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">        </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">streamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">streamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -854,7 +853,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp\muxer-parameters"
+            path: "./avblocks-for-cpp/muxer-parameters"
         },
         predefinedOutput: true
     }
