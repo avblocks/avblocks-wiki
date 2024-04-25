@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>String Encoding &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -50,6 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/c-c-api-specifics/string-encoding.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
     <link rel="next" title="C++ Utility Classes and Functions" href="../../c-utility-classes-and-functions/" />
@@ -110,17 +112,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../../search/" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../../">
-                    Welcome
-                </a>
-            </li>
-        </ul>
         <p class="caption" role="heading">
  <span class="caption-text">
   Getting Started
@@ -825,119 +819,119 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="string-encoding">
+  <section class="tex2jax_ignore mathjax_ignore" id="string-encoding">
 <h1>String Encoding<a class="headerlink" href="#string-encoding" title="Permalink to this headline">#</a></h1>
 <p>This topic describes the string encoding used by the AVBlocks C++ API.</p>
-<div class="section" id="unicode-strings">
+<section id="unicode-strings">
 <h2>Unicode Strings<a class="headerlink" href="#unicode-strings" title="Permalink to this headline">#</a></h2>
 <p>The AVBlocks API uses UTF-16 unicode encoding.</p>
 <p>The AVBlocks API character type is <code class="docutils literal notranslate"><span class="pre">char_t</span></code>, where <code class="docutils literal notranslate"><span class="pre">char_t</span></code> represents a UTF-16 character and is defined as a 16 bit unsigned integer on all platforms (Windows, Mac and Linux).</p>
 <p>Note: A Unicode character can be expressed by 1 or 2 UTF-16 code units, i.e. by 2 or 4 bytes.</p>
-<div class="section" id="windows">
+<section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
 <p>On Windows the <code class="docutils literal notranslate"><span class="pre">char_t</span></code> type is the same as the <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> type. Your Windows application must be compiled for Unicode OR alternatively you should convert strings to <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> before passing calling the AVBlocks API.</p>
-</div>
-<div class="section" id="mac">
+</section>
+<section id="mac">
 <h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">#</a></h3>
-<div class="section" id="corefoundation">
+<section id="corefoundation">
 <h4>CoreFoundation<a class="headerlink" href="#corefoundation" title="Permalink to this headline">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">CFStringRef</span></code> is UTF-16, so the encoding matches the <code class="docutils literal notranslate"><span class="pre">char_t</span></code> encoding. In your code, you can use the <code class="docutils literal notranslate"><span class="pre">CFStringGetCharactersPtr</span></code> function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get a UniChar* pointer from CFStringRef and pass it to AVBlocks</span>
 
-<span class="n">NSString</span><span class="w"> </span><span class="n">theString</span><span class="p">;</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">UniChar</span><span class="o">*</span><span class="w"> </span><span class="n">theStringPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CFStringGetCharactersPtr</span><span class="p">((</span><span class="n">__bridge</span><span class="w"> </span><span class="n">CFStringRef</span><span class="p">)</span><span class="w"> </span><span class="n">theString</span><span class="p">);</span><span class="w"></span>
+<span class="n">NSString</span><span class="w"> </span><span class="n">theString</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="n">UniChar</span><span class="o">*</span><span class="w"> </span><span class="n">theStringPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CFStringGetCharactersPtr</span><span class="p">((</span><span class="n">__bridge</span><span class="w"> </span><span class="n">CFStringRef</span><span class="p">)</span><span class="w"> </span><span class="n">theString</span><span class="p">);</span>
 
-<span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">metaAttribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">createMetaAttribute</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">Meta</span><span class="o">::</span><span class="n">Album</span><span class="p">);</span><span class="w"></span>
+<span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">metaAttribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">createMetaAttribute</span><span class="p">();</span>
+<span class="w">    </span><span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">Meta</span><span class="o">::</span><span class="n">Album</span><span class="p">);</span>
 <span class="w">    </span><span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">theStringPtr</span><span class="p">);</span><span class="w"> </span>
-<span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span><span class="w"></span>
+<span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="foundation">
+</section>
+<section id="foundation">
 <h4>Foundation<a class="headerlink" href="#foundation" title="Permalink to this headline">#</a></h4>
 <p>NSString is UTF-16. The UTF-16 encoding matches the AVBlocks API. You can use the <code class="docutils literal notranslate"><span class="pre">CFStringGetCharactersPtr</span></code> function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get a UniChar* pointer from NSString and pass it to AVBlocks</span>
 
-<span class="n">NSString</span><span class="w"> </span><span class="n">theString</span><span class="p">;</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">UniChar</span><span class="o">*</span><span class="w"> </span><span class="n">theStringPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CFStringGetCharactersPtr</span><span class="p">((</span><span class="n">__bridge</span><span class="w"> </span><span class="n">CFStringRef</span><span class="p">)</span><span class="w"> </span><span class="n">theString</span><span class="p">);</span><span class="w"></span>
+<span class="n">NSString</span><span class="w"> </span><span class="n">theString</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="n">UniChar</span><span class="o">*</span><span class="w"> </span><span class="n">theStringPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CFStringGetCharactersPtr</span><span class="p">((</span><span class="n">__bridge</span><span class="w"> </span><span class="n">CFStringRef</span><span class="p">)</span><span class="w"> </span><span class="n">theString</span><span class="p">);</span>
 
-<span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">metaAttribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">createMetaAttribute</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">Meta</span><span class="o">::</span><span class="n">Album</span><span class="p">);</span><span class="w"></span>
+<span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">metaAttribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">createMetaAttribute</span><span class="p">();</span>
+<span class="w">    </span><span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">Meta</span><span class="o">::</span><span class="n">Album</span><span class="p">);</span>
 <span class="w">    </span><span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">theStringPtr</span><span class="p">);</span><span class="w"> </span>
-<span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span><span class="w"></span>
+<span class="n">metaAttribute</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="command-line">
+</section>
+<section id="command-line">
 <h4>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">#</a></h4>
 <p>On Mac / Unix, <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> is defined as a 32-bit unsigned integer by default. Conversion is required between your code (if using UTF-8 or UTF-32 encoding)  and <code class="docutils literal notranslate"><span class="pre">char_t</span></code> (UTF-16 encoding).</p>
 <p>AVBlocks comes with the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> helper class (defined in <code class="docutils literal notranslate"><span class="pre">include/PrimoUString.h</span></code>) which can be used for string conversion. The <code class="docutils literal notranslate"><span class="pre">MetaInfo</span></code> sample demonstrates the use of the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> class:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="o">*</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">MetaAttributeList</span><span class="o">*</span><span class="w"> </span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">attributes</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="o">*</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">MetaAttributeList</span><span class="o">*</span><span class="w"> </span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">attributes</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">attrib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">attrib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">left</span><span class="w"> </span>
 <span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">attrib</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">attrib</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">attrib</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="linux">
+</section>
+</section>
+<section id="linux">
 <h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">#</a></h3>
-<div class="section" id="id1">
+<section id="id1">
 <h4>Command Line<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
 <p>On Linux, <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> is defined as a 32-bit unsigned integer by default. Conversion is required between your code (if using UTF-8 or UTF-32 encoding) and <code class="docutils literal notranslate"><span class="pre">char_t</span></code> (UTF-16 encoding).</p>
 <p>AVBlocks comes with the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> helper class (defined in <code class="docutils literal notranslate"><span class="pre">include/PrimoUString.h</span></code>) which can be used for string conversion. The <code class="docutils literal notranslate"><span class="pre">MetaInfo</span></code> sample demonstrates the use of the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> class:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="o">*</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">MetaAttributeList</span><span class="o">*</span><span class="w"> </span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">attributes</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="o">*</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">MetaAttributeList</span><span class="o">*</span><span class="w"> </span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="o">-&gt;</span><span class="n">attributes</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">attrib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MetaAttribute</span><span class="o">*</span><span class="w"> </span><span class="n">attrib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">attlist</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">left</span><span class="w"> </span>
 <span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">attrib</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">attrib</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">attrib</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="ansi-strings">
+</section>
+</section>
+</section>
+<section id="ansi-strings">
 <h2>ANSI Strings<a class="headerlink" href="#ansi-strings" title="Permalink to this headline">#</a></h2>
 <p>The text constants which are part of the AVBlocks API itself are plain 8-bit ANSI <code class="docutils literal notranslate"><span class="pre">char</span></code> for convenience. For example, the <code class="docutils literal notranslate"><span class="pre">primo::codecs::Meta</span></code> namespace contains metadata attribute names defined as ANSI strings:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm">    Metadata attribute names</span>
-<span class="cm">*/</span><span class="w"></span>
-<span class="k">namespace</span><span class="w"> </span><span class="nn">Meta</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="cm">/** Album */</span><span class="w"></span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Album</span><span class="p">[]</span><span class="w">				</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Album&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="cm">*/</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Meta</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/** Album */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Album</span><span class="p">[]</span><span class="w">				</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Album&quot;</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/** Composer */</span><span class="w"></span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Composer</span><span class="p">[]</span><span class="w">			</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Composer&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/** Composer */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Composer</span><span class="p">[]</span><span class="w">			</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Composer&quot;</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/** Genre */</span><span class="w"></span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Genre</span><span class="p">[]</span><span class="w">				</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genre&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/** Genre */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Genre</span><span class="p">[]</span><span class="w">				</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Genre&quot;</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/** Copyright */</span><span class="w"></span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Copyright</span><span class="p">[]</span><span class="w">			</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Copyright&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/** Copyright */</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Copyright</span><span class="p">[]</span><span class="w">			</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Copyright&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

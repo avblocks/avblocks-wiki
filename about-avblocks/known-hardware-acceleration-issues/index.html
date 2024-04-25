@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Known Hardware Acceleration Issues &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -50,6 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://wiki.avblocks.com/about-avblocks/known-hardware-acceleration-issues.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
     <link rel="next" title="Demo Version" href="../demo-version/" />
@@ -110,17 +112,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search/" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../">
-                    Welcome
-                </a>
-            </li>
-        </ul>
         <p class="caption" role="heading">
  <span class="caption-text">
   Getting Started
@@ -921,30 +915,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="known-hardware-acceleration-issues">
+  <section class="tex2jax_ignore mathjax_ignore" id="known-hardware-acceleration-issues">
 <h1>Known Hardware Acceleration Issues<a class="headerlink" href="#known-hardware-acceleration-issues" title="Permalink to this headline">#</a></h1>
 <p>This topic discusses known hardware acceleration issues that exist with some GPUs.</p>
-<div class="section" id="intel-quicksync-video">
+<section id="intel-quicksync-video">
 <h2>Intel QuickSync Video<a class="headerlink" href="#intel-quicksync-video" title="Permalink to this headline">#</a></h2>
-<div class="section" id="no-known-issues">
+<section id="no-known-issues">
 <h3>No Known Issues<a class="headerlink" href="#no-known-issues" title="Permalink to this headline">#</a></h3>
 <p>We have tested with 4th, 5th, and 6th generation Core i5 and i7 CPUs with Integrated Graphics. There are no known issues with Intel’s hardware.</p>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="nvidia-nvenc">
+<section id="nvidia-nvenc">
 <h2>NVIDIA NVENC<a class="headerlink" href="#nvidia-nvenc" title="Permalink to this headline">#</a></h2>
-<div class="section" id="known-issues">
+<section id="known-issues">
 <h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">#</a></h3>
-<div class="section" id="kepler-gk208">
+<section id="kepler-gk208">
 <h4>Kepler (GK208)<a class="headerlink" href="#kepler-gk208" title="Permalink to this headline">#</a></h4>
 <p>Cards based on the Kepler GK208 chipset do not have hardware encoding capability:</p>
 <ul class="simple">
 <li><p>GeForce GT 720M / 730M / 735M / 740M</p></li>
 <li><p>GeForce GT 910M / 920M</p></li>
 </ul>
-</div>
-<div class="section" id="maxwell-1st-gen-gm108">
+</section>
+<section id="maxwell-1st-gen-gm108">
 <h4>Maxwell 1st Gen. (GM108)<a class="headerlink" href="#maxwell-1st-gen-gm108" title="Permalink to this headline">#</a></h4>
 <p>Cards based on the Maxwell GM108 chipset do not have hardware encoding capability:</p>
 <ul class="simple">
@@ -952,28 +946,28 @@ title="Print to PDF"
 <li><p>GeForce 920MX / 930M / 930MX / 940M / 940MX / 945M</p></li>
 <li><p>GeForce GT 945A</p></li>
 </ul>
-</div>
-<div class="section" id="pascal-1st-gen-gp108">
+</section>
+<section id="pascal-1st-gen-gp108">
 <h4>Pascal 1st Gen. (GP108)<a class="headerlink" href="#pascal-1st-gen-gp108" title="Permalink to this headline">#</a></h4>
 <p>Cards based on the Pascal GP108 chipset do not have hardware encoding capability:</p>
 <ul class="simple">
 <li><p>GeForce GT 1030</p></li>
 <li><p>GeForce MX150</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="amd-video-coding-engine">
+<section id="amd-video-coding-engine">
 <h2>AMD Video Coding Engine<a class="headerlink" href="#amd-video-coding-engine" title="Permalink to this headline">#</a></h2>
 <p>We have tested with Radeon R7 2xx, R7 3xx and R9 3xx GPUs. There are no known issues with Radeon R9 series, but you may experience driver crashes, driver restarts, or system instability with AMD Radeon R7 2xx and 3xx GPUs.</p>
 <p>More specifically on R7 2XX and R7 3XX discrete GPUs there seems to compatibility issues between the AMD GPU driver and the Video BIOS (VBIOS) used in some models which makes using Video Codec Engine (VCE) hardware impossible.</p>
 <p>For some of those cards the issue can be fixed by updating the Video BIOS.</p>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Known Issues<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
-<div class="section" id="xfx-amd-radeon-r7-260x-core-edition-r7-260x-cnvf">
+<section id="xfx-amd-radeon-r7-260x-core-edition-r7-260x-cnvf">
 <h4>XFX AMD Radeon R7 260X, Core Edition (R7-260X-CNVF)<a class="headerlink" href="#xfx-amd-radeon-r7-260x-core-edition-r7-260x-cnvf" title="Permalink to this headline">#</a></h4>
-<div class="section" id="model-bios-driver">
+<section id="model-bios-driver">
 <h5>Model, BIOS, Driver<a class="headerlink" href="#model-bios-driver" title="Permalink to this headline">#</a></h5>
 <table class="colwidths-auto docutils align-default">
 <thead>
@@ -991,12 +985,12 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="issue">
+</section>
+<section id="issue">
 <h5>Issue<a class="headerlink" href="#issue" title="Permalink to this headline">#</a></h5>
 <p>Attempting to create an H.264 hardware encoder instance via the Media Foundation API results in a <a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows/hardware/ff569917(v=vs.85).aspx">TDR Error</a> and GPU reset. This is due to a Video BIOS (VBIOS) bug.</p>
-</div>
-<div class="section" id="resolution">
+</section>
+<section id="resolution">
 <h5>Resolution<a class="headerlink" href="#resolution" title="Permalink to this headline">#</a></h5>
 <blockquote>
 <div><p>Update VBIOS to 015.048.000.013.</p>
@@ -1004,11 +998,11 @@ title="Print to PDF"
 <p>This card comes originally with VBIOS version 015.048.000.011. XFX does not offer a VBIOS upgrade, but there is a newer VBIOS version 015.048.000.013 that is compatible on <a class="reference external" href="https://www.techpowerup.com/vgabios/173485/xfx-r7260x-2048-141013.html">TechPowerUp.com</a>.</p>
 <p>To update the VBIOS, download <code class="docutils literal notranslate"><span class="pre">XFX.R7260X.2048.141013.rom</span></code> from <a class="reference external" href="https://www.techpowerup.com/vgabios/173485/xfx-r7260x-2048-141013.html">TechPowerUp.com</a> and use it to reprogram your AMD GPU. You can do that with the <a class="reference external" href="https://www.techpowerup.com/downloads/2311/ati-winflash-2-6-7/">ATIWinFlash</a> utility.</p>
 <p>IMPORTANT: Make sure you backup your current VBIOS, before replacing it. That way, if something goes wrong you will be able to restore your GPU to the old state. You can use the <a class="reference external" href="https://www.techpowerup.com/downloads/2311/ati-winflash-2-6-7/">ATIWinFlash</a> to save your current VBIOS to your hard disc.</p>
-</div>
-</div>
-<div class="section" id="gygabyte-amd-radeon-r7-360-oc-gv-r7360c-2gd">
+</section>
+</section>
+<section id="gygabyte-amd-radeon-r7-360-oc-gv-r7360c-2gd">
 <h4>Gygabyte AMD Radeon R7 360, OC (GV-R7360C-2GD)<a class="headerlink" href="#gygabyte-amd-radeon-r7-360-oc-gv-r7360c-2gd" title="Permalink to this headline">#</a></h4>
-<div class="section" id="id2">
+<section id="id2">
 <h5>Model, BIOS, Driver<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h5>
 <table class="colwidths-auto docutils align-default">
 <thead>
@@ -1031,12 +1025,12 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h5>Issue<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h5>
 <p>Attempting to create an H.264 hardware encoder instance via the Media Foundation API results in a <a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows/hardware/ff569917(v=vs.85).aspx">TDR Error</a> and GPU reset. This is likely due to a Video BIOS (VBIOS) bug.</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h5>Resolution<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h5>
 <blockquote>
 <div><p>Solution for this card <em>does not</em> exist presently. Updating the Video BIOS to the latest version available from Gygabyte <em>does not</em> fix this issue.</p>
@@ -1045,11 +1039,11 @@ title="Print to PDF"
 <p>Gygabyte offers an updated BIOS version 015.049.000.007 / F3 or 015.049.000.007 / F21 .</p>
 <p>To update the VBIOS, download the F3 or the F21 flavor from <a class="reference external" href="http://www.gigabyte.us/products/product-page.aspx?pid=5467&amp;dl=1&amp;RWD=0#bios">Gygabyte</a> and use it to reprogram your AMD GPU. You can do that with the <a class="reference external" href="https://www.techpowerup.com/downloads/2311/ati-winflash-2-6-7/">ATIWinFlash</a> utility.</p>
 <p>IMPORTANT: Make sure you backup your current VBIOS, before replacing it. That way, if something goes wrong you will be able to restore your GPU to the old state. You can use the <a class="reference external" href="https://www.techpowerup.com/downloads/2311/ati-winflash-2-6-7/">ATIWinFlash</a> to save your current VBIOS to your hard disc.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

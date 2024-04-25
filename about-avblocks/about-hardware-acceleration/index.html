@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>About Hardware Acceleration &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -50,6 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://wiki.avblocks.com/about-avblocks/about-hardware-acceleration.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
     <link rel="next" title="Known Hardware Acceleration Issues" href="../known-hardware-acceleration-issues/" />
@@ -110,17 +112,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search/" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../">
-                    Welcome
-                </a>
-            </li>
-        </ul>
         <p class="caption" role="heading">
  <span class="caption-text">
   Getting Started
@@ -1029,25 +1023,25 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="about-hardware-acceleration">
+  <section class="tex2jax_ignore mathjax_ignore" id="about-hardware-acceleration">
 <h1>About Hardware Acceleration<a class="headerlink" href="#about-hardware-acceleration" title="Permalink to this headline">#</a></h1>
 <p>This topic discusses the platforms and the codecs for which hardware acceleration is supported.</p>
-<div class="section" id="how-to-enable-hardware-acceleration">
+<section id="how-to-enable-hardware-acceleration">
 <h2>How To Enable Hardware Acceleration<a class="headerlink" href="#how-to-enable-hardware-acceleration" title="Permalink to this headline">#</a></h2>
 <p>See <a class="reference internal" href="../../avblocks-for-cpp/using-transcoder/hardware-acceleration/"><span class="doc std std-doc">Hardware Acceleration</span></a> for an example on how to enable the hardware accelerated codecs in your code.</p>
-</div>
-<div class="section" id="supported-codecs">
+</section>
+<section id="supported-codecs">
 <h2>Supported Codecs<a class="headerlink" href="#supported-codecs" title="Permalink to this headline">#</a></h2>
-<div class="section" id="hevc-h-265-encoding">
+<section id="hevc-h-265-encoding">
 <h3>HEVC / H.265 Encoding<a class="headerlink" href="#hevc-h-265-encoding" title="Permalink to this headline">#</a></h3>
 <p>Hardware acceleration for HEVC H.265 video encoding is currently supported only on <a class="reference external" href="#nvenc-iii-maxwell-2nd-gen">NVIDIA 2nd generation Maxwell</a> GPUs.</p>
-</div>
-<div class="section" id="avc-h-264-encoding">
+</section>
+<section id="avc-h-264-encoding">
 <h3>AVC / H.264 Encoding<a class="headerlink" href="#avc-h-264-encoding" title="Permalink to this headline">#</a></h3>
 <p>Hardware acceleration for AVC / H.264 video encoding is supported on Intel CPUs with Intel® Iris and Intel® HD Graphics technology, NVIDIA GPUs, and AMD GPUs and APUs.</p>
-</div>
-</div>
-<div class="section" id="hardware-platforms">
+</section>
+</section>
+<section id="hardware-platforms">
 <h2>Hardware Platforms<a class="headerlink" href="#hardware-platforms" title="Permalink to this headline">#</a></h2>
 <p>Hardware acceleration is supported on following platforms:</p>
 <ul class="simple">
@@ -1055,8 +1049,8 @@ title="Print to PDF"
 <li><p>NVIDIA NVENC fixed-hardware encoder on Windows</p></li>
 <li><p>AMD Video Coding Engine (VCE) on Windows</p></li>
 </ul>
-</div>
-<div class="section" id="intel-quick-sync-video">
+</section>
+<section id="intel-quick-sync-video">
 <h2>Intel® Quick Sync Video<a class="headerlink" href="#intel-quick-sync-video" title="Permalink to this headline">#</a></h2>
 <p>Intel® QSV is available on select Intel processors with integrated Intel® Iris and Intel® HD Graphics technology. To use Intel® QSV, you must install the correct <a class="reference external" href="https://downloadcenter.intel.com/search?keyword=Intel+HD+Graphics">Intel® HD Graphics Driver for Windows</a>.</p>
 <p>If you are uncertain which Intel® Processor is in your computer, we recommend using the <a class="reference external" href="https://downloadcenter.intel.com/download/7838">Intel® Processor Identification Utility</a> or <a class="reference external" href="https://downloadcenter.intel.com/download/24345/Intel-Driver-Update-Utility">Intel® Driver Update Utility</a> to identify your Intel Processor.</p>
@@ -1068,11 +1062,11 @@ title="Print to PDF"
 <li><p>Intel® Pentium processors with Intel® QuickSync Video</p></li>
 <li><p>Intel® Atom processors with Intel® QuickSync Video</p></li>
 </ul>
-</div>
-<div class="section" id="nvidia-nvenc">
+</section>
+<section id="nvidia-nvenc">
 <h2>NVIDIA NVENC<a class="headerlink" href="#nvidia-nvenc" title="Permalink to this headline">#</a></h2>
 <p>NVIDIA NVENC is available on Kepler and Maxwell class NVIDIA GPUs. NVIDIA Maxwell 2nd generation GPUs also support HEVC / H.265.</p>
-<div class="section" id="nvenc-i-kepler">
+<section id="nvenc-i-kepler">
 <h3>NVENC I (Kepler)<a class="headerlink" href="#nvenc-i-kepler" title="Permalink to this headline">#</a></h3>
 <p>Supports:</p>
 <ul class="simple">
@@ -1095,8 +1089,8 @@ title="Print to PDF"
 <li><p>GeForce GTX Titan / Titan Black / Titan Z</p></li>
 <li><p>GeForce GT and GTX GPUs are limited to 2 encode sessions per system</p></li>
 </ul>
-</div>
-<div class="section" id="nvenc-ii-maxwell-1st-gen">
+</section>
+<section id="nvenc-ii-maxwell-1st-gen">
 <h3>NVENC II (Maxwell 1st Gen.)<a class="headerlink" href="#nvenc-ii-maxwell-1st-gen" title="Permalink to this headline">#</a></h3>
 <p>Supports:</p>
 <ul class="simple">
@@ -1113,8 +1107,8 @@ title="Print to PDF"
 <li><p>GeForce GTX 850M / 860M / 950M / 960M / 965M / 970M / 980M</p></li>
 <li><p>GeForce GTX GPUs are limited to 2 encode sessions per system</p></li>
 </ul>
-</div>
-<div class="section" id="nvenc-iii-maxwell-2nd-gen">
+</section>
+<section id="nvenc-iii-maxwell-2nd-gen">
 <h3>NVENC III (Maxwell 2nd Gen.)<a class="headerlink" href="#nvenc-iii-maxwell-2nd-gen" title="Permalink to this headline">#</a></h3>
 <p>Supports:</p>
 <ul class="simple">
@@ -1132,8 +1126,8 @@ title="Print to PDF"
 <li><p>GeForce GTX Titan X</p></li>
 <li><p>GeForce GTX GPUs are limited to 2 encode sessions per system</p></li>
 </ul>
-</div>
-<div class="section" id="nvenc-iv-pascal">
+</section>
+<section id="nvenc-iv-pascal">
 <h3>NVENC IV (Pascal)<a class="headerlink" href="#nvenc-iv-pascal" title="Permalink to this headline">#</a></h3>
 <p>Supports:</p>
 <ul class="simple">
@@ -1149,23 +1143,23 @@ title="Print to PDF"
 <li><p>GeForce GTX 1050 / 1050 Ti / 1060 / 1070 / 1070 Ti / 1080 / 1080 Ti</p></li>
 <li><p>TITAN X / Xp</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="amd-video-coding-engine">
+</section>
+</section>
+<section id="amd-video-coding-engine">
 <h2>AMD Video Coding Engine<a class="headerlink" href="#amd-video-coding-engine" title="Permalink to this headline">#</a></h2>
 <p>AMD VCE is available on a wide set of discrete GPUs as well as APUs, ranging from high-end servers all the way down to low-end chips. To use AMD VCE you must install the correct AMD driver. The easiest way to do that is via the <a class="reference external" href="http://support.amd.com/en-us/download/auto-detect-tool">AMD Driver Autodetect Tool</a>.</p>
-<div class="section" id="vce-1-0">
+<section id="vce-1-0">
 <h3>VCE 1.0<a class="headerlink" href="#vce-1-0" title="Permalink to this headline">#</a></h3>
-<div class="section" id="capabilities">
+<section id="capabilities">
 <h4>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>HD 1080p H.264 / AVC (YUV420 I/P frames) encoding</p></li>
 </ul>
-</div>
-<div class="section" id="availability">
+</section>
+<section id="availability">
 <h4>Availability<a class="headerlink" href="#availability" title="Permalink to this headline">#</a></h4>
 <p>Available on GCN 1.0 (Graphics Core Next 1.0 / GCN 1.0 / GCN 1st Gen):</p>
-<div class="section" id="cape-verde-curacao-trinidad-tahiti-and-oland-gpus">
+<section id="cape-verde-curacao-trinidad-tahiti-and-oland-gpus">
 <h5>Cape Verde, Curacao, Trinidad, Tahiti and Oland GPUs<a class="headerlink" href="#cape-verde-curacao-trinidad-tahiti-and-oland-gpus" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>Radeon HD 7900 / 7800 / 7700 GPU series</p></li>
@@ -1175,18 +1169,18 @@ title="Print to PDF"
 <li><p>Radeon R7 340 / 350 / 370 GPU</p></li>
 <li><p>Radeon R9 270 / 270X / 280 / 280X GPU</p></li>
 </ul>
-</div>
-<div class="section" id="trinity-and-richland-apus">
+</section>
+<section id="trinity-and-richland-apus">
 <h5>Trinity and Richland APUs<a class="headerlink" href="#trinity-and-richland-apus" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>A10 58XX / 68XX APU</p></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="vce-2-0">
+</section>
+</section>
+</section>
+<section id="vce-2-0">
 <h3>VCE 2.0<a class="headerlink" href="#vce-2-0" title="Permalink to this headline">#</a></h3>
-<div class="section" id="id1">
+<section id="id1">
 <h4>Capabilities<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>All VCE 1.0 features</p></li>
@@ -1194,11 +1188,11 @@ title="Print to PDF"
 <li><p>H.264 YUV420 (Intra and Predictive, I / P / B frames)</p></li>
 <li><p>H.264 YUV444 (Intra Only, I frames only)</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h4>Availability<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
 <p>Available on GCN 1.1 (Graphics Core Next 1.1 / GCN 1.1 / GCN 2nd Gen):</p>
-<div class="section" id="bonaire-and-hawaii-gpus">
+<section id="bonaire-and-hawaii-gpus">
 <h5>Bonaire and Hawaii GPUs<a class="headerlink" href="#bonaire-and-hawaii-gpus" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>Radeon R7 260 / 260X GPU</p></li>
@@ -1206,8 +1200,8 @@ title="Print to PDF"
 <li><p>Radeon R7 360 GPU</p></li>
 <li><p>Radeon R9 360 / 390 / 390X GPU</p></li>
 </ul>
-</div>
-<div class="section" id="kaveri-kabini-temash-beema-mullins-carrizo-l-apus">
+</section>
+<section id="kaveri-kabini-temash-beema-mullins-carrizo-l-apus">
 <h5>Kaveri, Kabini, Temash, Beema, Mullins, Carrizo-L APUs<a class="headerlink" href="#kaveri-kabini-temash-beema-mullins-carrizo-l-apus" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>A10 7850K APU</p></li>
@@ -1217,42 +1211,42 @@ title="Print to PDF"
 <li><p>E2 7110 APU</p></li>
 <li><p>E1 2650 / 7010 APU</p></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="vce-3-0">
+</section>
+</section>
+</section>
+<section id="vce-3-0">
 <h3>VCE 3.0<a class="headerlink" href="#vce-3-0" title="Permalink to this headline">#</a></h3>
-<div class="section" id="id3">
+<section id="id3">
 <h4>Capabilities<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>All VCE 2.0 features</p></li>
 <li><p>4K UHD 2160p &#64; 30 fps H.264 encoding (2160p30)</p></li>
 <li><p>High quality video scaling</p></li>
 </ul>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h4>Availability<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h4>
 <p>Available on GCN 1.2 (Graphics Core Next 1.2 / GCN 1.2 / GCN 3rd Gen):</p>
-<div class="section" id="tonga-and-fiji-gpus">
+<section id="tonga-and-fiji-gpus">
 <h5>Tonga and Fiji GPUs<a class="headerlink" href="#tonga-and-fiji-gpus" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>Radeon R9 285 GPU</p></li>
 <li><p>Radeon R9 380 GPU</p></li>
 <li><p>Radeon R9 Nano / Fury / Fury X / Fury X2 GPU</p></li>
 </ul>
-</div>
-<div class="section" id="carizo-apus">
+</section>
+<section id="carizo-apus">
 <h5>Carizo APUs<a class="headerlink" href="#carizo-apus" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>A10 8700P APU</p></li>
 <li><p>A8 8600P APU</p></li>
 <li><p>FX 8800P APU</p></li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
