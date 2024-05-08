@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Video From JPEG Images &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -809,42 +808,42 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="create-video-from-jpeg-images">
+  <div class="tex2jax_ignore mathjax_ignore section" id="create-video-from-jpeg-images">
 <h1>Create Video From JPEG Images<a class="headerlink" href="#create-video-from-jpeg-images" title="Permalink to this headline">#</a></h1>
 <p>This topic describes how to use the <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html ">Transcoder </a> class to make a video from a sequence of images.</p>
 <p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/slideshow">slideshow</a> sample.</p>
-<section id="create-a-transcoder-object">
+<div class="section" id="create-a-transcoder-object">
 <h2>Create a Transcoder object<a class="headerlink" href="#create-a-transcoder-object" title="Permalink to this headline">#</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">createTranscoder</span></code> function from the <code class="docutils literal notranslate"><span class="pre">primo::avblocks::Library</span></code> namespace to create a new <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html ">Transcoder </a> object.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span><span class="w"></span>
 
 <span class="c1">// Transcoder demo mode must be enabled, </span>
 <span class="c1">// in order to use the production release for testing (without a valid license)</span>
-<span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="n">TRUE</span><span class="p">);</span>
+<span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="n">TRUE</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<section id="configure-inputs">
+<div class="section" id="configure-inputs">
 <h3>Configure inputs<a class="headerlink" href="#configure-inputs" title="Permalink to this headline">#</a></h3>
-<section id="detect-the-input-stream">
+<div class="section" id="detect-the-input-stream">
 <h4>Detect the input stream<a class="headerlink" href="#detect-the-input-stream" title="Permalink to this headline">#</a></h4>
 <p>If the input is a media file, you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_media_info.html ">MediaInfo </a> to read the stream information from the file. For images <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_media_info.html ">MediaInfo </a> will return a <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1codecs_1_1_video_stream_info.html ">VideoStreamInfo </a> object readily configured with the image attributes. AVBlocks supports BMP, JPEG, PNG, and TIFF images.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Load image info</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">wstring</span><span class="w"> </span><span class="nf">firstImage</span><span class="p">(</span><span class="n">imgdir</span><span class="p">);</span>
-<span class="w">    </span><span class="n">firstImage</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">cube0000.jpeg&quot;</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">wstring</span><span class="w"> </span><span class="nf">firstImage</span><span class="p">(</span><span class="n">imgdir</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">firstImage</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">cube0000.jpeg&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">setInputFile</span><span class="p">(</span><span class="n">firstImage</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">    </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">setInputFile</span><span class="p">(</span><span class="n">firstImage</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">();</span>
-<span class="w">    </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Load Info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Load Info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-<section id="configure-the-input-socket">
+</div>
+<div class="section" id="configure-the-input-socket">
 <h4>Configure the input socket<a class="headerlink" href="#configure-the-input-socket" title="Permalink to this headline">#</a></h4>
 <p>This requires the following steps:</p>
 <ol class="simple">
@@ -855,23 +854,23 @@ title="Print to PDF"
 </ol>
 <!-- end of list -->
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Configure input</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">VideoStreamInfo</span><span class="w"> </span><span class="o">*</span><span class="n">vinfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">streams</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">vinfo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">inputFramerate</span><span class="p">);</span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">VideoStreamInfo</span><span class="w"> </span><span class="o">*</span><span class="n">vinfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">streams</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">vinfo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">inputFramerate</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">vinfo</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">vinfo</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="configure-outputs">
+</div>
+</div>
+<div class="section" id="configure-outputs">
 <h3>Configure outputs<a class="headerlink" href="#configure-outputs" title="Permalink to this headline">#</a></h3>
 <p>This requires the following steps:</p>
 <ol class="simple">
@@ -881,17 +880,17 @@ title="Print to PDF"
 </ol>
 <!-- end of list -->
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Configure output</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">preset</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outFilename</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">preset</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span><span class="w"></span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outFilename</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="encode-images">
+</div>
+</div>
+<div class="section" id="encode-images">
 <h2>Encode images<a class="headerlink" href="#encode-images" title="Permalink to this headline">#</a></h2>
 <p>This requires the following steps:</p>
 <ol class="simple">
@@ -901,21 +900,21 @@ title="Print to PDF"
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">Transcoder::close</span></code></p></li>
 </ol>
 <!-- end of list -->
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">();</span>
-<span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Open Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">();</span><span class="w"></span>
+<span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Open Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
 
 <span class="c1">// Code that pushes image data goes here ...</span>
 
-<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
-<span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Flush Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span><span class="w"></span>
+<span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Flush Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
 
-<span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Output video: </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">outFilename</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span><span class="w"></span>
+<span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Output video: </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">outFilename</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<section id="push-image-data">
+<div class="section" id="push-image-data">
 <h3>Push image data<a class="headerlink" href="#push-image-data" title="Permalink to this headline">#</a></h3>
 <p>The code that pushes the image data is fairly simple.</p>
 <p>For each image:</p>
@@ -927,225 +926,225 @@ title="Print to PDF"
 </ol>
 <!-- end of list -->
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Encode images</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">mediaSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">mediaSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span><span class="w"></span>
 
-<span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">imageCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">WCHAR</span><span class="w"> </span><span class="n">imgfile</span><span class="p">[</span><span class="n">MAX_PATH</span><span class="p">];</span>
-<span class="w">    </span><span class="n">wsprintf</span><span class="p">(</span><span class="n">imgfile</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;%s</span><span class="se">\\</span><span class="s">cube%04d.jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">imgdir</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">imageCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">WCHAR</span><span class="w"> </span><span class="n">imgfile</span><span class="p">[</span><span class="n">MAX_PATH</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="n">wsprintf</span><span class="p">(</span><span class="n">imgfile</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;%s</span><span class="se">\\</span><span class="s">cube%04d.jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">imgdir</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">createMediaBufferForFile</span><span class="p">(</span><span class="n">imgfile</span><span class="p">));</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">createMediaBufferForFile</span><span class="p">(</span><span class="n">imgfile</span><span class="p">));</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setBuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setBuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1">// the correct start time is required by the transcoder</span>
-<span class="w">    </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setStartTime</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">inputFramerate</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setStartTime</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">inputFramerate</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mediaSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Push Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mediaSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Push Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="nf">createMediaBufferForFile</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">HANDLE</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">GENERIC_READ</span><span class="p">,</span><span class="w"> </span><span class="n">FILE_SHARE_READ</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">OPEN_EXISTING</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">INVALID_HANDLE_VALUE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">h</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="nf">createMediaBufferForFile</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">HANDLE</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">GENERIC_READ</span><span class="p">,</span><span class="w"> </span><span class="n">FILE_SHARE_READ</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">OPEN_EXISTING</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">INVALID_HANDLE_VALUE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">imgsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetFileSize</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">imgsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetFileSize</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaBuffer</span><span class="p">(</span><span class="n">imgsize</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaBuffer</span><span class="p">(</span><span class="n">imgsize</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">DWORD</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span>
-<span class="w">    </span><span class="n">ReadFile</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(),</span><span class="w"> </span><span class="n">imgsize</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">DWORD</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReadFile</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(),</span><span class="w"> </span><span class="n">imgsize</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">imgsize</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">imgsize</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">CloseHandle</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CloseHandle</span><span class="p">(</span><span class="n">h</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>When you are done pushing, call <code class="docutils literal notranslate"><span class="pre">Transcoder::flush</span></code> to make sure all buffered data is processed.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
-<span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Flush Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span><span class="w"></span>
+<span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Flush Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="complete-c-code">
+</div>
+</div>
+<div class="section" id="complete-c-code">
 <h2>Complete C++ code<a class="headerlink" href="#complete-c-code" title="Permalink to this headline">#</a></h2>
 <p>Here is the complete sample:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stdafx.h&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stdafx.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span><span class="cp"></span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">printError</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorInfo</span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;: &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">printError</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorInfo</span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">action</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;: &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorFacility</span><span class="o">::</span><span class="n">Success</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Success&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorFacility</span><span class="o">::</span><span class="n">Success</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Success&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;, &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;, &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;facility:&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;, error:&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;facility:&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;, error:&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="nf">createMediaBufferForFile</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">HANDLE</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">GENERIC_READ</span><span class="p">,</span><span class="w"> </span><span class="n">FILE_SHARE_READ</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">OPEN_EXISTING</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">INVALID_HANDLE_VALUE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">h</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="nf">createMediaBufferForFile</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">HANDLE</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">GENERIC_READ</span><span class="p">,</span><span class="w"> </span><span class="n">FILE_SHARE_READ</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">OPEN_EXISTING</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">INVALID_HANDLE_VALUE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">imgsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetFileSize</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">imgsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetFileSize</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaBuffer</span><span class="p">(</span><span class="n">imgsize</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaBuffer</span><span class="p">(</span><span class="n">imgsize</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">DWORD</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span>
-<span class="w">    </span><span class="n">ReadFile</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(),</span><span class="w"> </span><span class="n">imgsize</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">DWORD</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReadFile</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(),</span><span class="w"> </span><span class="n">imgsize</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">imgsize</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mediaBuffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">imgsize</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">CloseHandle</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CloseHandle</span><span class="p">(</span><span class="n">h</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mediaBuffer</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">bool</span><span class="w"> </span><span class="nf">slideshow</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">inputFramerate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">25.0</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">imageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">250</span><span class="p">;</span>
-<span class="w">    </span><span class="n">bool_t</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">slideshow</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">inputFramerate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">25.0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">imageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">250</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">bool_t</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span>
-<span class="w">    </span><span class="n">wstring</span><span class="w"> </span><span class="n">imgdir</span><span class="p">(</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="n">input_dir</span><span class="p">);</span>
+<span class="w">    </span><span class="n">wstring</span><span class="w"> </span><span class="n">imgdir</span><span class="p">(</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="n">input_dir</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">wstring</span><span class="w"> </span><span class="n">outFilename</span><span class="w"> </span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">output_file</span><span class="p">);</span>
-<span class="w">    </span><span class="n">DeleteFile</span><span class="p">(</span><span class="n">outFilename</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wstring</span><span class="w"> </span><span class="n">outFilename</span><span class="w"> </span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">output_file</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">DeleteFile</span><span class="p">(</span><span class="n">outFilename</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// Transcoder demo mode must be enabled, </span>
 <span class="w">    </span><span class="c1">// in order to use the production release for testing (without a valid license)</span>
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="n">TRUE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="n">TRUE</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// Load image info</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">wstring</span><span class="w"> </span><span class="n">firstImage</span><span class="p">(</span><span class="n">imgdir</span><span class="p">);</span>
-<span class="w">        </span><span class="n">firstImage</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">cube0000.jpeg&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">wstring</span><span class="w"> </span><span class="n">firstImage</span><span class="p">(</span><span class="n">imgdir</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">firstImage</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">cube0000.jpeg&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">firstImage</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">        </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">firstImage</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">();</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Load Info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Load Info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// Configure input</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">vinfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">((</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">());</span>
-<span class="w">        </span><span class="n">vinfo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">inputFramerate</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">vinfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">((</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">vinfo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">inputFramerate</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">        </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">vinfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">vinfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span>
 
 <span class="w">    </span><span class="c1">// Configure output</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">preset</span><span class="p">.</span><span class="n">name</span><span class="p">));</span>
-<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outFilename</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">preset</span><span class="p">.</span><span class="n">name</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outFilename</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">();</span>
-<span class="w">    </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Open Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Open Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// Encode images</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mediaSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mediaSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">imageCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">WCHAR</span><span class="w"> </span><span class="n">imgfile</span><span class="p">[</span><span class="n">MAX_PATH</span><span class="p">];</span>
-<span class="w">        </span><span class="n">wsprintf</span><span class="p">(</span><span class="n">imgfile</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;%s</span><span class="se">\\</span><span class="s">cube%04d.jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">imgdir</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">imageCount</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">WCHAR</span><span class="w"> </span><span class="n">imgfile</span><span class="p">[</span><span class="n">MAX_PATH</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">wsprintf</span><span class="p">(</span><span class="n">imgfile</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;%s</span><span class="se">\\</span><span class="s">cube%04d.jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">imgdir</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">createMediaBufferForFile</span><span class="p">(</span><span class="n">imgfile</span><span class="p">));</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">createMediaBufferForFile</span><span class="p">(</span><span class="n">imgfile</span><span class="p">));</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setBuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setBuffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1">// the correct start time is required by the transcoder</span>
-<span class="w">        </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setStartTime</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">inputFramerate</span><span class="p">);</span>
+<span class="w">        </span><span class="n">mediaSample</span><span class="o">-&gt;</span><span class="n">setStartTime</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">inputFramerate</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mediaSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Push Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mediaSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">res</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Push Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Flush Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Flush Transcoder&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="w">    </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Output video: </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">outFilename</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;Output video: </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">outFilename</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">_tmain</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">_tmain</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">Error</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">slideshowResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slideshow</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">slideshowResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slideshow</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">slideshowResult</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">slideshowResult</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

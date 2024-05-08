@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create a Command Line Tool using CMake on Windows &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -787,10 +786,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="create-a-command-line-tool-using-cmake-on-windows">
+  <div class="tex2jax_ignore mathjax_ignore section" id="create-a-command-line-tool-using-cmake-on-windows">
 <h1>Create a Command Line Tool using CMake on Windows<a class="headerlink" href="#create-a-command-line-tool-using-cmake-on-windows" title="Permalink to this headline">#</a></h1>
 <p>This topic describes the steps needed to configure a CMake project for C++ Command Line Tool. These steps were tested on Windows 11, 23H2. Scripts are <code class="docutils literal notranslate"><span class="pre">PowerShell</span></code>.</p>
-<section id="test-that-you-have-all-tools-installed">
+<div class="section" id="test-that-you-have-all-tools-installed">
 <h2>Test that you have all tools installed<a class="headerlink" href="#test-that-you-have-all-tools-installed" title="Permalink to this headline">#</a></h2>
 <p>CMake:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="p">-</span><span class="n">-version</span>
@@ -801,25 +800,25 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>If you don’t have those tools follow the steps in the <a class="reference external" href="https://blog.primosoftware.com/setup-cpp-development-environment-windows/">Setup C++ development environment on Windows</a> post to configure a C++ development environment.</p>
-</section>
-<section id="create-the-project-directory">
+</div>
+<div class="section" id="create-the-project-directory">
 <h2>Create the project directory<a class="headerlink" href="#create-the-project-directory" title="Permalink to this headline">#</a></h2>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="p">~/</span><span class="n">avblocks</span><span class="p">/</span><span class="n">cmake</span><span class="p">/</span><span class="n">simple-converter</span>
 </pre></div>
 </div>
-</section>
-<section id="create-the-cmake-project">
+</div>
+<div class="section" id="create-the-cmake-project">
 <h2>Create the CMake project<a class="headerlink" href="#create-the-cmake-project" title="Permalink to this headline">#</a></h2>
 <p>Switch to the project directory:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd </span><span class="p">~/</span><span class="n">avblocks</span><span class="p">/</span><span class="n">cmake</span><span class="p">/</span><span class="n">simple-converter</span>
 </pre></div>
 </div>
 <p>Add <code class="docutils literal notranslate"><span class="pre">src/main.cpp</span></code>:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello AVBlocks!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello AVBlocks!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Add <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>:</p>
@@ -865,16 +864,16 @@ title="Print to PDF"
 </div>
 <p>You should end up with the following directory structure:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
-├──<span class="w"> </span>.gitignore
-├──<span class="w"> </span>CMakeLists.txt
-├──<span class="w"> </span>build.ps1
-├──<span class="w"> </span>configure.ps1
-└──<span class="w"> </span>src
-<span class="w">    </span>└──<span class="w"> </span>main.cpp
+├── .gitignore
+├── CMakeLists.txt
+├── build.ps1
+├── configure.ps1
+└── src
+    └── main.cpp
 </pre></div>
 </div>
-</section>
-<section id="test-the-build">
+</div>
+<div class="section" id="test-the-build">
 <h2>Test the build<a class="headerlink" href="#test-the-build" title="Permalink to this headline">#</a></h2>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># source configure.ps1</span>
 <span class="p">.</span> <span class="p">.\</span><span class="n">configure</span><span class="p">.</span><span class="n">ps1</span>
@@ -883,23 +882,23 @@ title="Print to PDF"
 <span class="p">./</span><span class="n">build</span><span class="p">.</span><span class="n">ps1</span>
 </pre></div>
 </div>
-</section>
-<section id="update-for-avblocks">
+</div>
+<div class="section" id="update-for-avblocks">
 <h2>Update for AVBlocks<a class="headerlink" href="#update-for-avblocks" title="Permalink to this headline">#</a></h2>
 <ol>
 <li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.0.1-demo.1-windows.zip</span></code> except for the version number which may be different.</p></li>
 <li><p>Extract the archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <p>You should end up with a directory structure similar to the following:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
-├──<span class="w"> </span>.gitignore
-├──<span class="w"> </span>CMakeLists.txt
-├──<span class="w"> </span>avblocks
-│<span class="w">   </span>├──<span class="w"> </span>include
-│<span class="w">   </span>└──<span class="w"> </span>lib
-├──<span class="w"> </span>build.ps1
-├──<span class="w"> </span>configure.ps1
-└──<span class="w"> </span>src
-<span class="w">    </span>└──<span class="w"> </span>main.cpp
+├── .gitignore
+├── CMakeLists.txt
+├── avblocks
+│   ├── include
+│   └── lib
+├── build.ps1
+├── configure.ps1
+└── src
+    └── main.cpp
 </pre></div>
 </div>
 </li>
@@ -911,75 +910,75 @@ title="Print to PDF"
 </div>
 </li>
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> with this code:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span><span class="w"> </span><span class="mf">3.16</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span><span class="w"> </span><span class="mf">3.16</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">project</span><span class="p">(</span><span class="n">simple</span><span class="o">-</span><span class="n">converter</span><span class="p">)</span>
-<span class="n">set</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="n">simple</span><span class="o">-</span><span class="n">converter</span><span class="p">)</span>
+<span class="n">project</span><span class="p">(</span><span class="n">simple</span><span class="o">-</span><span class="n">converter</span><span class="p">)</span><span class="w"></span>
+<span class="n">set</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="n">simple</span><span class="o">-</span><span class="n">converter</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">add_executable</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">})</span>
+<span class="n">add_executable</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">})</span><span class="w"></span>
 
 <span class="cp"># debug definitions</span>
-<span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w">  </span><span class="n">_DEBUG</span><span class="p">)</span>
+<span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w">  </span><span class="n">_DEBUG</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># debug compile options</span>
-<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">/</span><span class="n">Zi</span><span class="w"> </span><span class="o">/</span><span class="n">Od</span><span class="p">)</span>
+<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">/</span><span class="n">Zi</span><span class="w"> </span><span class="o">/</span><span class="n">Od</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># enable C++ 17 standard features</span>
-<span class="n">target_compile_features</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">cxx_std_17</span><span class="p">)</span>
+<span class="n">target_compile_features</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">cxx_std_17</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># include dirs</span>
-<span class="n">target_include_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">include</span><span class="p">)</span>
+<span class="n">target_include_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">include</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># libs</span>
-<span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x64</span><span class="p">)</span>
-<span class="n">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">AVBlocks64</span><span class="p">.</span><span class="n">dll</span><span class="p">)</span>
+<span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x64</span><span class="p">)</span><span class="w"></span>
+<span class="n">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">AVBlocks64</span><span class="p">.</span><span class="n">dll</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># add /MTd or /MT compiler option </span>
-<span class="n">set_property</span><span class="p">(</span><span class="n">TARGET</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PROPERTY</span><span class="w"> </span><span class="n">MSVC_RUNTIME_LIBRARY</span><span class="w"> </span><span class="s">&quot;MultiThreaded$&lt;$&lt;CONFIG:Debug&gt;:Debug&gt;&quot;</span><span class="p">)</span>
+<span class="n">set_property</span><span class="p">(</span><span class="n">TARGET</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PROPERTY</span><span class="w"> </span><span class="n">MSVC_RUNTIME_LIBRARY</span><span class="w"> </span><span class="s">&quot;MultiThreaded$&lt;$&lt;CONFIG:Debug&gt;:Debug&gt;&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># sources</span>
-<span class="n">file</span><span class="p">(</span><span class="n">GLOB</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="s">&quot;src/*.cpp&quot;</span><span class="p">)</span>
-<span class="n">target_sources</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">source</span><span class="p">})</span>
+<span class="n">file</span><span class="p">(</span><span class="n">GLOB</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="s">&quot;src/*.cpp&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">target_sources</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">source</span><span class="p">})</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">src/main.cpp</span></code> with this code:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span><span class="cp"></span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// needed for WMV</span>
-<span class="w">    </span><span class="n">CoInitializeEx</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CoInitializeEx</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.wmv&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.wmv&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">));</span>
-<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.mp4&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.mp4&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
-<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">CoUninitialize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">CoUninitialize</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
@@ -990,8 +989,8 @@ title="Print to PDF"
 </div>
 </li>
 </ol>
-</section>
-<section id="run-the-application">
+</div>
+<div class="section" id="run-the-application">
 <h2>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this headline">#</a></h2>
 <ol>
 <li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> HD movie from the <a class="reference external" href="https://archive.org/download/WildlifeHd/Wildlife.wmv">Internet Archive</a> and save it in the project directory.</p></li>
@@ -1003,15 +1002,15 @@ title="Print to PDF"
 <p>Wait for the Transcoder to finish - it will take a few seconds. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> will be in the project directory.</p>
 </li>
 </ol>
-</section>
-<section id="troubleshooting">
+</div>
+<div class="section" id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> to solve that.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
