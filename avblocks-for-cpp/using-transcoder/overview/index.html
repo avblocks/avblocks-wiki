@@ -4,7 +4,9 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="A quick look at the elements of a transcoding workflow." name="description" />
+
     <title>Overview &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -746,20 +748,20 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="overview">
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h1>
 <p>A quick look at the elements of a transcoding workflow.</p>
-<div class="section" id="inputs-and-outputs">
+<section id="inputs-and-outputs">
 <h2>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">#</a></h2>
 <p>Before using a Transcoder object you have to configure its inputs and outputs. The Transcoder inputs and outputs are collections of media sockets, and each media socket may have one or more media pins.</p>
 <p>Media sockets are roughly equivalent to containers like MP4 and OGG (i.e. file formats), and media pins represent individual data streams within the containers like video, audio and subtitle streams.</p>
-</div>
-<div class="section" id="presets">
+</section>
+<section id="presets">
 <h2>Presets<a class="headerlink" href="#presets" title="Permalink to this headline">#</a></h2>
 <p>You can configure a MediaSocket manually with StreamInfo and MediaPin objects. You can also configure a MediaSocket automatically from a predefined preset. AVBlocks offers presets for most modern audio and video formats.</p>
 <p><span class="label label-success"> Tip: </span> MediaSocket configuration from presets is especially useful when configuring outputs. A common way of configuring outputs is to start with a MediaSocket generated from the preset that is closest to your custom output format and then tweak and fine-tune the MediaSocket according to your needs.</p>
-</div>
-<div class="section" id="transcoding">
+</section>
+<section id="transcoding">
 <h2>Transcoding<a class="headerlink" href="#transcoding" title="Permalink to this headline">#</a></h2>
 <p>Once you have inputs and output configured, the actual transcoding is a simple three-step process:</p>
 <ul class="simple">
@@ -767,8 +769,8 @@ title="Print to PDF"
 <li><p>Run the Transcoder to encode the inputs into the outputs.</p></li>
 <li><p>Close the Transcoder to flush its buffers and to free the allocated resources.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

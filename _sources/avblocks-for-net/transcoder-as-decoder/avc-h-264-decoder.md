@@ -1,6 +1,6 @@
 ---
 title: AVC / H.264 Decoder
-metadata:
+html_meta:
     description: This article explains how you can use Transcoder to decode an AVC / H.264 elementary stream.
 taxonomy:
     category: docs

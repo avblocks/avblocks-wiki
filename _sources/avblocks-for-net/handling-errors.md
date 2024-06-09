@@ -1,6 +1,6 @@
 ---
 title: Handling Errors
-metadata:
+html_meta:
     description: This topic describes how to handle AVBlocks errors.
 taxonomy:
     category: docs

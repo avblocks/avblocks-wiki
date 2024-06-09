@@ -1,6 +1,6 @@
 ---
 title: About Hardware Acceleration
-metadata:
+html_meta:
     description: This topic discusses the platforms and the codecs for which hardware acceleration is supported.
 taxonomy:
     category: docs

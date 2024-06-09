@@ -1,6 +1,6 @@
 ---
 title: Release Notes
-metadata:
+html_meta:
     description: This topic describes the changes in each version of AVBlocks.
 taxonomy:
     category: docs

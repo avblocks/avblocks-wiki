@@ -1,6 +1,6 @@
 ---
 title: Overlay Image On Video
-metadata:
+html_meta:
     description: This article explains how you can overlay PNG image on top of MP4 video.
 taxonomy:
     category: docs

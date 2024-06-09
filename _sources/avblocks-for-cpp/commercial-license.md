@@ -1,6 +1,6 @@
 ---
 title: Commercial License
-metadata:
+html_meta:
     description: How to obtain an AVBlocks commercial license.
 taxonomy:
     category: docs

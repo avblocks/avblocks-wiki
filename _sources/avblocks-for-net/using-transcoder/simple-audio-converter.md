@@ -1,6 +1,6 @@
 ---
 title: Simple Audio Converter
-metadata:
+html_meta:
     description: This topic is about building an audio converter in C#.
 taxonomy:
     category: docs

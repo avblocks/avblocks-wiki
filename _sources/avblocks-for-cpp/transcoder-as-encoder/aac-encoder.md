@@ -1,6 +1,6 @@
 ---
 title: AAC Encoder
-metadata:
+html_meta:
     description: This article explains how you can use Transcoder to encode an AAC ADTS audio stream from raw audio frames.
 taxonomy:
     category: docs

@@ -1,6 +1,6 @@
 ---
 title: Reading metadata information
-metadata:
+html_meta:
     description: This topic describes how to use the MediaInfo class to read metadata information like ID3 tags, and OGG and Windows Media metadata attributes from a file.
 taxonomy:
     category: docs

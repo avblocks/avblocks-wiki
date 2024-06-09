@@ -1,6 +1,6 @@
 ---
 title: Getting Started - Linux
-metadata:
+html_meta:
     description: Steps to configure your environment for AVBlocks development on Linux.
 taxonomy:
     category: docs

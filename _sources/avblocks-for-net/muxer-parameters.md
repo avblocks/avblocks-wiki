@@ -1,6 +1,6 @@
 ---
 title: Muxer Parameters
-metadata:
+html_meta:
     description: This section contains topics that describe Muxer specific parameters and their usage.
 taxonomy:
     category: docs

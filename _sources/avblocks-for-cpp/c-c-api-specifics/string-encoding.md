@@ -1,6 +1,6 @@
 ---
 title: String Encoding
-metadata:
+html_meta:
     description: This topic describes the string encoding used by the AVBlocks C and C++ APIs.
 taxonomy:
     category: docs

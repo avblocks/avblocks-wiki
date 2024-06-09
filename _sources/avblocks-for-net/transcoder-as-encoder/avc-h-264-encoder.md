@@ -1,6 +1,6 @@
 ---
 title: AVC / H.264 Encoder
-metadata:
+html_meta:
     description: This article explains how you can use Transcoder.Push to encode an AVC / H.264 elementary stream from raw video frames.
 taxonomy:
     category: docs

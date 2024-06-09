@@ -1,6 +1,6 @@
 ---
 title: Create a C# console application in Visual Studio
-metadata:
+html_meta:
     description: This article describes the steps needed to configure a C# console application in Visual Studio.
 taxonomy:
     category: docs

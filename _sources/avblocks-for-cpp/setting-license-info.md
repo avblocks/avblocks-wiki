@@ -1,6 +1,6 @@
 ---
 title: Setting License Info
-metadata:
+html_meta:
     description: This topic describes how to use an AVBlocks license file.
 taxonomy:
     category: docs

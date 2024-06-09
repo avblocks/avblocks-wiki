@@ -1,6 +1,6 @@
 ---
 title: Change Video Frame Rate
-metadata:
+html_meta:
     description: This article shows how to change the frame rate of a video from 24 fps to 30 fps.
 taxonomy:
     category: docs

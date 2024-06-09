@@ -1,6 +1,6 @@
 ---
 title: Simple Video Converter
-metadata:
+html_meta:
     description: This topic is about building a video converter in C#, C++, and Visual Studio.
 taxonomy:
     category: docs

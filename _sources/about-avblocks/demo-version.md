@@ -1,6 +1,6 @@
 ---
 title: Demo Version
-metadata:
+html_meta:
     description: This topic discusses the limitations of the AVBlocks demo version.
 taxonomy:
     category: docs

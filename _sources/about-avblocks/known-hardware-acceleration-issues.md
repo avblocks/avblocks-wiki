@@ -1,6 +1,6 @@
 ---
 title: Known Hardware Acceleration Issues
-metadata:
+html_meta:
     description: This topic discusses known hardware acceleration issues with some GPUs.
 taxonomy:
     category: docs

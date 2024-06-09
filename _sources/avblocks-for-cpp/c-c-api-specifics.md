@@ -1,6 +1,6 @@
 ---
 title: C++ API Specifics
-metadata:
+html_meta:
     description: This section contains topics specific to the AVBlocks C++ API.
 taxonomy:
     category: docs

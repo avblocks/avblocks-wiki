@@ -1,6 +1,6 @@
 ---
 title: Using as an Encoder
-metadata:
+html_meta:
     description: This section contains topics about using Transcoder for encoding audio and video elementary streams.
 taxonomy:
     category: docs

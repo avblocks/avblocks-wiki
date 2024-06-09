@@ -1,6 +1,6 @@
 ---
 title: Overview
-metadata:
+html_meta:
     description: A quick look at the elements of a transcoding workflow.
 taxonomy:
     category: docs

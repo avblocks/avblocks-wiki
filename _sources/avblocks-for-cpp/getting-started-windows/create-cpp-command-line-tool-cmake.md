@@ -1,6 +1,6 @@
 ---
 title: Create a Command Line Tool using CMake on Windows
-metadata:
+html_meta:
     description: This page describes the steps needed to configure CMake project for AVBlocks Command Line Tool on Windows
 taxonomy:
     category: docs

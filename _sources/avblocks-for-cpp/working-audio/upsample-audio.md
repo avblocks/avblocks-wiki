@@ -1,6 +1,6 @@
 ---
 title: Upsample Audio
-metadata:
+html_meta:
     description: This article explains how to upsample a 44.1 Khz audio clip to 48 KHz with AVBlocks.
 taxonomy:
     category: docs

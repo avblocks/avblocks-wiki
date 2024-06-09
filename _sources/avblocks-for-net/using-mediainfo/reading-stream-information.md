@@ -1,6 +1,6 @@
 ---
 title: Reading stream information
-metadata:
+html_meta:
     description: This section describes how to use MediaInfo to read audio and video stream information from a file.
 taxonomy:
     category: docs

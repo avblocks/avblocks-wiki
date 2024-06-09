@@ -1,6 +1,6 @@
 ---
 title: Working with Audio
-metadata:
+html_meta:
     description: This section contains topics about audio processing tasks like resampling.
 taxonomy:
     category: docs

@@ -1,6 +1,6 @@
 ---
 title: Upscale Video
-metadata:
+html_meta:
     description: This article explains how to scale a video up to Full HD (1080p) with AVBlocks.
 taxonomy:
     category: docs

@@ -1,6 +1,6 @@
 ---
 title: AAC Decoder
-metadata:
+html_meta:
     description: This article explains how you can use Transcoder to decode an AAC ADTS elementary stream.
 taxonomy:
     category: docs

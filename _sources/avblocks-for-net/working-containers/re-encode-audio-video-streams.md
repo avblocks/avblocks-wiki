@@ -1,6 +1,6 @@
 ---
 title: Re-encode Audio and Video Streams
-metadata:
+html_meta:
     description: This topic describes how to use the Transcoder class to re-encode audio and video streams.
 taxonomy:
     category: docs

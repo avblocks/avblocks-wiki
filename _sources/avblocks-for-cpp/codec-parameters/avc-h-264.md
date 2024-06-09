@@ -1,6 +1,6 @@
 ---
 title: AVC / H.264
-metadata:
+html_meta:
     description: This topic describes the AVC / H.264 codec parameters.
 taxonomy:
     category: docs

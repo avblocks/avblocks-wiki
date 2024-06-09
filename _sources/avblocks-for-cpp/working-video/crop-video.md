@@ -1,6 +1,6 @@
 ---
 title: Crop Video
-metadata:
+html_meta:
     description: This article explains how you can crop video with AVBlocks.
 taxonomy:
     category: docs

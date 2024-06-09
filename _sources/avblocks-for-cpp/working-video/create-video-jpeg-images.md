@@ -1,6 +1,6 @@
 ---
 title: Create Video From JPEG Images
-metadata:
+html_meta:
     description: This topic describes how to make a video from a sequence of images with AVBlocks. It shows how to use the Transcoder, MediaSocket, and MediaPin classes.
 taxonomy:
     category: docs

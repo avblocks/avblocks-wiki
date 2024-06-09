@@ -1,6 +1,6 @@
 ---
 title: Convert Raw Video To Compressed Video
-metadata:
+html_meta:
     description: This topic describes how to use the Transcoder class to convert a raw YUV video file into a compressed video file. The format of the output is configured with an AVBlocks preset.
 taxonomy:
     category: docs

@@ -1,6 +1,6 @@
 ---
 title: Codec Parameters
-metadata:
+html_meta:
     description: This section contains topics that describe codec specific parameters and their usage.  
 taxonomy:
     category: docs
