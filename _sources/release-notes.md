@@ -17,6 +17,8 @@ toc:
 
 - [AVB-1365] - Use TLS/HTTPS for license verification
 
+---
+
 ## Version 3.0.1
 
 ### Fix
@@ -24,6 +26,7 @@ toc:
  - [AVB-1284] - Transcoder: Invalid Stream error when trying to open MP4 file
 
 ---
+
 ## Version 3.0
 
 ### Fix

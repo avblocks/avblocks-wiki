@@ -17,6 +17,8 @@ toc:
 
 - Add a Library setting for using TLS/HTTPS for license verification 
 
+---
+
 ## AVBlocks 3.0
 
 ### API
