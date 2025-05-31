@@ -54,6 +54,8 @@ This code requires Visual Studio 2013 or later.
 
 #include "stdafx.h"
 
+// Primo Software License in XML format. 
+// You will have this after obtaining a commercial license 
 static const char* licenseXml = R"xml(
     <!-- 
     This file contains PrimoSoftware license(s). 
@@ -91,6 +93,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
     Library::initialize();
 
+    // Optionally enable TLS for license verification. 
+    // This must be done before calling Library::setLicense
+    Library::setLicenseTls(1);
+
+    // Pass the license XML to Library::setLicense
+    // NOTE: If the license expireDate is in the past, 
+    // this will trigger a license verification call 
+    // to Primo Software over the Internet. 
     Library::setLicense(licenseXml);
 
     {

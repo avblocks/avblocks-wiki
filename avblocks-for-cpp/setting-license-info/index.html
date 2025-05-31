@@ -782,6 +782,8 @@ title="Print to PDF"
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stdafx.h&quot;</span>
 
+<span class="c1">// Primo Software License in XML format. </span>
+<span class="c1">// You will have this after obtaining a commercial license </span>
 <span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">licenseXml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">R</span><span class="s">&quot;</span><span class="dl">xml(</span>
 <span class="s">    &lt;!-- </span>
 <span class="s">    This file contains PrimoSoftware license(s). </span>
@@ -819,6 +821,14 @@ title="Print to PDF"
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
+<span class="w">    </span><span class="c1">// Optionally enable TLS for license verification. </span>
+<span class="w">    </span><span class="c1">// This must be done before calling Library::setLicense</span>
+<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">setLicenseTls</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Pass the license XML to Library::setLicense</span>
+<span class="w">    </span><span class="c1">// NOTE: If the license expireDate is in the past, </span>
+<span class="w">    </span><span class="c1">// this will trigger a license verification call </span>
+<span class="w">    </span><span class="c1">// to Primo Software over the Internet. </span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="n">licenseXml</span><span class="p">);</span>
 
 <span class="w">    </span><span class="p">{</span>

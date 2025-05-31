@@ -18,7 +18,7 @@ This topic describes the steps needed to configure an Objective-C Command Line T
 
 3. Rename `main.m` to `main.mm`. 
 
-4. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to `avblocks-v3.0.1-demo.1-darwin.zip` except for the version number which may be different. 
+4. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to `avblocks-v3.1.0-demo.1-darwin.zip` except for the version number which may be different. 
 
 5. Extract the ZIP archive in a location of your choice, then copy the `include` and `lib` directories to the `avblocks` subdirectory of the Xcode project directory. The Xcode project directory is the directory that contains the `simple-converter.xcodeproj` project file.
 

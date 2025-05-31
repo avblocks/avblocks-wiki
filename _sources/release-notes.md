@@ -11,6 +11,12 @@ toc:
 
 # Release Notes
 
+## Version 3.1.0
+
+### New
+
+- [AVB-1365] - Use TLS/HTTPS for license verification
+
 ## Version 3.0.1
 
 ### Fix

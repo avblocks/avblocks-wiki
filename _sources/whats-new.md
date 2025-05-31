@@ -11,24 +11,30 @@ toc:
 
 # What’s New
 
+## AVBlocks 3.1
+
+### API
+
+- Add a Library setting for using TLS/HTTPS for license verification 
+
 ## AVBlocks 3.0
 
 ### API
 
-* Remove 32-bit application support (C++ and .NET)
-* C\+\+: Refactor API headers to use lowercase file names and subdirectories for namespaces
-* .NET: New AVBlocks .NET SDK for macOS and Linux (based on .NET Core 6+)
-* Distribute the AVBlocks Core and AVBlocks .NET Core through GitHub
+- Remove 32-bit application support (C++ and .NET)
+- C\+\+: Refactor API headers to use lowercase file names and subdirectories for namespaces
+- .NET: New AVBlocks .NET SDK for macOS and Linux (based on .NET Core 6+)
+- Distribute the AVBlocks Core and AVBlocks .NET Core through GitHub
 
 ### Samples 
 
-* Use cmake and Visual Studio Code for AVBlocks samples
-* GitHub repositories for AVBlocks samples
-* C\+\+: Add `enc_preset_file` sample
+- Use cmake and Visual Studio Code for AVBlocks samples
+- GitHub repositories for AVBlocks samples
+- C\+\+: Add `enc_preset_file` sample
 
 ### Docs
 
-* Split the wiki to separate C\+\+ and .NET sites
+- Split the wiki to separate C\+\+ and .NET sites
 
 ---
 
