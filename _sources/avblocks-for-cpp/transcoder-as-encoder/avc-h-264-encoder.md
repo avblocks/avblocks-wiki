@@ -1,12 +1,12 @@
 ---
-title: AVC / H.264 Encoder
+title: AVC / H.264 Encoder (Push)
 html_meta:
     description: This article explains how you can use Transcoder to encode an AVC / H.264 elementary stream from raw video frames.
 taxonomy:
     category: docs
 ---
 
-# AVC / H.264 Encoder
+# AVC / H.264 Encoder (Push)
 
 This article explains how you can use [Transcoder::push](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0) to encode an AVC / H.264 elementary stream from raw YUV frames.
 

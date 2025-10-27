@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This article explains how you can use Transcoder to decode an AAC ADTS elementary stream." name="description" />
+<meta content="This article explains how you can use Transcoder to decode an MP3 elementary stream." name="description" />
 
-    <title>AAC Decoder (Pull) &#8212; AVBlocks for C++</title>
+    <title>MP3 Decoder (File Input) &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/aac-decoder/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/mp3-decoder-file/" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="AVC / H.264 Decoder (Pull)" href="../avc-h-264-decoder/" />
-    <link rel="prev" title="MP3 Decoder (Run)" href="../mp3-decoder-run/" />
+    <link rel="next" title="AAC Decoder (Pull)" href="../aac-decoder/" />
+    <link rel="prev" title="Transcoder as Decoder" href="../" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -303,12 +303,12 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../transcoder-as-encoder/aac-encoder/">
-     AAC Encoder (Push)
+     AAC Encoder
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../transcoder-as-encoder/avc-h-264-encoder/">
-     AVC / H.264 Encoder (Push)
+     AVC / H.264 Encoder
     </a>
    </li>
   </ul>
@@ -323,19 +323,19 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="../mp3-decoder-run/">
-     MP3 Decoder (Run)
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
+     MP3 Decoder (File Input)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aac-decoder/">
      AAC Decoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../avc-h-264-decoder/">
-     AVC / H.264 Decoder (Pull)
+     AVC / H.264 Decoder
     </a>
    </li>
    <li class="toctree-l2">
@@ -635,7 +635,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-decoder/aac-decoder.md"
+        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-decoder/mp3-decoder-file.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -705,8 +705,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#windows">
-     Windows
+    <a class="reference internal nav-link" href="#macos">
+     macOS
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -715,23 +715,18 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#configure-transcoder">
-       Configure Transcoder
+      <a class="reference internal nav-link" href="#configure-output-socket">
+       Configure Output Socket
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#call-transcoder-pull">
-       Call Transcoder::pull
+      <a class="reference internal nav-link" href="#configure-transcoder-and-decode">
+       Configure Transcoder and Decode
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#complete-c-code">
        Complete C++ Code
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#how-to-run">
-       How to run
       </a>
      </li>
     </ul>
@@ -747,7 +742,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>AAC Decoder (Pull)</h1>
+                <h1>MP3 Decoder (File Input)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -768,8 +763,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#windows">
-     Windows
+    <a class="reference internal nav-link" href="#macos">
+     macOS
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -778,23 +773,18 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#configure-transcoder">
-       Configure Transcoder
+      <a class="reference internal nav-link" href="#configure-output-socket">
+       Configure Output Socket
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#call-transcoder-pull">
-       Call Transcoder::pull
+      <a class="reference internal nav-link" href="#configure-transcoder-and-decode">
+       Configure Transcoder and Decode
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#complete-c-code">
        Complete C++ Code
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#how-to-run">
-       How to run
       </a>
      </li>
     </ul>
@@ -811,191 +801,215 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="aac-decoder-pull">
-<h1>AAC Decoder (Pull)<a class="headerlink" href="#aac-decoder-pull" title="Permalink to this headline">#</a></h1>
-<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a8b54e4ba7db4474b0288ff57c12d538e">Transcoder::pull</a> to decode an AAC ADTS elementary stream.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="mp3-decoder-file-input">
+<h1>MP3 Decoder (File Input)<a class="headerlink" href="#mp3-decoder-file-input" title="Permalink to this headline">#</a></h1>
+<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb">Transcoder::run</a> to decode an MP3 elementary stream.</p>
+<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_mp3_file">dec_mp3_file</a> macOS sample.</p>
 <section id="source-audio">
 <h2>Source Audio<a class="headerlink" href="#source-audio" title="Permalink to this headline">#</a></h2>
-<p>For source we use the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.aac</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.aac</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
+<p>For source we use the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.mp3</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.mp3</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
-<p>This code takes an AAC ADTS stream and decodes it to uncompressed LPCM samples.</p>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
+<p>This code takes an MP3 file and decodes it to uncompressed LPCM WAV file.</p>
+<section id="macos">
+<h3>macOS<a class="headerlink" href="#macos" title="Permalink to this headline">#</a></h3>
 <section id="initialize-avblocks">
 <h4>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Permalink to this headline">#</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">()</span>
+<p>The first step in any AVBlocks application is to initialize the library. This must be done before using any other AVBlocks functionality. The <code class="docutils literal notranslate"><span class="pre">Library::initialize()</span></code> method sets up the internal state and loads necessary codecs. Always remember to call <code class="docutils literal notranslate"><span class="pre">Library::shutdown()</span></code> at the end of your program to properly clean up resources and release any allocated memory.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Hydrate-Kenny_Beltrey.aac&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decode</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="configure-transcoder">
-<h4>Configure Transcoder<a class="headerlink" href="#configure-transcoder" title="Permalink to this headline">#</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<section id="configure-output-socket">
+<h4>Configure Output Socket<a class="headerlink" href="#configure-output-socket" title="Permalink to this headline">#</a></h4>
+<p>The output socket defines where and how the decoded audio data will be written. In this case, we’re configuring it to output a WAV file with LPCM (Linear Pulse Code Modulation) format. The socket represents the output destination, while the pin represents the specific audio stream within that destination. The AudioStreamInfo object specifies the audio format parameters - you can customize the number of channels or sampling rate by uncommenting the relevant lines.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create an input socket from file</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">));</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">WAVE</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Create an output socket with one LPCM audio pin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outStreamInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">44100</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">outStreamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// You can change the number of the channels</span>
+<span class="w">    </span><span class="c1">//asi-&gt;setChannels(1);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// or the sampling rate and</span>
+<span class="w">    </span><span class="c1">//asi-&gt;setSampleRate(44100);</span>
 
-<span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-transcoder-and-decode">
+<h4>Configure Transcoder and Decode<a class="headerlink" href="#configure-transcoder-and-decode" title="Permalink to this headline">#</a></h4>
+<p>This is the main decoding function that ties everything together. First, we create an input socket that points to the MP3 file we want to decode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual decoding - it takes the compressed MP3 data from the input and converts it to uncompressed LPCM data for the output.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">setAllowDemoMode(TRUE)</span></code> call allows the transcoder to work even without a valid license (useful for testing, but not recommended for production). We then add our input and output sockets to the transcoder, open it to prepare for processing, run the actual transcoding operation, and finally close it to clean up.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">inSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">inputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="c1">// Create Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transcoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// create output socket</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// create transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// Continue to work even when license is invalid </span>
+<span class="w">    </span><span class="c1">// This is not recommended in production</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="n">TRUE</span><span class="p">);</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="c1">// transcoder will fail if output exists (by design)</span>
+<span class="w">    </span><span class="n">deleteFile</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="n">transcoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Transcoder open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Transcoder run&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
 
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="call-transcoder-pull">
-<h4>Call Transcoder::pull<a class="headerlink" href="#call-transcoder-pull" title="Permalink to this headline">#</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">transcoder</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">outputIndex</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">audioSample</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">outputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one audio frame. </span>
-<span class="w">        </span><span class="c1">// One audio frame typically contains 512 audio samples.  </span>
-<span class="w">        </span><span class="n">process_audio_frame</span><span class="p">(</span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="complete-c-code">
 <h4>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Permalink to this headline">#</a></h4>
+<p>Here’s the complete working example that demonstrates MP3 decoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the decoding operation, and properly shuts down the library before exiting.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
+
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/error_facility.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
 
-<span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory.h&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">frame_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">process_audio_frame</span><span class="p">(</span><span class="n">MediaSample</span><span class="o">*</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span>
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// sample-&gt;buffer() contains 512 interleaved samples. In this example each sample is 16 bit signed integer. </span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">));</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">WAVE</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// The samples of multi-channel audio (such as stereo and surround) are stored by </span>
-<span class="w">    </span><span class="c1">// cycling through the samples for each channel before advancing to the next sample time</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Sample Index : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">frame_index</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; timestamp : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">startTime</span><span class="p">()</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; data : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; dataSize : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">dataSize</span><span class="p">()</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Do something with the audio buffer, </span>
-<span class="w">    </span><span class="c1">// for example you can save it to a WAV file or send it to a speaker</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">frame_index</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// You can change the number of the channels</span>
+<span class="w">    </span><span class="c1">//asi-&gt;setChannels(1);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// or the sampling rate and</span>
+<span class="w">    </span><span class="c1">//asi-&gt;setSampleRate(44100);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">transcoder</span><span class="p">)</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">decode</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">outputIndex</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">audioSample</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">inSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">inputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">outputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one audio frame. </span>
-<span class="w">        </span><span class="c1">// One audio frame typically contains 512 audio samples.  </span>
-<span class="w">        </span><span class="n">process_audio_frame</span><span class="p">(</span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// create output socket</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create an input socket from file</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Create an output socket with one LPCM audio pin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outStreamInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">44100</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">outStreamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// Create Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transcoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// create transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// Continue to work even when license is invalid </span>
+<span class="w">    </span><span class="c1">// This is not recommended in production</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="n">TRUE</span><span class="p">);</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="c1">// transcoder will fail if output exists (by design)</span>
+<span class="w">    </span><span class="n">deleteFile</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="n">transcoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Transcoder open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Transcoder run&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
 
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">()</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Hydrate-Kenny_Beltrey.aac&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decode</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
-<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">decode_aac_stream</span><span class="p">();</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="how-to-run">
-<h4>How to run<a class="headerlink" href="#how-to-run" title="Permalink to this headline">#</a></h4>
-<p>Follow the <a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/"><span class="doc std std-doc">steps</span></a> to create a C++ console application in Visual Studio, but use the code from this article.</p>
-<p>Copy the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.aac</span></code> file from the assets archive to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> under the project’s directory.</p>
-<p>Run the application in Visual Studio.</p>
 </section>
 </section>
 </section>
@@ -1028,17 +1042,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../mp3-decoder-run/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">MP3 Decoder (Run)</p>
+            <p class="prev-next-title">Transcoder as Decoder</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../avc-h-264-decoder/" title="next page">
+    <a class='right-next' id="next-link" href="../aac-decoder/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">AVC / H.264 Decoder (Pull)</p>
+        <p class="prev-next-title">AAC Decoder (Pull)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

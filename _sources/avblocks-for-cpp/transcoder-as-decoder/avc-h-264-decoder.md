@@ -1,12 +1,12 @@
 ---
-title: AVC / H.264 Decoder
+title: AVC / H.264 Decoder (Pull)
 html_meta:
     description: This article explains how you can use Transcoder to decode an AVC / H.264 elementary stream.
 taxonomy:
     category: docs
 ---
 
-# AVC / H.264 Decoder
+# AVC / H.264 Decoder (Pull)
 
 This article explains how you can use [Transcoder::pull](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a8b54e4ba7db4474b0288ff57c12d538e) to decode an AVC / H.264 elementary stream.
 
