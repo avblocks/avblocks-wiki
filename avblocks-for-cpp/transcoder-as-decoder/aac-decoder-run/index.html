@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This article explains how you can use Transcoder to decode an MP3 elementary stream." name="description" />
+<meta content="This article explains how you can use Transcoder to decode an AAC ADTS elementary stream." name="description" />
 
-    <title>MP3 Decoder (Run) &#8212; AVBlocks for C++</title>
+    <title>AAC Decoder (Run) &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/mp3-decoder-run/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/aac-decoder-run/" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="Working with Audio" href="../../working-audio/" />
-    <link rel="prev" title="AVC / H.264 Annex B Parser" href="../avc-h-264-annex-b-parser/" />
+    <link rel="next" title="AAC Decoder (Pull)" href="../aac-decoder/" />
+    <link rel="prev" title="Transcoder as Decoder" href="../" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -323,8 +323,8 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="../aac-decoder-run/">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      AAC Decoder (Run)
     </a>
    </li>
@@ -343,8 +343,8 @@ const thebe_selector_output = ".output, .cell_output"
      AVC / H.264 Annex B Parser
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mp3-decoder-run/">
      MP3 Decoder (Run)
     </a>
    </li>
@@ -640,7 +640,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-decoder/mp3-decoder-run.md"
+        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-decoder/aac-decoder-run.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -757,7 +757,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>MP3 Decoder (Run)</h1>
+                <h1>AAC Decoder (Run)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -826,22 +826,31 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="mp3-decoder-run">
-<h1>MP3 Decoder (Run)<a class="headerlink" href="#mp3-decoder-run" title="Permalink to this headline">#</a></h1>
-<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb">Transcoder::run</a> to decode an MP3 elementary stream.</p>
-<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_mp3_file">dec_mp3_file</a> macOS sample.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="aac-decoder-run">
+<h1>AAC Decoder (Run)<a class="headerlink" href="#aac-decoder-run" title="Permalink to this headline">#</a></h1>
+<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb">Transcoder::run</a> to decode an AAC ADTS elementary stream.</p>
+<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_aac_adts_file">dec_aac_adts_file</a> macOS sample.</p>
 <section id="source-audio">
 <h2>Source Audio<a class="headerlink" href="#source-audio" title="Permalink to this headline">#</a></h2>
-<p>For source we use the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.mp3</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.mp3</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
+<p>For source we use the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.adts.aac</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.adts.aac</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
-<p>This code takes an MP3 file and decodes it to uncompressed LPCM WAV file.</p>
+<p>This code takes an AAC ADTS file and decodes it to uncompressed LPCM WAV file.</p>
 <section id="initialize-avblocks">
 <h3>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Permalink to this headline">#</a></h3>
 <p>The first step in any AVBlocks application is to initialize the library. This must be done before using any other AVBlocks functionality. The <code class="docutils literal notranslate"><span class="pre">Library::initialize()</span></code> method sets up the internal state and loads necessary codecs. Always remember to call <code class="docutils literal notranslate"><span class="pre">Library::shutdown()</span></code> at the end of your program to properly clean up resources and release any allocated memory.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decode</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
@@ -883,7 +892,7 @@ title="Print to PDF"
 </section>
 <section id="configure-transcoder-and-decode">
 <h3>Configure Transcoder and Decode<a class="headerlink" href="#configure-transcoder-and-decode" title="Permalink to this headline">#</a></h3>
-<p>This is the main decoding function that ties everything together. First, we create an input socket that points to the MP3 file we want to decode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual decoding - it takes the compressed MP3 data from the input and converts it to uncompressed LPCM data for the output.</p>
+<p>This is the main decoding function that ties everything together. First, we create an input socket that points to the AAC ADTS file we want to decode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual decoding - it takes the compressed AAC data from the input and converts it to uncompressed LPCM data for the output.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">setAllowDemoMode(TRUE)</span></code> call allows the transcoder to work even without a valid license (useful for testing, but not recommended for production). We then add our input and output sockets to the transcoder, open it to prepare for processing, run the actual transcoding operation, and finally close it to clean up.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
@@ -928,27 +937,19 @@ title="Print to PDF"
 </section>
 <section id="complete-c-code">
 <h3>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Permalink to this headline">#</a></h3>
-<p>Here’s the complete working example that demonstrates MP3 decoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the decoding operation, and properly shuts down the library before exiting.</p>
+<p>Here’s the complete working example that demonstrates AAC ADTS decoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the decoding operation, and properly shuts down the library before exiting.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/error_facility.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory.h&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
 <span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1012,6 +1013,7 @@ title="Print to PDF"
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
+
 <span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
@@ -1037,30 +1039,31 @@ title="Print to PDF"
 </section>
 <section id="how-to-run">
 <h2>How to Run<a class="headerlink" href="#how-to-run" title="Permalink to this headline">#</a></h2>
-<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_mp3_file">dec_mp3_file</a> example for details.</p>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_aac_adts_file">dec_aac_adts_file</a> example
+for details.</p>
 <section id="command-line">
 <h3>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">#</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./dec_mp3_file<span class="w"> </span>--input<span class="w"> </span>&lt;mp3<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./dec_aac_adts_file<span class="w"> </span>--input<span class="w"> </span>&lt;aac<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;
 </pre></div>
 </div>
 </section>
 <section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h3>
 <p>List options:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/dec_mp3_file<span class="w"> </span>--help
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/dec_aac_adts_file<span class="w"> </span>--help
 
-dec_mp3_file<span class="w"> </span>--input<span class="w"> </span>&lt;mp3<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;
+dec_aac_adts_file<span class="w"> </span>--input<span class="w"> </span>&lt;aac<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;
 <span class="w">  </span>-h,<span class="w">    </span>--help
-<span class="w">  </span>-i,<span class="w">    </span>--input<span class="w">    </span>input<span class="w"> </span>MP3<span class="w"> </span>file
+<span class="w">  </span>-i,<span class="w">    </span>--input<span class="w">    </span>input<span class="w"> </span>AAC<span class="w"> </span>file
 <span class="w">  </span>-o,<span class="w">    </span>--output<span class="w">   </span>output<span class="w"> </span>WAV<span class="w"> </span>file
 </pre></div>
 </div>
-<p>The following example decodes input file <code class="docutils literal notranslate"><span class="pre">./assets/aud/Hydrate-Kenny_Beltrey.mp3</span></code> into output file <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.wav</span></code>:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./output/dec_mp3_file
+<p>The following example decodes input file <code class="docutils literal notranslate"><span class="pre">./assets/aud/Hydrate-Kenny_Beltrey.adts.aac</span></code> into output file <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.wav</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./output/dec_aac_adts_file
 
-./bin/x64/dec_mp3_file<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--input<span class="w"> </span>./assets/aud/Hydrate-Kenny_Beltrey.mp3<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output<span class="w"> </span>./output/dec_mp3_file/Hydrate-Kenny_Beltrey.wav
+./bin/x64/dec_aac_adts_file<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>./assets/aud/Hydrate-Kenny_Beltrey.adts.aac<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>./output/dec_aac_adts_file/Hydrate-Kenny_Beltrey.wav
 </pre></div>
 </div>
 </section>
@@ -1094,17 +1097,17 @@ dec_mp3_file<span class="w"> </span>--input<span class="w"> </span>&lt;mp3<span 
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../avc-h-264-annex-b-parser/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">AVC / H.264 Annex B Parser</p>
+            <p class="prev-next-title">Transcoder as Decoder</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../../working-audio/" title="next page">
+    <a class='right-next' id="next-link" href="../aac-decoder/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Working with Audio</p>
+        <p class="prev-next-title">AAC Decoder (Pull)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

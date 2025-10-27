@@ -12,7 +12,7 @@ This article explains how you can use [Transcoder::pull](https://doc.avblocks.co
 
 ## Source Audio
 
-For source we use the `Hydrate-Kenny_Beltrey.aac` file from the [AVBlocks Assets](https://github.com/avblocks/avblocks-assets/releases) repository. After downloading and unzipping you will find `Hydrate-Kenny_Beltrey.aac` in the `aud` subdirectory.
+For source we use the `Hydrate-Kenny_Beltrey.aac` file from the [AVBlocks Assets](https://github.com/avblocks/avblocks-assets/releases) repository. After downloading and unzipping you will find `Hydrate-Kenny_Beltrey.adts.aac` in the `aud` subdirectory.
 
 ## Code
 

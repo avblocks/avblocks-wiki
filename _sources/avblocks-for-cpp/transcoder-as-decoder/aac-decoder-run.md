@@ -1,24 +1,24 @@
 ---
-title: MP3 Decoder (Run)
+title: AAC Decoder (Run)
 html_meta:
-    description: This article explains how you can use Transcoder to decode an MP3 elementary stream.
+    description: This article explains how you can use Transcoder to decode an AAC ADTS elementary stream.
 taxonomy:
     category: docs
 ---
 
-# MP3 Decoder (Run)
+# AAC Decoder (Run)
 
-This article explains how you can use [Transcoder::run](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb) to decode an MP3 elementary stream.
+This article explains how you can use [Transcoder::run](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb) to decode an AAC ADTS elementary stream.
 
-The code snippets in this article are from the [dec_mp3_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_mp3_file) macOS sample.
+The code snippets in this article are from the [dec_aac_adts_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_aac_adts_file) macOS sample.
 
 ## Source Audio
 
-For source we use the `Hydrate-Kenny_Beltrey.mp3` file from the [AVBlocks Assets](https://github.com/avblocks/avblocks-assets/releases) repository. After downloading and unzipping you will find `Hydrate-Kenny_Beltrey.mp3` in the `aud` subdirectory.
+For source we use the `Hydrate-Kenny_Beltrey.adts.aac` file from the [AVBlocks Assets](https://github.com/avblocks/avblocks-assets/releases) repository. After downloading and unzipping you will find `Hydrate-Kenny_Beltrey.adts.aac` in the `aud` subdirectory.
 
 ## Code
 
-This code takes an MP3 file and decodes it to uncompressed LPCM WAV file.
+This code takes an AAC ADTS file and decodes it to uncompressed LPCM WAV file.
 
 ### Initialize AVBlocks
 
@@ -27,6 +27,15 @@ The first step in any AVBlocks application is to initialize the library. This mu
 ``` cpp
 int main(int argc, char* argv[])
 {
+    Options opt;
+
+    switch(prepareOptions( opt, argc, argv))
+    {
+        case Command: return 0;
+        case Error: return 1;
+        case Parsed: break;
+    }
+
     Library::initialize();
 
     bool result = decode(opt);
@@ -68,7 +77,7 @@ primo::ref<MediaSocket> createOutputSocket(Options& opt)
 
 ### Configure Transcoder and Decode
 
-This is the main decoding function that ties everything together. First, we create an input socket that points to the MP3 file we want to decode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual decoding - it takes the compressed MP3 data from the input and converts it to uncompressed LPCM data for the output. 
+This is the main decoding function that ties everything together. First, we create an input socket that points to the AAC ADTS file we want to decode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual decoding - it takes the compressed AAC data from the input and converts it to uncompressed LPCM data for the output. 
 
 The `setAllowDemoMode(TRUE)` call allows the transcoder to work even without a valid license (useful for testing, but not recommended for production). We then add our input and output sockets to the transcoder, open it to prepare for processing, run the actual transcoding operation, and finally close it to clean up.
 
@@ -115,29 +124,21 @@ bool decode(Options& opt)
 
 ### Complete C++ Code
 
-Here's the complete working example that demonstrates MP3 decoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the decoding operation, and properly shuts down the library before exiting.
+Here's the complete working example that demonstrates AAC ADTS decoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the decoding operation, and properly shuts down the library before exiting.
 
 ``` cpp
 #include <primo/avblocks/avb.h>
 
-#include <primo/platform/reference++.h>
-#include <primo/platform/error_facility.h>
 #include <primo/platform/ustring.h>
+#include <primo/platform/reference++.h>
 
 #include "util.h"
 #include "options.h"
 
-#include <cstdio>
 #include <iostream>
-#include <iomanip>
-#include <fstream>
-#include <string>
-
-#include <memory.h>
 
 using namespace primo::codecs;
 using namespace primo::avblocks;
-using namespace std;
 
 primo::ref<MediaSocket> createOutputSocket(Options& opt)
 {
@@ -201,6 +202,7 @@ bool decode(Options& opt)
     return true;
 }
 
+
 int main(int argc, char* argv[])
 {
     Options opt;
@@ -224,12 +226,13 @@ int main(int argc, char* argv[])
 
 ## How to Run
 
-See the [build instructions](https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md) for macOS and the [dec_mp3_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_mp3_file) example for details.
+See the [build instructions](https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md) for macOS and the [dec_aac_adts_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_aac_adts_file) example
+ for details.
 
 ### Command Line
 
 ```sh
-./dec_mp3_file --input <mp3 file> --output <wav file>
+./dec_aac_adts_file --input <aac file> --output <wav file>
 ```
 
 ### Examples
@@ -237,20 +240,20 @@ See the [build instructions](https://github.com/avblocks/avblocks-cpp/blob/main/
 List options:
 
 ```sh
-./bin/x64/dec_mp3_file --help
+./bin/x64/dec_aac_adts_file --help
 
-dec_mp3_file --input <mp3 file> --output <wav file>
+dec_aac_adts_file --input <aac file> --output <wav file>
   -h,    --help
-  -i,    --input    input MP3 file
+  -i,    --input    input AAC file
   -o,    --output   output WAV file
 ```
 
-The following example decodes input file `./assets/aud/Hydrate-Kenny_Beltrey.mp3` into output file `Hydrate-Kenny_Beltrey.wav`:
+The following example decodes input file `./assets/aud/Hydrate-Kenny_Beltrey.adts.aac` into output file `Hydrate-Kenny_Beltrey.wav`:
 
 ```sh
-mkdir -p ./output/dec_mp3_file
+mkdir -p ./output/dec_aac_adts_file
 
-./bin/x64/dec_mp3_file \
-  --input ./assets/aud/Hydrate-Kenny_Beltrey.mp3 \
-  --output ./output/dec_mp3_file/Hydrate-Kenny_Beltrey.wav
+./bin/x64/dec_aac_adts_file \
+  --input ./assets/aud/Hydrate-Kenny_Beltrey.adts.aac \
+  --output ./output/dec_aac_adts_file/Hydrate-Kenny_Beltrey.wav
 ```
