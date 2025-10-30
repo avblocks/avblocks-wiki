@@ -1,14 +1,14 @@
 ---
-title: AAC Decoder (Run)
+title: AAC Decoder ADTS (Run)
 html_meta:
-    description: This article explains how you can use Transcoder to decode an AAC ADTS elementary stream.
+    description: This article explains how you can use Transcoder to decode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream.
 taxonomy:
     category: docs
 ---
 
 # AAC Decoder (Run)
 
-This article explains how you can use [Transcoder::run](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb) to decode an AAC ADTS elementary stream.
+This article explains how you can use [Transcoder::run](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb) to decode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream.
 
 The code snippets in this article are from the [dec_aac_adts_file](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/dec_aac_adts_file) macOS sample.
 
