@@ -6,7 +6,7 @@ taxonomy:
     category: docs
 ---
 
-# AAC Decoder (Pull)
+# AAC Decoder ADTS (Pull)
 
 This article explains how you can use [Transcoder::pull](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a8b54e4ba7db4474b0288ff57c12d538e) to decode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream.
 
