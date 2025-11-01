@@ -5,58 +5,58 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This section describes how to use the MediaInfo class to read audio, video and metadata information from a file." name="description" />
+<meta content="Supported audio codecs." name="description" />
 
-    <title>Overview &#8212; AVBlocks for C++</title>
+    <title>Audio Codecs &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/using-mediainfo/overview/" />
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../../../genindex/" />
-    <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="Reading stream information" href="../reading-stream-information/" />
-    <link rel="prev" title="MediaInfo" href="../" />
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/audio-codecs/" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)" href="../mpeg-audio/" />
+    <link rel="prev" title="Release Notes" href="../../release-notes/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -99,19 +99,19 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../">
+    <a class="navbar-brand text-wrap" href="../../">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../../_static/logo_blue.png" class="logo" alt="logo">
+      <img src="../../_static/logo_blue.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">AVBlocks for C++</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search/" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search/" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -123,7 +123,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-linux/">
+  <a class="reference internal" href="../getting-started-linux/">
    Getting Started - Linux
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -133,19 +133,19 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-linux/create-cpp-command-line-tool-cmake/">
+    <a class="reference internal" href="../getting-started-linux/create-cpp-command-line-tool-cmake/">
      Create a Command Line Tool using CMake on Ubuntu
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-linux/developing-with-vscode/">
+    <a class="reference internal" href="../getting-started-linux/developing-with-vscode/">
      Developing with Visual Studio Code on Ubuntu
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-macos/">
+  <a class="reference internal" href="../getting-started-macos/">
    Getting Started - macOS
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -155,24 +155,24 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-macos/create-cpp-command-line-tool-cmake/">
+    <a class="reference internal" href="../getting-started-macos/create-cpp-command-line-tool-cmake/">
      Create a Command Line Tool using CMake on macOS
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-macos/developing-with-vscode/">
+    <a class="reference internal" href="../getting-started-macos/developing-with-vscode/">
      Developing with Visual Studio Code on macOS
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-macos/create-objc-command-line-tool-xcode/">
+    <a class="reference internal" href="../getting-started-macos/create-objc-command-line-tool-xcode/">
      Create a Command Line Tool in Xcode on macOS
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-windows/">
+  <a class="reference internal" href="../getting-started-windows/">
    Getting Started - Windows
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -182,34 +182,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-cpp-command-line-tool-cmake/">
+    <a class="reference internal" href="../getting-started-windows/create-cpp-command-line-tool-cmake/">
      Create a Command Line Tool using CMake on Windows
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/developing-with-vscode/">
+    <a class="reference internal" href="../getting-started-windows/developing-with-vscode/">
      Developing with Visual Studio Code on Windows
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">
+    <a class="reference internal" href="../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">
      Create a Console App in Visual Studio on Windows
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../initialization-and-termination/">
+  <a class="reference internal" href="../initialization-and-termination/">
    Initialization and Termination
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../setting-license-info/">
+  <a class="reference internal" href="../setting-license-info/">
    Setting License Info
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../commercial-license/">
+  <a class="reference internal" href="../commercial-license/">
    Commercial License
   </a>
  </li>
@@ -219,36 +219,36 @@ const thebe_selector_output = ".output, .cell_output"
   Blocks
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../using-mediainfo/">
    MediaInfo
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../using-mediainfo/overview/">
      Overview
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../reading-stream-information/">
+    <a class="reference internal" href="../using-mediainfo/reading-stream-information/">
      Reading stream information
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../reading-metadata-information/">
+    <a class="reference internal" href="../using-mediainfo/reading-metadata-information/">
      Reading metadata information
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../using-transcoder/">
+  <a class="reference internal" href="../using-transcoder/">
    Transcoder
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
@@ -258,29 +258,29 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/overview/">
+    <a class="reference internal" href="../using-transcoder/overview/">
      Overview
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/simple-audio-converter/">
+    <a class="reference internal" href="../using-transcoder/simple-audio-converter/">
      Simple Audio Converter
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/simple-video-converter/">
+    <a class="reference internal" href="../using-transcoder/simple-video-converter/">
      Simple Video Converter
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/hardware-acceleration/">
+    <a class="reference internal" href="../using-transcoder/hardware-acceleration/">
      Hardware Acceleration
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../handling-errors/">
+  <a class="reference internal" href="../handling-errors/">
    Handling Errors
   </a>
  </li>
@@ -292,7 +292,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../transcoder-as-encoder/">
+  <a class="reference internal" href="../transcoder-as-encoder/">
    Transcoder as Encoder
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
@@ -302,29 +302,29 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/aac-encoder-run/">
+    <a class="reference internal" href="../transcoder-as-encoder/aac-encoder-run/">
      AAC Encoder ADTS (Run)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/aac-encoder/">
+    <a class="reference internal" href="../transcoder-as-encoder/aac-encoder/">
      AAC Encoder ADTS (Push)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/avc-h-264-encoder/">
+    <a class="reference internal" href="../transcoder-as-encoder/avc-h-264-encoder/">
      AVC / H.264 Encoder (Push)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/mp3-encoder/">
+    <a class="reference internal" href="../transcoder-as-encoder/mp3-encoder/">
      MP3 Encoder (Push)
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../transcoder-as-decoder/">
+  <a class="reference internal" href="../transcoder-as-decoder/">
    Transcoder as Decoder
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
@@ -334,27 +334,27 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder-run/">
+    <a class="reference internal" href="../transcoder-as-decoder/aac-decoder-run/">
      AAC Decoder ADTS (Run)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder/">
+    <a class="reference internal" href="../transcoder-as-decoder/aac-decoder/">
      AAC Decoder ADTS (Pull)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/avc-h-264-decoder/">
+    <a class="reference internal" href="../transcoder-as-decoder/avc-h-264-decoder/">
      AVC / H.264 Decoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/avc-h-264-annex-b-parser/">
+    <a class="reference internal" href="../transcoder-as-decoder/avc-h-264-annex-b-parser/">
      AVC / H.264 Annex B Parser
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/mp3-decoder-run/">
+    <a class="reference internal" href="../transcoder-as-decoder/mp3-decoder-run/">
      MP3 Decoder (Run)
     </a>
    </li>
@@ -368,7 +368,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../working-audio/">
+  <a class="reference internal" href="../working-audio/">
    Working with Audio
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
@@ -378,14 +378,14 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-audio/upsample-audio/">
+    <a class="reference internal" href="../working-audio/upsample-audio/">
      Upsample Audio
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../working-video/">
+  <a class="reference internal" href="../working-video/">
    Working with Video
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
@@ -395,39 +395,39 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/upscale-video/">
+    <a class="reference internal" href="../working-video/upscale-video/">
      Upscale Video
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/crop-video/">
+    <a class="reference internal" href="../working-video/crop-video/">
      Crop Video
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/pad-video/">
+    <a class="reference internal" href="../working-video/pad-video/">
      Pad Video
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/change-video-frame-rate/">
+    <a class="reference internal" href="../working-video/change-video-frame-rate/">
      Change Video Frame Rate
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/convert-raw-video-compressed-video/">
+    <a class="reference internal" href="../working-video/convert-raw-video-compressed-video/">
      Convert Raw Video To Compressed Video
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/create-video-jpeg-images/">
+    <a class="reference internal" href="../working-video/create-video-jpeg-images/">
      Create Video From JPEG Images
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../working-containers/">
+  <a class="reference internal" href="../working-containers/">
    Working with Containers
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
@@ -437,12 +437,12 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-containers/mux-audio-video-mp4/">
+    <a class="reference internal" href="../working-containers/mux-audio-video-mp4/">
      Mux Audio and Video Into MP4
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../working-containers/re-encode-audio-video-streams/">
+    <a class="reference internal" href="../working-containers/re-encode-audio-video-streams/">
      Re-encode Audio and Video Streams
     </a>
    </li>
@@ -456,7 +456,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../codec-parameters/">
+  <a class="reference internal" href="../codec-parameters/">
    Codec Parameters
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
@@ -466,14 +466,14 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../codec-parameters/avc-h-264/">
+    <a class="reference internal" href="../codec-parameters/avc-h-264/">
      AVC / H.264
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../muxer-parameters/">
+  <a class="reference internal" href="../muxer-parameters/">
    Muxer Parameters
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
@@ -483,7 +483,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../muxer-parameters/mp4/">
+    <a class="reference internal" href="../muxer-parameters/mp4/">
      MP4
     </a>
    </li>
@@ -497,7 +497,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../c-c-api-specifics/">
+  <a class="reference internal" href="../c-c-api-specifics/">
    C++ API Specifics
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
@@ -507,14 +507,14 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../c-c-api-specifics/string-encoding/">
+    <a class="reference internal" href="../c-c-api-specifics/string-encoding/">
      String Encoding
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../c-utility-classes-and-functions/">
+  <a class="reference internal" href="../c-utility-classes-and-functions/">
    C++ Utility Classes and Functions
   </a>
  </li>
@@ -526,22 +526,22 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/about-avblocks-for-c/">
+  <a class="reference internal" href="../../about-avblocks/about-avblocks-for-c/">
    About AVBlocks for C++
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/about-hardware-acceleration/">
+  <a class="reference internal" href="../../about-avblocks/about-hardware-acceleration/">
    About Hardware Acceleration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/known-hardware-acceleration-issues/">
+  <a class="reference internal" href="../../about-avblocks/known-hardware-acceleration-issues/">
    Known Hardware Acceleration Issues
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/demo-version/">
+  <a class="reference internal" href="../../about-avblocks/demo-version/">
    Demo Version
   </a>
  </li>
@@ -553,7 +553,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../api-docs/">
+  <a class="reference internal" href="../../api-docs/">
    API Docs
   </a>
  </li>
@@ -565,7 +565,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../whats-new/">
+  <a class="reference internal" href="../../whats-new/">
    What’s New
   </a>
  </li>
@@ -577,7 +577,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../../release-notes/">
+  <a class="reference internal" href="../../release-notes/">
    Release Notes
   </a>
  </li>
@@ -587,24 +587,24 @@ const thebe_selector_output = ".output, .cell_output"
   Codecs
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../audio-codecs/">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Audio Codecs
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
   <label for="toctree-checkbox-14">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../mpeg-audio/">
+    <a class="reference internal" href="../mpeg-audio/">
      MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../aac-audio/">
+    <a class="reference internal" href="../aac-audio/">
      AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)
     </a>
    </li>
@@ -679,7 +679,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/using-mediainfo/overview.md"
+        <a href="../../_sources/avblocks-for-cpp/audio-codecs.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -728,7 +728,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Overview</h1>
+                <h1>Audio Codecs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -740,15 +740,14 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h1>
-<p>You can use MediaInfo for:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="audio-codecs">
+<h1>Audio Codecs<a class="headerlink" href="#audio-codecs" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p>Reading audio and video stream properties from a file.</p></li>
-<li><p>Extracting frame size, frame rate, color format, and other information for known video streams.</p></li>
-<li><p>Extracting sample rate, bitrate, channel layout, and other information for known audio streams.</p></li>
-<li><p>Reading metadata like ID3 tags, OGG tags, and Windows Media attributes.</p></li>
+<li><p><a class="reference internal" href="../mpeg-audio/"><span class="doc std std-doc">MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)</span></a></p></li>
+<li><p><a class="reference internal" href="../aac-audio/"><span class="doc std std-doc">AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)</span></a></p></li>
 </ul>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -764,7 +763,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp/using-mediainfo"
+            path: "./avblocks-for-cpp"
         },
         predefinedOutput: true
     }
@@ -778,17 +777,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../" title="previous page">
+    <a class='left-prev' id="prev-link" href="../../release-notes/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">MediaInfo</p>
+            <p class="prev-next-title">Release Notes</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../reading-stream-information/" title="next page">
+    <a class='right-next' id="next-link" href="../mpeg-audio/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Reading stream information</p>
+        <p class="prev-next-title">MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -813,7 +812,7 @@ title="Print to PDF"
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
 
   </body>

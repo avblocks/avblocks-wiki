@@ -29,11 +29,6 @@ toc:
 
 ## Version 3.0
 
-### Fix
-
-- [AVB-1229] - AAC: Push encoding with a raw input track causes `Transcoder::flush` to hang
-- [AVB-1267] - MP4: Converting mp4 files to DVD MP2 preset results in distorted audio when the source audio is AAC LC Mono 
- 
 ### New
  
 - [AVB-1264] - API: Refactor headers to lowercase and subdirs for namespaces
@@ -55,6 +50,11 @@ toc:
 - [AVB-1273] - Samples: C\+\+: Add enc\_preset\_file sample \(macOS, Linux, Windows\)
 - [AVB-1276] - Samples: Publish .NET CLI samples to GitHub
 - [AVB-1275] - wiki: Split Wiki to separate C\+\+ and .NET sites
+
+### Fix
+
+- [AVB-1229] - AAC: Push encoding with a raw input track causes `Transcoder::flush` to hang
+- [AVB-1267] - MP4: Converting mp4 files to DVD MP2 preset results in distorted audio when the source audio is AAC LC Mono 
 
 ---
 ## Version 2.3.2
