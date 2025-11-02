@@ -18,6 +18,7 @@ MPEG-1 Audio supports sampling rates of 32, 44.1, and 48 kHz, while MPEG-2 Audio
 
 ## MP3 Encoding
 
+- [MP3 Encoder (Run)](transcoder-as-encoder/mp3-encoder-run) - Encode a WAV file to MP3 using `Transcoder::run`
 - [MP3 Encoder (Push)](transcoder-as-encoder/mp3-encoder) - Encode raw audio frames to MP3 using `Transcoder::push`
 
 ## MP3 Decoding
