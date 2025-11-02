@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This article explains how you can use Transcoder to encode a WAV file to MP3 (MPEG Audio Layer III) format." name="description" />
+<meta content="This article explains how you can use Transcoder to encode a WAV file to G.711 A-law compressed audio format." name="description" />
 
-    <title>MP3 Encoder (Run) &#8212; AVBlocks for C++</title>
+    <title>G.711 A-law Encoder (Run) &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/mp3-encoder-run/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/g711-alaw-encoder-run/" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="MP3 Encoder (Push)" href="../mp3-encoder/" />
-    <link rel="prev" title="G.711 A-law Encoder (Run)" href="../g711-alaw-encoder-run/" />
+    <link rel="next" title="MP3 Encoder (Run)" href="../mp3-encoder-run/" />
+    <link rel="prev" title="AVC / H.264 Encoder (Push)" href="../avc-h-264-encoder/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -316,13 +316,13 @@ const thebe_selector_output = ".output, .cell_output"
      AVC / H.264 Encoder (Push)
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../g711-alaw-encoder-run/">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      G.711 A-law Encoder (Run)
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mp3-encoder-run/">
      MP3 Encoder (Run)
     </a>
    </li>
@@ -699,7 +699,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-encoder/mp3-encoder-run.md"
+        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-encoder/g711-alaw-encoder-run.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -816,7 +816,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>MP3 Encoder (Run)</h1>
+                <h1>G.711 A-law Encoder (Run)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -885,17 +885,17 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="mp3-encoder-run">
-<h1>MP3 Encoder (Run)<a class="headerlink" href="#mp3-encoder-run" title="Permalink to this headline">#</a></h1>
-<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb">Transcoder::run</a> to encode a WAV file to MP3 (MPEG Audio Layer III) format.</p>
-<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_mp3_file">enc_mp3_file</a> macOS sample.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="g-711-a-law-encoder-run">
+<h1>G.711 A-law Encoder (Run)<a class="headerlink" href="#g-711-a-law-encoder-run" title="Permalink to this headline">#</a></h1>
+<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb">Transcoder::run</a> to encode a WAV file to G.711 A-law compressed audio format.</p>
+<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_g711_alaw_file">enc_g711_alaw_file</a> macOS sample.</p>
 <section id="source-audio">
 <h2>Source Audio<a class="headerlink" href="#source-audio" title="Permalink to this headline">#</a></h2>
-<p>For source we use the <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
+<p>For source we use the <code class="docutils literal notranslate"><span class="pre">express-dictate_8000_s16_1ch_pcm.wav</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">express-dictate_8000_s16_1ch_pcm.wav</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
-<p>This code takes a WAV file and encodes it to compressed MP3 format.</p>
+<p>This code takes a WAV file and encodes it to compressed G.711 A-law format.</p>
 <section id="initialize-avblocks">
 <h3>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Permalink to this headline">#</a></h3>
 <p>The first step in any AVBlocks application is to initialize the library. This must be done before using any other AVBlocks functionality. The <code class="docutils literal notranslate"><span class="pre">Library::initialize()</span></code> method sets up the internal state and loads necessary codecs. Always remember to call <code class="docutils literal notranslate"><span class="pre">Library::shutdown()</span></code> at the end of your program to properly clean up resources and release any allocated memory.</p>
@@ -923,33 +923,25 @@ title="Print to PDF"
 </section>
 <section id="configure-output-socket">
 <h3>Configure Output Socket<a class="headerlink" href="#configure-output-socket" title="Permalink to this headline">#</a></h3>
-<p>The output socket defines where and how the encoded audio data will be written. In this case, we’re configuring it to output an MP3 file. The socket represents the output destination, while the pin represents the specific audio stream within that destination. The AudioStreamInfo object specifies the audio format parameters - you can customize the bitrate, sampling rate, number of channels, or stereo mode by uncommenting the relevant lines.</p>
+<p>The output socket defines where and how the encoded audio data will be written. In this case, we’re configuring it to output a G.711 A-law WAV file. The socket represents the output destination, while the pin represents the specific audio stream within that destination. The AudioStreamInfo object specifies the audio format parameters - G.711 A-law typically uses 8000 Hz sample rate and mono channel, which are set explicitly in this example.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// create stream info to describe the output audio stream</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">MPEG_Audio</span><span class="p">);</span>
-<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">MPEG_Audio_Layer3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">ALAW_PCM</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// The default bitrate is 128000. You can set it to 192000, 256000, etc.</span>
-<span class="w">    </span><span class="c1">// asi-&gt;setBitrate(192000);</span>
-
-<span class="w">    </span><span class="c1">// Optionally set the sampling rate and the number of the channels, e.g. 44.1 Khz, Mono </span>
-<span class="w">    </span><span class="c1">// asi-&gt;setSampleRate(44100);</span>
-<span class="w">    </span><span class="c1">// asi-&gt;setChannels(1);</span>
+<span class="w">    </span><span class="c1">// G.711 A-law typically uses 8000 Hz sample rate and mono channel</span>
+<span class="w">    </span><span class="c1">// These will be inherited from input if not explicitly set</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// create a pin using the stream info </span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// the pin allows you to specify additional parameters for the encoder </span>
-<span class="w">    </span><span class="c1">// for example, change the stereo mode, e.g. Joint Stereo</span>
-<span class="w">    </span><span class="c1">// pin-&gt;params()-&gt;addInt(Param::Encoder::Audio::MPEG1::StereoMode, StereoMode::Joint);</span>
-
-<span class="w">    </span><span class="c1">// finally create a socket for the output container format which is MP3 in this case</span>
+<span class="w">    </span><span class="c1">// finally create a socket for the output container format which is WAV in this case</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">MPEG_Audio</span><span class="p">);</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">MPEG_Audio_Layer3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">WAVE</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
@@ -964,7 +956,7 @@ title="Print to PDF"
 </section>
 <section id="configure-transcoder-and-encode">
 <h3>Configure Transcoder and Encode<a class="headerlink" href="#configure-transcoder-and-encode" title="Permalink to this headline">#</a></h3>
-<p>This is the main encoding function that ties everything together. First, we create an input socket that points to the WAV file we want to encode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual encoding - it takes the uncompressed LPCM data from the input and converts it to compressed MP3 data for the output.</p>
+<p>This is the main encoding function that ties everything together. First, we create an input socket that points to the WAV file we want to encode. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual encoding - it takes the uncompressed PCM data from the input and converts it to compressed G.711 A-law data for the output.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">setAllowDemoMode(true)</span></code> call allows the transcoder to work even without a valid license (useful for testing, but not recommended for production). We then add our input and output sockets to the transcoder, open it to prepare for processing, run the actual transcoding operation, and finally close it to clean up.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1005,7 +997,7 @@ title="Print to PDF"
 </section>
 <section id="complete-c-code">
 <h3>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Permalink to this headline">#</a></h3>
-<p>Here’s the complete working example that demonstrates MP3 encoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the encoding operation, and properly shuts down the library before exiting.</p>
+<p>Here’s the complete working example that demonstrates G.711 A-law encoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the encoding operation, and properly shuts down the library before exiting.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
@@ -1029,28 +1021,20 @@ title="Print to PDF"
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// create stream info to describe the output audio stream</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">MPEG_Audio</span><span class="p">);</span>
-<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">MPEG_Audio_Layer3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">ALAW_PCM</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// The default bitrate is 128000. You can set it to 192000, 256000, etc.</span>
-<span class="w">    </span><span class="c1">// asi-&gt;setBitrate(192000);</span>
-
-<span class="w">    </span><span class="c1">// Optionally set the sampling rate and the number of the channels, e.g. 44.1 Khz, Mono </span>
-<span class="w">    </span><span class="c1">// asi-&gt;setSampleRate(44100);</span>
-<span class="w">    </span><span class="c1">// asi-&gt;setChannels(1);</span>
+<span class="w">    </span><span class="c1">// G.711 A-law typically uses 8000 Hz sample rate and mono channel</span>
+<span class="w">    </span><span class="c1">// These will be inherited from input if not explicitly set</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// create a pin using the stream info </span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// the pin allows you to specify additional parameters for the encoder </span>
-<span class="w">    </span><span class="c1">// for example, change the stereo mode, e.g. Joint Stereo</span>
-<span class="w">    </span><span class="c1">// pin-&gt;params()-&gt;addInt(Param::Encoder::Audio::MPEG1::StereoMode, StereoMode::Joint);</span>
-
-<span class="w">    </span><span class="c1">// finally create a socket for the output container format which is MP3 in this case</span>
+<span class="w">    </span><span class="c1">// finally create a socket for the output container format which is WAV in this case</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">MPEG_Audio</span><span class="p">);</span>
-<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">MPEG_Audio_Layer3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">WAVE</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
@@ -1121,30 +1105,30 @@ title="Print to PDF"
 </section>
 <section id="how-to-run">
 <h2>How to Run<a class="headerlink" href="#how-to-run" title="Permalink to this headline">#</a></h2>
-<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_mp3_file">enc_mp3_file</a> example for details.</p>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_g711_alaw_file">enc_g711_alaw_file</a> example for details.</p>
 <section id="command-line">
 <h3>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">#</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./enc_mp3_file<span class="w"> </span>--input<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;mp3<span class="w"> </span>file&gt;
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./enc_g711_alaw_file<span class="w"> </span>--input<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;g711<span class="w"> </span>alaw<span class="w"> </span>wav<span class="w"> </span>file&gt;
 </pre></div>
 </div>
 </section>
 <section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h3>
 <p>List options:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/enc_mp3_file<span class="w"> </span>--help
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/enc_g711_alaw_file<span class="w"> </span>--help
 
-Usage:<span class="w"> </span>enc_mp3_file<span class="w"> </span>--input<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;mp3<span class="w"> </span>file&gt;
+Usage:<span class="w"> </span>enc_g711_alaw_file<span class="w"> </span>--input<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;g711<span class="w"> </span>alaw<span class="w"> </span>wav<span class="w"> </span>file&gt;
 <span class="w">  </span>-h,<span class="w">    </span>--help
 <span class="w">  </span>-i,<span class="w">    </span>--input<span class="w">    </span>input<span class="w"> </span>WAV<span class="w"> </span>file
-<span class="w">  </span>-o,<span class="w">    </span>--output<span class="w">   </span>output<span class="w"> </span>MP3<span class="w"> </span>file
+<span class="w">  </span>-o,<span class="w">    </span>--output<span class="w">   </span>output<span class="w"> </span>G.711<span class="w"> </span>A-law<span class="w"> </span>WAV<span class="w"> </span>file
 </pre></div>
 </div>
-<p>The following example encodes input file <code class="docutils literal notranslate"><span class="pre">./assets/aud/equinox-48KHz.wav</span></code> into output file <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.mp3</span></code>:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./output/enc_mp3_file
+<p>The following example encodes input file <code class="docutils literal notranslate"><span class="pre">./assets/aud/express-dictate_8000_s16_1ch_pcm.wav</span></code> into output file <code class="docutils literal notranslate"><span class="pre">express-dictate_g711_alaw.wav</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./output/enc_g711_alaw_file
 
-./bin/x64/enc_mp3_file<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--input<span class="w"> </span>./assets/aud/equinox-48KHz.wav<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output<span class="w"> </span>./output/enc_mp3_file/equinox-48KHz.mp3
+./bin/x64/enc_g711_alaw_file<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>./assets/aud/express-dictate_8000_s16_1ch_pcm.wav<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>./output/enc_g711_alaw_file/express-dictate_g711_alaw.wav
 </pre></div>
 </div>
 </section>
@@ -1178,17 +1162,17 @@ Usage:<span class="w"> </span>enc_mp3_file<span class="w"> </span>--input<span c
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../g711-alaw-encoder-run/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../avc-h-264-encoder/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">G.711 A-law Encoder (Run)</p>
+            <p class="prev-next-title">AVC / H.264 Encoder (Push)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../mp3-encoder/" title="next page">
+    <a class='right-next' id="next-link" href="../mp3-encoder-run/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">MP3 Encoder (Push)</p>
+        <p class="prev-next-title">MP3 Encoder (Run)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
