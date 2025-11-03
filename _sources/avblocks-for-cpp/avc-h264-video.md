@@ -19,13 +19,31 @@ Key features of H.264/AVC include:
 
 H.264/AVC is used in many applications including Blu-ray discs, streaming services (YouTube, Netflix), video conferencing, IPTV, and digital broadcasting.
 
+## H.264 Stream Formats
+
+H.264 video can be stored in different formats, with the two most common being:
+
+### AVC1 (AVCC Format)
+- **Length-prefixed format** - Each NAL unit is prefixed with its length (typically 4 bytes)
+- **Used in containers** - MP4, MOV, MKV, and other container formats
+- **Requires extradata** - SPS/PPS (Sequence/Picture Parameter Sets) are stored separately in the container header
+- **Not self-contained** - Cannot be decoded without the extradata from the container
+
+### Annex B Format
+- **Start code format** - NAL units are separated by start codes (0x000001 or 0x00000001)
+- **Used in streams** - Elementary streams, MPEG-TS, broadcasting, and real-time transmission
+- **Self-contained** - SPS/PPS are embedded in the stream itself
+- **Stream-friendly** - Can be decoded directly without additional metadata
+
+The choice between formats depends on the application: AVC1 for file storage and containers, Annex B for streaming and broadcasting.
+
 ## H.264 Encoding
 
-- [AVC / H.264 Encoder (Push)](transcoder-as-encoder/avc-h-264-encoder) - Encode raw video frames to H.264 using `Transcoder::push`
+- [AVC / H.264 AVC1 Encoder (Push)](transcoder-as-encoder/avc-h-264-encoder) - Encode raw video frames to H.264 AVC1 elementary stream using `Transcoder::push`
 
 ## H.264 Decoding
 
-- [AVC / H.264 Decoder (Pull)](transcoder-as-decoder/avc-h-264-decoder) - Decode an H.264 elementary stream to raw YUV frames using `Transcoder::pull`
+- [AVC / H.264 Annex B Decoder (Pull)](transcoder-as-decoder/avc-h-264-decoder) - Decode an H.264 AVC1 elementary stream to raw YUV frames using `Transcoder::pull`
 
 ## H.264 Parsing
 

@@ -317,7 +317,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../transcoder-as-encoder/avc-h-264-encoder/">
-     AVC / H.264 Encoder (Push)
+     AVC / H.264 AVC1 Encoder (Push)
     </a>
    </li>
    <li class="toctree-l2">
@@ -359,7 +359,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../transcoder-as-decoder/avc-h-264-decoder/">
-     AVC / H.264 Decoder (Pull)
+     AVC / H.264 Annex B Decoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
@@ -780,6 +780,23 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#h-264-stream-formats">
+   H.264 Stream Formats
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avc1-avcc-format">
+     AVC1 (AVCC Format)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annex-b-format">
+     Annex B Format
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#h-264-encoding">
    H.264 Encoding
   </a>
@@ -813,6 +830,23 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#h-264-stream-formats">
+   H.264 Stream Formats
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avc1-avcc-format">
+     AVC1 (AVCC Format)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annex-b-format">
+     Annex B Format
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#h-264-encoding">
    H.264 Encoding
@@ -849,16 +883,39 @@ title="Print to PDF"
 <li><p><strong>Hardware Acceleration</strong> - Widely supported by hardware encoders and decoders across devices</p></li>
 </ul>
 <p>H.264/AVC is used in many applications including Blu-ray discs, streaming services (YouTube, Netflix), video conferencing, IPTV, and digital broadcasting.</p>
+<section id="h-264-stream-formats">
+<h2>H.264 Stream Formats<a class="headerlink" href="#h-264-stream-formats" title="Permalink to this headline">#</a></h2>
+<p>H.264 video can be stored in different formats, with the two most common being:</p>
+<section id="avc1-avcc-format">
+<h3>AVC1 (AVCC Format)<a class="headerlink" href="#avc1-avcc-format" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Length-prefixed format</strong> - Each NAL unit is prefixed with its length (typically 4 bytes)</p></li>
+<li><p><strong>Used in containers</strong> - MP4, MOV, MKV, and other container formats</p></li>
+<li><p><strong>Requires extradata</strong> - SPS/PPS (Sequence/Picture Parameter Sets) are stored separately in the container header</p></li>
+<li><p><strong>Not self-contained</strong> - Cannot be decoded without the extradata from the container</p></li>
+</ul>
+</section>
+<section id="annex-b-format">
+<h3>Annex B Format<a class="headerlink" href="#annex-b-format" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Start code format</strong> - NAL units are separated by start codes (0x000001 or 0x00000001)</p></li>
+<li><p><strong>Used in streams</strong> - Elementary streams, MPEG-TS, broadcasting, and real-time transmission</p></li>
+<li><p><strong>Self-contained</strong> - SPS/PPS are embedded in the stream itself</p></li>
+<li><p><strong>Stream-friendly</strong> - Can be decoded directly without additional metadata</p></li>
+</ul>
+<p>The choice between formats depends on the application: AVC1 for file storage and containers, Annex B for streaming and broadcasting.</p>
+</section>
+</section>
 <section id="h-264-encoding">
 <h2>H.264 Encoding<a class="headerlink" href="#h-264-encoding" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-encoder/avc-h-264-encoder/"><span class="doc std std-doc">AVC / H.264 Encoder (Push)</span></a> - Encode raw video frames to H.264 using <code class="docutils literal notranslate"><span class="pre">Transcoder::push</span></code></p></li>
+<li><p><a class="reference internal" href="../transcoder-as-encoder/avc-h-264-encoder/"><span class="doc std std-doc">AVC / H.264 AVC1 Encoder (Push)</span></a> - Encode raw video frames to H.264 AVC1 elementary stream using <code class="docutils literal notranslate"><span class="pre">Transcoder::push</span></code></p></li>
 </ul>
 </section>
 <section id="h-264-decoding">
 <h2>H.264 Decoding<a class="headerlink" href="#h-264-decoding" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-decoder/avc-h-264-decoder/"><span class="doc std std-doc">AVC / H.264 Decoder (Pull)</span></a> - Decode an H.264 elementary stream to raw YUV frames using <code class="docutils literal notranslate"><span class="pre">Transcoder::pull</span></code></p></li>
+<li><p><a class="reference internal" href="../transcoder-as-decoder/avc-h-264-decoder/"><span class="doc std std-doc">AVC / H.264 Annex B Decoder (Pull)</span></a> - Decode an H.264 AVC1 elementary stream to raw YUV frames using <code class="docutils literal notranslate"><span class="pre">Transcoder::pull</span></code></p></li>
 </ul>
 </section>
 <section id="h-264-parsing">
