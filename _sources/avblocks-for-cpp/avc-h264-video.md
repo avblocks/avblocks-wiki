@@ -39,11 +39,11 @@ The choice between formats depends on the application: AVC1 for file storage and
 
 ## H.264 Encoding
 
-- [AVC / H.264 AVC1 Encoder (Push)](transcoder-as-encoder/avc-h-264-encoder) - Encode raw video frames to H.264 AVC1 elementary stream using `Transcoder::push`
+- [AVC / H.264 Annex B Encoder (Push)](transcoder-as-encoder/avc-h-264-encoder) - Encode raw video frames to H.264 Annex B elementary stream using `Transcoder::push`
 
 ## H.264 Decoding
 
-- [AVC / H.264 Annex B Decoder (Pull)](transcoder-as-decoder/avc-h-264-decoder) - Decode an H.264 AVC1 elementary stream to raw YUV frames using `Transcoder::pull`
+- [AVC / H.264 Annex B Decoder (Pull)](transcoder-as-decoder/avc-h-264-decoder) - Decode an H.264 Annex B elementary stream to raw YUV frames using `Transcoder::pull`
 
 ## H.264 Parsing
 

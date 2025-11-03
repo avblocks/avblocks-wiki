@@ -1,12 +1,12 @@
 ---
-title: AVC / H.264 AVC1 Encoder (Push)
+title: AVC / H.264 Annex B Encoder (Push)
 html_meta:
-    description: This article explains how you can use Transcoder to encode an AVC / H.264 AVC1 elementary stream from raw video frames.
+    description: This article explains how you can use Transcoder to encode an AVC / H.264 Annex B elementary stream from raw video frames.
 taxonomy:
     category: docs
 ---
 
-# AVC / H.264 AVC1 Encoder (Push)
+# AVC / H.264 Annex B Encoder (Push)
 
 This article explains how you can use [Transcoder::push](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0) to encode an AVC / H.264 elementary stream from raw YUV frames.
 
@@ -140,9 +140,9 @@ p::ref<Transcoder> create_h264_encoder(const char_t* outputFile, HardwareEncoder
     // MediaSocket
     p::ref<MediaSocket> h264OutSocket(Library::createMediaSocket());
     h264OutSocket->setStreamType(StreamType::H264);
-    // Default subtype for StreamType::H264 is StreamSubType::AVC1, 
+    // Default subtype for StreamType::H264 is StreamSubType::AVC_Annex_B, 
     // so we don't need to set it explicitly here
-    // h264OutSocket->setStreamSubType(StreamSubType::AVC1);
+    // h264OutSocket->setStreamSubType(StreamSubType::AVC_Annex_B);
     h264OutSocket->setFile(outputFile);
 
     h264OutSocket->pins()->add(h264OutPin.get());
@@ -318,9 +318,9 @@ p::ref<Transcoder> create_h264_encoder(const char_t* outputFile, HardwareEncoder
     // MediaSocket
     p::ref<MediaSocket> h264OutSocket(Library::createMediaSocket());
     h264OutSocket->setStreamType(StreamType::H264);
-    // Default subtype for StreamType::H264 is StreamSubType::AVC1, 
+    // Default subtype for StreamType::H264 is StreamSubType::AVC_Annex_B, 
     // so we don't need to set it explicitly here
-    // h264OutSocket->setStreamSubType(StreamSubType::AVC1);
+    // h264OutSocket->setStreamSubType(StreamSubType::AVC_Annex_B);
     h264OutSocket->setFile(outputFile);
 
     h264OutSocket->pins()->add(h264OutPin.get());
