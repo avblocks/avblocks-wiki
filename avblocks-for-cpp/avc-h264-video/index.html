@@ -785,13 +785,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#avc1-avcc-format">
-     AVC1 (AVCC Format)
+    <a class="reference internal nav-link" href="#annex-b-format">
+     Annex B Format
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#annex-b-format">
-     Annex B Format
+    <a class="reference internal nav-link" href="#avc1-avcc-format">
+     AVC1 (AVCC Format)
     </a>
    </li>
   </ul>
@@ -836,13 +836,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#avc1-avcc-format">
-     AVC1 (AVCC Format)
+    <a class="reference internal nav-link" href="#annex-b-format">
+     Annex B Format
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#annex-b-format">
-     Annex B Format
+    <a class="reference internal nav-link" href="#avc1-avcc-format">
+     AVC1 (AVCC Format)
     </a>
    </li>
   </ul>
@@ -886,15 +886,6 @@ title="Print to PDF"
 <section id="h-264-stream-formats">
 <h2>H.264 Stream Formats<a class="headerlink" href="#h-264-stream-formats" title="Permalink to this headline">#</a></h2>
 <p>H.264 video can be stored in different formats, with the two most common being:</p>
-<section id="avc1-avcc-format">
-<h3>AVC1 (AVCC Format)<a class="headerlink" href="#avc1-avcc-format" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p><strong>Length-prefixed format</strong> - Each NAL unit is prefixed with its length (typically 4 bytes)</p></li>
-<li><p><strong>Used in containers</strong> - MP4, MOV, MKV, and other container formats</p></li>
-<li><p><strong>Requires extradata</strong> - SPS/PPS (Sequence/Picture Parameter Sets) are stored separately in the container header</p></li>
-<li><p><strong>Not self-contained</strong> - Cannot be decoded without the extradata from the container</p></li>
-</ul>
-</section>
 <section id="annex-b-format">
 <h3>Annex B Format<a class="headerlink" href="#annex-b-format" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
@@ -902,6 +893,15 @@ title="Print to PDF"
 <li><p><strong>Used in streams</strong> - Elementary streams, MPEG-TS, broadcasting, and real-time transmission</p></li>
 <li><p><strong>Self-contained</strong> - SPS/PPS are embedded in the stream itself</p></li>
 <li><p><strong>Stream-friendly</strong> - Can be decoded directly without additional metadata</p></li>
+</ul>
+</section>
+<section id="avc1-avcc-format">
+<h3>AVC1 (AVCC Format)<a class="headerlink" href="#avc1-avcc-format" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Length-prefixed format</strong> - Each NAL unit is prefixed with its length (typically 4 bytes)</p></li>
+<li><p><strong>Used in containers</strong> - MP4, MOV, MKV, and other container formats</p></li>
+<li><p><strong>Requires extradata</strong> - SPS/PPS (Sequence/Picture Parameter Sets) are stored separately in the container header</p></li>
+<li><p><strong>Not self-contained</strong> - Cannot be decoded without the extradata from the container</p></li>
 </ul>
 <p>The choice between formats depends on the application: AVC1 for file storage and containers, Annex B for streaming and broadcasting.</p>
 </section>
