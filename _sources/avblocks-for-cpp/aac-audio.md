@@ -21,10 +21,11 @@ AVBlocks provides comprehensive support for AAC encoding and decoding, allowing 
 
 ## AAC Encoding
 
-- [AAC Encoder ADTS (Run)](transcoder-as-encoder/aac-encoder-run) - Encode a WAV file to AAC ADTS using `Transcoder::run`
-- [AAC Encoder ADTS (Push)](transcoder-as-encoder/aac-encoder) - Encode raw audio frames to AAC ADTS using `Transcoder::push`
+- [AAC ADTS Encoder (Run)](transcoder-as-encoder/aac-encoder-run) - Encode a WAV file to AAC ADTS using `Transcoder::run`
+- [AAC ADTS Encoder (Pull)](transcoder-as-encoder/aac-encoder-pull) - Encode a WAV file to AAC ADTS using `Transcoder::pull`
+- [AAC ADTS Encoder (Push)](transcoder-as-encoder/aac-encoder) - Encode raw audio frames to AAC ADTS using `Transcoder::push`
 
 ## AAC Decoding
 
-- [AAC Decoder ADTS (Run)](transcoder-as-decoder/aac-decoder-run) - Decode an AAC ADTS file to uncompressed WAV using `Transcoder::run`
-- [AAC Decoder ADTS (Pull)](transcoder-as-decoder/aac-decoder) - Decode an AAC ADTS stream to raw audio frames using `Transcoder::pull`
+- [AAC ADTS Decoder (Run)](transcoder-as-decoder/aac-decoder-run) - Decode an AAC ADTS file to uncompressed WAV using `Transcoder::run`
+- [AAC ADTS Decoder (Pull)](transcoder-as-decoder/aac-decoder) - Decode an AAC ADTS stream to raw audio frames using `Transcoder::pull`

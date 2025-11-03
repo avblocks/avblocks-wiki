@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This section contains topics about G.711 audio encoding and decoding." name="description" />
+<meta content="Supported video codecs." name="description" />
 
-    <title>G.711 Audio &#8212; AVBlocks for C++</title>
+    <title>Video Codecs &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/g711-audio/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/video-codecs/" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
-    <link rel="next" title="Video Codecs" href="../video-codecs/" />
-    <link rel="prev" title="AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)" href="../aac-audio/" />
+    <link rel="next" title="Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)" href="../avc-h264-video/" />
+    <link rel="prev" title="G.711 Audio" href="../g711-audio/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -608,16 +608,16 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../audio-codecs/">
    Audio Codecs
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
   <label for="toctree-checkbox-14">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../mpeg-audio/">
      MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)
@@ -628,18 +628,18 @@ const thebe_selector_output = ".output, .cell_output"
      AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../g711-audio/">
      G.711 Audio
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../video-codecs/">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Video Codecs
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
   <label for="toctree-checkbox-15">
    <i class="fas fa-chevron-down">
    </i>
@@ -721,7 +721,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/avblocks-for-cpp/g711-audio.md"
+        <a href="../../_sources/avblocks-for-cpp/video-codecs.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -758,80 +758,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-encoding">
-   G.711 Encoding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-decoding">
-   G.711 Decoding
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>G.711 Audio</h1>
+                <h1>Video Codecs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-encoding">
-   G.711 Encoding
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-decoding">
-   G.711 Decoding
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -839,36 +782,13 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="g-711-audio">
-<h1>G.711 Audio<a class="headerlink" href="#g-711-audio" title="Permalink to this headline">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
-<p>G.711 is an ITU-T standard for audio compression primarily used in telephony systems. It provides toll-quality voice compression at 64 kbit/s using pulse code modulation (PCM). G.711 is one of the most widely deployed audio codecs due to its simplicity, low computational requirements, and high audio quality for speech.</p>
-<p>The standard defines two main companding algorithms:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="video-codecs">
+<h1>Video Codecs<a class="headerlink" href="#video-codecs" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p><strong>A-law</strong> - Primarily used in European and international telephone networks. It provides a slightly better signal-to-noise ratio for small signal amplitudes.</p></li>
-<li><p><strong>μ-law (mu-law)</strong> - Primarily used in North American and Japanese telephone systems. It provides more uniform quantization error over a wider dynamic range.</p></li>
+<li><p><a class="reference internal" href="../avc-h264-video/"><span class="doc std std-doc">Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)</span></a></p></li>
 </ul>
-<p>Both algorithms compress 16-bit linear PCM samples to 8-bit logarithmic samples, achieving 2:1 compression. The standard sample rate is 8000 Hz with mono channel configuration, making it ideal for voice communications.</p>
-<p>AVBlocks provides comprehensive support for G.711 encoding and decoding, allowing you to:</p>
-<ul class="simple">
-<li><p>Encode uncompressed PCM audio to G.711 A-law or μ-law format</p></li>
-<li><p>Decode G.711 streams to uncompressed PCM audio</p></li>
-<li><p>Work with standard telephony audio formats (8 kHz, mono)</p></li>
-</ul>
-</section>
-<section id="g-711-encoding">
-<h2>G.711 Encoding<a class="headerlink" href="#g-711-encoding" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-encoder/g711-alaw-encoder-run/"><span class="doc std std-doc">G.711 A-law Encoder (Run)</span></a> - Encode a WAV file to G.711 A-law using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
-</ul>
-</section>
-<section id="g-711-decoding">
-<h2>G.711 Decoding<a class="headerlink" href="#g-711-decoding" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-decoder/g711-alaw-decoder-run/"><span class="doc std std-doc">G.711 A-law Decoder (Run)</span></a> - Decode a G.711 A-law WAV file to uncompressed PCM WAV using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
-</ul>
-</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -898,17 +818,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../aac-audio/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../g711-audio/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)</p>
+            <p class="prev-next-title">G.711 Audio</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../video-codecs/" title="next page">
+    <a class='right-next' id="next-link" href="../avc-h264-video/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Video Codecs</p>
+        <p class="prev-next-title">Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

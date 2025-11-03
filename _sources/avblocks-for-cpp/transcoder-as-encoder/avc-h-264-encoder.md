@@ -12,7 +12,7 @@ This article explains how you can use [Transcoder::push](https://doc.avblocks.co
 
 ## Source Video
 
-As video input we use the `foreman_qcif.yuv` file from the [AVBlocks Assets](https://github.com/avblocks/avblocks-assets/releases) archive. After downloading and unzipping you will find `foreman_qcif.h264` in the `vid` subdirectory.
+As video input we use the `foreman_qcif.yuv` file from the [AVBlocks Assets](https://github.com/avblocks/avblocks-assets/releases) archive. After downloading and unzipping you will find `foreman_qcif.yuv` in the `vid` subdirectory.
 
 
 ## Code
@@ -140,6 +140,9 @@ p::ref<Transcoder> create_h264_encoder(const char_t* outputFile, HardwareEncoder
     // MediaSocket
     p::ref<MediaSocket> h264OutSocket(Library::createMediaSocket());
     h264OutSocket->setStreamType(StreamType::H264);
+    // Default subtype for StreamType::H264 is StreamSubType::AVC1, 
+    // so we don't need to set it explicitly here
+    // h264OutSocket->setStreamSubType(StreamSubType::AVC1);
     h264OutSocket->setFile(outputFile);
 
     h264OutSocket->pins()->add(h264OutPin.get());
@@ -315,6 +318,9 @@ p::ref<Transcoder> create_h264_encoder(const char_t* outputFile, HardwareEncoder
     // MediaSocket
     p::ref<MediaSocket> h264OutSocket(Library::createMediaSocket());
     h264OutSocket->setStreamType(StreamType::H264);
+    // Default subtype for StreamType::H264 is StreamSubType::AVC1, 
+    // so we don't need to set it explicitly here
+    // h264OutSocket->setStreamSubType(StreamSubType::AVC1);
     h264OutSocket->setFile(outputFile);
 
     h264OutSocket->pins()->add(h264OutPin.get());

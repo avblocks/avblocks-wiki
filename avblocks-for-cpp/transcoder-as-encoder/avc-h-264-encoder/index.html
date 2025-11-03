@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
     <link rel="next" title="G.711 A-law Encoder (Run)" href="../g711-alaw-encoder-run/" />
-    <link rel="prev" title="AAC Encoder ADTS (Push)" href="../aac-encoder/" />
+    <link rel="prev" title="AAC ADTS Encoder (Push)" href="../aac-encoder/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -303,12 +303,17 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="../aac-encoder-run/">
-     AAC Encoder ADTS (Run)
+     AAC ADTS Encoder (Run)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aac-encoder-pull/">
+     AAC ADTS Encoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../aac-encoder/">
-     AAC Encoder ADTS (Push)
+     AAC ADTS Encoder (Push)
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -345,12 +350,12 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder-run/">
-     AAC Decoder ADTS (Run)
+     AAC ADTS Decoder (Run)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder/">
-     AAC Decoder ADTS (Pull)
+     AAC ADTS Decoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
@@ -630,6 +635,23 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../video-codecs/">
+   Video Codecs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../avc-h264-video/">
+     Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </div>
@@ -900,7 +922,7 @@ title="Print to PDF"
 <p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0">Transcoder::push</a> to encode an AVC / H.264 elementary stream from raw YUV frames.</p>
 <section id="source-video">
 <h2>Source Video<a class="headerlink" href="#source-video" title="Permalink to this headline">#</a></h2>
-<p>As video input we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
+<p>As video input we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
@@ -1025,6 +1047,9 @@ title="Print to PDF"
 <span class="w">    </span><span class="c1">// MediaSocket</span>
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Default subtype for StreamType::H264 is StreamSubType::AVC1, </span>
+<span class="w">    </span><span class="c1">// so we don&#39;t need to set it explicitly here</span>
+<span class="w">    </span><span class="c1">// h264OutSocket-&gt;setStreamSubType(StreamSubType::AVC1);</span>
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">h264OutPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
@@ -1200,6 +1225,9 @@ title="Print to PDF"
 <span class="w">    </span><span class="c1">// MediaSocket</span>
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Default subtype for StreamType::H264 is StreamSubType::AVC1, </span>
+<span class="w">    </span><span class="c1">// so we don&#39;t need to set it explicitly here</span>
+<span class="w">    </span><span class="c1">// h264OutSocket-&gt;setStreamSubType(StreamSubType::AVC1);</span>
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">h264OutPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
@@ -1310,7 +1338,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">AAC Encoder ADTS (Push)</p>
+            <p class="prev-next-title">AAC ADTS Encoder (Push)</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../g711-alaw-encoder-run/" title="next page">

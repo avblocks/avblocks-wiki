@@ -1,12 +1,12 @@
 ---
-title: AAC Encoder ADTS (Push)
+title: AAC ADTS Encoder (Push)
 html_meta:
     description: This article explains how you can use Transcoder to encode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) audio stream from raw audio frames.
 taxonomy:
     category: docs
 ---
 
-# AAC Encoder ADTS (Push)
+# AAC ADTS Encoder (Push)
 
 This article explains how you can use [Transcoder::push](https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0) to encode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) audio stream from raw audio frames.
 

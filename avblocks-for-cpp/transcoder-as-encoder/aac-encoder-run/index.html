@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <meta content="This article explains how you can use Transcoder to encode a WAV file to AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream." name="description" />
 
-    <title>AAC Encoder ADTS (Run) &#8212; AVBlocks for C++</title>
+    <title>AAC ADTS Encoder (Run) &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="AAC Encoder ADTS (Push)" href="../aac-encoder/" />
+    <link rel="next" title="AAC ADTS Encoder (Pull)" href="../aac-encoder-pull/" />
     <link rel="prev" title="Transcoder as Encoder" href="../" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -303,12 +303,17 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     AAC Encoder ADTS (Run)
+     AAC ADTS Encoder (Run)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aac-encoder-pull/">
+     AAC ADTS Encoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../aac-encoder/">
-     AAC Encoder ADTS (Push)
+     AAC ADTS Encoder (Push)
     </a>
    </li>
    <li class="toctree-l2">
@@ -345,12 +350,12 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder-run/">
-     AAC Decoder ADTS (Run)
+     AAC ADTS Decoder (Run)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder/">
-     AAC Decoder ADTS (Pull)
+     AAC ADTS Decoder (Pull)
     </a>
    </li>
    <li class="toctree-l2">
@@ -630,6 +635,23 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../video-codecs/">
+   Video Codecs
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../avc-h264-video/">
+     Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </div>
@@ -816,7 +838,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>AAC Encoder ADTS (Run)</h1>
+                <h1>AAC ADTS Encoder (Run)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -885,8 +907,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="aac-encoder-adts-run">
-<h1>AAC Encoder ADTS (Run)<a class="headerlink" href="#aac-encoder-adts-run" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="aac-adts-encoder-run">
+<h1>AAC ADTS Encoder (Run)<a class="headerlink" href="#aac-adts-encoder-run" title="Permalink to this headline">#</a></h1>
 <p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a31cbef423193a454b2634083cfb9b5cb">Transcoder::run</a> to encode a WAV file to AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream.</p>
 <p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_aac_adts_file">enc_aac_adts_file</a> macOS sample.</p>
 <section id="source-audio">
@@ -1173,10 +1195,10 @@ Usage:<span class="w"> </span>enc_aac_adts_file<span class="w"> </span>--input<s
             <p class="prev-next-title">Transcoder as Encoder</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../aac-encoder/" title="next page">
+    <a class='right-next' id="next-link" href="../aac-encoder-pull/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">AAC Encoder ADTS (Push)</p>
+        <p class="prev-next-title">AAC ADTS Encoder (Pull)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

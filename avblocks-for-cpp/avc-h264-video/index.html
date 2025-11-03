@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This section contains topics about G.711 audio encoding and decoding." name="description" />
+<meta content="This section contains topics about AVC / H.264 video encoding, decoding, and parsing." name="description" />
 
-    <title>G.711 Audio &#8212; AVBlocks for C++</title>
+    <title>Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10) &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/g711-audio/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/avc-h264-video/" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
-    <link rel="next" title="Video Codecs" href="../video-codecs/" />
-    <link rel="prev" title="AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)" href="../aac-audio/" />
+    <link rel="prev" title="Video Codecs" href="../video-codecs/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -608,16 +607,16 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../audio-codecs/">
    Audio Codecs
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
   <label for="toctree-checkbox-14">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../mpeg-audio/">
      MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)
@@ -628,25 +627,25 @@ const thebe_selector_output = ".output, .cell_output"
      AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../g711-audio/">
      G.711 Audio
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../video-codecs/">
    Video Codecs
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
   <label for="toctree-checkbox-15">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../avc-h264-video/">
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)
     </a>
    </li>
@@ -721,7 +720,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/avblocks-for-cpp/g711-audio.md"
+        <a href="../../_sources/avblocks-for-cpp/avc-h264-video.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -781,18 +780,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
+  <a class="reference internal nav-link" href="#h-264-encoding">
+   H.264 Encoding
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-encoding">
-   G.711 Encoding
+  <a class="reference internal nav-link" href="#h-264-decoding">
+   H.264 Decoding
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-decoding">
-   G.711 Decoding
+  <a class="reference internal nav-link" href="#h-264-parsing">
+   H.264 Parsing
   </a>
  </li>
 </ul>
@@ -804,7 +803,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>G.711 Audio</h1>
+                <h1>Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -815,18 +814,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
+  <a class="reference internal nav-link" href="#h-264-encoding">
+   H.264 Encoding
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-encoding">
-   G.711 Encoding
+  <a class="reference internal nav-link" href="#h-264-decoding">
+   H.264 Decoding
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#g-711-decoding">
-   G.711 Decoding
+  <a class="reference internal nav-link" href="#h-264-parsing">
+   H.264 Parsing
   </a>
  </li>
 </ul>
@@ -839,34 +838,33 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="g-711-audio">
-<h1>G.711 Audio<a class="headerlink" href="#g-711-audio" title="Permalink to this headline">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
-<p>G.711 is an ITU-T standard for audio compression primarily used in telephony systems. It provides toll-quality voice compression at 64 kbit/s using pulse code modulation (PCM). G.711 is one of the most widely deployed audio codecs due to its simplicity, low computational requirements, and high audio quality for speech.</p>
-<p>The standard defines two main companding algorithms:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-video-coding-h-264-mpeg-4-avc-mpeg-4-part-10">
+<h1>Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)<a class="headerlink" href="#advanced-video-coding-h-264-mpeg-4-avc-mpeg-4-part-10" title="Permalink to this headline">#</a></h1>
+<p>AVC (Advanced Video Coding), also known as H.264 or MPEG-4 Part 10, is a widely-used video compression standard. It provides excellent video quality at substantially lower bit rates than previous standards, making it ideal for streaming, broadcasting, and video storage.</p>
+<p>Key features of H.264/AVC include:</p>
 <ul class="simple">
-<li><p><strong>A-law</strong> - Primarily used in European and international telephone networks. It provides a slightly better signal-to-noise ratio for small signal amplitudes.</p></li>
-<li><p><strong>μ-law (mu-law)</strong> - Primarily used in North American and Japanese telephone systems. It provides more uniform quantization error over a wider dynamic range.</p></li>
+<li><p><strong>High Compression Efficiency</strong> - Achieves up to 50% better compression than MPEG-2</p></li>
+<li><p><strong>Flexible Design</strong> - Supports a wide range of applications from low-bitrate mobile video to high-definition broadcasting</p></li>
+<li><p><strong>Network Friendly</strong> - Designed with network streaming in mind with built-in error resilience</p></li>
+<li><p><strong>Hardware Acceleration</strong> - Widely supported by hardware encoders and decoders across devices</p></li>
 </ul>
-<p>Both algorithms compress 16-bit linear PCM samples to 8-bit logarithmic samples, achieving 2:1 compression. The standard sample rate is 8000 Hz with mono channel configuration, making it ideal for voice communications.</p>
-<p>AVBlocks provides comprehensive support for G.711 encoding and decoding, allowing you to:</p>
+<p>H.264/AVC is used in many applications including Blu-ray discs, streaming services (YouTube, Netflix), video conferencing, IPTV, and digital broadcasting.</p>
+<section id="h-264-encoding">
+<h2>H.264 Encoding<a class="headerlink" href="#h-264-encoding" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Encode uncompressed PCM audio to G.711 A-law or μ-law format</p></li>
-<li><p>Decode G.711 streams to uncompressed PCM audio</p></li>
-<li><p>Work with standard telephony audio formats (8 kHz, mono)</p></li>
-</ul>
-</section>
-<section id="g-711-encoding">
-<h2>G.711 Encoding<a class="headerlink" href="#g-711-encoding" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-encoder/g711-alaw-encoder-run/"><span class="doc std std-doc">G.711 A-law Encoder (Run)</span></a> - Encode a WAV file to G.711 A-law using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
+<li><p><a class="reference internal" href="../transcoder-as-encoder/avc-h-264-encoder/"><span class="doc std std-doc">AVC / H.264 Encoder (Push)</span></a> - Encode raw video frames to H.264 using <code class="docutils literal notranslate"><span class="pre">Transcoder::push</span></code></p></li>
 </ul>
 </section>
-<section id="g-711-decoding">
-<h2>G.711 Decoding<a class="headerlink" href="#g-711-decoding" title="Permalink to this headline">#</a></h2>
+<section id="h-264-decoding">
+<h2>H.264 Decoding<a class="headerlink" href="#h-264-decoding" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-decoder/g711-alaw-decoder-run/"><span class="doc std std-doc">G.711 A-law Decoder (Run)</span></a> - Decode a G.711 A-law WAV file to uncompressed PCM WAV using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
+<li><p><a class="reference internal" href="../transcoder-as-decoder/avc-h-264-decoder/"><span class="doc std std-doc">AVC / H.264 Decoder (Pull)</span></a> - Decode an H.264 elementary stream to raw YUV frames using <code class="docutils literal notranslate"><span class="pre">Transcoder::pull</span></code></p></li>
+</ul>
+</section>
+<section id="h-264-parsing">
+<h2>H.264 Parsing<a class="headerlink" href="#h-264-parsing" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../transcoder-as-decoder/avc-h-264-annex-b-parser/"><span class="doc std std-doc">AVC / H.264 Annex B Parser</span></a> - Parse an H.264 Annex B elementary stream and extract NAL units</p></li>
 </ul>
 </section>
 </section>
@@ -898,19 +896,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../aac-audio/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../video-codecs/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)</p>
+            <p class="prev-next-title">Video Codecs</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="../video-codecs/" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Video Codecs</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
