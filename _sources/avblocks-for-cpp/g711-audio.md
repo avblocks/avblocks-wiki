@@ -27,7 +27,9 @@ AVBlocks provides comprehensive support for G.711 encoding and decoding, allowin
 ## G.711 Encoding
 
 - [G.711 A-law Encoder (Run)](transcoder-as-encoder/g711-alaw-encoder-run) - Encode a WAV file to G.711 A-law using `Transcoder::run`
+- [G.711 μ-law Encoder (Run)](transcoder-as-encoder/g711-ulaw-encoder-run) - Encode a WAV file to G.711 μ-law using `Transcoder::run`
 
 ## G.711 Decoding
 
 - [G.711 A-law Decoder (Run)](transcoder-as-decoder/g711-alaw-decoder-run) - Decode a G.711 A-law WAV file to uncompressed PCM WAV using `Transcoder::run`
+- [G.711 μ-law Decoder (Run)](transcoder-as-decoder/g711-ulaw-decoder-run) - Decode a G.711 μ-law WAV file to uncompressed PCM WAV using `Transcoder::run`
