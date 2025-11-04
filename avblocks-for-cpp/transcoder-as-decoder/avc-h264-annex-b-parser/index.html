@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This article explains how you can use Transcoder to decode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream." name="description" />
+<meta content="This topic explains how you can use Transcoder to parse an AVC / H.264 Annex B elementary stream." name="description" />
 
-    <title>AAC ADTS Decoder (Pull) &#8212; AVBlocks for C++</title>
+    <title>AVC / H.264 Annex B Parser &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/aac-decoder/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/avc-h264-annex-b-parser/" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="AVC / H.264 Annex B Decoder (Pull)" href="../avc-h264-decoder/" />
-    <link rel="prev" title="AAC ADTS Decoder (Run)" href="../aac-decoder-run/" />
+    <link rel="next" title="G.711 A-law Decoder (Run)" href="../g711-alaw-decoder-run/" />
+    <link rel="prev" title="AVC / H.264 Annex B Decoder (Pull)" href="../avc-h264-decoder/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -358,8 +358,8 @@ const thebe_selector_output = ".output, .cell_output"
      AAC ADTS Decoder (Run)
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../aac-decoder/">
      AAC ADTS Decoder (Pull)
     </a>
    </li>
@@ -368,8 +368,8 @@ const thebe_selector_output = ".output, .cell_output"
      AVC / H.264 Annex B Decoder (Pull)
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../avc-h264-annex-b-parser/">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      AVC / H.264 Annex B Parser
     </a>
    </li>
@@ -726,7 +726,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-decoder/aac-decoder.md"
+        <a href="../../../_sources/avblocks-for-cpp/transcoder-as-decoder/avc-h264-annex-b-parser.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -786,8 +786,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#source-audio">
-   Source Audio
+  <a class="reference internal nav-link" href="#source-video">
+   Source Video
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -838,7 +838,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>AAC ADTS Decoder (Pull)</h1>
+                <h1>AVC / H.264 Annex B Parser</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -849,8 +849,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#source-audio">
-   Source Audio
+  <a class="reference internal nav-link" href="#source-video">
+   Source Video
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -902,25 +902,24 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="aac-adts-decoder-pull">
-<h1>AAC ADTS Decoder (Pull)<a class="headerlink" href="#aac-adts-decoder-pull" title="Permalink to this headline">#</a></h1>
-<p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#a8b54e4ba7db4474b0288ff57c12d538e">Transcoder::pull</a> to decode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) elementary stream.</p>
-<section id="source-audio">
-<h2>Source Audio<a class="headerlink" href="#source-audio" title="Permalink to this headline">#</a></h2>
-<p>For source we use the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.aac</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.adts.aac</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="avc-h-264-annex-b-parser">
+<h1>AVC / H.264 Annex B Parser<a class="headerlink" href="#avc-h-264-annex-b-parser" title="Permalink to this headline">#</a></h1>
+<p>How to use Transcoder to parse an AVC / H.264 Annex B elementary stream.</p>
+<section id="source-video">
+<h2>Source Video<a class="headerlink" href="#source-video" title="Permalink to this headline">#</a></h2>
+<p>As video input we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
-<p>This code takes an AAC ADTS stream and decodes it to uncompressed LPCM samples.</p>
+<p>This code takes an H.264 stream encoded according to <a class="reference external" href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer#NAL_Units_in_Byte-Stream_Format_Use">ISO/IEC 14496 - 10 Annex B</a>, and prints the header of each NAL (Network Abstraction Layer) unit.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
 <section id="initialize-avblocks">
 <h4>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Permalink to this headline">#</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">()</span>
-<span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">parse_h264_stream</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Hydrate-Kenny_Beltrey.aac&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">parse_h264_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;foreman_qcif.h264&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
 <span class="p">}</span>
@@ -929,26 +928,18 @@ title="Print to PDF"
 </section>
 <section id="configure-transcoder">
 <h4>Configure Transcoder<a class="headerlink" href="#configure-transcoder" title="Permalink to this headline">#</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
-<span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">parse_h264_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Create an input socket from file</span>
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">inSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Create an output socket with one LPCM audio pin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outStreamInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">44100</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Create an output socket with one video pin</span>
+<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outStreamInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
 
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">outPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">outStreamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-
 <span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="c1">// Create Transcoder</span>
@@ -956,9 +947,8 @@ title="Print to PDF"
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="n">transcoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">parse_h264_stream</span><span class="p">(</span><span class="n">transcoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
@@ -968,16 +958,14 @@ title="Print to PDF"
 </section>
 <section id="call-transcoder-pull">
 <h4>Call Transcoder::pull<a class="headerlink" href="#call-transcoder-pull" title="Permalink to this headline">#</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">transcoder</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">outputIndex</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">audioSample</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">parse_h264_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">transcoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">accessUnit</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">outputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one audio frame. </span>
-<span class="w">        </span><span class="c1">// One audio frame typically contains 512 audio samples.  </span>
-<span class="w">        </span><span class="n">process_audio_frame</span><span class="p">(</span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">accessUnit</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one Access Unit. </span>
+<span class="w">        </span><span class="c1">// The Access Unit may contain one or more NAL units.</span>
+<span class="w">        </span><span class="n">parse_access_unit</span><span class="p">(</span><span class="n">accessUnit</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -996,61 +984,173 @@ title="Print to PDF"
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="c1">// Network Abstraction Layer Unit Definitions</span>
+<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NALUType</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">UNSPEC</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// Unspecified</span>
+<span class="w">    </span><span class="n">SLICE</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="c1">// Coded slice of a non-IDR picture</span>
+<span class="w">    </span><span class="n">DPA</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="c1">// Coded slice data partition A</span>
+<span class="w">    </span><span class="n">DPB</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="c1">// Coded slice data partition B</span>
+<span class="w">    </span><span class="n">DPC</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">  </span><span class="c1">// Coded slice data partition C</span>
+<span class="w">    </span><span class="n">IDR</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">  </span><span class="c1">// Coded slice of an IDR picture</span>
+<span class="w">    </span><span class="n">SEI</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">  </span><span class="c1">// Supplemental enhancement information</span>
+<span class="w">    </span><span class="n">SPS</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">  </span><span class="c1">// Sequence parameter set</span>
+<span class="w">    </span><span class="n">PPS</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">  </span><span class="c1">// Picture parameter set</span>
+<span class="w">    </span><span class="n">AUD</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">  </span><span class="c1">// Access unit delimiter</span>
+<span class="w">    </span><span class="n">EOSEQ</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="c1">// End of sequence                                               </span>
+<span class="w">    </span><span class="n">EOSTREAM</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="c1">// End of stream</span>
+<span class="w">    </span><span class="n">FILL</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="w">  </span><span class="c1">// Filler data</span>
+<span class="p">};</span>
 
-<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">frame_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">process_audio_frame</span><span class="p">(</span><span class="n">MediaSample</span><span class="o">*</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// sample-&gt;buffer() contains 512 interleaved samples. In this example each sample is 16 bit signed integer. </span>
+<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NALUPriority</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DISPOSABLE</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">LOW</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HIGH</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HIGHEST</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="p">};</span>
 
-<span class="w">    </span><span class="c1">// The samples of multi-channel audio (such as stereo and surround) are stored by </span>
-<span class="w">    </span><span class="c1">// cycling through the samples for each channel before advancing to the next sample time</span>
+<span class="cp">#pragma pack(push, NALU, 1)</span>
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Sample Index : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">frame_index</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; timestamp : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">startTime</span><span class="p">()</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; data : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; dataSize : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sample</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">dataSize</span><span class="p">()</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// The bit fields follow Little Endian layout</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">NALUHeader</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NALUType</span><span class="w"> </span><span class="n">nal_unit_type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">NALUPriority</span><span class="w"> </span><span class="n">nal_unit_ref_idc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">forbidden_bit</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
 
-<span class="w">    </span><span class="c1">// Do something with the audio buffer, </span>
-<span class="w">    </span><span class="c1">// for example you can save it to a WAV file or send it to a speaker</span>
+<span class="cp">#pragma pack(pop, NALU)</span>
 
-<span class="w">    </span><span class="n">frame_index</span><span class="o">++</span><span class="p">;</span>
+<span class="c1">// std::out helper functions</span>
+<span class="cp">#define MAP_ENUM_VALUE(p) strings[p] = L#p</span>
+<span class="n">std</span><span class="o">::</span><span class="n">wostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">wostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">wout</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">NALUType</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">NALUType</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">wstring</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strings</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">SLICE</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">DPA</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">DPB</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">DPB</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">DPC</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">IDR</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">SEI</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">SPS</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">PPS</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">AUD</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">EOSEQ</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">EOSTREAM</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUType</span><span class="o">::</span><span class="n">FILL</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">wout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">strings</span><span class="p">[</span><span class="n">value</span><span class="p">].</span><span class="n">c_str</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">transcoder</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">outputIndex</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">audioSample</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="n">std</span><span class="o">::</span><span class="n">wostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">wostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">wout</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">NALUPriority</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">NALUPriority</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">wstring</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strings</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUPriority</span><span class="o">::</span><span class="n">DISPOSABLE</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUPriority</span><span class="o">::</span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUPriority</span><span class="o">::</span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MAP_ENUM_VALUE</span><span class="p">(</span><span class="n">NALUPriority</span><span class="o">::</span><span class="n">HIGHEST</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">outputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one audio frame. </span>
-<span class="w">        </span><span class="c1">// One audio frame typically contains 512 audio samples.  </span>
-<span class="w">        </span><span class="n">process_audio_frame</span><span class="p">(</span><span class="n">audioSample</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">wout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">strings</span><span class="p">[</span><span class="n">value</span><span class="p">].</span><span class="n">c_str</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nalu_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_nalu_header</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">NALUHeader</span><span class="o">*</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">NALUHeader</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;NALU Index         : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nalu_index</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;NALU Type          : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">header</span><span class="o">-&gt;</span><span class="n">nal_unit_type</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;NALU Reference IDC : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">header</span><span class="o">-&gt;</span><span class="n">nal_unit_ref_idc</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">wcout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nalu_index</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// </span>
+<span class="c1">// The pseudo logic from ISO/IEC 14496 - 10 Annex B:</span>
+<span class="c1">//</span>
+<span class="c1">//  byte_stream_nal_unit(NumBytesInNALunit) {</span>
+<span class="c1">//      while (next_bits(24) != 0x000001 &amp;&amp; </span>
+<span class="c1">//             next_bits(32) != 0x00000001)</span>
+<span class="c1">//          leading_zero_8bits /* equal to 0x00 */</span>
+<span class="c1">//  </span>
+<span class="c1">//      if (next_bits(24) != 0x000001)</span>
+<span class="c1">//          zero_byte /* equal to 0x00 */</span>
+<span class="c1">//  </span>
+<span class="c1">//      if (more_data_in_byte_stream()) {</span>
+<span class="c1">//          start_code_prefix_one_3bytes /* equal to 0x000001 */</span>
+<span class="c1">//          nal_unit(NumBytesInNALunit)</span>
+<span class="c1">//      }</span>
+<span class="c1">//  </span>
+<span class="c1">//      while (more_data_in_byte_stream() &amp;&amp; </span>
+<span class="c1">//             next_bits(24) != 0x000001 &amp;&amp; </span>
+<span class="c1">//             next_bits(32) != 0x00000001)</span>
+<span class="c1">//          trailing_zero_8bits /* equal to 0x00 */</span>
+<span class="c1">//  }</span>
+<span class="c1">//</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">parse_access_unit</span><span class="p">(</span><span class="n">MediaBuffer</span><span class="o">*</span><span class="w"> </span><span class="n">buffer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This parsing code assumes that MediaBuffer contains </span>
+<span class="w">    </span><span class="c1">// a single Access Unit of one or more complete NAL Units</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">dataSize</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">dataOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">dataOffset</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">dataSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">dataSize</span><span class="p">();</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// is this a NALU with a 3 byte start code prefix</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dataSize</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">            </span><span class="mh">0x00</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">            </span><span class="mh">0x00</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">            </span><span class="mh">0x01</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">print_nalu_header</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// advance in the buffer</span>
+<span class="w">            </span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">dataOffset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">dataSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// OR is this a NALU with a 4 byte start code prefix</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dataSize</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                 </span><span class="mh">0x00</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                 </span><span class="mh">0x00</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                 </span><span class="mh">0x00</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                 </span><span class="mh">0x01</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="n">print_nalu_header</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// advance in the buffer</span>
+<span class="w">            </span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">dataOffset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">dataSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// advance in the buffer</span>
+<span class="w">            </span><span class="n">buffer</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">dataOffset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dataSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// NOTE: Some NALUs may have a trailing zero byte. The `while` </span>
+<span class="w">        </span><span class="c1">// condition `buffer-&gt;dataSize() &gt; 1` will effectively </span>
+<span class="w">        </span><span class="c1">// skip the trailing zero byte.</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
-<span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">parse_h264_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">transcoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">accessUnit</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">accessUnit</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one Access Unit. </span>
+<span class="w">        </span><span class="c1">// The Access Unit may contain one or more NAL units.</span>
+<span class="w">        </span><span class="n">parse_access_unit</span><span class="p">(</span><span class="n">accessUnit</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">parse_h264_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Create an input socket from file</span>
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">inSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Create an output socket with one LPCM audio pin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outStreamInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">44100</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outStreamInfo</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Create an output socket with one video pin</span>
+<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outStreamInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
 
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">outPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">outStreamInfo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-
 <span class="w">    </span><span class="n">outSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="c1">// Create Transcoder</span>
@@ -1058,25 +1158,23 @@ title="Print to PDF"
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="n">transcoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">parse_h264_stream</span><span class="p">(</span><span class="n">transcoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">decode_aac_stream</span><span class="p">()</span>
-<span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">parse_h264_stream</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">decode_aac_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Hydrate-Kenny_Beltrey.aac&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">parse_h264_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;foreman_qcif.h264&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">decode_aac_stream</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">parse_h264_stream</span><span class="p">();</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -1085,7 +1183,7 @@ title="Print to PDF"
 <section id="how-to-run">
 <h4>How to run<a class="headerlink" href="#how-to-run" title="Permalink to this headline">#</a></h4>
 <p>Follow the <a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/"><span class="doc std std-doc">steps</span></a> to create a C++ console application in Visual Studio, but use the code from this article.</p>
-<p>Copy the <code class="docutils literal notranslate"><span class="pre">Hydrate-Kenny_Beltrey.aac</span></code> file from the assets archive to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> under the project’s directory.</p>
+<p>Copy the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.h264</span></code> file from the assets archive to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> under the project’s directory.</p>
 <p>Run the application in Visual Studio.</p>
 </section>
 </section>
@@ -1119,17 +1217,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../aac-decoder-run/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../avc-h264-decoder/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">AAC ADTS Decoder (Run)</p>
+            <p class="prev-next-title">AVC / H.264 Annex B Decoder (Pull)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../avc-h264-decoder/" title="next page">
+    <a class='right-next' id="next-link" href="../g711-alaw-decoder-run/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">AVC / H.264 Annex B Decoder (Pull)</p>
+        <p class="prev-next-title">G.711 A-law Decoder (Run)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
