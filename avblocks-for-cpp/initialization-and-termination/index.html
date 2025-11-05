@@ -369,6 +369,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../transcoder-as-decoder/avc-h264-decoder-run/">
+     AVC / H.264 Annex B Decoder (Run)
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../transcoder-as-decoder/avc-h264-decoder/">
      AVC / H.264 Annex B Decoder (Pull)
     </a>
@@ -859,23 +864,23 @@ title="Print to PDF"
 <p>You must initialize the AVBlocks API when your application starts and terminate it before your application ends. The AVBlocks license can be set right after the initialization. If you do not set a license, AVBlocks will work in demo mode.</p>
 <section id="mac">
 <h2>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
 
 <span class="c1">// Set license information. To run AVBlocks in demo mode, comment the next line out</span>
-<span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="s">&quot;license-xml-string&quot;</span><span class="p">);</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="s">&quot;license-xml-string&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="linux">
 <h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">#</a></h2>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
 
 <span class="c1">// Set license information. To run AVBlocks in demo mode, comment the next line out</span>
-<span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="s">&quot;license-xml-string&quot;</span><span class="p">);</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="s">&quot;license-xml-string&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -883,16 +888,16 @@ title="Print to PDF"
 <h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h2>
 <p>You have to call CoInitializeEx / CoUninitialize to enable Windows Media codecs:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// needed for Windows Media codecs</span>
-<span class="n">CoInitializeEx</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span>
+<span class="n">CoInitializeEx</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span><span class="w"></span>
 
-<span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span><span class="w"></span>
 
 <span class="c1">// Set license information. To run AVBlocks in demo mode, comment the next line out</span>
-<span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="s">&quot;license-xml-string&quot;</span><span class="p">);</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">setLicense</span><span class="p">(</span><span class="s">&quot;license-xml-string&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span><span class="w"></span>
 
-<span class="n">CoUninitialize</span><span class="p">();</span>
+<span class="n">CoUninitialize</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

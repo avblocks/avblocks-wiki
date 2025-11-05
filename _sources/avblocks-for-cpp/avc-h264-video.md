@@ -44,6 +44,7 @@ The choice between formats depends on the application: AVC1 for file storage and
 
 ## H.264 Decoding
 
+- [AVC / H.264 Annex B Decoder (Run)](transcoder-as-decoder/avc-h264-decoder-run) - Decode an H.264 Annex B elementary stream to a raw YUV file using `Transcoder::run`
 - [AVC / H.264 Annex B Decoder (Pull)](transcoder-as-decoder/avc-h264-decoder) - Decode an H.264 Annex B elementary stream to raw YUV frames using `Transcoder::pull`
 
 ## H.264 Parsing
