@@ -11,6 +11,18 @@ toc:
 
 # Release Notes
 
+## Version 3.2.0
+
+### New
+
+- [AVB-1386] - G.711: Voice Activity Detection and Comfort Noise Generation
+- [AVB-1150] - Samples: C\+\+: New \`dec\_g711\_ulaw\_file\` sample
+- [AVB-1151] - Samples: C\+\+: New \`dec\_g711\_alaw\_file\` sample
+- [AVB-1379] - Samples: C\+\+: New \`enc\_g711\_ulaw\_file\` sample
+- [AVB-1380] - Samples: C\+\+: New \`enc\_g711\_alaw\_file\` sample
+- [AVB-1382] - Samples: C\+\+: New \`enc\_avc\_pull\` sample
+- [AVB-1330] - Wiki: C\+\+: Page for MP3 encoder
+
 ## Version 3.1.0
 
 ### New

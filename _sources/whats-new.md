@@ -1,5 +1,5 @@
 ---
-title: What’s New
+title: What's New
 html_meta:
     description: Discover what&#039;s new and improved in the latest AVBlocks version.
 taxonomy:
@@ -9,7 +9,27 @@ toc:
     headinglevel: 2              # Maximum heading level to show in TOC    
 ---
 
-# What’s New
+# What's New
+
+## AVBlocks 3.2
+
+### API
+
+- G.711: Voice Activity Detection and Comfort Noise Generation support
+
+### Samples
+
+- C\+\+: New `dec_g711_ulaw_file` sample that shows how to decode G.711 μ-Law audio
+- C\+\+: New `dec_g711_alaw_file` sample that shows how to decode G.711 A-Law audio  
+- C\+\+: New `enc_g711_ulaw_file` sample that shows how to encode G.711 μ-Law audio
+- C\+\+: New `enc_g711_alaw_file` sample that shows how to encode G.711 A-Law audio
+- C\+\+: New `enc_avc_pull` sample that shows how to use the Transcoder.Pull method to encode raw YUV video to AVC / H.264
+
+### Docs
+
+- C\+\+: New page for MP3 encoder
+
+---
 
 ## AVBlocks 3.1
 
