@@ -14,7 +14,7 @@ This topic describes the steps needed to configure a C++ Console App in Visual S
 
 1. Create a C++, Console App in Visual Studio. Name the project `simple-converter`. Check `Place solution and project in the same directory`. 
 
-2. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to `avblocks-v3.1.0-demo.1-windows.zip` - the version number may differ. 
+2. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to `avblocks-v3.2.0-demo.1-windows.zip` - the version number may differ. 
 
 3. Extract the ZIP archive in a location of your choice, then copy the `include` and `lib` directories to the `avblocks` subdirectory of the Visual Studio solution directory. The Visual Studio solution is the directory that contains the `simple-converter.sln` solution file.
     
