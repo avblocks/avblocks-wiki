@@ -123,7 +123,7 @@ simple-converter
 
 ## Update for AVBlocks
 
-1. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to `avblocks-v3.2.0-demo.1-windows.zip` except for the version number which may be different. 
+1. [Download](https://github.com/avblocks/avblocks-core/releases/) the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to `avblocks-v3.3.0-demo.1-windows.zip` except for the version number which may be different. 
 
 2. Extract the archive in a location of your choice, then copy the `include` and `lib` directories to the `avblocks` subdirectory of the CMake project directory. The CMake project directory is the directory that contains the `CMakeLists.txt` file.
 

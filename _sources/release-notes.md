@@ -11,16 +11,45 @@ toc:
 
 # Release Notes
 
+## Version 3.3.0
+
+### New
+
+- [AVB-668] - VP9 video encoding
+- [AVB-669] - VP9 video decoding
+- [AVB-1409] - Opus audio encoding and decoding
+- [AVB-1412] - IVF: VP8 / VP9 video in Duck IVF container
+- [AVB-1410] - WebM: Mux and demux Opus in WebM
+- [AVB-1416] - WebM: Mux and demux VP9 in WebM
+- [AVB-1391] - Improve stream reading. Read 2048 bytes at a time for better efficiency 
+
+### Samples
+
+- [AVB-1313] - samples: Linux: C\+\+: Update instructions for Ubuntu 22.04 and 24.04
+- [AVB-1314] - samples: Linux: Provide instructions for direct cmake build
+- [AVB-1315] - samples: macOS: Provide instructions for direct cmake build
+- [AVB-1316] - samples: Windows: Provide instructions for direct cmake build
+
+### Fix
+
+- [AVB-1411] - Vorbis: MediaInfo reports bitsPerSample = 0 for Vorbis streams in WebM container
+
 ## Version 3.2.0
 
 ### New
 
 - [AVB-1386] - G.711: Voice Activity Detection and Comfort Noise Generation
+
+### Samples
+
 - [AVB-1150] - Samples: C\+\+: New \`dec\_g711\_ulaw\_file\` sample
 - [AVB-1151] - Samples: C\+\+: New \`dec\_g711\_alaw\_file\` sample
 - [AVB-1379] - Samples: C\+\+: New \`enc\_g711\_ulaw\_file\` sample
 - [AVB-1380] - Samples: C\+\+: New \`enc\_g711\_alaw\_file\` sample
 - [AVB-1382] - Samples: C\+\+: New \`enc\_avc\_pull\` sample
+
+### Docs
+
 - [AVB-1330] - Wiki: C\+\+: Page for MP3 encoder
 
 ## Version 3.1.0
@@ -54,6 +83,9 @@ toc:
 - [AVB-1187] - Linux: Remove 32-bit application support
 - [AVB-1280] - Linux: .NET SDK for Linux
 - [AVB-1185] - Linux: Switch to Ubuntu 22.04
+
+### Samples
+
 - [AVB-1241] - Samples: macOS: Use cmake and Visual Studio Code
 - [AVB-1157] - Samples: Linux: Use cmake and Visual Studio Code
 - [AVB-1242] - Samples: Windows: Use cmake and Visual Studio Code
@@ -61,6 +93,9 @@ toc:
 - [AVB-1271] - Samples: C\+\+: Rename the \`remux\` sample to \`re-encode\`
 - [AVB-1273] - Samples: C\+\+: Add enc\_preset\_file sample \(macOS, Linux, Windows\)
 - [AVB-1276] - Samples: Publish .NET CLI samples to GitHub
+
+### Docs
+
 - [AVB-1275] - wiki: Split Wiki to separate C\+\+ and .NET sites
 
 ### Fix

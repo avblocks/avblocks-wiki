@@ -11,6 +11,18 @@ toc:
 
 # What's New
 
+## AVBlocks 3.3
+
+### API
+
+- VP9: Video encoding and decoding support
+- Opus: Audio encoding and decoding support
+- WebM: Muxing VP9 video into WebM container
+- WebM: Muxing Opus audio into WebM container
+- Ogg: Muxing Opus audio into Ogg container
+
+---
+
 ## AVBlocks 3.2
 
 ### API
