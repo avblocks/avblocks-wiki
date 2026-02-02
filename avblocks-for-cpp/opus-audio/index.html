@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<meta content="This section contains topics that explain how to use the Transcoder class for media processing." name="description" />
+<meta content="This section contains topics about Opus audio encoding and decoding." name="description" />
 
-    <title>Transcoder &#8212; AVBlocks for C++</title>
+    <title>Opus Audio &#8212; AVBlocks for C++</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/using-transcoder/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/opus-audio/" />
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
-    <link rel="next" title="Overview" href="overview/" />
-    <link rel="prev" title="Reading metadata information" href="../using-mediainfo/reading-metadata-information/" />
+    <link rel="next" title="Video Codecs" href="../video-codecs/" />
+    <link rel="prev" title="MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)" href="../mpeg-audio/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -219,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
   Blocks
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../using-mediainfo/">
    MediaInfo
@@ -247,33 +247,33 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../using-transcoder/">
    Transcoder
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="overview/">
+    <a class="reference internal" href="../using-transcoder/overview/">
      Overview
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="simple-audio-converter/">
+    <a class="reference internal" href="../using-transcoder/simple-audio-converter/">
      Simple Audio Converter
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="simple-video-converter/">
+    <a class="reference internal" href="../using-transcoder/simple-video-converter/">
      Simple Video Converter
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="hardware-acceleration/">
+    <a class="reference internal" href="../using-transcoder/hardware-acceleration/">
      Hardware Acceleration
     </a>
    </li>
@@ -637,17 +637,17 @@ const thebe_selector_output = ".output, .cell_output"
   Codecs
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../audio-codecs/">
    Audio Codecs
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
   <label for="toctree-checkbox-14">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="../aac-audio/">
      AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)
@@ -663,8 +663,8 @@ const thebe_selector_output = ".output, .cell_output"
      MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../opus-audio/">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Opus Audio
     </a>
    </li>
@@ -756,7 +756,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/avblocks-for-cpp/using-transcoder.md"
+        <a href="../../_sources/avblocks-for-cpp/opus-audio.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -793,23 +793,114 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-characteristics">
+     Key Characteristics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-use-cases">
+     Main Use Cases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages">
+     Advantages
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opus-encoding">
+   Opus Encoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opus-decoding">
+   Opus Decoding
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Transcoder</h1>
+                <h1>Opus Audio</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-characteristics">
+     Key Characteristics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-use-cases">
+     Main Use Cases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages">
+     Advantages
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opus-encoding">
+   Opus Encoding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opus-decoding">
+   Opus Decoding
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -817,11 +908,83 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="transcoder">
-<h1>Transcoder<a class="headerlink" href="#transcoder" title="Permalink to this headline">#</a></h1>
-<p>How to use the Transcoder class for encoding, decoding, and media processing.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="opus-audio">
+<h1>Opus Audio<a class="headerlink" href="#opus-audio" title="Permalink to this headline">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
+<p>Opus is a totally open, royalty-free, highly versatile audio codec standardized by the IETF as <a class="reference external" href="https://tools.ietf.org/html/rfc6716">RFC 6716</a>. It was designed to handle a wide range of audio applications, from low-bitrate speech to high-fidelity music, making it one of the most flexible audio codecs available today.</p>
+<p>Opus uses a hybrid design that combines two underlying codecs:</p>
+<ul class="simple">
+<li><p><strong>SILK</strong> (from Skype) - Optimized for speech compression, providing excellent quality at low bitrates for voice communications</p></li>
+<li><p><strong>CELT</strong> (from <a class="reference external" href="http://Xiph.Org">Xiph.Org</a>) - Optimized for music and general audio, delivering high-fidelity sound reproduction</p></li>
+</ul>
+<p>The codec can seamlessly switch between these modes or blend them together depending on the audio content, ensuring optimal quality regardless of the source material.</p>
+<section id="key-characteristics">
+<h3>Key Characteristics<a class="headerlink" href="#key-characteristics" title="Permalink to this headline">#</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Feature</p></th>
+<th class="text-align:left head"><p>Specification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Bitrate range</p></td>
+<td class="text-align:left"><p>6 kbps to 510 kbps</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Sample rates</p></td>
+<td class="text-align:left"><p>8 kHz, 12 kHz, 16 kHz, 24 kHz, 48 kHz</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Frame sizes</p></td>
+<td class="text-align:left"><p>2.5 ms, 5 ms, 10 ms, 20 ms, 40 ms, 60 ms</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Channels</p></td>
+<td class="text-align:left"><p>Mono, stereo, and up to 255 channels</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Latency</p></td>
+<td class="text-align:left"><p>As low as 5 ms (algorithmic delay)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="main-use-cases">
+<h3>Main Use Cases<a class="headerlink" href="#main-use-cases" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Voice over IP (VoIP)</strong> - WebRTC uses Opus as its mandatory audio codec</p></li>
+<li><p><strong>Video conferencing</strong> - Low latency and excellent speech quality</p></li>
+<li><p><strong>Streaming audio</strong> - Adaptive bitrate for varying network conditions</p></li>
+<li><p><strong>Storage</strong> - Typically stored in Ogg container as <code class="docutils literal notranslate"><span class="pre">.opus</span></code> files</p></li>
+</ul>
+</section>
+<section id="advantages">
+<h3>Advantages<a class="headerlink" href="#advantages" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Very low latency</strong> - Suitable for real-time communications</p></li>
+<li><p><strong>Excellent quality at low bitrates</strong> - Outperforms most codecs below 64 kbps</p></li>
+<li><p><strong>Dynamic adaptation</strong> - Seamlessly switches between speech and music modes</p></li>
+<li><p><strong>Royalty-free and open source</strong> - No licensing fees required</p></li>
+<li><p><strong>Superior compression</strong> - Better quality than MP3, AAC, and Vorbis at most bitrates</p></li>
+</ul>
+<p>Opus was designed to replace both Speex (speech) and Vorbis (music) with a single codec that handles both equally well.</p>
+<p>AVBlocks provides comprehensive support for Opus encoding and decoding, allowing you to:</p>
+<ul class="simple">
+<li><p>Encode uncompressed PCM audio to Opus format</p></li>
+<li><p>Decode Opus streams to uncompressed PCM audio</p></li>
+<li><p>Work with various sample rates and channel configurations</p></li>
+</ul>
+</section>
+</section>
+<section id="opus-encoding">
+<h2>Opus Encoding<a class="headerlink" href="#opus-encoding" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../transcoder-as-encoder/opus-encoder-run/"><span class="doc std std-doc">Opus Encoder (Run)</span></a> - Encode a WAV file to Opus using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
+</ul>
+</section>
+<section id="opus-decoding">
+<h2>Opus Decoding<a class="headerlink" href="#opus-decoding" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../transcoder-as-decoder/opus-decoder-run/"><span class="doc std std-doc">Opus Decoder (Run)</span></a> - Decode an Opus file to uncompressed PCM WAV using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -851,17 +1014,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../using-mediainfo/reading-metadata-information/" title="previous page">
+    <a class='left-prev' id="prev-link" href="../mpeg-audio/" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Reading metadata information</p>
+            <p class="prev-next-title">MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="overview/" title="next page">
+    <a class='right-next' id="next-link" href="../video-codecs/" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">Video Codecs</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
