@@ -876,14 +876,15 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="create-a-command-line-tool-in-xcode-on-macos">
 <h1>Create a Command Line Tool in Xcode on macOS<a class="headerlink" href="#create-a-command-line-tool-in-xcode-on-macos" title="Permalink to this headline">#</a></h1>
-<p>This topic describes the steps needed to configure an Objective-C Command Line Tool in Xcode. These steps have been verified to work with Xcode 15.0.1, on macOS Ventura 13.5.2.</p>
+<p>This topic describes the steps needed to configure an Objective-C Command Line Tool in Xcode.</p>
+<p>The code snippets used in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_converter">simple_converter</a> macOS sample.</p>
 <section id="create-the-xcode-project">
 <h2>Create the Xcode project<a class="headerlink" href="#create-the-xcode-project" title="Permalink to this headline">#</a></h2>
 <ol>
 <li><p>Open Xcode, select <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">New</span> <span class="pre">Project</span></code>, pick <code class="docutils literal notranslate"><span class="pre">macOS</span></code> as a platform, pick <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Tool</span></code> for Application</p></li>
 <li><p>Set Product Name to <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>, select <code class="docutils literal notranslate"><span class="pre">Objective-C</span></code> for language.</p></li>
 <li><p>Rename <code class="docutils literal notranslate"><span class="pre">main.m</span></code> to <code class="docutils literal notranslate"><span class="pre">main.mm</span></code>.</p></li>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.3.0-demo.1-darwin.zip</span></code> except for the version number which may be different.</p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin.zip</span></code> except for the version number which may be different.</p></li>
 <li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the Xcode project directory. The Xcode project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">simple-converter.xcodeproj</span></code> project file.</p>
 <p>You should end up with a directory structure similar to the following:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
@@ -911,12 +912,7 @@ title="Print to PDF"
 </ul>
 </li>
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">main.mm</span></code> with this code:</p>
-<div class="highlight-objectivec notranslate"><div class="highlight"><pre><span></span><span class="c1">//</span>
-<span class="c1">//  main.mm</span>
-<span class="c1">//  simple-converter</span>
-<span class="c1">//</span>
-
-<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<div class="highlight-objectivec notranslate"><div class="highlight"><pre><span></span><span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
 
 <span class="cp">#pragma clang diagnostic push</span>
 <span class="cp">#pragma clang diagnostic ignored &quot;-Weverything&quot;</span>
@@ -935,24 +931,51 @@ title="Print to PDF"
 <span class="w">    </span><span class="k">@autoreleasepool</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AAP.m4v&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AAP.mp4&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife_h264_aac.mp4&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife_h265_aac.mp4&quot;</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">        </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">.</span><span class="n">u16</span><span class="p">());</span>
+<span class="w">        </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">));</span>
-<span class="w">            </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">.</span><span class="n">u16</span><span class="p">());</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
+<span class="w">                </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">())</span>
+<span class="w">            </span><span class="p">);</span>
 <span class="w">            </span>
+<span class="w">            </span><span class="c1">// Start with same output as the input, which is MP4 / H.264 + AAC</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">());</span>
+
+<span class="w">            </span><span class="c1">// Change the video stream type to H.265 (HEVC) </span>
+<span class="w">            </span><span class="c1">// and the stream subtype to HEVC Annex B</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="n">outputSocket</span>
+<span class="w">                                                    </span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                                                    </span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">();</span>
+<span class="w">            </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H265</span><span class="p">);</span>
+<span class="w">            </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">HEVC_Annex_B</span><span class="p">);</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="c1">// Input is H.264/AVC at 700 kbps</span>
+<span class="w">            </span><span class="c1">// With H.265/HEVC we can use lower bitrate, e.g. 500 kbps</span>
+<span class="w">            </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setBitrate</span><span class="p">(</span><span class="mi">500&#39;000</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Change the output file name to Wildlife_h265_aac.mp4</span>
+<span class="w">            </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="c1">// Create Transcoder and configure it with </span>
+<span class="w">            </span><span class="c1">//the input and output sockets</span>
 <span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
 <span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">            </span>
+
+<span class="w">            </span><span class="c1">// Allow demo mode for the transcoder when </span>
+<span class="w">            </span><span class="c1">// using the demo version of the library</span>
+<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Run the transcoder</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
 <span class="w">                </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;transcoder-&gt;open() failed: %@&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">NS</span><span class="w"> </span><span class="n">stringWithUTF8String</span><span class="o">:</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">()).</span><span class="n">c_str</span><span class="p">()]);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span>
@@ -971,16 +994,20 @@ title="Print to PDF"
 </section>
 <section id="run-the-application">
 <h2>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p>Download the <code class="docutils literal notranslate"><span class="pre">AAP.m4v</span></code> HD movie from the <a class="reference external" href="https://archive.org/details/Wildlife-filming">Internet Archive</a> and save it in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory.</p></li>
-<li><p>Run the application in Xcode. Wait for the Transcoder to finish - it will take a few minutes. The converted file <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> will be in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory.</p></li>
+<ol>
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife_h264_aac.mp4</span></code> sample file and save it in the project directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>Wildlife_h264_aac.mp4<span class="w"> </span>https://archive.org/download/WildlifeSampleVideo/Wildlife.mp4
+</pre></div>
+</div>
+</li>
+<li><p>Run the application in Xcode. Wait for the Transcoder to finish - it will take a few minutes. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> will be in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory.</p></li>
 </ol>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>You may get <code class="docutils literal notranslate"><span class="pre">dyld:</span> <span class="pre">Library</span> <span class="pre">not</span> <span class="pre">loaded:</span> <span class="pre">&#64;executable_path/libAVBlocks.dylib</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib</span></code> to <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory. Delete <code class="docutils literal notranslate"><span class="pre">AAP.mp4</span></code> to solve that.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> in the <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code> directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> to solve that.</p></li>
 </ul>
 </section>
 </section>

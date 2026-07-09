@@ -8,7 +8,7 @@ taxonomy:
 
 # Developing with Visual Studio Code on macOS
 
-This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on macOS. These steps have been verified to work with Xcode 15.0.1, on macOS Ventura 13.5.2.
+This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on macOS.
 
 ## Visual Studio Code
 
