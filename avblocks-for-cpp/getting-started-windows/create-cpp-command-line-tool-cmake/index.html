@@ -1047,6 +1047,9 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 
 <span class="n">add_executable</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">})</span>
 
+<span class="cp"># common definitions</span>
+<span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">UNICODE</span><span class="w"> </span><span class="n">_UNICODE</span><span class="p">)</span>
+
 <span class="cp"># debug definitions</span>
 <span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w">  </span><span class="n">_DEBUG</span><span class="p">)</span>
 

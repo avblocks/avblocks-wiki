@@ -163,6 +163,9 @@ simple-converter
 
     add_executable(${target})
 
+    # common definitions
+    target_compile_definitions(${target} PRIVATE UNICODE _UNICODE)
+    
     # debug definitions
     target_compile_definitions(${target} PRIVATE  _DEBUG)
 
