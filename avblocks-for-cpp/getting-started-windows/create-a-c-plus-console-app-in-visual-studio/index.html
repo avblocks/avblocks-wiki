@@ -51,7 +51,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/getting-started-windows/create-a-c-plus-console-app-in-visual-studio/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/getting-started-windows/create-a-c-plus-console-app-in-visual-studio.html" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
@@ -876,7 +876,9 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="create-a-console-app-in-visual-studio-on-windows">
 <h1>Create a Console App in Visual Studio on Windows<a class="headerlink" href="#create-a-console-app-in-visual-studio-on-windows" title="Permalink to this headline">#</a></h1>
-<p>This topic describes the steps needed to configure a C++ Console App in Visual Studio. These steps have been verified to work with Visual Studio 2022 Community Edition, on Windows 11 (22H2).</p>
+<p>This topic describes the steps needed to configure a C++ Console App in Visual Studio. These steps have been verified to work with Visual Studio 2022 Community Edition, on Windows 11.</p>
+<p>The code snippets used in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/simple_converter">simple_converter Windows sample</a>.
+This sample takes a WMV media file as input and converts it to H.265/HEVC video and AAC audio in MP4 container.</p>
 <section id="create-the-visual-studio-project">
 <h2>Create the Visual Studio project<a class="headerlink" href="#create-the-visual-studio-project" title="Permalink to this headline">#</a></h2>
 <ol>
@@ -897,34 +899,71 @@ title="Print to PDF"
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">simple-converter.cpp</span></code> with this code:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span>
 
 <span class="c1">// link with AVBlocks64.lib</span>
 <span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
 
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">wmain</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
 <span class="w">    </span><span class="c1">// needed for WMV</span>
-<span class="w">    </span><span class="n">CoInitializeEx</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CoInitializeEx</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.wmv&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife_h265_aac.mp4&quot;</span><span class="p">);</span>
+
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.wmv&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">));</span>
-<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.mp4&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
+<span class="w">            </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">())</span>
+<span class="w">        </span><span class="p">);</span>
 
+<span class="w">        </span><span class="c1">// Start with MP4 / H.264 + AAC preset, then change video to H.265</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
+<span class="w">            </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Get the output video stream info and modify it for H.265/HEVC</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">outputSocket</span>
+<span class="w">                                                            </span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                                                            </span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">());</span>
+<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H265</span><span class="p">);</span>
+<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">HEVC_Annex_B</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// With H.265/HEVC we can use lower bitrate, e.g. 500 kbps</span>
+<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setBitrate</span><span class="p">(</span><span class="mi">500&#39;000</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Change the output file name</span>
+<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Create Transcoder and configure it with</span>
+<span class="w">        </span><span class="c1">// the input and output sockets</span>
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
+<span class="w">        </span><span class="c1">// Allow demo mode for the transcoder when</span>
+<span class="w">        </span><span class="c1">// using the demo version of the library</span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Run the transcoder</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
 <span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">wcerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;transcoder-&gt;open() failed: &quot;</span>
+<span class="w">                       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
+<span class="w">                       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -945,16 +984,23 @@ title="Print to PDF"
 </section>
 <section id="run-the-application">
 <h2>Run the application<a class="headerlink" href="#run-the-application" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> HD movie from the <a class="reference external" href="https://archive.org/download/WildlifeHd/Wildlife.wmv">Internet Archive</a> and save it in the Visual Studio solution directory (next to the  <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file).</p></li>
-<li><p>Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> will be in the solution directory.</p></li>
+<ol>
+<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> sample file and save it in the Visual Studio solution directory (next to the <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file):</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
+<span class="n">-Uri</span> <span class="n">https</span><span class="p">://</span><span class="n">archive</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">WildlifeSampleVideo</span><span class="p">/</span><span class="n">Wildlife</span><span class="p">.</span><span class="n">wmv</span> <span class="p">`</span>
+<span class="n">-OutFile</span> <span class="n">Wildlife</span><span class="p">.</span><span class="n">wmv</span>
+</pre></div>
+</div>
+</li>
+<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
+<li><p>Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> will be in the solution directory.</p></li>
 </ol>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife.mp4</span></code> to solve that.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> to solve that.</p></li>
 </ul>
 </section>
 </section>
@@ -972,7 +1018,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp/getting-started-windows"
+            path: "./avblocks-for-cpp\getting-started-windows"
         },
         predefinedOutput: true
     }

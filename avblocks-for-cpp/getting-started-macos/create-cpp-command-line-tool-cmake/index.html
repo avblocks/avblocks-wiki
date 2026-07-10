@@ -51,7 +51,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/getting-started-macos/create-cpp-command-line-tool-cmake/" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/getting-started-macos/create-cpp-command-line-tool-cmake.html" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
@@ -917,7 +917,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="create-a-command-line-tool-using-cmake-on-macos">
 <h1>Create a Command Line Tool using CMake on macOS<a class="headerlink" href="#create-a-command-line-tool-using-cmake-on-macos" title="Permalink to this headline">#</a></h1>
 <p>This topic describes the steps needed to configure a CMake project for C++ Command Line Tool.</p>
-<p>The code snippets used in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_converter">simple_converter</a> macOS sample.</p>
+<p>The code snippets used in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_converter">simple_converter macOS sample</a>.
+This sample takes H.264/AVC video and AAC audio in MP4 container as input and converts them to H.265/HEVC video and AAC audio in MP4 container.</p>
 <section id="test-that-you-have-all-tools-installed">
 <h2>Test that you have all tools installed<a class="headerlink" href="#test-that-you-have-all-tools-installed" title="Permalink to this headline">#</a></h2>
 <p>C++ Compiler (clang):</p>
@@ -1176,7 +1177,7 @@ https://archive.org/download/WildlifeSampleVideo/Wildlife.mp4
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp/getting-started-macos"
+            path: "./avblocks-for-cpp\getting-started-macos"
         },
         predefinedOutput: true
     }

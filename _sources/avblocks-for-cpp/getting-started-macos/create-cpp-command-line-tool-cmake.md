@@ -10,7 +10,9 @@ taxonomy:
 
 This topic describes the steps needed to configure a CMake project for C++ Command Line Tool. 
 
-The code snippets used in this article are from the [simple_converter](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_converter) macOS sample.
+The code snippets used in this article are from the [simple_converter macOS sample](https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_converter).
+This sample takes H.264/AVC video and AAC audio in MP4 container as input and converts them to H.265/HEVC video and AAC audio in MP4 container.
+
 
 ## Test that you have all tools installed
 

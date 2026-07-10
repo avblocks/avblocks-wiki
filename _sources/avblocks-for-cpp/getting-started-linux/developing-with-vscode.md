@@ -8,7 +8,7 @@ taxonomy:
 
 # Developing with Visual Studio Code on Ubuntu
 
-This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on Ubuntu. These steps have been verified to work on Ubuntu 22.04.3 LTS.
+This topic describes the steps needed to setup Visual Studio Code for AVBlocks development on Ubuntu Linux.
 
 ## Visual Studio Code
 
