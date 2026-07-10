@@ -239,7 +239,8 @@ See the [build instructions](https://github.com/avblocks/avblocks-cpp/blob/main/
 Download the `AndrewConnolly_2014.mp4` file from the Internet Archive:
 
 ```sh
-curl -L -o AndrewConnolly_2014.mp4 https://archive.org/download/AndrewConnolly_2014/AndrewConnolly_2014_640x480.mp4
+curl -L -o AndrewConnolly_2014.mp4 \
+    https://archive.org/download/AndrewConnolly_2014/AndrewConnolly_2014_640x480.mp4
 ```
 
 ```sh
