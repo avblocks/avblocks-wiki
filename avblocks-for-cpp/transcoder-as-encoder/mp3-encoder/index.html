@@ -51,7 +51,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/mp3-encoder.html" />
+    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/mp3-encoder/" />
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex/" />
     <link rel="search" title="Search" href="../../../search/" />
@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../installation/">
+   Installation
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../getting-started-linux/">
    Getting Started - Linux
@@ -1144,7 +1149,7 @@ title="Print to PDF"
 <span class="w">                </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">CodecError</span><span class="o">::</span><span class="n">EOS</span><span class="p">)</span>
 <span class="w">            </span><span class="p">{</span>
 <span class="w">                </span><span class="c1">// Push null to signal EOS to encoder</span>
-<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">);</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
 <span class="w">                </span><span class="n">wavEos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">else</span>
@@ -1315,7 +1320,7 @@ title="Print to PDF"
 <span class="w">                </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">CodecError</span><span class="o">::</span><span class="n">EOS</span><span class="p">)</span>
 <span class="w">            </span><span class="p">{</span>
 <span class="w">                </span><span class="c1">// Push null to signal EOS to encoder</span>
-<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">);</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
 <span class="w">                </span><span class="n">wavEos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">else</span>
@@ -1401,7 +1406,7 @@ Usage:<span class="w"> </span>enc_mp3_push<span class="w"> </span>--input<span c
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./avblocks-for-cpp\transcoder-as-encoder"
+            path: "./avblocks-for-cpp/transcoder-as-encoder"
         },
         predefinedOutput: true
     }
