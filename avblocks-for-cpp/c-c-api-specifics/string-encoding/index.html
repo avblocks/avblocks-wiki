@@ -1,972 +1,420 @@
-
-<!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="This topic describes the string encoding used by the AVBlocks C and C++ APIs." name="description" />
+<meta property="og:title" content="String Encoding" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/c-c-api-specifics/string-encoding/" />
+<meta property="og:site_name" content="AVBlocks for C++" />
+<meta property="og:description" content="This topic describes the string encoding used by the AVBlocks C++ API. Unicode Strings: The AVBlocks API uses UTF-16 unicode encoding. The AVBlocks API character type is char_t, where char_t repres..." />
+<meta property="og:image" content="https://wiki.avblocks.com/_static/og-image.png" />
+<meta property="og:image:alt" content="AVBlocks for C++" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wiki.avblocks.com/_static/og-image.png">
+<link rel="search" title="Search" href="../../../search/" /><link rel="next" title="C++ Utility Classes and Functions" href="../../c-utility-classes-and-functions/" /><link rel="prev" title="C++ API Specifics" href="../" />
+        <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/c-c-api-specifics/string-encoding/" />
 
-    <title>String Encoding &#8212; AVBlocks for C++</title>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>String Encoding - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=ba64e249" />
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-
-    
-  <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/c-c-api-specifics/string-encoding/" />
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../../../genindex/" />
-    <link rel="search" title="Search" href="../../../search/" />
-    <link rel="next" title="C++ Utility Classes and Functions" href="../../c-utility-classes-and-functions/" />
-    <link rel="prev" title="C++ API Specifics" href="../" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
     
 
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-41P511G2KM"></script>
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-41P511G2KM"></script>
 <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-41P511G2KM');
-                </script>
-
-  </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../">
-      
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
-      <img src="../../../_static/logo_blue.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">AVBlocks for C++</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search/" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p class="caption" role="heading">
- <span class="caption-text">
-  Getting Started
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../installation/">
-   Installation
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-linux/">
-   Getting Started - Linux
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-linux/create-cpp-command-line-tool-cmake/">
-     Create a Command Line Tool using CMake on Ubuntu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-linux/developing-with-vscode/">
-     Developing with Visual Studio Code on Ubuntu
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-macos/">
-   Getting Started - macOS
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-macos/create-cpp-command-line-tool-cmake/">
-     Create a Command Line Tool using CMake on macOS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-macos/developing-with-vscode/">
-     Developing with Visual Studio Code on macOS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-macos/create-objc-command-line-tool-xcode/">
-     Create a Command Line Tool in Xcode on macOS
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../getting-started-windows/">
-   Getting Started - Windows
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-cpp-command-line-tool-cmake/">
-     Create a Command Line Tool using CMake on Windows
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/developing-with-vscode/">
-     Developing with Visual Studio Code on Windows
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">
-     Create a Console App in Visual Studio on Windows
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../initialization-and-termination/">
-   Initialization and Termination
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../setting-license-info/">
-   Setting License Info
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../commercial-license/">
-   Commercial License
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Blocks
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../using-mediainfo/">
-   MediaInfo
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-mediainfo/overview/">
-     Overview
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-mediainfo/reading-stream-information/">
-     Reading stream information
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-mediainfo/reading-metadata-information/">
-     Reading metadata information
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../using-transcoder/">
-   Transcoder
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/overview/">
-     Overview
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/simple-audio-converter/">
-     Simple Audio Converter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/simple-video-converter/">
-     Simple Video Converter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../using-transcoder/hardware-acceleration/">
-     Hardware Acceleration
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../handling-errors/">
-   Handling Errors
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Encoding &amp; Decoding
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../transcoder-as-encoder/">
-   Transcoder as Encoder
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/aac-encoder-run/">
-     AAC ADTS Encoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/aac-encoder-pull/">
-     AAC ADTS Encoder (Pull)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/aac-encoder/">
-     AAC ADTS Encoder (Push)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/avc-h264-encoder-run/">
-     AVC / H.264 Annex B Encoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/avc-h264-encoder/">
-     AVC / H.264 Annex B Encoder (Push)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/g711-alaw-encoder-run/">
-     G.711 A-law Encoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/g711-ulaw-encoder-run/">
-     G.711 μ-law Encoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/mp3-encoder-run/">
-     MP3 Encoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/mp3-encoder/">
-     MP3 Encoder (Push)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-encoder/opus-encoder-run/">
-     Opus Encoder (Run)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../transcoder-as-decoder/">
-   Transcoder as Decoder
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-  <label for="toctree-checkbox-7">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder-run/">
-     AAC ADTS Decoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/aac-decoder/">
-     AAC ADTS Decoder (Pull)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/avc-h264-decoder-run/">
-     AVC / H.264 Annex B Decoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/avc-h264-decoder/">
-     AVC / H.264 Annex B Decoder (Pull)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/avc-h264-annex-b-parser/">
-     AVC / H.264 Annex B Parser
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/g711-alaw-decoder-run/">
-     G.711 A-law Decoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/g711-ulaw-decoder-run/">
-     G.711 μ-law Decoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/mp3-decoder-run/">
-     MP3 Decoder (Run)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../transcoder-as-decoder/opus-decoder-run/">
-     Opus Decoder (Run)
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Processing
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../working-audio/">
-   Working with Audio
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
-  <label for="toctree-checkbox-8">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-audio/upsample-audio/">
-     Upsample Audio
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../working-video/">
-   Working with Video
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
-  <label for="toctree-checkbox-9">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/upscale-video/">
-     Upscale Video
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/crop-video/">
-     Crop Video
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/pad-video/">
-     Pad Video
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/change-video-frame-rate/">
-     Change Video Frame Rate
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/convert-raw-video-compressed-video/">
-     Convert Raw Video To Compressed Video
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-video/create-video-jpeg-images/">
-     Create Video From JPEG Images
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../working-containers/">
-   Working with Containers
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
-  <label for="toctree-checkbox-10">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-containers/mux-audio-video-mp4/">
-     Mux Audio and Video Into MP4
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../working-containers/re-encode-audio-video-streams/">
-     Re-encode Audio and Video Streams
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Parameters
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../codec-parameters/">
-   Codec Parameters
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
-  <label for="toctree-checkbox-11">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../codec-parameters/avc-h-264/">
-     AVC / H.264
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../muxer-parameters/">
-   Muxer Parameters
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
-  <label for="toctree-checkbox-12">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../muxer-parameters/mp4/">
-     MP4
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  C++ API
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../">
-   C++ API Specifics
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
-  <label for="toctree-checkbox-13">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     String Encoding
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../c-utility-classes-and-functions/">
-   C++ Utility Classes and Functions
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  About
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/about-avblocks-for-c/">
-   About AVBlocks for C++
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/about-hardware-acceleration/">
-   About Hardware Acceleration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/known-hardware-acceleration-issues/">
-   Known Hardware Acceleration Issues
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../about-avblocks/demo-version/">
-   Demo Version
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Docs
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../api-docs/">
-   API Docs
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  What's New
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../whats-new/">
-   What’s New
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Release Notes
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../release-notes/">
-   Release Notes
-  </a>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
-  Codecs
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../audio-codecs/">
-   Audio Codecs
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
-  <label for="toctree-checkbox-14">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../aac-audio/">
-     AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../g711-audio/">
-     G.711 Audio
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../mpeg-audio/">
-     MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../opus-audio/">
-     Opus Audio
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../video-codecs/">
-   Video Codecs
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
-  <label for="toctree-checkbox-15">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../avc-h264-video/">
-     Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../../_sources/avblocks-for-cpp/c-c-api-specifics/string-encoding.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-41P511G2KM', { 'anonymize_ip': true });
+</script>
+</head>
+  <body>
+    <nav class="top-nav">
+  <div class="top-nav-links">
+    <a href="https://avblocks.com" target="_blank" rel="noopener">AVBlocks</a>
+    <a href="https://wiki-net.avblocks.com" target="_blank" rel="noopener">.NET Wiki</a>
+    <a href="https://blog.avblocks.com" target="_blank" rel="noopener">Blog</a>
+    <a href="https://github.com/avblocks" target="_blank" rel="noopener">GitHub</a>
   </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
+</nav>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
 
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-    </div>
-</div>
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unicode-strings">
-   Unicode Strings
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#windows">
-     Windows
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mac">
-     Mac
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#corefoundation">
-       CoreFoundation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#foundation">
-       Foundation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#command-line">
-       Command Line
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linux">
-     Linux
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Command Line
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ansi-strings">
-   ANSI Strings
-  </a>
- </li>
+    <div class="header-center">
+      <a href="../../../"><div class="brand">AVBlocks for C++</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo_blue_128.svg" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">AVBlocks for C++</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started-linux/">Getting Started - Linux</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started - Linux</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-linux/create-cpp-command-line-tool-cmake/">Create a Command Line Tool using CMake on Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-linux/developing-with-vscode/">Developing with Visual Studio Code on Ubuntu</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started-macos/">Getting Started - macOS</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Getting Started - macOS</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-macos/create-cpp-command-line-tool-cmake/">Create a Command Line Tool using CMake on macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-macos/developing-with-vscode/">Developing with Visual Studio Code on macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-macos/create-objc-command-line-tool-xcode/">Create a Command Line Tool in Xcode on macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started-windows/">Getting Started - Windows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Getting Started - Windows</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-windows/create-cpp-command-line-tool-cmake/">Create a Command Line Tool using CMake on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-windows/developing-with-vscode/">Developing with Visual Studio Code on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">Create a Console App in Visual Studio on Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization-and-termination/">Initialization and Termination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setting-license-info/">Setting License Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial-license/">Commercial License</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Blocks</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../using-mediainfo/">MediaInfo</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MediaInfo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../using-mediainfo/overview/">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../using-mediainfo/reading-stream-information/">Reading stream information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../using-mediainfo/reading-metadata-information/">Reading metadata information</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../using-transcoder/">Transcoder</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Transcoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../using-transcoder/overview/">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../using-transcoder/simple-audio-converter/">Simple Audio Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../using-transcoder/simple-video-converter/">Simple Video Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../using-transcoder/hardware-acceleration/">Hardware Acceleration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../handling-errors/">Handling Errors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Encoding &amp; Decoding</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transcoder-as-encoder/">Transcoder as Encoder</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Transcoder as Encoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/aac-encoder-run/">AAC ADTS Encoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/aac-encoder-pull/">AAC ADTS Encoder (Pull)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/aac-encoder/">AAC ADTS Encoder (Push)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/avc-h264-encoder-run/">AVC / H.264 Annex B Encoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/avc-h264-encoder/">AVC / H.264 Annex B Encoder (Push)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/g711-alaw-encoder-run/">G.711 A-law Encoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/g711-ulaw-encoder-run/">G.711 μ-law Encoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/mp3-encoder-run/">MP3 Encoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/mp3-encoder/">MP3 Encoder (Push)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-encoder/opus-encoder-run/">Opus Encoder (Run)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transcoder-as-decoder/">Transcoder as Decoder</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Transcoder as Decoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/aac-decoder-run/">AAC ADTS Decoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/aac-decoder/">AAC ADTS Decoder (Pull)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-decoder-run/">AVC / H.264 Annex B Decoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-decoder/">AVC / H.264 Annex B Decoder (Pull)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-annex-b-parser/">AVC / H.264 Annex B Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/g711-alaw-decoder-run/">G.711 A-law Decoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/g711-ulaw-decoder-run/">G.711 μ-law Decoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/mp3-decoder-run/">MP3 Decoder (Run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transcoder-as-decoder/opus-decoder-run/">Opus Decoder (Run)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../working-audio/">Working with Audio</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Working with Audio</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../working-audio/upsample-audio/">Upsample Audio</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../working-video/">Working with Video</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Working with Video</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../working-video/upscale-video/">Upscale Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-video/crop-video/">Crop Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-video/pad-video/">Pad Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-video/change-video-frame-rate/">Change Video Frame Rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-video/convert-raw-video-compressed-video/">Convert Raw Video To Compressed Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-video/create-video-jpeg-images/">Create Video From JPEG Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../working-containers/">Working with Containers</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Working with Containers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../working-containers/mux-audio-video-mp4/">Mux Audio and Video Into MP4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-containers/re-encode-audio-video-streams/">Re-encode Audio and Video Streams</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parameters</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../codec-parameters/">Codec Parameters</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of Codec Parameters</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../codec-parameters/avc-h-264/">AVC / H.264</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../muxer-parameters/">Muxer Parameters</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Muxer Parameters</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../muxer-parameters/mp4/">MP4</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">C++ API</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">C++ API Specifics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of C++ API Specifics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">String Encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../c-utility-classes-and-functions/">C++ Utility Classes and Functions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-avblocks/about-avblocks-for-c/">About AVBlocks for C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-avblocks/about-hardware-acceleration/">About Hardware Acceleration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-avblocks/known-hardware-acceleration-issues/">Known Hardware Acceleration Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-avblocks/demo-version/">Demo Version</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-docs/">API Docs</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../whats-new/">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes/">Release Notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Codecs</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../audio-codecs/">Audio Codecs</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of Audio Codecs</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../aac-audio/">AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../g711-audio/">G.711 Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpeg-audio/">MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../opus-audio/">Opus Audio</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../video-codecs/">Video Codecs</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Video Codecs</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../avc-h264-video/">Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)</a></li>
+</ul>
+</li>
 </ul>
 
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>String Encoding</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unicode-strings">
-   Unicode Strings
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#windows">
-     Windows
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mac">
-     Mac
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#corefoundation">
-       CoreFoundation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#foundation">
-       Foundation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#command-line">
-       Command Line
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linux">
-     Linux
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Command Line
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ansi-strings">
-   ANSI Strings
-  </a>
- </li>
-</ul>
+</div>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="string-encoding">
-<h1>String Encoding<a class="headerlink" href="#string-encoding" title="Permalink to this headline">#</a></h1>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="string-encoding">
+<h1>String Encoding<a class="headerlink" href="#string-encoding" title="Link to this heading">¶</a></h1>
 <p>This topic describes the string encoding used by the AVBlocks C++ API.</p>
 <section id="unicode-strings">
-<h2>Unicode Strings<a class="headerlink" href="#unicode-strings" title="Permalink to this headline">#</a></h2>
+<h2>Unicode Strings<a class="headerlink" href="#unicode-strings" title="Link to this heading">¶</a></h2>
 <p>The AVBlocks API uses UTF-16 unicode encoding.</p>
 <p>The AVBlocks API character type is <code class="docutils literal notranslate"><span class="pre">char_t</span></code>, where <code class="docutils literal notranslate"><span class="pre">char_t</span></code> represents a UTF-16 character and is defined as a 16 bit unsigned integer on all platforms (Windows, Mac and Linux).</p>
 <p>Note: A Unicode character can be expressed by 1 or 2 UTF-16 code units, i.e. by 2 or 4 bytes.</p>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
 <p>On Windows the <code class="docutils literal notranslate"><span class="pre">char_t</span></code> type is the same as the <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> type. Your Windows application must be compiled for Unicode OR alternatively you should convert strings to <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> before passing calling the AVBlocks API.</p>
 </section>
 <section id="mac">
-<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">#</a></h3>
+<h3>Mac<a class="headerlink" href="#mac" title="Link to this heading">¶</a></h3>
 <section id="corefoundation">
-<h4>CoreFoundation<a class="headerlink" href="#corefoundation" title="Permalink to this headline">#</a></h4>
+<h4>CoreFoundation<a class="headerlink" href="#corefoundation" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">CFStringRef</span></code> is UTF-16, so the encoding matches the <code class="docutils literal notranslate"><span class="pre">char_t</span></code> encoding. In your code, you can use the <code class="docutils literal notranslate"><span class="pre">CFStringGetCharactersPtr</span></code> function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get a UniChar* pointer from CFStringRef and pass it to AVBlocks</span>
 
@@ -981,7 +429,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="foundation">
-<h4>Foundation<a class="headerlink" href="#foundation" title="Permalink to this headline">#</a></h4>
+<h4>Foundation<a class="headerlink" href="#foundation" title="Link to this heading">¶</a></h4>
 <p>NSString is UTF-16. The UTF-16 encoding matches the AVBlocks API. You can use the <code class="docutils literal notranslate"><span class="pre">CFStringGetCharactersPtr</span></code> function:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get a UniChar* pointer from NSString and pass it to AVBlocks</span>
 
@@ -996,7 +444,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="command-line">
-<h4>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">#</a></h4>
+<h4>Command Line<a class="headerlink" href="#command-line" title="Link to this heading">¶</a></h4>
 <p>On Mac / Unix, <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> is defined as a 32-bit unsigned integer by default. Conversion is required between your code (if using UTF-8 or UTF-32 encoding)  and <code class="docutils literal notranslate"><span class="pre">char_t</span></code> (UTF-16 encoding).</p>
 <p>AVBlocks comes with the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> helper class (defined in <code class="docutils literal notranslate"><span class="pre">include/PrimoUString.h</span></code>) which can be used for string conversion. The <code class="docutils literal notranslate"><span class="pre">MetaInfo</span></code> sample demonstrates the use of the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> class:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="o">*</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span>
@@ -1017,9 +465,9 @@ title="Print to PDF"
 </section>
 </section>
 <section id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">#</a></h3>
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h3>
 <section id="id1">
-<h4>Command Line<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<h4>Command Line<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
 <p>On Linux, <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> is defined as a 32-bit unsigned integer by default. Conversion is required between your code (if using UTF-8 or UTF-32 encoding) and <code class="docutils literal notranslate"><span class="pre">char_t</span></code> (UTF-16 encoding).</p>
 <p>AVBlocks comes with the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> helper class (defined in <code class="docutils literal notranslate"><span class="pre">include/PrimoUString.h</span></code>) which can be used for string conversion. The <code class="docutils literal notranslate"><span class="pre">MetaInfo</span></code> sample demonstrates the use of the <code class="docutils literal notranslate"><span class="pre">primo::ustring</span></code> class:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="o">*</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span>
@@ -1041,7 +489,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="ansi-strings">
-<h2>ANSI Strings<a class="headerlink" href="#ansi-strings" title="Permalink to this headline">#</a></h2>
+<h2>ANSI Strings<a class="headerlink" href="#ansi-strings" title="Link to this heading">¶</a></h2>
 <p>The text constants which are part of the AVBlocks API itself are plain 8-bit ANSI <code class="docutils literal notranslate"><span class="pre">char</span></code> for convenience. For example, the <code class="docutils literal notranslate"><span class="pre">primo::codecs::Meta</span></code> namespace contains metadata attribute names defined as ANSI strings:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm">    Metadata attribute names</span>
@@ -1065,70 +513,96 @@ title="Print to PDF"
 </section>
 </section>
 
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            kernelName: "python3",
-            path: "./avblocks-for-cpp/c-c-api-specifics"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
-
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">C++ API Specifics</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../../c-utility-classes-and-functions/" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">C++ Utility Classes and Functions</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Primo Software<br/>
-  
-      &copy; Copyright 2003-2026 Primo Software Corp. All rights reserved.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
+        </article>
       </div>
+      <footer>
+        
+<div class="related-pages">
+  <a class="next-page" href="../../c-utility-classes-and-functions/">
+      <div class="page-info">
+        <div class="context">
+          <span>Next</span>
+        </div>
+        <div class="title">C++ Utility Classes and Functions</div>
+      </div>
+      <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+    </a>
+  <a class="prev-page" href="../">
+      <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+      <div class="page-info">
+        <div class="context">
+          <span>Previous</span>
+        </div>
+        
+        <div class="title">C++ API Specifics</div>
+        
+      </div>
+    </a>
+</div>
+<div class="bottom-of-page">
+  <div class="left-details">
+    <div class="copyright">
+        Copyright &#169; 2003 - 2026, Primo Software Corp.
     </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  </div>
+  <div class="right-details">
+    <div class="icons">
+      
+      <a href="https://github.com/avblocks" class="muted-link " aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+      
+      
+    </div>
+  </div>
+</div>
 
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">String Encoding</a><ul>
+<li><a class="reference internal" href="#unicode-strings">Unicode Strings</a><ul>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+<li><a class="reference internal" href="#mac">Mac</a><ul>
+<li><a class="reference internal" href="#corefoundation">CoreFoundation</a></li>
+<li><a class="reference internal" href="#foundation">Foundation</a></li>
+<li><a class="reference internal" href="#command-line">Command Line</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linux">Linux</a><ul>
+<li><a class="reference internal" href="#id1">Command Line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ansi-strings">ANSI Strings</a></li>
+</ul>
+</li>
+</ul>
 
-  </body>
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=6e107310"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
 </html>
