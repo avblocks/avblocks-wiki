@@ -501,8 +501,24 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <section id="update-for-avblocks">
 <h2>Update for AVBlocks<a class="headerlink" href="#update-for-avblocks" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code> except for the version number which may be different.</p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code> except for the version number which may be different.</p>
+<p>You can also download it with PowerShell from the project directory:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
+<span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
+
+<span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
+    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span>
+</pre></div>
+</div>
+</li>
 <li><p>Extract the archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
+<p>If you downloaded the archive to the project directory with PowerShell, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Expand-Archive</span> <span class="p">`</span>
+    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-DestinationPath</span> <span class="s2">&quot;./avblocks&quot;</span> <span class="n">-Force</span>
+</pre></div>
+</div>
 <p>You should end up with a directory structure similar to the following:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
 ├──<span class="w"> </span>.gitignore

@@ -486,8 +486,23 @@ simple-converter
 <section id="update-for-avblocks">
 <h2>Update for AVBlocks<a class="headerlink" href="#update-for-avblocks" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Linux). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-linux.tar.gz</span></code> except for the version number which may be different.</p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Linux). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-linux.tar.gz</span></code> except for the version number which may be different.</p>
+<p>You can also download it with <code class="docutils literal notranslate"><span class="pre">curl</span></code> from the project directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
+<span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
+
+curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux.tar.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux.tar.gz&quot;</span>
+</pre></div>
+</div>
+</li>
 <li><p>Extract the archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
+<p>If you downloaded the archive to the project directory with <code class="docutils literal notranslate"><span class="pre">curl</span></code>, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
+tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux.tar.gz&quot;</span><span class="w"> </span>-C<span class="w"> </span>./avblocks<span class="w"> </span>--strip-components<span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
 <p>You should end up with a directory structure similar to the following:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>simple-converter
 ├──<span class="w"> </span>.gitignore
