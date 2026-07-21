@@ -408,229 +408,186 @@
 </section>
 <section id="sample-code">
 <h2>Sample Code<a class="headerlink" href="#sample-code" title="Link to this heading">¶</a></h2>
-<p>This code takes an MP4 file with H.264 video and AAC audio, and scales the video stream up to Full HD 1920x1080 (1080p) using bicubic method for interpolation. The audio stream is copied from the source as is.</p>
-<p>The snippets in this section are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/video_upscale">video_upscale macOS sample</a>.</p>
+<p>This code takes an MP4 file with H.264 video and AAC audio, and scales the video stream up to Full HD 1920x1080 (1080p) using bicubic method for interpolation. The audio stream is copied from the source as is. The input and output file paths are hardcoded in the source code, no command line parsing is used.</p>
+<p>The snippets in this section are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_video_upscale">simple_video_upscale macOS sample</a>.</p>
 <p>Linux and Windows samples are also available:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/linux/video_upscale">video_upscale Linux sample</a></p></li>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/video_upscale">video_upscale Windows sample</a></p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/linux/simple_video_upscale">simple_video_upscale Linux sample</a></p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/simple_video_upscale">simple_video_upscale Windows sample</a></p></li>
 </ul>
 </section>
 <section id="initialize-avblocks">
 <h2>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Link to this heading">¶</a></h2>
 <p>The first step in any AVBlocks application is to initialize the library. This must be done before using any other AVBlocks functionality. The <code class="docutils literal notranslate"><span class="pre">Library::initialize()</span></code> method sets up the internal state and loads necessary codecs. Always remember to call <code class="docutils literal notranslate"><span class="pre">Library::shutdown()</span></code> at the end of your program to properly clean up resources and release any allocated memory.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upscaleVideo</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
-<span class="w">    </span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AndrewConnolly_2014.mp4&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AndrewConnolly_2014_1080p.mp4&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// ... upscaling code ...</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="configure-transcoder-and-upscale">
 <h2>Configure Transcoder and Upscale<a class="headerlink" href="#configure-transcoder-and-upscale" title="Link to this heading">¶</a></h2>
-<p>This is the main upscaling function that ties everything together. First, we create an input socket that points to the source video file. Then we create the output socket using our helper function. The transcoder is the core component that performs the actual upscaling - it takes the 480p video from the input and resizes it to 1920x1080 using bicubic interpolation for the best upscaling quality.</p>
+<p>We probe the input file with a <code class="docutils literal notranslate"><span class="pre">MediaInfo</span></code> object, and create an input socket from it. The output socket is created by cloning the input socket, so it starts out with an identical configuration, and then we set the output file path on it. The transcoder is the core component that performs the actual upscaling - it takes the 480p video from the input and resizes it to 1920x1080 using bicubic interpolation for the best upscaling quality.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">setAllowDemoMode(true)</span></code> call allows the transcoder to work even without a valid license (useful for testing, but not recommended for production). We then add our input and output sockets to the transcoder, open it to prepare for processing, run the actual upscaling operation, and finally close it to clean up.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">upscaleVideo</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mediaInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">inputFile</span><span class="p">));</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;MediaInfo open:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// create input socket</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">mediaInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// create output socket</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">mediaInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">));</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// get output video pin</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// set the new frame width and height</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// set the resize interpolation method:</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
+<span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">())</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Start with the same output as the input</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">());</span>
+<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Get the output video pin</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set the new frame width and height to Full HD 1920x1080</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">();</span>
+<span class="w">    </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">1920</span><span class="p">);</span>
+<span class="w">    </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">1080</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set the resize interpolation method:</span>
 <span class="w">    </span><span class="c1">// InterpolationMethod::Cubic is best for upscaling (however, it is slow)</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPinParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createParameterList</span><span class="p">());</span><span class="w"> </span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPinParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createParameterList</span><span class="p">());</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">interpolationMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createIntParameter</span><span class="p">());</span><span class="w"> </span>
-<span class="w">    </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Param</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Resize</span><span class="o">::</span><span class="n">InterpolationMethod</span><span class="p">);</span>
-<span class="w">    </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">InterpolationMethod</span><span class="o">::</span><span class="n">Cubic</span><span class="p">);</span>
-
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">interpolationMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createIntParameter</span><span class="p">());</span>
+<span class="w">    </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Resize</span><span class="o">::</span><span class="n">InterpolationMethod</span><span class="p">);</span>
+<span class="w">    </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">InterpolationMethod</span><span class="o">::</span><span class="n">Cubic</span><span class="p">);</span>
 <span class="w">    </span><span class="n">outVideoPinParams</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">interpolationMethod</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">setParams</span><span class="p">(</span><span class="n">outVideoPinParams</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// create a Transcoder</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span><span class="w"> </span>
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// add input and output sockets</span>
+
+<span class="w">    </span><span class="c1">// Create Transcoder and configure it with</span>
+<span class="w">    </span><span class="c1">// the input and output sockets</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// process</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Allow demo mode for the transcoder when</span>
+<span class="w">    </span><span class="c1">// using the demo version of the library</span>
+<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Run the transcoder</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
 <span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;transcoder-&gt;open() failed: &quot;</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Transcoder open:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Output: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;inputInfo-&gt;open() failed: &quot;</span>
+<span class="w">               </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
+<span class="w">               </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="complete-c-code">
 <h2>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Link to this heading">¶</a></h2>
-<p>Here’s the complete working example that demonstrates video upscaling using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the upscaling operation, and properly shuts down the library before exiting.</p>
+<p>Here’s the complete working example that demonstrates video upscaling using AVBlocks. The input and output file paths are hardcoded, so no command line parsing is required.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
-
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/error_facility.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
-
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
-<span class="kt">bool</span><span class="w"> </span><span class="nf">upscaleVideo</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mediaInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">inputFile</span><span class="p">));</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;MediaInfo open:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// create input socket</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">mediaInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// create output socket</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">mediaInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">));</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// get output video pin</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// set the new frame width and height</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// set the resize interpolation method:</span>
-<span class="w">    </span><span class="c1">// InterpolationMethod::Cubic is best for upscaling (however, it is slow)</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPinParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createParameterList</span><span class="p">());</span><span class="w"> </span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">interpolationMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createIntParameter</span><span class="p">());</span><span class="w"> </span>
-<span class="w">    </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">avblocks</span><span class="o">::</span><span class="n">Param</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Resize</span><span class="o">::</span><span class="n">InterpolationMethod</span><span class="p">);</span>
-<span class="w">    </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">InterpolationMethod</span><span class="o">::</span><span class="n">Cubic</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">outVideoPinParams</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">interpolationMethod</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">setParams</span><span class="p">(</span><span class="n">outVideoPinParams</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// create a Transcoder</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span><span class="w"> </span>
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// add input and output sockets</span>
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// process</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Transcoder open:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Output: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upscaleVideo</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
-<span class="w">    </span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AndrewConnolly_2014.mp4&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;AndrewConnolly_2014_1080p.mp4&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
+<span class="w">            </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">())</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Start with the same output as the input</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">());</span>
+<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Get the output video pin</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Set the new frame width and height to Full HD 1920x1080</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VideoStreamInfo</span><span class="o">*</span><span class="p">)</span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">();</span>
+<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">1920</span><span class="p">);</span>
+<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">1080</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Set the resize interpolation method:</span>
+<span class="w">        </span><span class="c1">// InterpolationMethod::Cubic is best for upscaling (however, it is slow)</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoPinParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createParameterList</span><span class="p">());</span>
+
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">interpolationMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createIntParameter</span><span class="p">());</span>
+<span class="w">        </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Resize</span><span class="o">::</span><span class="n">InterpolationMethod</span><span class="p">);</span>
+<span class="w">        </span><span class="n">interpolationMethod</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">InterpolationMethod</span><span class="o">::</span><span class="n">Cubic</span><span class="p">);</span>
+<span class="w">        </span><span class="n">outVideoPinParams</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">interpolationMethod</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">outVideoPin</span><span class="o">-&gt;</span><span class="n">setParams</span><span class="p">(</span><span class="n">outVideoPinParams</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// Create Transcoder and configure it with</span>
+<span class="w">        </span><span class="c1">// the input and output sockets</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// Allow demo mode for the transcoder when</span>
+<span class="w">        </span><span class="c1">// using the demo version of the library</span>
+<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Run the transcoder</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
+<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;transcoder-&gt;open() failed: &quot;</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;inputInfo-&gt;open() failed: &quot;</span>
+<span class="w">                   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
+<span class="w">                   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="how-to-run">
 <h2>How to run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h2>
-<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/video_upscale">video_upscale</a> example for details.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./video_upscale<span class="w"> </span>--input<span class="w"> </span>&lt;input.mp4&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;output.mp4&gt;
-</pre></div>
-</div>
-<p>Download the <code class="docutils literal notranslate"><span class="pre">AndrewConnolly_2014.mp4</span></code> file from the Internet Archive:</p>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_video_upscale">simple_video_upscale</a> example for details.</p>
+<p>Download the sample video, the <code class="docutils literal notranslate"><span class="pre">AndrewConnolly_2014.mp4</span></code> file from the Internet Archive:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>AndrewConnolly_2014.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://archive.org/download/AndrewConnolly_2014/AndrewConnolly_2014_640x480.mp4
+<span class="w">    </span>https://archive.org/download/AndrewConnolly_2014/AndrewConnolly_2014.mp4
 </pre></div>
 </div>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/video_upscale<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--input<span class="w"> </span>AndrewConnolly_2014.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output<span class="w"> </span>AndrewConnolly_2014_1080p.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--width<span class="w"> </span><span class="m">1920</span><span class="w"> </span>--height<span class="w"> </span><span class="m">1080</span>
+<p>Run the sample from the sample directory - the input and output file paths are relative to the working directory:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>samples/darwin/simple_video_upscale
+../../../bin/x64/simple_video_upscale
 </pre></div>
 </div>
+<p>The upscaled output file <code class="docutils literal notranslate"><span class="pre">AndrewConnolly_2014_1080p.mp4</span></code> will be created in the <code class="docutils literal notranslate"><span class="pre">samples/darwin/simple_video_upscale</span></code> directory.</p>
 </section>
 </section>
 
