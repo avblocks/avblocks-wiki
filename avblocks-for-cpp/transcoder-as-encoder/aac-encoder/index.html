@@ -8,7 +8,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/aac-encoder/" />
 <meta property="og:site_name" content="AVBlocks for C++" />
-<meta property="og:description" content="This article explains how you can use Transcoder::push to encode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) audio stream from raw audio frames. Source Audio: As audio input w..." />
+<meta property="og:description" content="This article explains how you can use Transcoder::push to encode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) audio stream from raw audio frames. The code snippets in this arti..." />
 <meta property="og:image" content="https://wiki.avblocks.com/_static/og-image.png" />
 <meta property="og:image:alt" content="AVBlocks for C++" />
 <meta name="twitter:card" content="summary_large_image">
@@ -438,356 +438,431 @@
           <section id="aac-adts-encoder-push">
 <h1>AAC ADTS Encoder (Push)<a class="headerlink" href="#aac-adts-encoder-push" title="Link to this heading">¶</a></h1>
 <p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0">Transcoder::push</a> to encode an AAC (Advanced Audio Coding) ADTS (Audio Data Transport Stream) audio stream from raw audio frames.</p>
+<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_aac_adts_push">enc_aac_adts_push</a> macOS sample.</p>
+<p>Linux and Windows samples are also available:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/linux/enc_aac_adts_push">enc_aac_adts_push (Linux)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/enc_aac_adts_push">enc_aac_adts_push (Windows)</a></p></li>
+</ul>
 <section id="source-audio">
 <h2>Source Audio<a class="headerlink" href="#source-audio" title="Link to this heading">¶</a></h2>
-<p>As audio input we use the <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
+<p>For source we use the <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> in the <code class="docutils literal notranslate"><span class="pre">aud</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Link to this heading">¶</a></h2>
-<p>This code shows how you can encode raw uncompressed audio frames into an AAC ADTS stream. Two Transcoder objects are used, one to read the raw LPCM frames from a file, and another to encode the raw frames to AAC ADTS stream. The encoding is done via the <code class="docutils literal notranslate"><span class="pre">Transcoder::push</span></code> method.</p>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
+<p>This code takes a WAV file and encodes it to compressed AAC ADTS format using the push method. Two Transcoder objects are used: one to read raw LPCM frames from the WAV file, and another to encode those frames to AAC ADTS.</p>
 <section id="initialize-avblocks">
-<h4>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">encode_aac_adts_stream</span><span class="p">()</span>
+<h3>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Link to this heading">¶</a></h3>
+<p>The first step in any AVBlocks application is to initialize the library. This must be done before using any other AVBlocks functionality. The <code class="docutils literal notranslate"><span class="pre">Library::initialize()</span></code> method sets up the internal state and loads necessary codecs. Always remember to call <code class="docutils literal notranslate"><span class="pre">Library::shutdown()</span></code> at the end of your program to properly clean up resources and release any allocated memory.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="s">&quot;equinox-48KHz.wav&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="s">&quot;equinox-48KHz.aac&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">encode_aac_adts_stream</span><span class="p">(</span><span class="n">inputFile</span><span class="p">,</span><span class="w"> </span><span class="n">outputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encode</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="configure-audio-reader-transcoder">
-<h4>Configure Audio Reader Transcoder<a class="headerlink" href="#configure-audio-reader-transcoder" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_lpcm_source</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<section id="configure-input-socket">
+<h3>Configure Input Socket<a class="headerlink" href="#configure-input-socket" title="Link to this heading">¶</a></h3>
+<p>The encoder input socket defines the format of the raw audio frames being pushed to the encoder. In this case, we’re configuring it for uncompressed LPCM audio with 2 channels at 48 kHz with 16-bit samples. The socket represents the input source, while the pin represents the specific audio stream within that source.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createInputSocket</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create MediaSocket describing the WAV input using MediaInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mediaInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Could not parse {}.&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">inputFile</span><span class="p">).</span><span class="n">str</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">mediaInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-output-socket">
+<h3>Configure Output Socket<a class="headerlink" href="#configure-output-socket" title="Link to this heading">¶</a></h3>
+<p>The encoder output socket defines the format of the encoded AAC data. We configure it to output AAC with ADTS (Audio Data Transport Stream) format. The output file path is set on the socket before creating the encoder transcoder.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">outputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Create AudioStreamInfo, MediaPin, and MediaSocket describing the LPCM output</span>
-<span class="w">    </span><span class="c1">// This is the same as the input, but no output file is set on the MediaSocket, </span>
-<span class="w">    </span><span class="c1">// because we want to pull frames one by one using Transcoder::pull</span>
+<span class="w">    </span><span class="c1">// You can change the sampling rate and the number of the channels</span>
+<span class="w">    </span><span class="c1">// asi-&gt;setChannels(1);</span>
+<span class="w">    </span><span class="c1">// asi-&gt;setSampleRate(44100);</span>
 
-<span class="w">    </span><span class="c1">// AudioStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcmAudio</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">pcmAudio</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-wav-reader-transcoder">
+<h3>Configure WAV Reader Transcoder<a class="headerlink" href="#configure-wav-reader-transcoder" title="Link to this heading">¶</a></h3>
+<p>The WAV reader transcoder reads the source WAV file and outputs raw LPCM frames. It creates an input socket from the WAV file and an output socket configured for LPCM format. The transcoder is opened to prepare for reading frames one by one using the pull method.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createWavReader</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// input socket</span>
+<span class="w">    </span><span class="c1">// it will automatically detect stream info from the file</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">wavInputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wavInputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">inputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// output stream info</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmAsi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Create Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wavReader</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// output pin</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pcmPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">pcmAsi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
+<span class="w">    </span><span class="c1">// output socket. we need LPCM stream type</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmOutputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pcmOutputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmOutputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pcmPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// create transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">wavReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">wavInputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pcmOutputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">wavReader</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="configure-aac-encoder-transcoder">
-<h4>Configure AAC Encoder Transcoder<a class="headerlink" href="#configure-aac-encoder-transcoder" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_aac_encoder</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
+<section id="encode-with-push">
+<h3>Encode with Push<a class="headerlink" href="#encode-with-push" title="Link to this heading">¶</a></h3>
+<p>This is the main encoding function. It opens both the WAV reader and encoder transcoders, then runs a push loop that pulls LPCM frames from the WAV reader and pushes them to the AAC encoder. When the WAV reader reaches EOS (End of Stream), a null sample is pushed to the encoder to signal the end of the stream.</p>
+<p>The function checks error codes at each step to determine if encoding completed successfully or if an error occurred.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">Options</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create AudioStreamInfo, MediaPin, and MediaSocket describing the LPCM input</span>
+<span class="w">    </span><span class="c1">// transcoder will fail if output exists (by design)</span>
+<span class="w">    </span><span class="n">deleteFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="c1">// AudioStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcmAudio</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setBytesPerFrame</span><span class="p">((</span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">bitsPerSample</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">channels</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">pcmAudio</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// Create AudioStreamInfo, MediaPin, and MediaSocket describing the AAC / M4A output</span>
-
-<span class="w">    </span><span class="c1">// AudioStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aacAdtsAudio</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">aacAdtsAudio</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">    </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="open-transcoders">
-<h4>Open Transcoders<a class="headerlink" href="#open-transcoders" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">encode_aac_adts_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create a reader to simulate raw audio frames. In reality you will likely</span>
-<span class="w">    </span><span class="c1">// have a different raw audio source like for example some kind of audio capture device.</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lpcmReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_lpcm_source</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Create an AAC encoder. We will pass the raw audio frames to it to encode them as AAC / ADTS stream</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aacEncoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_aac_encoder</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lpcmReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="c1">// Create WAV reader transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">wavReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createWavReader</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;WAV Reader open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create encoder transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">createInputSocket</span><span class="p">().</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">).</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Encoder open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Push encoding loop</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">wavOutputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">wavEos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">wavEos</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Get PCM sample from WAV reader</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">wavOutputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">pcmSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">encode_aac_adts_stream</span><span class="p">(</span><span class="n">lpcmReader</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">            </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// Push PCM sample to encoder</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">pcmSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Encoder push&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">                </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="n">lpcmReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="call-transcoder-pull-and-transcoder-push">
-<h4>Call Transcoder::pull and Transcoder::push<a class="headerlink" href="#call-transcoder-pull-and-transcoder-push" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">encode_aac_adts_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">lpcmReader</span><span class="p">,</span><span class="w"> </span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">audioFrame</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
-
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Simulate a raw frame</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one audio frame.</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">lpcmReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">audioFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
-
-<span class="w">        </span><span class="c1">// Pass the raw audio frame to Transcoder::push to encode it as AAC / ADTS</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">audioFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// No more PCM data from WAV reader</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorInfo</span><span class="w"> </span><span class="o">*</span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorFacility</span><span class="o">::</span><span class="n">Codec</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">CodecError</span><span class="o">::</span><span class="n">EOS</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Push null to signal EOS to encoder</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">);</span>
+<span class="w">                </span><span class="n">wavEos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;WAV Reader pull&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="w">                </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="complete-c-code">
-<h4>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Link to this heading">¶</a></h4>
+<h3>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Link to this heading">¶</a></h3>
+<p>Here’s the complete working example that demonstrates AAC ADTS encoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the encoding operation using push, and properly shuts down the library before exiting.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
+
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/error_facility.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
 
-<span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
-
-<span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_lpcm_source</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createInputSocket</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create MediaSocket describing the WAV input using MediaInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mediaInfo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Could not parse {}.&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">inputFile</span><span class="p">).</span><span class="n">str</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">mediaInfo</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="n">mediaInfo</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createOutputSocket</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">outputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="c1">// Create AudioStreamInfo, MediaPin, and MediaSocket describing the LPCM output</span>
-<span class="w">    </span><span class="c1">// This is the same as the input, but no output file is set on the MediaSocket, </span>
-<span class="w">    </span><span class="c1">// because we want to pull frames one by one using Transcoder::pull</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">asi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">asi</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// AudioStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcmAudio</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// You can change the sampling rate and the number of the channels</span>
+<span class="w">    </span><span class="c1">// asi-&gt;setChannels(1);</span>
+<span class="w">    </span><span class="c1">// asi-&gt;setSampleRate(44100);</span>
 
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">pcmAudio</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">asi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">socket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Create Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wavReader</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createWavReader</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// input socket</span>
+<span class="w">    </span><span class="c1">// it will automatically detect stream info from the file</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">wavInputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wavInputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">inputFile</span><span class="p">));</span>
 
+<span class="w">    </span><span class="c1">// output stream info</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmAsi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmAsi</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// output pin</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pcmPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">pcmAsi</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// output socket. we need LPCM stream type</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmOutputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pcmOutputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pcmOutputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pcmPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// create transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">wavReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">wavInputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">pcmOutputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">wavReader</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_aac_encoder</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">encode</span><span class="p">(</span><span class="n">Options</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create AudioStreamInfo, MediaPin, and MediaSocket describing the LPCM input</span>
+<span class="w">    </span><span class="c1">// transcoder will fail if output exists (by design)</span>
+<span class="w">    </span><span class="n">deleteFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">));</span>
 
-<span class="w">    </span><span class="c1">// AudioStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcmAudio</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
-<span class="w">    </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">setBytesPerFrame</span><span class="p">((</span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">bitsPerSample</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pcmAudio</span><span class="o">-&gt;</span><span class="n">channels</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">pcmAudio</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">LPCM</span><span class="p">);</span>
-<span class="w">    </span><span class="n">inputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// Create AudioStreamInfo, MediaPin, and MediaSocket describing the AAC / M4A output</span>
-
-<span class="w">    </span><span class="c1">// AudioStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">AudioStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aacAdtsAudio</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createAudioStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setChannels</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setSampleRate</span><span class="p">(</span><span class="mi">48000</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aacAdtsAudio</span><span class="o">-&gt;</span><span class="n">setBitsPerSample</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">aacAdtsAudio</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">AAC</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">AAC_ADTS</span><span class="p">);</span>
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="c1">// Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">    </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">    </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span><span class="w"> </span><span class="n">encode_aac_adts_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">lpcmReader</span><span class="p">,</span><span class="w"> </span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">audioFrame</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
-
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Create WAV reader transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">wavReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createWavReader</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Simulate a raw frame</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one audio frame.</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">lpcmReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">audioFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
-
-<span class="w">        </span><span class="c1">// Pass the raw audio frame to Transcoder::push to encode it as AAC / ADTS</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">audioFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;WAV Reader open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="kt">void</span><span class="w"> </span><span class="n">encode_aac_adts_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create a reader to simulate raw audio frames. In reality you will likely</span>
-<span class="w">    </span><span class="c1">// have a different raw audio source like for example some kind of audio capture device.</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lpcmReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_lpcm_source</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Create an AAC encoder. We will pass the raw audio frames to it to encode them as AAC / ADTS stream</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aacEncoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_aac_encoder</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lpcmReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="c1">// Create encoder transcoder</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">createInputSocket</span><span class="p">().</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">createOutputSocket</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">outputFile</span><span class="p">).</span><span class="n">get</span><span class="p">());</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Encoder open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Push encoding loop</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">wavOutputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pcmSample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">wavEos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">wavEos</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Get PCM sample from WAV reader</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">wavOutputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">pcmSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">encode_aac_adts_stream</span><span class="p">(</span><span class="n">lpcmReader</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">aacEncoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">            </span><span class="n">aacEncoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// Push PCM sample to encoder</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">pcmSample</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;Encoder push&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">                </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="n">lpcmReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// No more PCM data from WAV reader</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorInfo</span><span class="w"> </span><span class="o">*</span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorFacility</span><span class="o">::</span><span class="n">Codec</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">                </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">codecs</span><span class="o">::</span><span class="n">CodecError</span><span class="o">::</span><span class="n">EOS</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Push null to signal EOS to encoder</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">);</span>
+<span class="w">                </span><span class="n">wavEos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;WAV Reader pull&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="w">                </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">wavReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="n">encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">encode_aac_adts_stream</span><span class="p">()</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="s">&quot;equinox-48KHz.wav&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="s">&quot;equinox-48KHz.aac&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">encode_aac_adts_stream</span><span class="p">(</span><span class="n">inputFile</span><span class="p">,</span><span class="w"> </span><span class="n">outputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encode</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
-<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">encode_aac_adts_stream</span><span class="p">();</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="how-to-run">
-<h4>How to run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h4>
-<p><a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/"><span class="doc std std-doc">Create a C++ console application </span></a> in Visual Studio and use the code from this article.</p>
-<p>Copy the <code class="docutils literal notranslate"><span class="pre">equinox-48KHz.wav</span></code> file from the assets archive to project directory.</p>
-<p>Run the application in Visual Studio.</p>
 </section>
+<section id="how-to-run">
+<h2>How to Run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h2>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_aac_adts_push">enc_aac_adts_push</a> example for details.</p>
+<section id="command-line">
+<h3>Command Line<a class="headerlink" href="#command-line" title="Link to this heading">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>enc_aac_adts_push<span class="w"> </span>--input<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;aac<span class="w"> </span>file&gt;
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<p>List options:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/enc_aac_adts_push<span class="w"> </span>--help
+Usage:<span class="w"> </span>enc_aac_adts_push<span class="w"> </span>--input<span class="w"> </span>&lt;wav<span class="w"> </span>file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;aac<span class="w"> </span>file&gt;
+<span class="w">  </span>-h,<span class="w">    </span>--help
+<span class="w">  </span>-i,<span class="w">    </span>--input<span class="w">    </span>input<span class="w"> </span>WAV<span class="w"> </span>file
+<span class="w">  </span>-o,<span class="w">    </span>--output<span class="w">   </span>output<span class="w"> </span>AAC<span class="w"> </span>file
+</pre></div>
+</div>
+<p>Encode the input file <code class="docutils literal notranslate"><span class="pre">./assets/aud/equinox-48KHz.wav</span></code> into output file <code class="docutils literal notranslate"><span class="pre">./output/enc_aac_adts_push/equinox-48KHz.adts.aac</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./output/enc_aac_adts_push
+
+./bin/x64/enc_aac_adts_push<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>./assets/aud/equinox-48KHz.wav<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>./output/enc_aac_adts_push/equinox-48KHz.adts.aac
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -855,16 +930,17 @@
 <li><a class="reference internal" href="#">AAC ADTS Encoder (Push)</a><ul>
 <li><a class="reference internal" href="#source-audio">Source Audio</a></li>
 <li><a class="reference internal" href="#code">Code</a><ul>
-<li><a class="reference internal" href="#windows">Windows</a><ul>
 <li><a class="reference internal" href="#initialize-avblocks">Initialize AVBlocks</a></li>
-<li><a class="reference internal" href="#configure-audio-reader-transcoder">Configure Audio Reader Transcoder</a></li>
-<li><a class="reference internal" href="#configure-aac-encoder-transcoder">Configure AAC Encoder Transcoder</a></li>
-<li><a class="reference internal" href="#open-transcoders">Open Transcoders</a></li>
-<li><a class="reference internal" href="#call-transcoder-pull-and-transcoder-push">Call Transcoder::pull and Transcoder::push</a></li>
+<li><a class="reference internal" href="#configure-input-socket">Configure Input Socket</a></li>
+<li><a class="reference internal" href="#configure-output-socket">Configure Output Socket</a></li>
+<li><a class="reference internal" href="#configure-wav-reader-transcoder">Configure WAV Reader Transcoder</a></li>
+<li><a class="reference internal" href="#encode-with-push">Encode with Push</a></li>
 <li><a class="reference internal" href="#complete-c-code">Complete C++ Code</a></li>
-<li><a class="reference internal" href="#how-to-run">How to run</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#how-to-run">How to Run</a><ul>
+<li><a class="reference internal" href="#command-line">Command Line</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 </ul>

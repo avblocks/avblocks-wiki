@@ -8,7 +8,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/avc-h264-encoder/" />
 <meta property="og:site_name" content="AVBlocks for C++" />
-<meta property="og:description" content="This article explains how you can use Transcoder::push to encode an AVC / H.264 elementary stream from raw YUV frames. Source Video: As video input we use the foreman_qcif.yuv file from the AVBlock..." />
+<meta property="og:description" content="This article explains how you can use Transcoder::push to encode an AVC / H.264 elementary stream from raw YUV frames. The code snippets in this article are from the enc_avc_push macOS sample. Linu..." />
 <meta property="og:image" content="https://wiki.avblocks.com/_static/og-image.png" />
 <meta property="og:image:alt" content="AVBlocks for C++" />
 <meta name="twitter:card" content="summary_large_image">
@@ -438,79 +438,94 @@
           <section id="avc-h-264-annex-b-encoder-push">
 <h1>AVC / H.264 Annex B Encoder (Push)<a class="headerlink" href="#avc-h-264-annex-b-encoder-push" title="Link to this heading">¶</a></h1>
 <p>This article explains how you can use <a class="reference external" href="https://doc.avblocks.com/core/latest/classprimo_1_1avblocks_1_1_transcoder.html#abb8fa7942b3e84e0275c793dfbe2c3a0">Transcoder::push</a> to encode an AVC / H.264 elementary stream from raw YUV frames.</p>
+<p>The code snippets in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_avc_push">enc_avc_push</a> macOS sample.</p>
+<p>Linux and Windows samples are also available:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/linux/enc_avc_push">enc_avc_push (Linux)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/enc_avc_push">enc_avc_push (Windows)</a></p></li>
+</ul>
 <section id="source-video">
 <h2>Source Video<a class="headerlink" href="#source-video" title="Link to this heading">¶</a></h2>
-<p>As video input we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> archive. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
+<p>For source we use the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> file from the <a class="reference external" href="https://github.com/avblocks/avblocks-assets/releases">AVBlocks Assets</a> repository. After downloading and unzipping you will find <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> in the <code class="docutils literal notranslate"><span class="pre">vid</span></code> subdirectory.</p>
 </section>
 <section id="code">
 <h2>Code<a class="headerlink" href="#code" title="Link to this heading">¶</a></h2>
-<p>This code shows how you can encode raw uncompressed YUV frames into an H.264 stream. Two Transcoder objects are used, one to read the raw YUV frames from a file, and another to encode the raw frames to AVC / H.264 Annex B stream. The encoding is done via the <code class="docutils literal notranslate"><span class="pre">Transcoder::push</span></code> method.</p>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
+<p>This code takes a raw YUV video file and encodes it to an H.264 stream using the push method. Two Transcoder objects are used: one to read raw YUV frames from the file, and another to encode those frames to AVC / H.264 Annex B.</p>
 <section id="initialize-avblocks">
-<h4>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">encode_h264_stream</span><span class="p">()</span>
+<h3>Initialize AVBlocks<a class="headerlink" href="#initialize-avblocks" title="Link to this heading">¶</a></h3>
+<p>The first step in any AVBlocks application is to initialize the library. This must be done before using any other AVBlocks functionality. The <code class="docutils literal notranslate"><span class="pre">Library::initialize()</span></code> method sets up the internal state and loads necessary codecs. Always remember to call <code class="docutils literal notranslate"><span class="pre">Library::shutdown()</span></code> at the end of your program to properly clean up resources and release any allocated memory.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;foreman_qcif.yuv&quot;</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;foreman_qcif.h264&quot;</span><span class="p">);</span>
-
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 <span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-yuv-video-stream-info">
+<h3>Configure YUV Video Stream Info<a class="headerlink" href="#configure-yuv-video-stream-info" title="Link to this heading">¶</a></h3>
+<p>This helper function creates a VideoStreamInfo object describing uncompressed YUV video. The frame dimensions, frame rate, color format, and scan type are all configured here. This same stream info is used for both the YUV reader output and the H.264 encoder input.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">fps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">width_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">height_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">yuv_color</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">yuvVideo</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="configure-yuv-reader-transcoder">
-<h4>Configure YUV Reader Transcoder<a class="headerlink" href="#configure-yuv-reader-transcoder" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<h3>Configure YUV Reader Transcoder<a class="headerlink" href="#configure-yuv-reader-transcoder" title="Link to this heading">¶</a></h3>
+<p>The YUV reader transcoder reads the source YUV file and outputs raw uncompressed frames. It creates an input socket pointing to the YUV file and an output socket configured for uncompressed video. The transcoder is opened to prepare for reading frames one by one using the pull method.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">yuvInVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">yuv_file</span><span class="p">));</span>
 
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV output</span>
-<span class="w">    </span><span class="c1">// This is the same as the input, but no output file is set on the MediaSocket, </span>
-<span class="w">    </span><span class="c1">// because we want to pull frames one by one using Transcoder::pull</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV output.</span>
+<span class="w">    </span><span class="c1">// This is the same as the input, but no output file is set on the MediaSocket,</span>
+<span class="w">    </span><span class="c1">// because we want to pull frames one by one using Transcoder::pull.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvOutPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">yuvOutVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvOutSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">yuvOutSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvOutPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Create Transcoder.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 <span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvOutSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
@@ -519,61 +534,48 @@
 </pre></div>
 </div>
 </section>
-<section id="configure-avc-h-264-encoder-transcoder">
-<h4>Configure AVC / H.264 Encoder Transcoder<a class="headerlink" href="#configure-avc-h-264-encoder-transcoder" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Enum</span><span class="w"> </span><span class="n">hardware</span><span class="p">)</span>
+<section id="configure-h-264-encoder-transcoder">
+<h3>Configure H.264 Encoder Transcoder<a class="headerlink" href="#configure-h-264-encoder-transcoder" title="Link to this heading">¶</a></h3>
+<p>The H.264 encoder transcoder takes raw YUV frames and encodes them to H.264 Annex B format. It creates an input socket for uncompressed YUV video and an output socket configured for H.264. The output file path is set on the encoder socket before creating the transcoder.</p>
+<p>Hardware acceleration can be enabled or disabled by setting the <code class="docutils literal notranslate"><span class="pre">Param::HardwareEncoder</span></code> parameter on the output pin.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Enum</span><span class="w"> </span><span class="n">hardware</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">yuvInVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the H.264 output</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the H.264 output.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">fps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">width_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">height_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">yuv_color</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
 <span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">h264OutVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Enable \ disable hardware acceleration</span>
+<span class="w">    </span><span class="c1">// Enable or disable hardware acceleration.</span>
 <span class="w">    </span><span class="n">h264OutPin</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addInt</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">HardwareEncoder</span><span class="p">,</span><span class="w"> </span><span class="n">hardware</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// Default subtype for StreamType::H264 is StreamSubType::AVC_Annex_B, </span>
-<span class="w">    </span><span class="c1">// so we don&#39;t need to set it explicitly here</span>
-<span class="w">    </span><span class="c1">// h264OutSocket-&gt;setStreamSubType(StreamSubType::AVC_Annex_B);</span>
-<span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Default subtype for StreamType::H264 is StreamSubType::AVC_Annex_B.</span>
+<span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">h264_file</span><span class="p">));</span>
 
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">h264OutPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Transcoder.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 <span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">h264OutSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
@@ -582,245 +584,330 @@
 </pre></div>
 </div>
 </section>
-<section id="open-transcoders">
-<h4>Open Transcoders<a class="headerlink" href="#open-transcoders" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">encode_h264_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
+<section id="encode-with-push">
+<h3>Encode with Push<a class="headerlink" href="#encode-with-push" title="Link to this heading">¶</a></h3>
+<p>This is the main encoding function. It opens both the YUV reader and H.264 encoder transcoders, then runs a push loop that pulls YUV frames from the reader and pushes them to the encoder. After all frames are processed, the encoder is flushed to finalize the output.</p>
+<p>The function checks error codes at each step to determine if encoding completed successfully or if an error occurred.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">encode_h264_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">,</span><span class="w"> </span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create a reader to simulate raw video frames. In reality you will likely</span>
-<span class="w">    </span><span class="c1">// have a different raw video source, for example some kind of video capture device.</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create a H.264 encoder. We will pass the raw video frames to it to encode them as H.264</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="n">outputFile</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Auto</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">        </span><span class="c1">// Simulate a raw frame. Each call to Transcoder::pull returns one video frame.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Pass the raw video frame to Transcoder::push to encode it as AVC / H.264.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">yuvReader</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">            </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;H264 encoder push&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorInfo</span><span class="o">*</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorFacility</span><span class="o">::</span><span class="n">Codec</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CodecError</span><span class="o">::</span><span class="n">EOS</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;YUV reader pull&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;H264 encoder flush&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="call-transcoder-pull-and-transcoder-push">
-<h4>Call Transcoder::pull and Transcoder::push<a class="headerlink" href="#call-transcoder-pull-and-transcoder-push" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">encode_h264_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">,</span><span class="w"> </span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">)</span>
+<section id="run-encoding-pipeline">
+<h3>Run Encoding Pipeline<a class="headerlink" href="#run-encoding-pipeline" title="Link to this heading">¶</a></h3>
+<p>This function orchestrates the entire encoding pipeline. It deletes the output file if it exists (the transcoder will fail if the output already exists), creates and opens both transcoders, runs the encoding loop, and properly closes everything.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">encode_h264_stream</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Transcoder will fail if the output file already exists.</span>
+<span class="w">    </span><span class="n">deleteFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">h264_file</span><span class="p">));</span>
 
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Create a reader to simulate raw video frames. In reality, the raw video source</span>
+<span class="w">    </span><span class="c1">// could be different, for example some kind of video capture device.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Create a H.264 encoder. We will pass the raw video frames to it to encode them as H.264.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Auto</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Simulate a raw frame</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one video frame.</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
-
-<span class="w">        </span><span class="c1">// Pass the raw video frame to Transcoder::push to encode it as AVC / H.264</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;YUV reader open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">yuvReader</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;H264 encoder open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">success</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="complete-c-code">
-<h4>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Link to this heading">¶</a></h4>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
+<h3>Complete C++ Code<a class="headerlink" href="#complete-c-code" title="Link to this heading">¶</a></h3>
+<p>Here’s the complete working example that demonstrates H.264 encoding using AVBlocks. This code combines all the previous snippets into a functional program that can be compiled and run. The main function handles command-line argument parsing, initializes AVBlocks, performs the encoding operation using push, and properly shuts down the library before exiting.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> *  Copyright (c)  Primo Software. All Rights Reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> *  Use of this source code is governed by a MIT License</span>
+<span class="cm"> *  that can be found in the LICENSE file in the root of the source</span>
+<span class="cm"> *  tree.</span>
+<span class="cm"> */</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/error_facility.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
 
-<span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;options.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;util.h&quot;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">p</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
-
-<span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">)</span>
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">fps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">width_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">height_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">yuv_color</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">yuvVideo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">yuvInVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">yuv_file</span><span class="p">));</span>
 
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV output</span>
-<span class="w">    </span><span class="c1">// This is the same as the input, but no output file is set on the MediaSocket, </span>
-<span class="w">    </span><span class="c1">// because we want to pull frames one by one using Transcoder::pull</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV output.</span>
+<span class="w">    </span><span class="c1">// This is the same as the input, but no output file is set on the MediaSocket,</span>
+<span class="w">    </span><span class="c1">// because we want to pull frames one by one using Transcoder::pull.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvOutVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvOutPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">yuvOutVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvOutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvOutSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">yuvOutSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvOutPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Create Transcoder.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 <span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvOutSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Enum</span><span class="w"> </span><span class="n">hardware</span><span class="p">)</span>
+<span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Enum</span><span class="w"> </span><span class="n">hardware</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the YUV input.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_video_info</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
-<span class="w">    </span><span class="n">yuvInVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">yuvInVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvInSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">UncompressedVideo</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">yuvInSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the H.264 output</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// VideoStreamInfo</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Create VideoStreamInfo, MediaPin, and MediaSocket describing the H.264 output.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutVideo</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createVideoStreamInfo</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mf">30.0</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="mi">144</span><span class="p">);</span>
-<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">ColorFormat</span><span class="o">::</span><span class="n">YUV420</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">fps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameWidth</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">width_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setFrameHeight</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">frame_size</span><span class="p">.</span><span class="n">height_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setColorFormat</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">yuv_color</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
 <span class="w">    </span><span class="n">h264OutVideo</span><span class="o">-&gt;</span><span class="n">setScanType</span><span class="p">(</span><span class="n">ScanType</span><span class="o">::</span><span class="n">Progressive</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// MediaPin</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaPin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutPin</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaPin</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutPin</span><span class="o">-&gt;</span><span class="n">setStreamInfo</span><span class="p">(</span><span class="n">h264OutVideo</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Enable \ disable hardware acceleration</span>
+<span class="w">    </span><span class="c1">// Enable or disable hardware acceleration.</span>
 <span class="w">    </span><span class="n">h264OutPin</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addInt</span><span class="p">(</span><span class="n">Param</span><span class="o">::</span><span class="n">HardwareEncoder</span><span class="p">,</span><span class="w"> </span><span class="n">hardware</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// MediaSocket</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSocket</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264OutSocket</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H264</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// Default subtype for StreamType::H264 is StreamSubType::AVC_Annex_B, </span>
-<span class="w">    </span><span class="c1">// so we don&#39;t need to set it explicitly here</span>
-<span class="w">    </span><span class="c1">// h264OutSocket-&gt;setStreamSubType(StreamSubType::AVC_Annex_B);</span>
-<span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Default subtype for StreamType::H264 is StreamSubType::AVC_Annex_B.</span>
+<span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">h264_file</span><span class="p">));</span>
 
 <span class="w">    </span><span class="n">h264OutSocket</span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">h264OutPin</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">// Transcoder</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// Transcoder.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
+<span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 <span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">yuvInSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 <span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">h264OutSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">,</span><span class="w"> </span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">)</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">yuvReader</span><span class="p">,</span><span class="w"> </span><span class="n">Transcoder</span><span class="o">*</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">inputIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">MediaSample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSample</span><span class="p">());</span>
 
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Simulate a raw frame</span>
-<span class="w">        </span><span class="c1">// Each call to Transcoder::pull returns one video frame.</span>
+<span class="w">        </span><span class="c1">// Simulate a raw frame. Each call to Transcoder::pull returns one video frame.</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">pull</span><span class="p">(</span><span class="n">inputIndex</span><span class="p">,</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// Pass the raw video frame to Transcoder::push to encode it as AVC / H.264</span>
+<span class="w">        </span><span class="c1">// Pass the raw video frame to Transcoder::push to encode it as AVC / H.264.</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">yuvFrame</span><span class="p">.</span><span class="n">get</span><span class="p">()))</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="kt">void</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">inputFile</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">char_t</span><span class="o">*</span><span class="w"> </span><span class="n">outputFile</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create a reader to simulate raw video frames. In reality you will likely</span>
-<span class="w">    </span><span class="c1">// have a different raw video source like for example some kind of video capture device.</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Create a H.264 encoder. We will pass the raw video frames to it to encode them as H.264</span>
-<span class="w">    </span><span class="n">p</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="n">outputFile</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Auto</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">yuvReader</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">            </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;H264 encoder push&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorInfo</span><span class="o">*</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="o">-&gt;</span><span class="n">facility</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">ErrorFacility</span><span class="o">::</span><span class="n">Codec</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="n">error</span><span class="o">-&gt;</span><span class="n">code</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CodecError</span><span class="o">::</span><span class="n">EOS</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;YUV reader pull&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;H264 encoder flush&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">()</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">Options</span><span class="o">&amp;</span><span class="w"> </span><span class="n">opt</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Transcoder will fail if the output file already exists.</span>
+<span class="w">    </span><span class="n">deleteFile</span><span class="p">(</span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">h264_file</span><span class="p">));</span>
 
-<span class="w">    </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;foreman_qcif.yuv&quot;</span><span class="p">,</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;foreman_qcif.h264&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Create a reader to simulate raw video frames. In reality, the raw video source</span>
+<span class="w">    </span><span class="c1">// could be different, for example some kind of video capture device.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">yuvReader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_yuv_reader</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Create a H.264 encoder. We will pass the raw video frames to it to encode them as H.264.</span>
+<span class="w">    </span><span class="n">primo</span><span class="o">::</span><span class="n">ref</span><span class="o">&lt;</span><span class="n">Transcoder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">h264Encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create_h264_encoder</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">HardwareEncoder</span><span class="o">::</span><span class="n">Auto</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;YUV reader open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">yuvReader</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span><span class="w"> </span><span class="n">h264Encoder</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">        </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printError</span><span class="p">(</span><span class="s">&quot;H264 encoder open&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">h264Encoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">yuvReader</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">success</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">encode_h264_stream</span><span class="p">();</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Options</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">prepareOptions</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Command</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Error</span><span class="p">:</span><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Parsed</span><span class="p">:</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encode_h264_stream</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="how-to-run">
-<h4>How to run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h4>
-<p><a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/"><span class="doc std std-doc">Create a C++ console application </span></a> in Visual Studio and use the code from this article.</p>
-<p>Copy the <code class="docutils literal notranslate"><span class="pre">foreman_qcif.yuv</span></code> file from the assets archive to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> under the project’s directory.</p>
-<p>Run the application in Visual Studio.</p>
 </section>
+<section id="how-to-run">
+<h2>How to Run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h2>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/enc_avc_push">enc_avc_push</a> example for details.</p>
+<section id="command-line">
+<h3>Command Line<a class="headerlink" href="#command-line" title="Link to this heading">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./enc_avc_push<span class="w"> </span>--frame<span class="w"> </span>&lt;width&gt;x&lt;height&gt;<span class="w"> </span>--rate<span class="w"> </span>&lt;fps&gt;<span class="w"> </span>--color<span class="w"> </span>&lt;COLOR&gt;<span class="w"> </span>--input<span class="w"> </span>&lt;file.yuv&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;file.h264&gt;<span class="w"> </span><span class="o">[</span>--colors<span class="o">]</span><span class="w">	</span><span class="o">[</span>--help<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<p>List options:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./bin/x64/enc_avc_push<span class="w"> </span>--help
+enc_avc_push<span class="w"> </span>--frame<span class="w"> </span>&lt;width&gt;x&lt;height&gt;<span class="w"> </span>--rate<span class="w"> </span>&lt;fps&gt;<span class="w"> </span>--color<span class="w"> </span>&lt;COLOR&gt;<span class="w"> </span>--input<span class="w"> </span>&lt;file.yuv&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;file.h264&gt;<span class="w"> </span><span class="o">[</span>--colors<span class="o">]</span>
+<span class="w">  </span>-h,<span class="w">    </span>--help
+<span class="w">  </span>-i,<span class="w">    </span>--input<span class="w">    </span>input<span class="w"> </span>YUV<span class="w"> </span>file
+<span class="w">  </span>-o,<span class="w">    </span>--output<span class="w">   </span>output<span class="w"> </span>H264<span class="w"> </span>file
+<span class="w">  </span>-r,<span class="w">    </span>--rate<span class="w">     </span>input<span class="w"> </span>frame<span class="w"> </span>rate
+<span class="w">  </span>-f,<span class="w">    </span>--frame<span class="w">    </span>input<span class="w"> </span>frame<span class="w"> </span>sizes<span class="w"> </span>&lt;width&gt;x&lt;height&gt;
+<span class="w">  </span>-c,<span class="w">    </span>--color<span class="w">    </span>input<span class="w"> </span>color<span class="w"> </span>format.<span class="w"> </span>Use<span class="w"> </span>--colors<span class="w"> </span>to<span class="w"> </span>list<span class="w"> </span>all<span class="w"> </span>supported<span class="w"> </span>color
+<span class="w">                    </span>formats
+<span class="w">         </span>--colors<span class="w">   </span>list<span class="w"> </span>COLOR<span class="w"> </span>constants
+</pre></div>
+</div>
+<p>Encode a raw YUV video from <code class="docutils literal notranslate"><span class="pre">./assets/vid/foreman_qcif.yuv</span></code> to a H.264 video in <code class="docutils literal notranslate"><span class="pre">./output/enc_avc_push/foreman_qcif.h264</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./output/enc_avc_push
+
+./bin/x64/enc_avc_push<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>./assets/vid/foreman_qcif.yuv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>./output/enc_avc_push/foreman_qcif.h264<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--frame<span class="w"> </span>176x144<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--color<span class="w"> </span>yuv420
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -888,16 +975,18 @@
 <li><a class="reference internal" href="#">AVC / H.264 Annex B Encoder (Push)</a><ul>
 <li><a class="reference internal" href="#source-video">Source Video</a></li>
 <li><a class="reference internal" href="#code">Code</a><ul>
-<li><a class="reference internal" href="#windows">Windows</a><ul>
 <li><a class="reference internal" href="#initialize-avblocks">Initialize AVBlocks</a></li>
+<li><a class="reference internal" href="#configure-yuv-video-stream-info">Configure YUV Video Stream Info</a></li>
 <li><a class="reference internal" href="#configure-yuv-reader-transcoder">Configure YUV Reader Transcoder</a></li>
-<li><a class="reference internal" href="#configure-avc-h-264-encoder-transcoder">Configure AVC / H.264 Encoder Transcoder</a></li>
-<li><a class="reference internal" href="#open-transcoders">Open Transcoders</a></li>
-<li><a class="reference internal" href="#call-transcoder-pull-and-transcoder-push">Call Transcoder::pull and Transcoder::push</a></li>
+<li><a class="reference internal" href="#configure-h-264-encoder-transcoder">Configure H.264 Encoder Transcoder</a></li>
+<li><a class="reference internal" href="#encode-with-push">Encode with Push</a></li>
+<li><a class="reference internal" href="#run-encoding-pipeline">Run Encoding Pipeline</a></li>
 <li><a class="reference internal" href="#complete-c-code">Complete C++ Code</a></li>
-<li><a class="reference internal" href="#how-to-run">How to run</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#how-to-run">How to Run</a><ul>
+<li><a class="reference internal" href="#command-line">Command Line</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
