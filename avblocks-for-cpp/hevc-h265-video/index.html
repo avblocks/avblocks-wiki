@@ -3,20 +3,20 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="This section contains topics about Opus audio encoding and decoding." name="description" />
-<meta property="og:title" content="Opus Audio" />
+<meta content="This section contains topics about HEVC / H.265 video encoding, decoding, and parsing." name="description" />
+<meta property="og:title" content="High Efficiency Video Coding (HEVC / H.265 / MPEG-H Part 2)" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/opus-audio/" />
+<meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/hevc-h265-video/" />
 <meta property="og:site_name" content="AVBlocks for C++" />
-<meta property="og:description" content="Overview: Opus is a totally open, royalty-free, highly versatile audio codec standardized by the IETF as RFC 6716. It was designed to handle a wide range of audio applications, from low-bitrate spe..." />
+<meta property="og:description" content="HEVC (High Efficiency Video Coding), also known as H.265 or MPEG-H Part 2, is a video compression standard designed to improve upon H.264/AVC. It delivers approximately twice the data compression r..." />
 <meta property="og:image" content="https://wiki.avblocks.com/_static/og-image.png" />
 <meta property="og:image:alt" content="AVBlocks for C++" />
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wiki.avblocks.com/_static/og-image.png">
-<link rel="search" title="Search" href="../../search/" /><link rel="next" title="Video Codecs" href="../video-codecs/" /><link rel="prev" title="MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)" href="../mpeg-audio/" />
-        <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/opus-audio/" />
+<link rel="search" title="Search" href="../../search/" /><link rel="prev" title="Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)" href="../avc-h264-video/" />
+        <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/hevc-h265-video/" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>Opus Audio - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>High Efficiency Video Coding (HEVC / H.265 / MPEG-H Part 2) - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ba64e249" />
@@ -398,16 +398,16 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Codecs</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../audio-codecs/">Audio Codecs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of Audio Codecs</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../audio-codecs/">Audio Codecs</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle navigation of Audio Codecs</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../aac-audio/">AAC Audio (MPEG-2 Part 7 / MPEG-4 Part 3)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../g711-audio/">G.711 Audio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../mpeg-audio/">MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Opus Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opus-audio/">Opus Audio</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../video-codecs/">Video Codecs</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><div class="visually-hidden">Toggle navigation of Video Codecs</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../video-codecs/">Video Codecs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><div class="visually-hidden">Toggle navigation of Video Codecs</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../avc-h264-video/">Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hevc-h265-video/">High Efficiency Video Coding (HEVC / H.265 / MPEG-H Part 2)</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">High Efficiency Video Coding (HEVC / H.265 / MPEG-H Part 2)</a></li>
 </ul>
 </li>
 </ul>
@@ -444,83 +444,51 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="opus-audio">
-<h1>Opus Audio<a class="headerlink" href="#opus-audio" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>Opus is a totally open, royalty-free, highly versatile audio codec standardized by the IETF as <a class="reference external" href="https://tools.ietf.org/html/rfc6716">RFC 6716</a>. It was designed to handle a wide range of audio applications, from low-bitrate speech to high-fidelity music, making it one of the most flexible audio codecs available today.</p>
-<p>Opus uses a hybrid design that combines two underlying codecs:</p>
+          <section id="high-efficiency-video-coding-hevc-h-265-mpeg-h-part-2">
+<h1>High Efficiency Video Coding (HEVC / H.265 / MPEG-H Part 2)<a class="headerlink" href="#high-efficiency-video-coding-hevc-h-265-mpeg-h-part-2" title="Link to this heading">¶</a></h1>
+<p>HEVC (High Efficiency Video Coding), also known as H.265 or MPEG-H Part 2, is a video compression standard designed to improve upon H.264/AVC. It delivers approximately twice the data compression ratio at the same video quality, or significantly improved video quality at the same bit rate.</p>
+<p>Key features of H.265/HEVC include:</p>
 <ul class="simple">
-<li><p><strong>SILK</strong> (from Skype) - Optimized for speech compression, providing excellent quality at low bitrates for voice communications</p></li>
-<li><p><strong>CELT</strong> (from Xiph.Org) - Optimized for music and general audio, delivering high-fidelity sound reproduction</p></li>
+<li><p><strong>Superior Compression</strong> - Achieves up to 50% better compression than H.264/AVC at the same quality level</p></li>
+<li><p><strong>Support for Higher Resolutions</strong> - Designed for 4K, 8K, and even 16K video content</p></li>
+<li><p><strong>Flexible Block Structure</strong> - Uses Coding Tree Units (CTUs) up to 64x64 pixels, compared to H.264’s 16x16 maximum</p></li>
+<li><p><strong>Improved Predictive Coding</strong> - More efficient intra and inter prediction modes with 35 directional modes vs H.264’s 9</p></li>
+<li><p><strong>Hardware Acceleration</strong> - Supported by modern GPUs including NVIDIA NVENC/NVDEC and Apple Video Toolbox</p></li>
 </ul>
-<p>The codec can seamlessly switch between these modes or blend them together depending on the audio content, ensuring optimal quality regardless of the source material.</p>
-<section id="key-characteristics">
-<h3>Key Characteristics<a class="headerlink" href="#key-characteristics" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Feature</p></th>
-<th class="head text-left"><p>Specification</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p>Bitrate range</p></td>
-<td class="text-left"><p>6 kbps to 510 kbps</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Sample rates</p></td>
-<td class="text-left"><p>8 kHz, 12 kHz, 16 kHz, 24 kHz, 48 kHz</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>Frame sizes</p></td>
-<td class="text-left"><p>2.5 ms, 5 ms, 10 ms, 20 ms, 40 ms, 60 ms</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Channels</p></td>
-<td class="text-left"><p>Mono, stereo, and up to 255 channels</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>Latency</p></td>
-<td class="text-left"><p>As low as 5 ms (algorithmic delay)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="main-use-cases">
-<h3>Main Use Cases<a class="headerlink" href="#main-use-cases" title="Link to this heading">¶</a></h3>
+<p>HEVC is used in 4K UHD broadcasting, streaming services (Apple TV+, Amazon Prime Video), video conferencing, and next-generation video storage.</p>
+<section id="hevc-stream-formats">
+<h2>HEVC Stream Formats<a class="headerlink" href="#hevc-stream-formats" title="Link to this heading">¶</a></h2>
+<p>HEVC video can be stored in different formats, with the two most common being:</p>
+<section id="annex-b-format">
+<h3>Annex B Format<a class="headerlink" href="#annex-b-format" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Voice over IP (VoIP)</strong> - WebRTC uses Opus as its mandatory audio codec</p></li>
-<li><p><strong>Video conferencing</strong> - Low latency and excellent speech quality</p></li>
-<li><p><strong>Streaming audio</strong> - Adaptive bitrate for varying network conditions</p></li>
-<li><p><strong>Storage</strong> - Typically stored in Ogg container as <code class="docutils literal notranslate"><span class="pre">.opus</span></code> files</p></li>
+<li><p><strong>Start code format</strong> - NAL units are separated by start codes (0x000001 or 0x00000001)</p></li>
+<li><p><strong>Used in streams</strong> - Elementary streams, MPEG-TS, broadcasting, and real-time transmission</p></li>
+<li><p><strong>Self-contained</strong> - VPS/SPS/PPS are embedded in the stream itself</p></li>
+<li><p><strong>Stream-friendly</strong> - Can be decoded directly without additional metadata</p></li>
 </ul>
 </section>
-<section id="advantages">
-<h3>Advantages<a class="headerlink" href="#advantages" title="Link to this heading">¶</a></h3>
+<section id="hevc1-hevcc-format">
+<h3>HEVC1 (HEVCC Format)<a class="headerlink" href="#hevc1-hevcc-format" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Very low latency</strong> - Suitable for real-time communications</p></li>
-<li><p><strong>Excellent quality at low bitrates</strong> - Outperforms most codecs below 64 kbps</p></li>
-<li><p><strong>Dynamic adaptation</strong> - Seamlessly switches between speech and music modes</p></li>
-<li><p><strong>Royalty-free and open source</strong> - No licensing fees required</p></li>
-<li><p><strong>Superior compression</strong> - Better quality than MP3, AAC, and Vorbis at most bitrates</p></li>
+<li><p><strong>Length-prefixed format</strong> - Each NAL unit is prefixed with its length (typically 4 bytes)</p></li>
+<li><p><strong>Used in containers</strong> - MP4, MOV, MKV, and other container formats</p></li>
+<li><p><strong>Requires extradata</strong> - VPS/SPS/PPS (Video/Sequence/Picture Parameter Sets) are stored separately in the container header</p></li>
+<li><p><strong>Not self-contained</strong> - Cannot be decoded without the extradata from the container</p></li>
 </ul>
-<p>Opus was designed to replace both Speex (speech) and Vorbis (music) with a single codec that handles both equally well.</p>
-<p>AVBlocks provides comprehensive support for Opus encoding and decoding, allowing you to:</p>
-<ul class="simple">
-<li><p>Encode uncompressed PCM audio to Opus format</p></li>
-<li><p>Decode Opus streams to uncompressed PCM audio</p></li>
-<li><p>Work with various sample rates and channel configurations</p></li>
-</ul>
+<p>The choice between formats depends on the application: HEVC1 for file storage and containers, Annex B for streaming and broadcasting.</p>
 </section>
 </section>
-<section id="opus-encoding">
-<h2>Opus Encoding<a class="headerlink" href="#opus-encoding" title="Link to this heading">¶</a></h2>
+<section id="hevc-encoding">
+<h2>HEVC Encoding<a class="headerlink" href="#hevc-encoding" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-encoder/opus-encoder-run/"><span class="doc std std-doc">Opus Encoder (Run)</span></a> - Encode a WAV file to Opus using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
+<li><p><a class="reference internal" href="../transcoder-as-encoder/hevc-encoder-run/"><span class="doc std std-doc">HEVC / H.265 Annex B Encoder (Run)</span></a> - Encode a raw YUV file to HEVC Annex B elementary stream using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
 </ul>
 </section>
-<section id="opus-decoding">
-<h2>Opus Decoding<a class="headerlink" href="#opus-decoding" title="Link to this heading">¶</a></h2>
+<section id="hevc-decoding">
+<h2>HEVC Decoding<a class="headerlink" href="#hevc-decoding" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../transcoder-as-decoder/opus-decoder-run/"><span class="doc std std-doc">Opus Decoder (Run)</span></a> - Decode an Opus file to uncompressed PCM WAV using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
+<li><p><a class="reference internal" href="../transcoder-as-decoder/hevc-decoder-run/"><span class="doc std std-doc">HEVC / H.265 Annex B Decoder (Run)</span></a> - Decode an HEVC Annex B elementary stream to a raw YUV file using <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code></p></li>
 </ul>
 </section>
 </section>
@@ -530,23 +498,15 @@
       <footer>
         
 <div class="related-pages">
-  <a class="next-page" href="../video-codecs/">
-      <div class="page-info">
-        <div class="context">
-          <span>Next</span>
-        </div>
-        <div class="title">Video Codecs</div>
-      </div>
-      <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-    </a>
-  <a class="prev-page" href="../mpeg-audio/">
+  
+  <a class="prev-page" href="../avc-h264-video/">
       <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
       <div class="page-info">
         <div class="context">
           <span>Previous</span>
         </div>
         
-        <div class="title">MPEG-1 Audio and MPEG-2 Audio (Layer 1, 2 and 3)</div>
+        <div class="title">Advanced Video Coding (H.264 / MPEG-4 AVC / MPEG-4 Part 10)</div>
         
       </div>
     </a>
@@ -585,15 +545,14 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Opus Audio</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#key-characteristics">Key Characteristics</a></li>
-<li><a class="reference internal" href="#main-use-cases">Main Use Cases</a></li>
-<li><a class="reference internal" href="#advantages">Advantages</a></li>
+<li><a class="reference internal" href="#">High Efficiency Video Coding (HEVC / H.265 / MPEG-H Part 2)</a><ul>
+<li><a class="reference internal" href="#hevc-stream-formats">HEVC Stream Formats</a><ul>
+<li><a class="reference internal" href="#annex-b-format">Annex B Format</a></li>
+<li><a class="reference internal" href="#hevc1-hevcc-format">HEVC1 (HEVCC Format)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#opus-encoding">Opus Encoding</a></li>
-<li><a class="reference internal" href="#opus-decoding">Opus Decoding</a></li>
+<li><a class="reference internal" href="#hevc-encoding">HEVC Encoding</a></li>
+<li><a class="reference internal" href="#hevc-decoding">HEVC Decoding</a></li>
 </ul>
 </li>
 </ul>

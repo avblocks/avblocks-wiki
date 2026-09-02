@@ -3,20 +3,19 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="This topic describes the steps needed to configure a C++ console application in Visual Studio." name="description" />
-<meta property="og:title" content="Create a Console App in Visual Studio on Windows" />
+<meta content="HEVC / H.265 Annex B decoding articles for AVBlocks C++ API." name="description" />
+<meta property="og:title" content="HEVC / H.265 Annex B Decoder" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/getting-started-windows/create-a-c-plus-console-app-in-visual-studio/" />
+<meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/hevc-h265-index/" />
 <meta property="og:site_name" content="AVBlocks for C++" />
-<meta property="og:description" content="This topic describes the steps needed to configure a C++ Console App in Visual Studio. These steps have been verified to work with Visual Studio 2022 Community Edition, on Windows 11. The code snip..." />
 <meta property="og:image" content="https://wiki.avblocks.com/_static/og-image.png" />
 <meta property="og:image:alt" content="AVBlocks for C++" />
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wiki.avblocks.com/_static/og-image.png">
-<link rel="search" title="Search" href="../../../search/" /><link rel="next" title="Initialization and Termination" href="../../initialization-and-termination/" /><link rel="prev" title="Developing with Visual Studio Code on Windows" href="../developing-with-vscode/" />
-        <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/getting-started-windows/create-a-c-plus-console-app-in-visual-studio/" />
+<link rel="search" title="Search" href="../../../search/" /><link rel="next" title="HEVC / H.265 Annex B Decoder (Run)" href="../hevc-decoder-run/" /><link rel="prev" title="G.711 μ-law Decoder (Run)" href="../g711-ulaw-decoder-run/" />
+        <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-decoder/hevc-h265-index/" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>Create a Console App in Visual Studio on Windows - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>HEVC / H.265 Annex B Decoder - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=ba64e249" />
@@ -205,7 +204,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -229,7 +228,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started-linux/">Getting Started - Linux</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started - Linux</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../getting-started-linux/create-cpp-command-line-tool-cmake/">Create a Command Line Tool using CMake on Ubuntu</a></li>
@@ -242,10 +241,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../getting-started-macos/create-objc-command-line-tool-xcode/">Create a Command Line Tool in Xcode on macOS</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../">Getting Started - Windows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Getting Started - Windows</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../create-cpp-command-line-tool-cmake/">Create a Command Line Tool using CMake on Windows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../developing-with-vscode/">Developing with Visual Studio Code on Windows</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Create a Console App in Visual Studio on Windows</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting-started-windows/">Getting Started - Windows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Getting Started - Windows</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-windows/create-cpp-command-line-tool-cmake/">Create a Command Line Tool using CMake on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-windows/developing-with-vscode/">Developing with Visual Studio Code on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting-started-windows/create-a-c-plus-console-app-in-visual-studio/">Create a Console App in Visual Studio on Windows</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../initialization-and-termination/">Initialization and Termination</a></li>
@@ -270,7 +269,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../handling-errors/">Handling Errors</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Encoding &amp; Decoding</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../transcoder-as-encoder/">Transcoder as Encoder</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Transcoder as Encoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-encoder/aac-index/">AAC Audio Encoding</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of AAC Audio Encoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-encoder/aac-encoder-run/">AAC ADTS Encoder (Run)</a></li>
@@ -306,36 +305,36 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../transcoder-as-decoder/">Transcoder as Decoder</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of Transcoder as Decoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/aac-index/">AAC Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of AAC Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/aac-decoder-run/">AAC ADTS Decoder (Run)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/aac-decoder/">AAC ADTS Decoder (Pull)</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">Transcoder as Decoder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of Transcoder as Decoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../aac-index/">AAC Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of AAC Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../aac-decoder-run/">AAC ADTS Decoder (Run)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aac-decoder/">AAC ADTS Decoder (Pull)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-index/">AVC (H.264) Video Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of AVC (H.264) Video Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-decoder-run/">AVC / H.264 Annex B Decoder (Run)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-decoder/">AVC / H.264 Annex B Decoder (Pull)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/avc-h264-annex-b-parser/">AVC / H.264 Annex B Parser</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../avc-h264-index/">AVC (H.264) Video Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of AVC (H.264) Video Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../avc-h264-decoder-run/">AVC / H.264 Annex B Decoder (Run)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../avc-h264-decoder/">AVC / H.264 Annex B Decoder (Pull)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../avc-h264-annex-b-parser/">AVC / H.264 Annex B Parser</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/g711-alaw-index/">G.711 (A-law) Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of G.711 (A-law) Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/g711-alaw-decoder-run/">G.711 A-law Decoder (Run)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../g711-alaw-index/">G.711 (A-law) Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of G.711 (A-law) Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../g711-alaw-decoder-run/">G.711 A-law Decoder (Run)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/g711-ulaw-index/">G.711 (u-law) Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of G.711 (u-law) Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/g711-ulaw-decoder-run/">G.711 μ-law Decoder (Run)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../g711-ulaw-index/">G.711 (u-law) Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of G.711 (u-law) Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../g711-ulaw-decoder-run/">G.711 μ-law Decoder (Run)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/hevc-h265-index/">HEVC / H.265 Annex B Decoder</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of HEVC / H.265 Annex B Decoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/hevc-decoder-run/">HEVC / H.265 Annex B Decoder (Run)</a></li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">HEVC / H.265 Annex B Decoder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of HEVC / H.265 Annex B Decoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hevc-decoder-run/">HEVC / H.265 Annex B Decoder (Run)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/mp3-index/">MP3 Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of MP3 Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/mp3-decoder-run/">MP3 Decoder (Run)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../mp3-index/">MP3 Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of MP3 Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mp3-decoder-run/">MP3 Decoder (Run)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/opus-index/">Opus Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Opus Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/opus-decoder-run/">Opus Decoder (Run)</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../opus-index/">Opus Audio Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Opus Audio Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../opus-decoder-run/">Opus Decoder (Run)</a></li>
 </ul>
 </li>
 </ul>
@@ -438,157 +437,16 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="create-a-console-app-in-visual-studio-on-windows">
-<h1>Create a Console App in Visual Studio on Windows<a class="headerlink" href="#create-a-console-app-in-visual-studio-on-windows" title="Link to this heading">¶</a></h1>
-<p>This topic describes the steps needed to configure a C++ Console App in Visual Studio. These steps have been verified to work with Visual Studio 2022 Community Edition, on Windows 11.</p>
-<p>The code snippets used in this article are from the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/windows/simple_converter">simple_converter Windows sample</a>.
-This sample takes a WMV media file as input and converts it to H.265/HEVC video and AAC audio in MP4 container.</p>
-<section id="create-the-visual-studio-project">
-<h2>Create the Visual Studio project<a class="headerlink" href="#create-the-visual-studio-project" title="Link to this heading">¶</a></h2>
-<ol class="arabic">
-<li><p>Create a C++, Console App in Visual Studio. Name the project <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>. Check <code class="docutils literal notranslate"><span class="pre">Place</span> <span class="pre">solution</span> <span class="pre">and</span> <span class="pre">project</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">directory</span></code>.</p></li>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code> - the version number may differ.</p>
-<p>You can also download it with PowerShell from the Visual Studio solution directory:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
-<span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
-
-<span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
-    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
-    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span>
-</pre></div>
+          <section id="hevc-h-265-annex-b-decoder">
+<h1>HEVC / H.265 Annex B Decoder<a class="headerlink" href="#hevc-h-265-annex-b-decoder" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
 </div>
-</li>
-<li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the Visual Studio solution directory. The Visual Studio solution is the directory that contains the <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file.</p>
-<p>If you downloaded the archive to the Visual Studio solution directory with PowerShell, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Expand-Archive</span> <span class="p">`</span>
-    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
-    <span class="n">-DestinationPath</span> <span class="s2">&quot;./avblocks&quot;</span> <span class="n">-Force</span>
-</pre></div>
-</div>
-<p>You should end up with a directory structure similar to the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>simple-converter
-├───avblocks
-│   ├───include
-│   └───lib
-├───simple-converter.cpp
-├───simple-converter.sln
-└───simple-converter.vcxproj
-</pre></div>
-</div>
-</li>
-<li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">simple-converter.cpp</span></code> with this code:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/avblocks/avb.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/reference++.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;primo/platform/ustring.h&gt;</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span>
-
-<span class="c1">// link with AVBlocks64.lib</span>
-<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
-
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">avblocks</span><span class="p">;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">wmain</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">wchar_t</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// needed for WMV</span>
-<span class="w">    </span><span class="n">CoInitializeEx</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">COINITBASE_MULTITHREADED</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife.wmv&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">outputFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="sa">L</span><span class="s">&quot;Wildlife_h265_aac.mp4&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inputInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaInfo</span><span class="p">());</span>
-<span class="w">    </span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputInfo</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
-<span class="w">            </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">inputInfo</span><span class="p">.</span><span class="n">get</span><span class="p">())</span>
-<span class="w">        </span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Start with MP4 / H.264 + AAC preset, then change video to H.265</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outputSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span>
-<span class="w">            </span><span class="n">Library</span><span class="o">::</span><span class="n">createMediaSocket</span><span class="p">(</span><span class="n">Preset</span><span class="o">::</span><span class="n">Video</span><span class="o">::</span><span class="n">Generic</span><span class="o">::</span><span class="n">MP4</span><span class="o">::</span><span class="n">Base_H264_AAC</span><span class="p">)</span>
-<span class="w">        </span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Get the output video stream info and modify it for H.265/HEVC</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">outVideoStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">VideoStreamInfo</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">outputSocket</span>
-<span class="w">                                                            </span><span class="o">-&gt;</span><span class="n">pins</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">                                                            </span><span class="o">-&gt;</span><span class="n">streamInfo</span><span class="p">());</span>
-<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setStreamType</span><span class="p">(</span><span class="n">StreamType</span><span class="o">::</span><span class="n">H265</span><span class="p">);</span>
-<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setStreamSubType</span><span class="p">(</span><span class="n">StreamSubType</span><span class="o">::</span><span class="n">HEVC_Annex_B</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// With H.265/HEVC we can use lower bitrate, e.g. 500 kbps</span>
-<span class="w">        </span><span class="n">outVideoStream</span><span class="o">-&gt;</span><span class="n">setBitrate</span><span class="p">(</span><span class="mi">500&#39;000</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Change the output file name</span>
-<span class="w">        </span><span class="n">outputSocket</span><span class="o">-&gt;</span><span class="n">setFile</span><span class="p">(</span><span class="n">outputFile</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Create Transcoder and configure it with</span>
-<span class="w">        </span><span class="c1">// the input and output sockets</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">transcoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">make_ref</span><span class="p">(</span><span class="n">Library</span><span class="o">::</span><span class="n">createTranscoder</span><span class="p">());</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">inputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">outputSocket</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-
-<span class="w">        </span><span class="c1">// Allow demo mode for the transcoder when</span>
-<span class="w">        </span><span class="c1">// using the demo version of the library</span>
-<span class="w">        </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">setAllowDemoMode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Run the transcoder</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
-<span class="w">            </span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">wcerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;transcoder-&gt;open() failed: &quot;</span>
-<span class="w">                       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">primo</span><span class="o">::</span><span class="n">ustring</span><span class="p">(</span><span class="n">transcoder</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">())</span>
-<span class="w">                       </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">Library</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">CoUninitialize</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</li>
-<li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">|</span> <span class="pre">Configuration</span> <span class="pre">Manager</span></code> from the menu, then select the <code class="docutils literal notranslate"><span class="pre">x64</span></code> platform to the solution platforms.</p></li>
-<li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">|</span> <span class="pre">simple-converter</span> <span class="pre">Properties</span></code> from the menu, then <code class="docutils literal notranslate"><span class="pre">C++</span> <span class="pre">|</span> <span class="pre">General</span></code>, then add <code class="docutils literal notranslate"><span class="pre">./avblocks/include</span></code> to <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Include</span> <span class="pre">Directories</span></code>.</p></li>
-<li><p>Build the project (Ctrl + Shift + B).</p></li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
-</ol>
-</section>
-<section id="run-the-application">
-<h2>Run the application<a class="headerlink" href="#run-the-application" title="Link to this heading">¶</a></h2>
-<ol class="arabic">
-<li><p>Download the <code class="docutils literal notranslate"><span class="pre">Wildlife.wmv</span></code> sample file and save it in the Visual Studio solution directory (next to the <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file):</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
-    <span class="n">-Uri</span> <span class="n">https</span><span class="p">://</span><span class="n">archive</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">WildlifeSampleVideo</span><span class="p">/</span><span class="n">Wildlife</span><span class="p">.</span><span class="n">wmv</span> <span class="p">`</span>
-    <span class="n">-OutFile</span> <span class="n">Wildlife</span><span class="p">.</span><span class="n">wmv</span>
-</pre></div>
-</div>
-</li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
-<li><p>Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> will be in the solution directory.</p></li>
-</ol>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> to solve that.</p></li>
-</ul>
-</section>
 </section>
 
         </article>
@@ -596,23 +454,23 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
       <footer>
         
 <div class="related-pages">
-  <a class="next-page" href="../../initialization-and-termination/">
+  <a class="next-page" href="../hevc-decoder-run/">
       <div class="page-info">
         <div class="context">
           <span>Next</span>
         </div>
-        <div class="title">Initialization and Termination</div>
+        <div class="title">HEVC / H.265 Annex B Decoder (Run)</div>
       </div>
       <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
     </a>
-  <a class="prev-page" href="../developing-with-vscode/">
+  <a class="prev-page" href="../g711-ulaw-decoder-run/">
       <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
       <div class="page-info">
         <div class="context">
           <span>Previous</span>
         </div>
         
-        <div class="title">Developing with Visual Studio Code on Windows</div>
+        <div class="title">G.711 μ-law Decoder (Run)</div>
         
       </div>
     </a>
@@ -639,29 +497,8 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Create a Console App in Visual Studio on Windows</a><ul>
-<li><a class="reference internal" href="#create-the-visual-studio-project">Create the Visual Studio project</a></li>
-<li><a class="reference internal" href="#run-the-application">Run the application</a></li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
