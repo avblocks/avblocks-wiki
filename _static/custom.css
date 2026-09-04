@@ -29,6 +29,15 @@
 }
 
 /* Hide top nav on mobile (Furo mobile header takes over) */
+.sidebar-scroll {
+  /* Keep restoring the navigation position instantaneous. */
+  scroll-behavior: auto;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
 @media (max-width: 46em) {
   .top-nav {
     display: none;
