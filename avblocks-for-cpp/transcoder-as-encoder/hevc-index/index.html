@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="HEVC H.265 video encoding with AVBlocks Transcoder" name="description" />
-<meta property="og:title" content="HEVC / H.265 Annex B Encoder" />
+<meta property="og:title" content="HEVC (H.265) Encoding" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/hevc-index/" />
 <meta property="og:site_name" content="AVBlocks for C++" />
@@ -16,7 +16,7 @@
 <link rel="search" title="Search" href="../../../search/" /><link rel="next" title="HEVC / H.265 Annex B Encoder (Run)" href="../hevc-encoder-run/" /><link rel="prev" title="G.711 μ-law Encoder (Run)" href="../g711-ulaw-encoder-run/" />
         <link rel="canonical" href="https://wiki.avblocks.com/avblocks-for-cpp/transcoder-as-encoder/hevc-index/" />
 
-    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>HEVC / H.265 Annex B Encoder - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 --><title>HEVC (H.265) Encoding - AVBlocks for C++</title><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2283dd69" />
@@ -291,7 +291,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../g711-ulaw-encoder-run/">G.711 μ-law Encoder (Run)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">HEVC / H.265 Annex B Encoder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of HEVC / H.265 Annex B Encoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">HEVC (H.265) Encoding</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of HEVC (H.265) Encoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../hevc-encoder-run/">HEVC / H.265 Annex B Encoder (Run)</a></li>
 </ul>
 </li>
@@ -338,7 +338,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/g711-ulaw-decoder-run/">G.711 μ-law Decoder (Run)</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/hevc-h265-index/">HEVC / H.265 Annex B Decoder</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle navigation of HEVC / H.265 Annex B Decoder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../transcoder-as-decoder/hevc-h265-index/">HEVC / H.265 Decoding</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle navigation of HEVC / H.265 Decoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../transcoder-as-decoder/hevc-decoder-run/">HEVC / H.265 Annex B Decoder (Run)</a></li>
 </ul>
 </li>
@@ -382,6 +382,7 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../working-containers/">Working with Containers</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><div class="visually-hidden">Toggle navigation of Working with Containers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../working-containers/mux-audio-video-mp4/">Mux Audio and Video Into MP4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-containers/mux-audio-video-webm/">Mux Audio and Video Into WebM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../working-containers/re-encode-audio-video-streams/">Re-encode Audio and Video Streams</a></li>
 </ul>
 </li>
@@ -468,8 +469,8 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="hevc-h-265-annex-b-encoder">
-<h1>HEVC / H.265 Annex B Encoder<a class="headerlink" href="#hevc-h-265-annex-b-encoder" title="Link to this heading">¶</a></h1>
+          <section id="hevc-h-265-encoding">
+<h1>HEVC (H.265) Encoding<a class="headerlink" href="#hevc-h-265-encoding" title="Link to this heading">¶</a></h1>
 <p>This sample shows how to encode raw YUV video to an HEVC / H.265 Annex B elementary stream with <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code>.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../hevc-encoder-run/"><span class="std std-doc">HEVC / H.265 Encoder (Run)</span></a> - Encode raw YUV video to an HEVC / H.265 Annex B elementary stream with <code class="docutils literal notranslate"><span class="pre">Transcoder::run</span></code>.</p></li>
