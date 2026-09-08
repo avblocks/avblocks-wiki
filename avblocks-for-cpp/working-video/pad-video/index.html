@@ -738,6 +738,20 @@
 </pre></div>
 </div>
 </section>
+<section id="how-to-run">
+<h2>How to Run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h2>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_video_pad">simple_video_pad</a> example for details.</p>
+<p>Download the sample video, the MP4 file from the TED talk video <a class="reference external" href="https://archive.org/details/AndrewConnolly_2014">What’s the next window into our universe?</a> by Andrew Connolly (Wide 480p, 854x480, 16:9):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>samples/darwin/simple_video_pad
+curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>AndrewConnolly_2014.mp4<span class="w"> </span><span class="s2">&quot;https://archive.org/download/AndrewConnolly_2014/AndrewConnolly_2014.mp4&quot;</span>
+</pre></div>
+</div>
+<p>Run the sample from the sample directory (the input/output file paths are relative to the working directory):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>../../../bin/x64/simple_video_pad
+</pre></div>
+</div>
+<p>The padded output file <code class="docutils literal notranslate"><span class="pre">AndrewConnolly_2014_640x480_Padded.mp4</span></code> will be created in the <code class="docutils literal notranslate"><span class="pre">samples/darwin/simple_video_pad</span></code> directory.</p>
+</section>
 </section>
 
         </article>
@@ -812,6 +826,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#complete-c-code">Complete C++ Code</a></li>
+<li><a class="reference internal" href="#how-to-run">How to Run</a></li>
 </ul>
 </li>
 </ul>

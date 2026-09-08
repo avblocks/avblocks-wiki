@@ -665,6 +665,21 @@
 </pre></div>
 </div>
 </section>
+<section id="how-to-run">
+<h2>How to Run<a class="headerlink" href="#how-to-run" title="Link to this heading">¶</a></h2>
+<p>See the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/blob/main/docs/build-mac.md">build instructions</a> for macOS and the <a class="reference external" href="https://github.com/avblocks/avblocks-cpp/tree/main/samples/darwin/simple_audio_upsample">simple_audio_upsample</a> example for details.</p>
+<p>Download the sample audio, the <code class="docutils literal notranslate"><span class="pre">kahvi011_kennybeltrey-hydrate.mp3</span></code> song from the <a class="reference external" href="https://archive.org/details/kahvi011">Internet Archive</a> (MPEG Audio Layer 3, 44.1 KHz, Joint Stereo):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>samples/darwin/simple_audio_upsample
+curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>kahvi011_kennybeltrey-hydrate.mp3<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://archive.org/download/kahvi011/kahvi011_kennybeltrey-hydrate.mp3
+</pre></div>
+</div>
+<p>Run the sample from the sample directory (the input/output file paths are relative to the working directory):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>../../../bin/x64/simple_audio_upsample
+</pre></div>
+</div>
+<p>The upsampled output file <code class="docutils literal notranslate"><span class="pre">kahvi011_kennybeltrey-hydrate_48Khz.mp3</span></code> will be created in the <code class="docutils literal notranslate"><span class="pre">samples/darwin/simple_audio_upsample</span></code> directory.</p>
+</section>
 </section>
 
         </article>
@@ -738,6 +753,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#complete-c-code">Complete C++ Code</a></li>
+<li><a class="reference internal" href="#how-to-run">How to Run</a></li>
 </ul>
 </li>
 </ul>
