@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="Download and install the AVBlocks demo version on Linux, macOS, or Windows." name="description" />
+<meta content="Download and install the AVBlocks demo version on Linux, macOS, or Windows, for x64 and ARM64." name="description" />
 <meta property="og:title" content="Installation" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://wiki.avblocks.com/avblocks-for-cpp/installation/" />
 <meta property="og:site_name" content="AVBlocks for C++" />
-<meta property="og:description" content="Download and install the AVBlocks demo version on your platform. Linux: Download: Verify Integrity (Optional): Extract: The extracted files will be placed under./avblocks/. macOS: Download: Verify ..." />
+<meta property="og:description" content="Download and install the AVBlocks demo version on your platform. Builds are available for both x64 and ARM64. Choose the section that matches your machine. Linux: x64 (x86_64): Use this build on x8..." />
 <meta property="og:image" content="https://wiki.avblocks.com/_static/og-image.png" />
 <meta property="og:image:alt" content="AVBlocks for C++" />
 <meta name="twitter:card" content="summary_large_image">
@@ -506,11 +506,14 @@
         <article role="main" id="furo-main-content">
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
-<p>Download and install the AVBlocks demo version on your platform.</p>
+<p>Download and install the AVBlocks demo version on your platform. Builds are available for both x64 and ARM64. Choose the section that matches your machine.</p>
 <section id="linux">
 <h2>Linux<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h2>
+<section id="x64-x86-64">
+<h3>x64 (x86_64)<a class="headerlink" href="#x64-x86-64" title="Link to this heading">¶</a></h3>
+<p>Use this build on x86_64 machines (<code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code> prints <code class="docutils literal notranslate"><span class="pre">x86_64</span></code>).</p>
 <section id="download">
-<h3>Download<a class="headerlink" href="#download" title="Link to this heading">¶</a></h3>
+<h4>Download<a class="headerlink" href="#download" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
@@ -521,7 +524,7 @@ curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
 </div>
 </section>
 <section id="verify-integrity-optional">
-<h3>Verify Integrity (Optional)<a class="headerlink" href="#verify-integrity-optional" title="Link to this heading">¶</a></h3>
+<h4>Verify Integrity (Optional)<a class="headerlink" href="#verify-integrity-optional" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux.tar.gz.sha256&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux.tar.gz.sha256&quot;</span>
@@ -531,7 +534,7 @@ sha256sum<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quo
 </div>
 </section>
 <section id="extract">
-<h3>Extract<a class="headerlink" href="#extract" title="Link to this heading">¶</a></h3>
+<h4>Extract<a class="headerlink" href="#extract" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
 tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux.tar.gz&quot;</span><span class="w"> </span>-C<span class="w"> </span>./avblocks<span class="w"> </span>--strip-components<span class="o">=</span><span class="m">1</span>
 </pre></div>
@@ -539,11 +542,48 @@ tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">&quot;av
 <p>The extracted files will be placed under <code class="docutils literal notranslate"><span class="pre">./avblocks/</span></code>.</p>
 </section>
 </section>
+<section id="arm64-aarch64">
+<h3>ARM64 (aarch64)<a class="headerlink" href="#arm64-aarch64" title="Link to this heading">¶</a></h3>
+<p>Use this build on ARM64 / aarch64 machines (<code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code> prints <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>).</p>
+<section id="id1">
+<h4>Download<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
+<span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
+
+curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux-arm64.tar.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux-arm64.tar.gz&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Verify Integrity (Optional)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux-arm64.tar.gz.sha256&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux-arm64.tar.gz.sha256&quot;</span>
+
+sha256sum<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux-arm64.tar.gz.sha256&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>Extract<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
+tar<span class="w"> </span>-xzf<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-linux-arm64.tar.gz&quot;</span><span class="w"> </span>-C<span class="w"> </span>./avblocks<span class="w"> </span>--strip-components<span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>The extracted files will be placed under <code class="docutils literal notranslate"><span class="pre">./avblocks/</span></code>.</p>
+</section>
+</section>
+</section>
 <hr class="docutils" />
 <section id="macos">
 <h2>macOS<a class="headerlink" href="#macos" title="Link to this heading">¶</a></h2>
-<section id="id1">
-<h3>Download<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="intel-x86-64">
+<h3>Intel (x86_64)<a class="headerlink" href="#intel-x86-64" title="Link to this heading">¶</a></h3>
+<p>Use this build on Intel Macs (<code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code> prints <code class="docutils literal notranslate"><span class="pre">x86_64</span></code>).</p>
+<section id="id4">
+<h4>Download<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
@@ -553,8 +593,8 @@ curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
 </pre></div>
 </div>
 </section>
-<section id="id2">
-<h3>Verify Integrity (Optional)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<section id="id5">
+<h4>Verify Integrity (Optional)<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip.sha256&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip.sha256&quot;</span>
@@ -564,8 +604,8 @@ shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</spa
 </div>
 <p>The output should match the contents of the <code class="docutils literal notranslate"><span class="pre">.sha256</span></code> file.</p>
 </section>
-<section id="id3">
-<h3>Extract<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h4>Extract<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
 unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span><span class="w"> </span>-d<span class="w"> </span>./avblocks
 </pre></div>
@@ -573,11 +613,49 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 <p>The extracted files will be placed under <code class="docutils literal notranslate"><span class="pre">./avblocks/</span></code>.</p>
 </section>
 </section>
+<section id="apple-silicon-arm64">
+<h3>Apple Silicon (arm64)<a class="headerlink" href="#apple-silicon-arm64" title="Link to this heading">¶</a></h3>
+<p>Use this build on Apple Silicon Macs (M1 and later; <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code> prints <code class="docutils literal notranslate"><span class="pre">arm64</span></code>).</p>
+<section id="id7">
+<h4>Download<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
+<span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
+
+curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin-arm64.zip&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin-arm64.zip&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h4>Verify Integrity (Optional)<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin-arm64.zip.sha256&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin-arm64.zip.sha256&quot;</span>
+
+shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin-arm64.zip&quot;</span>
+</pre></div>
+</div>
+<p>The output should match the contents of the <code class="docutils literal notranslate"><span class="pre">.sha256</span></code> file.</p>
+</section>
+<section id="id9">
+<h4>Extract<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
+unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin-arm64.zip&quot;</span><span class="w"> </span>-d<span class="w"> </span>./avblocks
+</pre></div>
+</div>
+<p>The extracted files will be placed under <code class="docutils literal notranslate"><span class="pre">./avblocks/</span></code>.</p>
+</section>
+</section>
+</section>
 <hr class="docutils" />
 <section id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h2>
-<section id="id4">
-<h3>Download<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="x64-amd64">
+<h3>x64 (AMD64)<a class="headerlink" href="#x64-amd64" title="Link to this heading">¶</a></h3>
+<p>Use this build when <code class="docutils literal notranslate"><span class="pre">$env:PROCESSOR_ARCHITECTURE</span></code> is <code class="docutils literal notranslate"><span class="pre">AMD64</span></code>.</p>
+<section id="id10">
+<h4>Download<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
@@ -587,12 +665,9 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 </pre></div>
 </div>
 </section>
-<section id="id5">
-<h3>Verify Integrity (Optional)<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
-<span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
-
-<span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
+<section id="id11">
+<h4>Verify Integrity (Optional)<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
     <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows.zip.sha256&quot;</span> <span class="p">`</span>
     <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows.zip.sha256&quot;</span>
 
@@ -601,14 +676,50 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 </div>
 <p>The output should match the contents of the <code class="docutils literal notranslate"><span class="pre">.sha256</span></code> file.</p>
 </section>
-<section id="id6">
-<h3>Extract<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<section id="id12">
+<h4>Extract<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Expand-Archive</span> <span class="p">`</span>
     <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
     <span class="n">-DestinationPath</span> <span class="s2">&quot;./avblocks&quot;</span> <span class="n">-Force</span>
 </pre></div>
 </div>
 <p>The extracted files will be placed under <code class="docutils literal notranslate"><span class="pre">.\avblocks\</span></code>.</p>
+</section>
+</section>
+<section id="arm64">
+<h3>ARM64<a class="headerlink" href="#arm64" title="Link to this heading">¶</a></h3>
+<p>Use this build on Windows on ARM, when <code class="docutils literal notranslate"><span class="pre">$env:PROCESSOR_ARCHITECTURE</span></code> is <code class="docutils literal notranslate"><span class="pre">ARM64</span></code>.</p>
+<section id="id13">
+<h4>Download<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
+<span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
+
+<span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
+    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows-arm64.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows-arm64.zip&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h4>Verify Integrity (Optional)<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
+    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows-arm64.zip.sha256&quot;</span> <span class="p">`</span>
+    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows-arm64.zip.sha256&quot;</span>
+
+<span class="nb">Get-FileHash</span> <span class="n">-Algorithm</span> <span class="n">SHA256</span> <span class="s2">&quot;avblocks-${Version}-windows-arm64.zip&quot;</span>
+</pre></div>
+</div>
+<p>The output should match the contents of the <code class="docutils literal notranslate"><span class="pre">.sha256</span></code> file.</p>
+</section>
+<section id="id15">
+<h4>Extract<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Expand-Archive</span> <span class="p">`</span>
+    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-windows-arm64.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-DestinationPath</span> <span class="s2">&quot;./avblocks&quot;</span> <span class="n">-Force</span>
+</pre></div>
+</div>
+<p>The extracted files will be placed under <code class="docutils literal notranslate"><span class="pre">.\avblocks\</span></code>.</p>
+</section>
 </section>
 </section>
 </section>
@@ -675,21 +786,48 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
             <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
 <li><a class="reference internal" href="#linux">Linux</a><ul>
+<li><a class="reference internal" href="#x64-x86-64">x64 (x86_64)</a><ul>
 <li><a class="reference internal" href="#download">Download</a></li>
 <li><a class="reference internal" href="#verify-integrity-optional">Verify Integrity (Optional)</a></li>
 <li><a class="reference internal" href="#extract">Extract</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#macos">macOS</a><ul>
+<li><a class="reference internal" href="#arm64-aarch64">ARM64 (aarch64)</a><ul>
 <li><a class="reference internal" href="#id1">Download</a></li>
 <li><a class="reference internal" href="#id2">Verify Integrity (Optional)</a></li>
 <li><a class="reference internal" href="#id3">Extract</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#windows">Windows</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#macos">macOS</a><ul>
+<li><a class="reference internal" href="#intel-x86-64">Intel (x86_64)</a><ul>
 <li><a class="reference internal" href="#id4">Download</a></li>
 <li><a class="reference internal" href="#id5">Verify Integrity (Optional)</a></li>
 <li><a class="reference internal" href="#id6">Extract</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apple-silicon-arm64">Apple Silicon (arm64)</a><ul>
+<li><a class="reference internal" href="#id7">Download</a></li>
+<li><a class="reference internal" href="#id8">Verify Integrity (Optional)</a></li>
+<li><a class="reference internal" href="#id9">Extract</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#windows">Windows</a><ul>
+<li><a class="reference internal" href="#x64-amd64">x64 (AMD64)</a><ul>
+<li><a class="reference internal" href="#id10">Download</a></li>
+<li><a class="reference internal" href="#id11">Verify Integrity (Optional)</a></li>
+<li><a class="reference internal" href="#id12">Extract</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#arm64">ARM64</a><ul>
+<li><a class="reference internal" href="#id13">Download</a></li>
+<li><a class="reference internal" href="#id14">Verify Integrity (Optional)</a></li>
+<li><a class="reference internal" href="#id15">Extract</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

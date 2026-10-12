@@ -569,8 +569,11 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <span class="nv">$vs_install_dir</span> <span class="p">=</span> <span class="p">$(</span><span class="nb">Get-VSSetupInstance</span> <span class="p">|</span> <span class="nb">Select-VSSetupInstance</span> <span class="n">-Version</span> <span class="s1">&#39;[17.0,18.0]&#39;</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">InstallationPath</span><span class="p">)</span>
 <span class="nv">$vs_common_tools</span> <span class="p">=</span> <span class="s2">&quot;${vs_install_dir}/Common7/Tools/&quot;</span>
 
-<span class="c"># run VsDevCmd.bat for x64 C++ compiler and save the environment to a file</span>
-<span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot; </span><span class="se">`&quot;</span><span class="s2">$vs_common_tools/VsDevCmd.bat</span><span class="se">`&quot;</span><span class="s2"> -arch=amd64 -host_arch=amd64 &amp;&amp; set &gt; </span><span class="se">`&quot;</span><span class="s2">$tempFile</span><span class="se">`&quot;</span><span class="s2">&quot;</span>
+<span class="c"># use the C++ compiler for the host architecture: x64 (amd64) or ARM64 (arm64)</span>
+<span class="nv">$arch</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$env:PROCESSOR_ARCHITECTURE</span> <span class="o">-eq</span> <span class="s1">&#39;ARM64&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="s1">&#39;arm64&#39;</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="s1">&#39;amd64&#39;</span> <span class="p">}</span>
+
+<span class="c"># run VsDevCmd.bat for the C++ compiler and save the environment to a file</span>
+<span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="s2">&quot; </span><span class="se">`&quot;</span><span class="s2">$vs_common_tools/VsDevCmd.bat</span><span class="se">`&quot;</span><span class="s2"> -arch=$arch -host_arch=$arch &amp;&amp; set &gt; </span><span class="se">`&quot;</span><span class="s2">$tempFile</span><span class="se">`&quot;</span><span class="s2">&quot;</span>
 
 <span class="c"># set the environment into PowerShell</span>
 <span class="nb">Get-Content</span> <span class="nv">$tempFile</span> <span class="p">|</span> <span class="k">Foreach</span><span class="n">-Object</span> <span class="p">{</span>
@@ -606,21 +609,41 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <section id="update-for-avblocks">
 <h2>Update for AVBlocks<a class="headerlink" href="#update-for-avblocks" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code> except for the version number which may be different.</p>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows) that matches your machine. Check <code class="docutils literal notranslate"><span class="pre">$env:PROCESSOR_ARCHITECTURE</span></code>: <code class="docutils literal notranslate"><span class="pre">AMD64</span></code> means x64, <code class="docutils literal notranslate"><span class="pre">ARM64</span></code> means ARM64. The file you need will have a name similar to the following, except for the version number which may be different:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Architecture</p></th>
+<th class="head"><p>File</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x64 (AMD64)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ARM64</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows-arm64.zip</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>You can also download it with PowerShell from the project directory:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
+<span class="c"># &quot;windows&quot; for x64 (AMD64), &quot;windows-arm64&quot; for ARM64</span>
+<span class="nv">$Platform</span> <span class="p">=</span> <span class="s2">&quot;windows&quot;</span>
+
 <span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
-    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
-    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span>
+    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-${Platform}.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-${Platform}.zip&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p>Extract the archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <p>If you downloaded the archive to the project directory with PowerShell, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Expand-Archive</span> <span class="p">`</span>
-    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-${Platform}.zip&quot;</span> <span class="p">`</span>
     <span class="n">-DestinationPath</span> <span class="s2">&quot;./avblocks&quot;</span> <span class="n">-Force</span>
 </pre></div>
 </div>
@@ -668,8 +691,15 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <span class="cp"># include dirs</span>
 <span class="n">target_include_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">include</span><span class="p">)</span>
 
+<span class="cp"># architecture: the AVBlocks libraries are in avblocks/lib/x64 or avblocks/lib/arm64</span>
+<span class="k">if</span><span class="p">(</span><span class="n">CMAKE_SYSTEM_PROCESSOR</span><span class="w"> </span><span class="n">STREQUAL</span><span class="w"> </span><span class="s">&quot;ARM64&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">AVBLOCKS_ARCH</span><span class="w"> </span><span class="n">arm64</span><span class="p">)</span>
+<span class="k">else</span><span class="p">()</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">AVBLOCKS_ARCH</span><span class="w"> </span><span class="n">x64</span><span class="p">)</span>
+<span class="n">endif</span><span class="p">()</span>
+
 <span class="cp"># libs</span>
-<span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x64</span><span class="p">)</span>
+<span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">$</span><span class="p">{</span><span class="n">AVBLOCKS_ARCH</span><span class="p">})</span>
 <span class="n">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">AVBlocks64</span><span class="p">.</span><span class="n">dll</span><span class="p">)</span>
 
 <span class="cp"># add /MTd or /MT compiler option </span>
@@ -777,7 +807,7 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 </pre></div>
 </div>
 </li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
+<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> (or <code class="docutils literal notranslate"><span class="pre">avblocks/lib/arm64</span></code> on ARM64) to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
 <li><p>Run the application:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">./</span><span class="n">build</span><span class="p">/</span><span class="n">debug</span><span class="p">/</span><span class="n">simple-converter</span>
 </pre></div>
@@ -789,7 +819,7 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
+<li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> (or <code class="docutils literal notranslate"><span class="pre">avblocks/lib/arm64</span></code> on ARM64) to <code class="docutils literal notranslate"><span class="pre">build/debug</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> to solve that.</p></li>
 </ul>
 </section>

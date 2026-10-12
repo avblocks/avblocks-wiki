@@ -513,21 +513,41 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <h2>Create the Visual Studio project<a class="headerlink" href="#create-the-visual-studio-project" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
 <li><p>Create a C++, Console App in Visual Studio. Name the project <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>. Check <code class="docutils literal notranslate"><span class="pre">Place</span> <span class="pre">solution</span> <span class="pre">and</span> <span class="pre">project</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">directory</span></code>.</p></li>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code> - the version number may differ.</p>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (Windows) that matches your machine. Check <code class="docutils literal notranslate"><span class="pre">$env:PROCESSOR_ARCHITECTURE</span></code>: <code class="docutils literal notranslate"><span class="pre">AMD64</span></code> means x64, <code class="docutils literal notranslate"><span class="pre">ARM64</span></code> means ARM64. The file you need will have a name similar to the following - the version number may differ:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Architecture</p></th>
+<th class="head"><p>File</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x64 (AMD64)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows.zip</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ARM64</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-windows-arm64.zip</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>You can also download it with PowerShell from the Visual Studio solution directory:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$BaseUrl</span> <span class="p">=</span> <span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">$Version</span> <span class="p">=</span> <span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
+<span class="c"># &quot;windows&quot; for x64 (AMD64), &quot;windows-arm64&quot; for ARM64</span>
+<span class="nv">$Platform</span> <span class="p">=</span> <span class="s2">&quot;windows&quot;</span>
+
 <span class="nb">Invoke-WebRequest</span> <span class="p">`</span>
-    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
-    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span>
+    <span class="n">-Uri</span> <span class="s2">&quot;${BaseUrl}/${Version}/avblocks-${Version}-${Platform}.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-OutFile</span> <span class="s2">&quot;avblocks-${Version}-${Platform}.zip&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the Visual Studio solution directory. The Visual Studio solution is the directory that contains the <code class="docutils literal notranslate"><span class="pre">simple-converter.sln</span></code> solution file.</p>
 <p>If you downloaded the archive to the Visual Studio solution directory with PowerShell, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Expand-Archive</span> <span class="p">`</span>
-    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-windows.zip&quot;</span> <span class="p">`</span>
+    <span class="n">-Path</span> <span class="s2">&quot;avblocks-${Version}-${Platform}.zip&quot;</span> <span class="p">`</span>
     <span class="n">-DestinationPath</span> <span class="s2">&quot;./avblocks&quot;</span> <span class="n">-Force</span>
 </pre></div>
 </div>
@@ -550,7 +570,11 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span>
 
 <span class="c1">// link with AVBlocks64.lib</span>
+<span class="cp">#if defined(_M_ARM64)</span>
+<span class="cp">#pragma comment(lib, &quot;./avblocks/lib/arm64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#else</span>
 <span class="cp">#pragma comment(lib, &quot;./avblocks/lib/x64/AVBlocks64.lib&quot;)</span>
+<span class="cp">#endif</span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="p">;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">primo</span><span class="o">::</span><span class="nn">codecs</span><span class="p">;</span>
@@ -622,10 +646,10 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 </pre></div>
 </div>
 </li>
-<li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">|</span> <span class="pre">Configuration</span> <span class="pre">Manager</span></code> from the menu, then select the <code class="docutils literal notranslate"><span class="pre">x64</span></code> platform to the solution platforms.</p></li>
+<li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">|</span> <span class="pre">Configuration</span> <span class="pre">Manager</span></code> from the menu, then select the platform that matches the AVBlocks build you downloaded (<code class="docutils literal notranslate"><span class="pre">x64</span></code> or <code class="docutils literal notranslate"><span class="pre">ARM64</span></code>) from the solution platforms. If it is not in the list, choose <code class="docutils literal notranslate"><span class="pre">&lt;New...&gt;</span></code> and create it from the existing platform.</p></li>
 <li><p>In Visual Studio, select <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">|</span> <span class="pre">simple-converter</span> <span class="pre">Properties</span></code> from the menu, then <code class="docutils literal notranslate"><span class="pre">C++</span> <span class="pre">|</span> <span class="pre">General</span></code>, then add <code class="docutils literal notranslate"><span class="pre">./avblocks/include</span></code> to <code class="docutils literal notranslate"><span class="pre">Additional</span> <span class="pre">Include</span> <span class="pre">Directories</span></code>.</p></li>
 <li><p>Build the project (Ctrl + Shift + B).</p></li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
+<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> (on ARM64: from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/arm64</span></code> to <code class="docutils literal notranslate"><span class="pre">ARM64/Debug</span></code>).</p></li>
 </ol>
 </section>
 <section id="run-the-application">
@@ -638,14 +662,14 @@ This sample takes a WMV media file as input and converts it to H.265/HEVC video 
 </pre></div>
 </div>
 </li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
+<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> (on ARM64: from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/arm64</span></code> to <code class="docutils literal notranslate"><span class="pre">ARM64/Debug</span></code>).</p></li>
 <li><p>Run the application in Visual Studio. Wait a few seconds for the Transcoder to finish. The converted file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> will be in the solution directory.</p></li>
 </ol>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code>.</p></li>
+<li><p>You may get <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">program</span> <span class="pre">can't</span> <span class="pre">start</span> <span class="pre">because</span> <span class="pre">AVBlocks64.dll</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">from</span> <span class="pre">your</span> <span class="pre">computer.</span> <span class="pre">Try</span> <span class="pre">reinstalling</span> <span class="pre">the</span> <span class="pre">program</span> <span class="pre">to</span> <span class="pre">fix</span> <span class="pre">this</span> <span class="pre">problem.</span></code> or a similar message. To fix that, copy the file <code class="docutils literal notranslate"><span class="pre">AVBlocks64.dll</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">x64/Debug</span></code> (on ARM64: from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/arm64</span></code> to <code class="docutils literal notranslate"><span class="pre">ARM64/Debug</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">transcoder-&gt;open()</span></code> may fail if there is already a file <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> in the project directory. Delete <code class="docutils literal notranslate"><span class="pre">Wildlife_h265_aac.mp4</span></code> to solve that.</p></li>
 </ul>
 </section>

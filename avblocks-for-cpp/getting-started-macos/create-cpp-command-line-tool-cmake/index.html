@@ -593,21 +593,41 @@ simple-converter
 <section id="update-for-avblocks">
 <h2>Update for AVBlocks<a class="headerlink" href="#update-for-avblocks" title="Link to this heading">¶</a></h2>
 <ol class="arabic">
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin.zip</span></code> except for the version number which may be different.</p>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS) that matches your Mac. Run <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code> to check: <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> means Intel, <code class="docutils literal notranslate"><span class="pre">arm64</span></code> means Apple Silicon. The file you need will have a name similar to the following, except for the version number which may be different:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Architecture</p></th>
+<th class="head"><p>File</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Intel (x86_64)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin.zip</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Apple Silicon (arm64)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin-arm64.zip</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>You can also download it with <code class="docutils literal notranslate"><span class="pre">curl</span></code> from the project directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
+<span class="c1"># &quot;darwin&quot; for Intel (x86_64), &quot;darwin-arm64&quot; for Apple Silicon (arm64)</span>
+<span class="nv">AVBLOCKS_PLATFORM</span><span class="o">=</span><span class="s2">&quot;darwin&quot;</span>
+
 curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">AVBLOCKS_PLATFORM</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">AVBLOCKS_PLATFORM</span><span class="si">}</span><span class="s2">.zip&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the CMake project directory. The CMake project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
 <p>If you downloaded the archive to the project directory with <code class="docutils literal notranslate"><span class="pre">curl</span></code>, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
-unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span><span class="w"> </span>-d<span class="w"> </span>./avblocks
+unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">AVBLOCKS_PLATFORM</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="w"> </span>-d<span class="w"> </span>./avblocks
 </pre></div>
 </div>
 <p>You should end up with a directory structure similar to the following:</p>
@@ -639,12 +659,22 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 
 <span class="n">add_executable</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">})</span>
 
-<span class="cp"># definitions for Debug x64</span>
+<span class="cp"># architecture: the AVBlocks libraries are in avblocks/lib/x64 or avblocks/lib/arm64</span>
+<span class="k">if</span><span class="p">(</span><span class="n">CMAKE_SYSTEM_PROCESSOR</span><span class="w"> </span><span class="n">STREQUAL</span><span class="w"> </span><span class="s">&quot;arm64&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">AVBLOCKS_ARCH</span><span class="w"> </span><span class="n">arm64</span><span class="p">)</span>
+<span class="k">else</span><span class="p">()</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">AVBLOCKS_ARCH</span><span class="w"> </span><span class="n">x64</span><span class="p">)</span>
+<span class="n">endif</span><span class="p">()</span>
+
+<span class="cp"># definitions for Debug</span>
 <span class="n">target_compile_definitions</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PUBLIC</span><span class="w">  </span><span class="n">_DEBUG</span><span class="p">)</span>
 
-<span class="cp"># compile options for Debug x64</span>
+<span class="cp"># compile options for Debug</span>
 <span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">17</span><span class="w"> </span><span class="o">-</span><span class="n">stdlib</span><span class="o">=</span><span class="n">libc</span><span class="o">++</span><span class="p">)</span>
-<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">m64</span><span class="w"> </span><span class="o">-</span><span class="n">fPIC</span><span class="p">)</span>
+<span class="k">if</span><span class="p">(</span><span class="n">AVBLOCKS_ARCH</span><span class="w"> </span><span class="n">STREQUAL</span><span class="w"> </span><span class="s">&quot;x64&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">m64</span><span class="p">)</span>
+<span class="n">endif</span><span class="p">()</span>
+<span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">fPIC</span><span class="p">)</span>
 <span class="n">target_compile_options</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
 
 <span class="cp"># includes</span>
@@ -654,7 +684,7 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 
 <span class="cp"># libs</span>
 <span class="n">target_link_directories</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span><span class="n">PRIVATE</span><span class="w"> </span>
-<span class="w">    </span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x64</span>
+<span class="w">    </span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">avblocks</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">$</span><span class="p">{</span><span class="n">AVBLOCKS_ARCH</span><span class="p">}</span>
 <span class="p">)</span>
 <span class="n">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">target</span><span class="p">}</span><span class="w"> </span>
 <span class="w">    </span><span class="n">libAVBlocks</span><span class="p">.</span><span class="n">dylib</span><span class="w"> </span>

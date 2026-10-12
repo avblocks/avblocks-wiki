@@ -514,21 +514,41 @@
 <li><p>Open Xcode, select <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">New</span> <span class="pre">Project</span></code>, pick <code class="docutils literal notranslate"><span class="pre">macOS</span></code> as a platform, pick <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Tool</span></code> for Application</p></li>
 <li><p>Set Product Name to <code class="docutils literal notranslate"><span class="pre">simple-converter</span></code>, select <code class="docutils literal notranslate"><span class="pre">Objective-C</span></code> for language.</p></li>
 <li><p>Rename <code class="docutils literal notranslate"><span class="pre">main.m</span></code> to <code class="docutils literal notranslate"><span class="pre">main.mm</span></code>.</p></li>
-<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS). The file you need will have a name similar to <code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin.zip</span></code> except for the version number which may be different.</p>
+<li><p><a class="reference external" href="https://github.com/avblocks/avblocks-core/releases/">Download</a> the 64 bit version of AVBlocks for C++ (macOS) that matches your Mac. Run <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code> to check: <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> means Intel, <code class="docutils literal notranslate"><span class="pre">arm64</span></code> means Apple Silicon. The file you need will have a name similar to the following, except for the version number which may be different:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Architecture</p></th>
+<th class="head"><p>File</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Intel (x86_64)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin.zip</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Apple Silicon (arm64)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">avblocks-v3.4.0-demo.1-darwin-arm64.zip</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>You can also download it with <code class="docutils literal notranslate"><span class="pre">curl</span></code> from the Xcode project directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AVBLOCKS_BASE_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/avblocks/avblocks-core/releases/download&quot;</span>
 <span class="nv">AVBLOCKS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.4.0-demo.1&quot;</span>
 
+<span class="c1"># &quot;darwin&quot; for Intel (x86_64), &quot;darwin-arm64&quot; for Apple Silicon (arm64)</span>
+<span class="nv">AVBLOCKS_PLATFORM</span><span class="o">=</span><span class="s2">&quot;darwin&quot;</span>
+
 curl<span class="w"> </span>-L<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">AVBLOCKS_PLATFORM</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">AVBLOCKS_BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">/avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">AVBLOCKS_PLATFORM</span><span class="si">}</span><span class="s2">.zip&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p>Extract the ZIP archive in a location of your choice, then copy the <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory of the Xcode project directory. The Xcode project directory is the directory that contains the <code class="docutils literal notranslate"><span class="pre">simple-converter.xcodeproj</span></code> project file.</p>
 <p>If you downloaded the archive to the Xcode project directory with <code class="docutils literal notranslate"><span class="pre">curl</span></code>, you can extract it directly into the <code class="docutils literal notranslate"><span class="pre">avblocks</span></code> subdirectory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>./avblocks
-unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-darwin.zip&quot;</span><span class="w"> </span>-d<span class="w"> </span>./avblocks
+unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;avblocks-</span><span class="si">${</span><span class="nv">AVBLOCKS_VERSION</span><span class="si">}</span><span class="s2">-</span><span class="si">${</span><span class="nv">AVBLOCKS_PLATFORM</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="w"> </span>-d<span class="w"> </span>./avblocks
 </pre></div>
 </div>
 <p>You should end up with a directory structure similar to the following:</p>
@@ -553,7 +573,7 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 <li><p>In Xcode, select the ‘simple-converter’ target, and then the ‘Build Phases’ tab:</p>
 <ul class="simple">
 <li><p>Expand the ‘Link Binary with Libraries’ section</p></li>
-<li><p>Add the <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from the <code class="docutils literal notranslate"><span class="pre">$(PROJECT_DIR)/avblocks/lib/x64</span></code> directory.</p></li>
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from the <code class="docutils literal notranslate"><span class="pre">$(PROJECT_DIR)/avblocks/lib/arm64</span></code> directory on Apple Silicon, or <code class="docutils literal notranslate"><span class="pre">$(PROJECT_DIR)/avblocks/lib/x64</span></code> on Intel.</p></li>
 </ul>
 </li>
 <li><p>Replace the contents of <code class="docutils literal notranslate"><span class="pre">main.mm</span></code> with this code:</p>
@@ -634,7 +654,7 @@ unzip<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;av
 </li>
 <li><p>Restart Xcode!!! Otherwise it will not pick the new Build Products Path</p></li>
 <li><p>Build the project ( ⌘B )</p></li>
-<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> to <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code>.</p></li>
+<li><p>Copy the file <code class="docutils literal notranslate"><span class="pre">libAVBlocks.dylib</span></code> from <code class="docutils literal notranslate"><span class="pre">avblocks/lib/arm64</span></code> (Apple Silicon) or <code class="docutils literal notranslate"><span class="pre">avblocks/lib/x64</span></code> (Intel) to <code class="docutils literal notranslate"><span class="pre">build/Debug</span></code>.</p></li>
 </ol>
 </section>
 <section id="run-the-application">
